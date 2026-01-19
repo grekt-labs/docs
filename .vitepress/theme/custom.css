@@ -1,0 +1,119 @@
+/* ========================================
+   grekt Custom VitePress Overrides
+   ======================================== */
+
+/* Brand color override */
+:root {
+  --vp-c-brand-1: #77CABD;
+  --vp-c-brand-2: #5a9a8f;
+  --vp-c-brand-3: #3d6a62;
+}
+
+/* Logo size */
+.VPNavBarTitle .logo {
+  height: 65px;
+  width: auto;
+}
+
+/* Make navbar transparent on homepage only */
+.VPContent.is-home + .VPNav,
+.is-home .VPNav,
+.Layout:has(.is-home) .VPNav {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.Layout:has(.is-home) .VPNavBar {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+.Layout:has(.is-home) .VPNavBar .divider,
+.Layout:has(.is-home) .VPNavBar .divider-line {
+  display: none !important;
+}
+
+/* Nav text colors for homepage - light mode */
+.Layout:has(.is-home) .VPNav .VPNavBarTitle .title {
+  color: #1a1a2e !important;
+}
+
+.Layout:has(.is-home) .VPNavBarMenuLink {
+  color: rgba(26, 26, 46, 0.85) !important;
+}
+
+.Layout:has(.is-home) .VPNavBarMenuLink:hover {
+  color: #77CABD !important;
+}
+
+.Layout:has(.is-home) .VPSocialLink {
+  color: rgba(26, 26, 46, 0.85) !important;
+}
+
+/* Nav text colors for homepage - dark mode */
+.dark .Layout:has(.is-home) .VPNav .VPNavBarTitle .title {
+  color: #fff !important;
+}
+
+.dark .Layout:has(.is-home) .VPNavBarMenuLink {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dark .Layout:has(.is-home) .VPSocialLink {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ========================================
+   Hero dark mode overrides
+   ======================================== */
+
+.dark .home-container {
+  --hero-bg-start: #0d1117;
+  --hero-text-color: #fff;
+  --hero-tagline-color: rgba(255, 255, 255, 0.8);
+  --hero-btn-secondary-bg: rgba(255, 255, 255, 0.1);
+  --hero-btn-secondary-border: rgba(255, 255, 255, 0.2);
+  --hero-btn-secondary-color: #fff;
+  --hero-deco-opacity: 0.6;
+}
+
+/* ========================================
+   Homepage-only layout overrides
+   ======================================== */
+
+/* Override VitePress home layout to allow full-width sections */
+.VPContent.is-home {
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.VPContent.is-home .VPHome {
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.VPContent.is-home .container,
+.VPContent.is-home .VPHomeContent {
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Ensure our home container spans full width */
+.home-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
+}
+
+/* Hero needs negative margin to escape any remaining padding */
+.home-container .hero {
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  padding-left: calc(50vw - 50%) !important;
+  padding-right: calc(50vw - 50%) !important;
+  width: 100vw !important;
+}
