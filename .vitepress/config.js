@@ -9,14 +9,15 @@ export default defineConfig({
     'en-US': {
       label: 'English',
       lang: 'en-US',
-      link: '/en-US/'
+      link: '/'
     }
   },
 
   themeConfig: {
     logo: {
       light: '/grekt-logo-light.svg',
-      dark: '/grekt-logo-dark.svg'
+      dark: '/grekt-logo-dark.svg',
+      link: '/'
     },
     nav: [
       ...enUSNav,
