@@ -36,18 +36,21 @@ Output:
 ```
 Installed artifacts:
 
-@grekt/code-review (1.0.0)
-  agent: code-reviewer
-  skills: testing, debugging
-  commands: review
+  @grekt/code-review@1.0.0  2.1 KB
+    agent: agent.md
+    skills: testing.md, debugging.md
+    commands: review.md
 
-@myorg/docs-helper (2.1.0)
-  agent: docs-writer
-  skills: markdown, api-docs
-  commands: doc
+  @myorg/docs-helper@2.1.0  5.3 KB ⚠
+    agent: agent.md
+    skills: markdown.md, api-docs.md
+    commands: doc.md
 
-2 artifacts installed
+────────────────────────────────────────
+  Total: 7.4 KB (~1,850 tokens)
 ```
+
+The ⚠ indicator shows artifacts larger than 5 KB.
 
 ### JSON output
 

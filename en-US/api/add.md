@@ -107,9 +107,15 @@ version: 1
 artifacts:
   "@scope/artifact-name":
     version: "1.0.0"
-    checksum: "sha256:abc123..."
+    integrity: "sha256:abc123..."
     source: "github:owner/repo/@scope/artifact-name"
+    files:
+      "grekt.yaml": "sha256:def456..."
+      "agent.md": "sha256:789abc..."
+      "skills/skill1.md": "sha256:012def..."
 ```
+
+The `files` field contains SHA256 checksums for each file, enabling drift detection with `grekt check`.
 
 ## Notes
 
