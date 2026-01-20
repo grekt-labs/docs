@@ -10,8 +10,10 @@ grekt provides a command-line interface for managing AI artifacts.
     <ul>
       <li><a href="/en-US/api/init">grekt init</a> — Initialize a project</li>
       <li><a href="/en-US/api/add">grekt add</a> — Add an artifact</li>
+      <li><a href="/en-US/api/install">grekt install</a> — Install from lockfile</li>
       <li><a href="/en-US/api/remove">grekt remove</a> — Remove an artifact</li>
       <li><a href="/en-US/api/list">grekt list</a> — List installed artifacts</li>
+      <li><a href="/en-US/api/publish">grekt publish</a> — Publish an artifact</li>
     </ul>
   </div>
 
@@ -39,10 +41,13 @@ grekt provides a command-line interface for managing AI artifacts.
 grekt init
 
 # Add an artifact
-grekt add my-artifact
+grekt add @author/my-artifact
+
+# Install from lockfile (after cloning)
+grekt install
 
 # Remove an artifact
-grekt remove my-artifact
+grekt remove @author/my-artifact
 
 # List artifacts with sizes
 grekt list
@@ -55,6 +60,9 @@ grekt sync --dry-run
 
 # Sync to targets
 grekt sync
+
+# Publish an artifact
+grekt publish ./my-artifact
 
 # Manage config
 grekt config list

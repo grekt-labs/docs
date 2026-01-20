@@ -18,20 +18,27 @@ By default, artifacts are downloaded from grekt's public registry. You can confi
 
 | Argument | Description |
 |----------|-------------|
-| `artifact-id` | Artifact identifier (e.g., `code-reviewer`) |
+| `artifact-id` | Artifact identifier (e.g., `@author/code-reviewer`) |
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `-c, --choose` | Interactively select which components to install |
 
 ## Examples
 
 ### Add an artifact
 
 ```bash
-grekt add code-reviewer
+grekt add @grekt/code-reviewer
 ```
 
-### Add another artifact
+### Select specific components
 
 ```bash
-grekt add testing-agent
+grekt add @grekt/git-flow --choose
+# Shows checkbox to select agent, skills, commands
 ```
 
 ## What happens
