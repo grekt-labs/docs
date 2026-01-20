@@ -10,18 +10,14 @@ export const enUSSidebar = {
   ],
   '/en-US/api/': [
     {
-      text: 'Core API',
+      text: 'CLI Reference',
       items: [
         { text: 'Overview', link: '/en-US/api/' },
-        { text: 'createIsolation', link: '/en-US/api/create-isolation' },
-        { text: 'Service Worker', link: '/en-US/api/service-worker' }
-      ]
-    },
-    {
-      text: 'Plugins',
-      items: [
-        { text: 'Vite Plugin', link: '/en-US/api/plugin-vite' },
-        { text: 'Webpack Plugin', link: '/en-US/api/plugin-webpack' }
+        { text: 'grekt init', link: '/en-US/api/init' },
+        { text: 'grekt add', link: '/en-US/api/add' },
+        { text: 'grekt sync', link: '/en-US/api/sync' },
+        { text: 'grekt list', link: '/en-US/api/list' },
+        { text: 'grekt config', link: '/en-US/api/config' }
       ]
     }
   ]
@@ -30,5 +26,5 @@ export const enUSSidebar = {
 export const enUSNav = [
   { text: 'Home', link: '/' },
   { text: 'Guide', link: '/en-US/docs/guide/getting-started' },
-  { text: 'API', link: '/en-US/api/' }
+  { text: 'CLI', link: '/en-US/api/' }
 ]

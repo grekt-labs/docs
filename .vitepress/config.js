@@ -3,7 +3,7 @@ import { enUSSidebar, enUSNav } from './configs/en-US'
 
 export default defineConfig({
   title: " ",
-  description: "AI Artifacts Package Manager - Manage and sync AI tool configurations",
+  description: "AI Artifact Manager - Manage and sync AI tool configurations",
 
   locales: {
     'en-US': {

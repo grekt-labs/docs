@@ -1,71 +1,179 @@
 # Core Concepts
 
-grekt takes a unique approach to frontend execution orchestration, moving away from the heavy-handed nature of iframes and the fragility of simple CSS scoping.
+grekt manages AI tool configurations through a simple but powerful model: **artifacts** contain **agents, skills, and commands** that sync to **targets**.
 
-## Traditional isolation problems
+## Artifacts
 
-- **iframes**: Slow, resource-heavy, and create hard boundaries that make state sharing and UI composition difficult (scrolling issues, modal positioning, etc.).
+An artifact is a collection of related AI configurations published under a scoped name like `@author/artifact-name`. Artifacts are stored in the `grekts/` directory.
 
-- **CSS scoping**: Tools like CSS Modules or BEM help, but they don't protect the global scope (`window`, `localStorage`, globals) from code pollution.
+### Artifact Structure
 
-- **Module Federation**: Requires specific bundler setup and doesn't provide true runtime isolation.
+```
+grekts/@author/artifact-name/
+├── grekt.yaml           # Artifact manifest
+├── agent.md             # Optional: Main agent definition
+├── skills/
+│   ├── testing.md
+│   └── debugging.md
+└── commands/
+    └── review.md
+```
 
-## How grekt solves it
+### Artifact Manifest
 
-grekt combines modern browser APIs to create a lightweight yet robust orchestration layer:
+Every artifact has a `grekt.yaml` manifest:
 
-### Shadow DOM Containment
+```yaml
+name: "@author/artifact-name"
+author: "Author Name"
+version: "1.0.0"
+description: "What this artifact does"
+```
 
-grekt mounts every isolation unit inside a Shadow Root.
+## Components
 
-- **CSS Encapsulation**: Styles defined in the bundle do not leak to the host application.
-- **DOM Encapsulation**: `document.getElementById` inside the bundle only sees elements within its shadow root.
+Artifacts contain three types of components:
 
-### Proxy Membranes for JS Scoping
+### Agents
 
-grekt wraps bundle execution in a membrane using JS Proxies.
+Agents are AI personas with specific capabilities. They define how the AI should behave for certain tasks.
 
-- **Global Scope Protection**: When the bundle writes to `window.foo`, it writes to a proxied virtual window. The real global window remains untouched.
-- **API Interception**: Calls to `setTimeout`, `addEventListener`, `IntersectionObserver`, etc. are intercepted and tracked for cleanup.
+```markdown
+---
+type: agent
+name: code-reviewer
+description: Expert code reviewer focused on best practices
+---
 
-### Cleanup Engine
+You are an expert code reviewer. Focus on:
+- Code quality and readability
+- Performance implications
+- Security vulnerabilities
+- Best practices
+```
 
-Memory leaks are one of the hardest problems in frontend orchestration. Frameworks often leave behind zombie listeners or timers when destroyed externally.
+### Skills
 
-grekt implements a centralized **Cleanup Engine** that tracks every side effect:
+Skills are reusable capabilities that agents can use. They're modular pieces of knowledge or behavior.
 
-| Handler | What it tracks | On unmount |
-|---------|----------------|------------|
-| Global Pollution | `window.*` additions | Deletes added properties |
-| Listener Cleanup | `addEventListener` calls | Removes all listeners |
-| Timer Cleanup | `setTimeout`, `setInterval`, `requestAnimationFrame` | Clears all timers |
-| Observer Cleanup | `MutationObserver`, `ResizeObserver`, `IntersectionObserver` | Disconnects all |
+```markdown
+---
+type: skill
+name: testing
+description: Knowledge about testing patterns
+agent: code-reviewer
+---
 
-### Lifecycle Supervision
+When reviewing tests:
+- Check for edge cases
+- Verify mocking is appropriate
+- Ensure assertions are meaningful
+```
 
-The **IsolationUnitSupervisor** manages isolation unit lifecycles:
+### Commands
 
-- **Preservation**: Unmounted units can be preserved for fast remount
-- **Freeze**: After idle timeout, units are soft-cleaned (Shadow DOM preserved)
-- **Eviction**: Under memory pressure, units are fully destroyed
+Commands are specific actions users can invoke. They're typically slash commands.
 
-## Starvation Mode
+```markdown
+---
+type: command
+name: review
+description: Review code changes
+---
 
-When an isolation unit is unmounted, async work may still be pending:
-- Queued microtasks
-- Unresolved promises
-- Timers
-- Network callbacks
+/review - Analyze the current changes and provide feedback
+```
 
-If these run after the unit is "dead", they could try to access the real DOM or mutate global state.
+## Frontmatter
 
-### Solution: `__GREKT_STARVED__`
+All components use YAML frontmatter to define metadata:
 
-When an isolation unit is removed, grekt **invalidates its proxy membrane**:
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | Yes | `agent`, `skill`, or `command` |
+| `name` | Yes | Unique identifier |
+| `description` | Yes | What it does |
+| `agent` | No | Parent agent (for skills) |
 
-- Any late callback receives an **inert virtual window**
-- Reads return neutral values or empty proxies
-- Writes and API calls become **safe no-ops**
-- No interaction with real DOM or global state is possible
+## Targets
 
-The async code still runs, but inside a sealed, effect-less sandbox. The JavaScript engine naturally garbage collects the zombie code once no references remain.
+Targets are AI tools that grekt can sync to. Each target has its own configuration format, and grekt handles the translation.
+
+### Supported Targets
+
+| Target | Directory/File | Description |
+|--------|---------------|-------------|
+| `claude` | `.claude/` | Claude Code and Claude Desktop |
+| `cursor` | `.cursorrules` | Cursor IDE |
+
+### How Sync Works
+
+When you run `grekt sync`:
+
+1. **Read** installed artifacts from `grekts/installed.yaml`
+2. **Transform** components to target-specific format
+3. **Write** to target locations
+
+#### Claude Sync
+
+Creates organized directories:
+
+```
+.claude/
+├── agents/
+│   └── code-reviewer.md
+├── skills/
+│   └── testing.md
+├── commands/
+│   └── review.md
+└── CLAUDE.md              # Generated index
+```
+
+#### Cursor Sync
+
+Updates the `.cursorrules` file with metadata pointing to installed artifacts.
+
+## Lockfile
+
+The `grekt.lock` file tracks exact versions and checksums of installed artifacts:
+
+```yaml
+version: 1
+artifacts:
+  "@author/artifact-name":
+    version: "1.0.0"
+    checksum: "sha256:abc123..."
+    source: "github:author/repo/@author/artifact-name"
+```
+
+This ensures:
+- **Reproducible installs** across machines
+- **Integrity verification** via checksums
+- **Version tracking** for updates
+
+## Installed Index
+
+The `grekts/installed.yaml` file tracks what's installed and where components are located:
+
+```yaml
+version: 1
+artifacts:
+  "@author/artifact-name":
+    version: "1.0.0"
+    agent: "agent.md"
+    skills:
+      - "skills/testing.md"
+      - "skills/debugging.md"
+    commands:
+      - "commands/review.md"
+```
+
+## Non-destructive Sync
+
+grekt uses a non-destructive sync approach:
+
+- **Preserves manual changes** in target files
+- **Marks managed sections** with special comments
+- **Preview with `--dry-run`** before applying changes
+
+This means you can safely add your own configurations alongside grekt-managed content.

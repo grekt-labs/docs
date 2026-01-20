@@ -122,7 +122,7 @@ onUnmounted(() => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7z"/></svg>
           </div>
           <h3>Share with Teams</h3>
-          <p>Publish packages to share AI configurations across your organization.</p>
+          <p>Publish artifacts to share AI configurations across your organization.</p>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -136,7 +136,7 @@ onUnmounted(() => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
           <h3>Install from Registry</h3>
-          <p><code>grekt add @scope/package</code> — discover and install community-created artifacts.</p>
+          <p><code>grekt add @scope/artifact</code> — discover and install community-created artifacts.</p>
         </div>
       </div>
     </section>

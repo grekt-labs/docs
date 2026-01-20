@@ -1,57 +1,59 @@
-# API Reference
+# CLI Reference
 
-All public exports from `@grekt/core`.
+grekt provides a command-line interface for managing AI artifacts.
+
+## Commands
 
 <div class="api-groups">
-  <div class="api-section-title">
-      <h2>Core API</h2>
-  </div>
   <div class="api-group">
-    <h3>Isolation</h3>
+    <h3>Artifact Management</h3>
     <ul>
-      <li><a href="/en-US/api/create-isolation">createIsolation()</a></li>
-      <li><a href="/en-US/api/create-isolation#isolationunit">IsolationUnit</a></li>
-      <li><a href="/en-US/api/create-isolation#mount">mount()</a></li>
-      <li><a href="/en-US/api/create-isolation#unmount">unmount()</a></li>
-      <li><a href="/en-US/api/create-isolation#destroy">destroy()</a></li>
+      <li><a href="/en-US/api/init">grekt init</a> — Initialize a project</li>
+      <li><a href="/en-US/api/add">grekt add</a> — Add an artifact</li>
+      <li><a href="/en-US/api/list">grekt list</a> — List installed artifacts</li>
     </ul>
   </div>
 
   <div class="api-group">
-    <h3>Service Worker</h3>
+    <h3>Sync & Config</h3>
     <ul>
-      <li><a href="/en-US/api/service-worker#registerserviceworker">registerServiceWorker()</a></li>
-      <li><a href="/en-US/api/service-worker#unregisterserviceworker">unregisterServiceWorker()</a></li>
-    </ul>
-  </div>
-
-  <div class="api-section-title">
-      <h2>Configuration</h2>
-  </div>
-  <div class="api-group">
-    <h3>Types</h3>
-    <ul>
-      <li><a href="/en-US/api/create-isolation#isolationruntimeconfig">IsolationRuntimeConfig</a></li>
-      <li><a href="/en-US/api/create-isolation#entrypoints">EntryPoints</a></li>
-      <li><a href="/en-US/api/create-isolation#mountoptions">MountOptions</a></li>
-      <li><a href="/en-US/api/create-isolation#shadowdomconfig">ShadowDOMConfig</a></li>
-      <li><a href="/en-US/api/create-isolation#supervisionconfig">SupervisionConfig</a></li>
-    </ul>
-  </div>
-
-  <div class="api-group">
-    <h3>Constants</h3>
-    <ul>
-      <li><a href="/en-US/api/constants#plugin_roles">PLUGIN_ROLES</a></li>
-      <li><a href="/en-US/api/constants#plugin_modes">PLUGIN_MODES</a></li>
+      <li><a href="/en-US/api/sync">grekt sync</a> — Sync to AI tools</li>
+      <li><a href="/en-US/api/config">grekt config</a> — Manage configuration</li>
     </ul>
   </div>
 </div>
 
+## Global Options
+
+| Option | Description |
+|--------|-------------|
+| `-h, --help` | Show help for command |
+| `-V, --version` | Show version number |
+
+## Quick Reference
+
+```bash
+# Initialize project
+grekt init
+
+# Add an artifact
+grekt add github:author/repo/@scope/artifact
+
+# Preview sync
+grekt sync --dry-run
+
+# Sync to targets
+grekt sync
+
+# List artifacts
+grekt list
+
+# Manage config
+grekt config list
+grekt config set autoSync true
+```
+
 <style>
-.api-section-title {
-  grid-column: span 2;
-}
 .api-groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

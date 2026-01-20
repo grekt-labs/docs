@@ -2,11 +2,11 @@
 
 ## Name
 
-**grekt** - AI Artifacts Package Manager
+**grekt** - AI Artifact Manager
 
 ## Definition
 
-A package manager for AI tool artifacts (agents, skills, commands) that syncs configurations across AI coding assistants like Claude, Cursor, and others.
+An AI artifact manager for agents, skills, commands, and more that syncs configurations across AI coding assistants like Claude, Cursor, and others.
 
 ## Color Palette
 
@@ -120,8 +120,8 @@ A package manager for AI tool artifacts (agents, skills, commands) that syncs co
 
 | Term | Description |
 |------|-------------|
-| **Package** | A collection of artifacts (`@scope/name`) |
-| **Artifact** | An agent, skill, or command file |
+| **Artifact** | An installable unit with agents, skills, commands (`@scope/name`) |
+| **Artifact-kit** | A collection of artifacts for team sharing |
 | **Target** | An AI tool to sync to (Claude, Cursor) |
 
 ## Use Cases
