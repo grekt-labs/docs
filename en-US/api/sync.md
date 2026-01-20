@@ -10,7 +10,7 @@ grekt sync [options]
 
 ## Description
 
-Copies artifacts from `grekts/` to the appropriate locations for each configured target (Claude, Cursor, etc.).
+Copies artifacts from `grekts/` to the appropriate locations for each configured target (Claude, Cursor, OpenCode).
 
 ## Options
 
@@ -76,6 +76,20 @@ The `CLAUDE.md` file contains:
 ### Cursor
 
 Updates the `.cursorrules` file with metadata pointing to installed artifacts.
+
+### OpenCode
+
+Creates organized directories in `.opencode/`:
+
+```
+.opencode/
+├── agents/
+│   └── scope-artifact-name.md
+├── skills/
+│   └── scope-artifact-name_skill.md
+└── commands/
+    └── scope-artifact-name_cmd.md
+```
 
 ## Non-destructive sync
 

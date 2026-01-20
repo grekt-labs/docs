@@ -1,65 +1,47 @@
 # grekt add
 
-Add an artifact from a GitHub repository.
+Add an artifact from the registry.
 
 ## Usage
 
 ```bash
-grekt add <source>
+grekt add <artifact-id>
 ```
 
 ## Description
 
-Downloads and installs an artifact from GitHub. The artifact is saved to `grekts/` and registered in `installed.yaml` and `grekt.lock`.
+Downloads and installs an artifact from the registry. The artifact is saved to `grekts/` and registered in `installed.yaml` and `grekt.lock`.
+
+By default, artifacts are downloaded from grekt's public registry. You can configure a custom registry in `.grekt/config.yaml`.
 
 ## Arguments
 
 | Argument | Description |
 |----------|-------------|
-| `source` | GitHub source (see formats below) |
-
-## Source formats
-
-### Short format
-
-```bash
-grekt add github:owner/repo/@scope/artifact-name
-```
-
-### URL format
-
-```bash
-grekt add https://github.com/owner/repo/tree/branch/path/@scope/artifact-name
-```
+| `artifact-id` | Artifact identifier (e.g., `@grekt/code-reviewer`) |
 
 ## Examples
 
-### Add from grekt-labs
+### Add an artifact
 
 ```bash
-grekt add github:grekt-labs/artifacts/@grekt/code-review
+grekt add @grekt/code-reviewer
 ```
 
-### Add from any GitHub repo
+### Add from a scoped namespace
 
 ```bash
-grekt add github:myorg/ai-tools/@myorg/testing-agent
-```
-
-### Add from a specific branch
-
-```bash
-grekt add https://github.com/user/repo/tree/develop/artifacts/@user/my-artifact
+grekt add @myorg/testing-agent
 ```
 
 ## What happens
 
-1. **Validates** the source format
-2. **Downloads** artifact files from GitHub API
+1. **Downloads** artifact tarball from the registry
+2. **Extracts** to `grekts/@scope/artifact-name/`
 3. **Parses** `grekt.yaml` manifest
 4. **Scans** for components (agents, skills, commands)
 5. **Updates** `grekts/installed.yaml`
-6. **Updates** `grekt.lock` with version and checksum
+6. **Updates** `grekt.lock` with version and checksums
 
 ## Artifact structure
 
@@ -119,7 +101,7 @@ The `files` field contains SHA256 checksums for each file, enabling drift detect
 
 ## Notes
 
-- Requires internet connection to download from GitHub
-- Uses GitHub API (rate limits may apply)
+- Requires internet connection to download from the registry
 - Artifact is downloaded to `grekts/@scope/artifact-name/`
 - Run `grekt sync` after adding to sync to your AI tools
+- Configure a custom registry with `grekt config set registry <url>`

@@ -33,7 +33,7 @@ project/
 
 When run without `--yes`, you'll be prompted to:
 
-1. **Select sync targets** — Choose which AI tools to sync to (Claude, Cursor)
+1. **Select sync targets** — Choose which AI tools to sync to (Claude, Cursor, OpenCode)
 
 ## Examples
 
