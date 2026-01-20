@@ -135,7 +135,7 @@ onUnmounted(() => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
           <h3>Install from Registry</h3>
-          <p><code>grekt add @scope/artifact</code> — discover and install community-created artifacts.</p>
+          <p><code>grekt add artifact</code> — discover and install community-created artifacts.</p>
         </div>
       </div>
     </section>
@@ -170,7 +170,7 @@ onUnmounted(() => {
             <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
           <h3>Artifact Types</h3>
-          <p>Agents, skills, commands — organize your AI toolbox in <code>grekts/</code>.</p>
+          <p>Agents, skills, commands — organize your AI toolbox in <code>.grekt/</code>.</p>
         </div>
       </div>
     </section>

@@ -36,12 +36,12 @@ Output:
 ```
 Installed artifacts:
 
-  @grekt/code-review@1.0.0  2.1 KB
+  code-review@1.0.0  2.1 KB
     agent: agent.md
     skills: testing.md, debugging.md
     commands: review.md
 
-  @myorg/docs-helper@2.1.0  5.3 KB ⚠
+  docs-helper@2.1.0  5.3 KB ⚠
     agent: agent.md
     skills: markdown.md, api-docs.md
     commands: doc.md
@@ -64,14 +64,14 @@ Output:
 {
   "artifacts": [
     {
-      "name": "@grekt/code-review",
+      "name": "code-review",
       "version": "1.0.0",
       "agent": "code-reviewer",
       "skills": ["testing", "debugging"],
       "commands": ["review"]
     },
     {
-      "name": "@myorg/docs-helper",
+      "name": "docs-helper",
       "version": "2.1.0",
       "agent": "docs-writer",
       "skills": ["markdown", "api-docs"],
@@ -83,6 +83,6 @@ Output:
 
 ## Notes
 
-- Reads from `grekts/installed.yaml`
+- Reads from `grekt.yaml` and `grekt.lock`
 - Shows components grouped by type
 - Use `--json` for scripting and automation

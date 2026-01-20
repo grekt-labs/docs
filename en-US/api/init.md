@@ -23,10 +23,9 @@ Creates the grekt directory structure and configuration files in the current dir
 ```
 project/
 ├── .grekt/
-│   └── config.yaml      # Project configuration
-├── grekts/
-│   └── installed.yaml   # Empty package index
-└── grekt.lock           # Empty lockfile
+│   └── artifacts/       # Downloaded artifacts (gitignored)
+├── grekt.yaml           # Config + artifact declarations
+└── grekt.lock           # Lockfile with versions/checksums
 ```
 
 ## Interactive prompts
@@ -59,30 +58,25 @@ grekt init
 
 ## Generated files
 
-### `.grekt/config.yaml`
+### `grekt.yaml`
 
 ```yaml
 targets:
   - claude
   - cursor
-```
-
-### `grekts/installed.yaml`
-
-```yaml
-version: 1
-packages: {}
+autoSync: false
+artifacts: {}
 ```
 
 ### `grekt.lock`
 
 ```yaml
 version: 1
-packages: {}
+artifacts: {}
 ```
 
 ## Notes
 
 - Running `init` in an already initialized project will not overwrite existing files
-- The `grekts/` directory is where packages will be installed
+- The `.grekt/artifacts/` directory is where artifacts will be downloaded
 - Configuration can be changed later with `grekt config`

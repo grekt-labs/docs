@@ -10,45 +10,45 @@ grekt add <artifact-id>
 
 ## Description
 
-Downloads and installs an artifact from the registry. The artifact is saved to `grekts/` and registered in `installed.yaml` and `grekt.lock`.
+Downloads and installs an artifact from the registry. The artifact is saved to `.grekt/artifacts/` and registered in `grekt.yaml` and `grekt.lock`.
 
-By default, artifacts are downloaded from grekt's public registry. You can configure a custom registry in `.grekt/config.yaml`.
+By default, artifacts are downloaded from grekt's public registry. You can configure a custom registry in `grekt.yaml`.
 
 ## Arguments
 
 | Argument | Description |
 |----------|-------------|
-| `artifact-id` | Artifact identifier (e.g., `@grekt/code-reviewer`) |
+| `artifact-id` | Artifact identifier (e.g., `code-reviewer`) |
 
 ## Examples
 
 ### Add an artifact
 
 ```bash
-grekt add @grekt/code-reviewer
+grekt add code-reviewer
 ```
 
-### Add from a scoped namespace
+### Add another artifact
 
 ```bash
-grekt add @myorg/testing-agent
+grekt add testing-agent
 ```
 
 ## What happens
 
 1. **Downloads** artifact tarball from the registry
-2. **Extracts** to `grekts/@scope/artifact-name/`
+2. **Extracts** to `.grekt/artifacts/<artifact-id>/`
 3. **Parses** `grekt.yaml` manifest
 4. **Scans** for components (agents, skills, commands)
-5. **Updates** `grekts/installed.yaml`
-6. **Updates** `grekt.lock` with version and checksums
+5. **Updates** `grekt.yaml` with artifact version
+6. **Updates** `grekt.lock` with version, checksums, and component paths
 
 ## Artifact structure
 
 Artifacts must have a `grekt.yaml` manifest:
 
 ```yaml
-name: "@scope/artifact-name"
+name: "my-artifact"
 author: "Author Name"
 version: "1.0.0"
 description: "Artifact description"
@@ -68,18 +68,14 @@ Agent content here...
 
 ## Output files
 
-### `grekts/installed.yaml`
+### `grekt.yaml`
 
 ```yaml
-version: 1
+targets:
+  - claude
+autoSync: false
 artifacts:
-  "@scope/artifact-name":
-    version: "1.0.0"
-    agent: "agent.md"
-    skills:
-      - "skills/skill1.md"
-    commands:
-      - "commands/cmd1.md"
+  my-artifact: "1.0.0"
 ```
 
 ### `grekt.lock`
@@ -87,14 +83,19 @@ artifacts:
 ```yaml
 version: 1
 artifacts:
-  "@scope/artifact-name":
+  my-artifact:
     version: "1.0.0"
     integrity: "sha256:abc123..."
-    source: "github:owner/repo/@scope/artifact-name"
+    source: "registry:my-artifact"
     files:
       "grekt.yaml": "sha256:def456..."
       "agent.md": "sha256:789abc..."
       "skills/skill1.md": "sha256:012def..."
+    agent: "agent.md"
+    skills:
+      - "skills/skill1.md"
+    commands:
+      - "commands/cmd1.md"
 ```
 
 The `files` field contains SHA256 checksums for each file, enabling drift detection with `grekt check`.
@@ -102,6 +103,6 @@ The `files` field contains SHA256 checksums for each file, enabling drift detect
 ## Notes
 
 - Requires internet connection to download from the registry
-- Artifact is downloaded to `grekts/@scope/artifact-name/`
+- Artifact is downloaded to `.grekt/artifacts/<artifact-id>/`
 - Run `grekt sync` after adding to sync to your AI tools
 - Configure a custom registry with `grekt config set registry <url>`

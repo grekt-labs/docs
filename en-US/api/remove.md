@@ -13,8 +13,8 @@ grekt rm <artifact>
 
 Completely removes an artifact from the project, including:
 
-1. Artifact files in `grekts/`
-2. Entry in `installed.yaml`
+1. Artifact files in `.grekt/artifacts/`
+2. Entry in `grekt.yaml`
 3. Entry in `grekt.lock`
 4. Synced files in `.claude/` (agents, skills, commands)
 
@@ -22,7 +22,7 @@ Completely removes an artifact from the project, including:
 
 | Argument | Description |
 |----------|-------------|
-| `artifact` | Artifact ID (e.g., `@grekt/code-reviewer`) |
+| `artifact` | Artifact ID (e.g., `code-reviewer`) |
 
 ## Options
 
@@ -35,14 +35,14 @@ Completely removes an artifact from the project, including:
 ### Remove with confirmation
 
 ```bash
-grekt remove @grekt/code-reviewer
+grekt remove code-reviewer
 ```
 
 Output:
 ```
 Will remove:
 
-  @grekt/code-reviewer@1.0.0
+  code-reviewer@1.0.0
     agent: agent.md
     skills: skills/review.md
 
@@ -52,36 +52,36 @@ Remove this artifact? (y/N)
 ### Force remove (no confirmation)
 
 ```bash
-grekt remove @grekt/code-reviewer --force
+grekt remove code-reviewer --force
 ```
 
 ### Using alias
 
 ```bash
-grekt rm @grekt/code-reviewer
+grekt rm code-reviewer
 ```
 
 ## What gets removed
 
-### From `grekts/`
+### From `.grekt/artifacts/`
 
 The entire artifact directory:
 ```
-grekts/@grekt/code-reviewer/  ← Deleted
+.grekt/artifacts/code-reviewer/  ← Deleted
 ```
 
 ### From `.claude/`
 
 All synced files for this artifact:
 ```
-.claude/agents/@grekt-code-reviewer.md  ← Deleted
-.claude/skills/grekt-code-reviewer_*.md ← Deleted
-.claude/commands/grekt-code-reviewer_*.md ← Deleted
+.claude/agents/code-reviewer.md  ← Deleted
+.claude/skills/code-reviewer_*.md ← Deleted
+.claude/commands/code-reviewer_*.md ← Deleted
 ```
 
 ### From config files
 
-- Entry removed from `grekts/installed.yaml`
+- Entry removed from `grekt.yaml`
 - Entry removed from `grekt.lock`
 
 ## Notes

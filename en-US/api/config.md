@@ -18,7 +18,7 @@ grekt config <subcommand>
 
 ## Configuration file
 
-Located at `.grekt/config.yaml` in your project:
+Located at `grekt.yaml` in your project root:
 
 ```yaml
 targets:
@@ -27,6 +27,8 @@ targets:
   - opencode
 autoSync: false
 registry: https://custom-registry.example.com/artifacts  # optional
+artifacts:
+  code-review: "1.0.0"
 ```
 
 ## Configuration keys
@@ -48,7 +50,7 @@ grekt config list
 Output:
 
 ```
-Configuration (.grekt/config.yaml):
+Configuration (grekt.yaml):
   targets: claude, cursor
   autoSync: false
 ```

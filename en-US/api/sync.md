@@ -10,7 +10,7 @@ grekt sync [options]
 
 ## Description
 
-Copies artifacts from `grekts/` to the appropriate locations for each configured target (Claude, Cursor, OpenCode).
+Copies artifacts from `.grekt/artifacts/` to the appropriate locations for each configured target (Claude, Cursor, OpenCode).
 
 ## Options
 
@@ -84,11 +84,11 @@ Creates organized directories in `.opencode/`:
 ```
 .opencode/
 ├── agents/
-│   └── scope-artifact-name.md
+│   └── artifact-name.md
 ├── skills/
-│   └── scope-artifact-name_skill.md
+│   └── artifact-name_skill.md
 └── commands/
-    └── scope-artifact-name_cmd.md
+    └── artifact-name_cmd.md
 ```
 
 ## Non-destructive sync
@@ -128,5 +128,5 @@ No changes made (dry-run)
 
 - Run after `grekt add` to sync new packages
 - Use `--dry-run` to preview before applying
-- Configured targets are in `.grekt/config.yaml`
+- Configured targets are in `grekt.yaml`
 - Override with `--target` without changing config
