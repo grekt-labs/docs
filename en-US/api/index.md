@@ -39,10 +39,10 @@ grekt provides a command-line interface for managing AI artifacts.
 grekt init
 
 # Add an artifact
-grekt add github:author/repo/@scope/artifact
+grekt add my-artifact
 
 # Remove an artifact
-grekt remove @scope/artifact
+grekt remove my-artifact
 
 # List artifacts with sizes
 grekt list
