@@ -17,12 +17,11 @@ const copyCommand = async () => {
 }
 
 const phrases = [
-  'synced to Claude.',
-  'synced to Cursor.',
-  'shared across your team.',
+  'synced to any AI assistant.',
+  'shared across teams.',
   'versioned and tracked.',
   'without copy-paste hell.',
-  'like npm, but for AI.'
+  'well managed.',
 ]
 
 const currentPhrase = ref('')
@@ -72,11 +71,11 @@ onUnmounted(() => {
     <section class="hero">
       <div class="hero-content">
         <h1>
-          <span class="static-text">Your AI tools. Finally in sync.</span><br>
+          <span class="static-text">Your AI tools finally</span><br>
           <span class="typing-text">{{ currentPhrase }}<span class="cursor">|</span></span>
         </h1>
         <p class="tagline">
-          Install, sync, and share AI configurations across Claude, Cursor, and other coding assistants. <strong class="typing-text">Version-controlled. Lockfile-backed. Zero friction.</strong>
+          Install, sync, and share AI configurations across Claude, Cursor, and other coding assistants. <strong class="typing-text">Version controlled. Lockfile backed. Zero friction.</strong>
         </p>
         <div class="hero-buttons">
           <div class="install-box">
