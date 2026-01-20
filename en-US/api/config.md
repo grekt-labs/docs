@@ -24,15 +24,18 @@ Located at `.grekt/config.yaml` in your project:
 targets:
   - claude
   - cursor
+  - opencode
 autoSync: false
+registry: https://custom-registry.example.com/artifacts  # optional
 ```
 
 ## Configuration keys
 
 | Key | Description |
 |-----|-------------|
-| `targets` | AI tools to sync artifacts to |
+| `targets` | AI tools to sync artifacts to (claude, cursor, opencode) |
 | `autoSync` | Automatically sync after `grekt add` |
+| `registry` | Custom artifact registry URL (defaults to grekt's public registry) |
 
 ## Examples
 
