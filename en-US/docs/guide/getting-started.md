@@ -31,9 +31,8 @@ This creates the grekt structure in your project:
 ```
 project/
 ├── .grekt/
-│   └── config.yaml      # Project configuration
-├── grekts/
-│   └── installed.yaml   # Installed artifacts index
+│   └── artifacts/       # Downloaded artifacts (gitignored)
+├── grekt.yaml           # Config + artifact declarations
 └── grekt.lock           # Lockfile with versions/checksums
 ```
 
@@ -51,7 +50,7 @@ grekt add github:grekt-labs/artifacts/@grekt/code-review
 grekt add https://github.com/user/repo/tree/main/artifacts/@scope/name
 ```
 
-Artifacts are downloaded to `grekts/@scope/artifact-name/`.
+Artifacts are downloaded to `.grekt/artifacts/<artifact-name>/`.
 
 ### 3. Sync to your AI tools
 
@@ -81,7 +80,12 @@ After installing artifacts, your project looks like:
 ```
 project/
 ├── .grekt/
-│   └── config.yaml
+│   └── artifacts/
+│       └── code-review/
+│           ├── grekt.yaml
+│           ├── agent.md
+│           └── skills/
+│               └── testing.md
 ├── .claude/
 │   ├── agents/
 │   │   └── code-reviewer.md
@@ -91,26 +95,21 @@ project/
 │   │   └── review.md
 │   └── CLAUDE.md
 ├── .cursorrules
-├── grekts/
-│   ├── installed.yaml
-│   └── @grekt/
-│       └── code-review/
-│           ├── grekt.yaml
-│           ├── agent.md
-│           └── skills/
-│               └── testing.md
+├── grekt.yaml
 └── grekt.lock
 ```
 
 ## Configuration
 
-Project configuration is stored in `.grekt/config.yaml`:
+Project configuration is stored in `grekt.yaml`:
 
 ```yaml
 targets:
   - claude
   - cursor
 autoSync: false
+artifacts:
+  code-review: "1.0.0"
 ```
 
 Manage with:

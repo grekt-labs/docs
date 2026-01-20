@@ -4,12 +4,12 @@ grekt manages AI tool configurations through a simple but powerful model: **arti
 
 ## Artifacts
 
-An artifact is a collection of related AI configurations published under a scoped name like `@author/artifact-name`. Artifacts are stored in the `grekts/` directory.
+An artifact is a collection of related AI configurations. Artifacts are stored in the `.grekt/artifacts/` directory.
 
 ### Artifact Structure
 
 ```
-grekts/@author/artifact-name/
+.grekt/artifacts/my-artifact/
 ├── grekt.yaml           # Artifact manifest
 ├── agent.md             # Optional: Main agent definition
 ├── skills/
@@ -24,8 +24,8 @@ grekts/@author/artifact-name/
 Every artifact has a `grekt.yaml` manifest:
 
 ```yaml
-name: "@author/artifact-name"
-author: "Author Name"
+name: "my-artifact"
+author: "Your Name"
 version: "1.0.0"
 description: "What this artifact does"
 ```
@@ -110,7 +110,7 @@ Targets are AI tools that grekt can sync to. Each target has its own configurati
 
 When you run `grekt sync`:
 
-1. **Read** installed artifacts from `grekts/installed.yaml`
+1. **Read** installed artifacts from `grekt.lock`
 2. **Transform** components to target-specific format
 3. **Write** to target locations
 
@@ -133,40 +133,49 @@ Creates organized directories:
 
 Updates the `.cursorrules` file with metadata pointing to installed artifacts.
 
-## Lockfile
+## Project Files
 
-The `grekt.lock` file tracks exact versions and checksums of installed artifacts:
+grekt uses an npm-like file structure:
+
+### `grekt.yaml`
+
+The main configuration file (like `package.json`). Contains project settings and artifact declarations:
+
+```yaml
+targets:
+  - claude
+  - cursor
+autoSync: false
+artifacts:
+  my-artifact: "1.0.0"
+```
+
+### `grekt.lock`
+
+The lockfile (like `package-lock.json`). Tracks exact versions, checksums, and component paths:
 
 ```yaml
 version: 1
 artifacts:
-  "@author/artifact-name":
+  my-artifact:
     version: "1.0.0"
-    checksum: "sha256:abc123..."
-    source: "github:author/repo/@author/artifact-name"
+    integrity: "sha256:abc123..."
+    source: "registry:my-artifact"
+    files:
+      "grekt.yaml": "sha256:def456..."
+      "agent.md": "sha256:789abc..."
+    agent: "agent.md"
+    skills:
+      - "skills/testing.md"
+    commands:
+      - "commands/review.md"
 ```
 
 This ensures:
 - **Reproducible installs** across machines
 - **Integrity verification** via checksums
 - **Version tracking** for updates
-
-## Installed Index
-
-The `grekts/installed.yaml` file tracks what's installed and where components are located:
-
-```yaml
-version: 1
-artifacts:
-  "@author/artifact-name":
-    version: "1.0.0"
-    agent: "agent.md"
-    skills:
-      - "skills/testing.md"
-      - "skills/debugging.md"
-    commands:
-      - "commands/review.md"
-```
+- **Component paths** for sync operations
 
 ## Non-destructive Sync
 
