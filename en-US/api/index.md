@@ -37,36 +37,17 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Quick Reference
 
 ```bash
-# Initialize project
-grekt init
-
-# Add an artifact
-grekt add @author/my-artifact
-
-# Install from lockfile (after cloning)
-grekt install
-
-# Remove an artifact
-grekt remove @author/my-artifact
-
-# List artifacts with sizes
-grekt list
-
-# Check artifact integrity
-grekt check
-
-# Preview sync
-grekt sync --dry-run
-
-# Sync to targets
-grekt sync
-
-# Publish an artifact
-grekt publish ./my-artifact
-
-# Manage config
-grekt config list
-grekt config set autoSync true
+grekt init                     # Initialize
+grekt add @author/artifact     # Add from registry
+grekt add github:user/repo     # Add from GitHub
+grekt install                  # Install from lockfile
+grekt sync --dry-run           # Preview sync
+grekt sync                     # Apply
+grekt list                     # List artifacts
+grekt check                    # Verify integrity
+grekt remove artifact          # Remove
+grekt publish ./artifact       # Publish
+grekt config set autoSync true # Configure
 ```
 
 <style>

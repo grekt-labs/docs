@@ -1,115 +1,51 @@
 # grekt add
 
-Add an artifact from the registry.
-
-## Usage
+Add an artifact from registry, GitHub, or GitLab.
 
 ```bash
-grekt add <artifact-id>
+grekt add <source>
 ```
-
-## Description
-
-Downloads and installs an artifact from the registry. The artifact is saved to `.grekt/artifacts/` and registered in `grekt.yaml` and `grekt.lock`.
-
-By default, artifacts are downloaded from grekt's public registry. You can configure a custom registry in `grekt.yaml`.
-
-## Arguments
-
-| Argument | Description |
-|----------|-------------|
-| `artifact-id` | Artifact identifier (e.g., `@author/code-reviewer`) |
 
 ## Options
 
 | Option | Description |
 |--------|-------------|
-| `-c, --choose` | Interactively select which components to install |
+| `-c, --choose` | Select which components to install |
+
+## Source Formats
+
+| Format | Example |
+|--------|---------|
+| Registry | `@author/name` |
+| GitHub | `github:owner/repo` |
+| GitHub (ref) | `github:owner/repo#v1.0.0` |
+| GitLab | `gitlab:owner/repo` |
+| GitLab (self-hosted) | `gitlab:host.com/owner/repo` |
 
 ## Examples
 
-### Add an artifact
-
 ```bash
+# Registry
 grekt add @grekt/code-reviewer
-```
 
-### Select specific components
+# GitHub
+grekt add github:user/my-artifact
+grekt add github:user/my-artifact#v1.0.0
 
-```bash
+# GitLab
+grekt add gitlab:group/my-artifact
+grekt add gitlab:gitlab.company.com/team/artifact#main
+
+# Select components
 grekt add @grekt/git-flow --choose
-# Shows checkbox to select agent, skills, commands
 ```
 
-## What happens
+## Authentication
 
-1. **Downloads** artifact tarball from the registry
-2. **Extracts** to `.grekt/artifacts/<artifact-id>/`
-3. **Parses** `grekt.yaml` manifest
-4. **Scans** for components (agents, skills, commands)
-5. **Updates** `grekt.yaml` with artifact version
-6. **Updates** `grekt.lock` with version, checksums, and component paths
-
-## Artifact structure
-
-Artifacts must have a `grekt.yaml` manifest:
-
-```yaml
-name: "my-artifact"
-author: "Author Name"
-version: "1.0.0"
-description: "Artifact description"
-```
-
-And contain `.md` files with frontmatter:
-
-```markdown
----
-type: agent
-name: my-agent
-description: What this agent does
----
-
-Agent content here...
-```
-
-## Output files
-
-### `grekt.yaml`
-
-```yaml
-targets:
-  - claude
-autoSync: false
-artifacts:
-  my-artifact: "1.0.0"
-```
-
-### `grekt.lock`
-
-```yaml
-version: 1
-artifacts:
-  my-artifact:
-    version: "1.0.0"
-    integrity: "sha256:abc123..."
-    source: "registry:my-artifact"
-    files:
-      "grekt.yaml": "sha256:def456..."
-      "agent.md": "sha256:789abc..."
-      "skills/skill1.md": "sha256:012def..."
-    agent: "agent.md"
-    skills:
-      - "skills/skill1.md"
-    commands:
-      - "commands/cmd1.md"
-```
-
-The `files` field contains SHA256 checksums for each file, enabling drift detection with `grekt check`.
+For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/authentication).
 
 ## Notes
 
-- Requires internet connection to download from the registry
-- Artifact is downloaded to `.grekt/artifacts/<artifact-id>/`
-- Run `grekt sync` after adding to sync to your AI tools
-- Configure a custom registry with `grekt config set registry <url>`
+- Downloads to `.grekt/artifacts/<artifact-id>/`
+- Updates `grekt.yaml` and `grekt.lock`
+- Run `grekt sync` after adding

@@ -2,85 +2,31 @@
 
 Manage project configuration.
 
-## Usage
-
 ```bash
 grekt config <subcommand>
 ```
 
 ## Subcommands
 
-| Subcommand | Description |
-|------------|-------------|
-| `list` | Show current configuration |
-| `set <key> <value>` | Set a configuration value |
-| `get <key>` | Get a configuration value |
+| Command | Description |
+|---------|-------------|
+| `list` | Show config |
+| `set <key> <value>` | Set value |
+| `get <key>` | Get value |
 
-## Configuration file
-
-Located at `grekt.yaml` in your project root:
-
-```yaml
-targets:
-  - claude
-  - cursor
-  - opencode
-autoSync: false
-registry: https://custom-registry.example.com/artifacts  # optional
-artifacts:
-  code-review: "1.0.0"
-```
-
-## Configuration keys
+## Keys
 
 | Key | Description |
 |-----|-------------|
-| `targets` | AI tools to sync artifacts to (claude, cursor, opencode) |
-| `autoSync` | Automatically sync after `grekt add` |
-| `registry` | Custom artifact registry URL (defaults to grekt's public registry) |
+| `targets` | AI tools to sync to |
+| `autoSync` | Sync after `grekt add` |
+| `registry` | Custom registry URL |
 
 ## Examples
 
-### List config
-
 ```bash
 grekt config list
-```
-
-Output:
-
-```
-Configuration (grekt.yaml):
-  targets: claude, cursor
-  autoSync: false
-```
-
-### Set targets
-
-```bash
 grekt config set targets claude,cursor
-```
-
-### Enable auto-sync
-
-```bash
 grekt config set autoSync true
-```
-
-### Get a value
-
-```bash
 grekt config get targets
 ```
-
-Output:
-
-```
-claude, cursor
-```
-
-## Notes
-
-- Config is always project-scoped
-- Run `grekt init` first to create the config file
-- Changes take effect immediately
