@@ -1,22 +1,42 @@
 export const enUSSidebar = {
   '/en-US/docs/': [
     {
-      text: 'Introduction',
+      text: 'Quick Start',
       items: [
-        { text: 'Getting Started', link: '/en-US/docs/guide/getting-started' },
-        { text: 'Core Concepts', link: '/en-US/docs/guide/concepts' }
+        { text: 'Getting Started', link: '/en-US/docs/guide/getting-started' }
+      ]
+    },
+    {
+      text: 'Core Concepts',
+      items: [
+        { text: 'Artifacts', link: '/en-US/docs/guide/artifacts' },
+        { text: 'Targets', link: '/en-US/docs/guide/targets' }
+      ]
+    },
+    {
+      text: 'Configuration',
+      items: [
+        { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
       ]
     }
   ],
   '/en-US/api/': [
     {
-      text: 'CLI Reference',
+      text: 'Artifact Management',
       items: [
-        { text: 'Overview', link: '/en-US/api/' },
         { text: 'grekt init', link: '/en-US/api/init' },
         { text: 'grekt add', link: '/en-US/api/add' },
-        { text: 'grekt sync', link: '/en-US/api/sync' },
+        { text: 'grekt install', link: '/en-US/api/install' },
+        { text: 'grekt remove', link: '/en-US/api/remove' },
         { text: 'grekt list', link: '/en-US/api/list' },
+        { text: 'grekt publish', link: '/en-US/api/publish' }
+      ]
+    },
+    {
+      text: 'Sync & Config',
+      items: [
+        { text: 'grekt sync', link: '/en-US/api/sync' },
+        { text: 'grekt check', link: '/en-US/api/check' },
         { text: 'grekt config', link: '/en-US/api/config' }
       ]
     }
