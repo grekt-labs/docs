@@ -13,7 +13,17 @@ grekt provides a command-line interface for managing AI artifacts.
       <li><a href="/en-US/api/install">grekt install</a> — Install from lockfile</li>
       <li><a href="/en-US/api/remove">grekt remove</a> — Remove an artifact</li>
       <li><a href="/en-US/api/list">grekt list</a> — List installed artifacts</li>
+    </ul>
+  </div>
+
+  <div class="api-group">
+    <h3>Registry Operations</h3>
+    <ul>
       <li><a href="/en-US/api/publish">grekt publish</a> — Publish an artifact</li>
+      <li><a href="/en-US/api/deprecate">grekt deprecate</a> — Deprecate a version</li>
+      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a> — Remove deprecation</li>
+      <li><a href="/en-US/api/info">grekt info</a> — Show artifact info</li>
+      <li><a href="/en-US/api/versions">grekt versions</a> — List versions</li>
     </ul>
   </div>
 
@@ -37,17 +47,22 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Quick Reference
 
 ```bash
-grekt init                     # Initialize
-grekt add @author/artifact     # Add from registry
-grekt add github:user/repo     # Add from GitHub
-grekt install                  # Install from lockfile
-grekt sync --dry-run           # Preview sync
-grekt sync                     # Apply
-grekt list                     # List artifacts
-grekt check                    # Verify integrity
-grekt remove artifact          # Remove
-grekt publish ./artifact       # Publish
-grekt config set autoSync true # Configure
+grekt init                       # Initialize
+grekt add @author/artifact       # Add from registry
+grekt add @author/artifact@1.0.0 # Add specific version
+grekt add github:user/repo       # Add from GitHub
+grekt install                    # Install from lockfile
+grekt sync --dry-run             # Preview sync
+grekt sync                       # Apply
+grekt list                       # List artifacts
+grekt check                      # Verify integrity
+grekt remove artifact            # Remove
+grekt publish ./artifact         # Publish
+grekt deprecate @a/b@1.0 -m "x"  # Deprecate version
+grekt undeprecate @a/b@1.0       # Remove deprecation
+grekt info @author/artifact      # Show artifact info
+grekt versions @author/artifact  # List versions
+grekt config set autoSync true   # Configure
 ```
 
 <style>

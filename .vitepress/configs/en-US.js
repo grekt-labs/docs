@@ -1,9 +1,10 @@
 export const enUSSidebar = {
   '/en-US/docs/': [
     {
-      text: 'Quick Start',
+      text: 'Getting Started',
       items: [
-        { text: 'Getting Started', link: '/en-US/docs/guide/getting-started' }
+        { text: 'Introduction', link: '/en-US/docs/guide/introduction' },
+        { text: 'Quick Start', link: '/en-US/docs/guide/getting-started' }
       ]
     },
     {
@@ -28,8 +29,17 @@ export const enUSSidebar = {
         { text: 'grekt add', link: '/en-US/api/add' },
         { text: 'grekt install', link: '/en-US/api/install' },
         { text: 'grekt remove', link: '/en-US/api/remove' },
-        { text: 'grekt list', link: '/en-US/api/list' },
-        { text: 'grekt publish', link: '/en-US/api/publish' }
+        { text: 'grekt list', link: '/en-US/api/list' }
+      ]
+    },
+    {
+      text: 'Registry Operations',
+      items: [
+        { text: 'grekt publish', link: '/en-US/api/publish' },
+        { text: 'grekt deprecate', link: '/en-US/api/deprecate' },
+        { text: 'grekt undeprecate', link: '/en-US/api/undeprecate' },
+        { text: 'grekt info', link: '/en-US/api/info' },
+        { text: 'grekt versions', link: '/en-US/api/versions' }
       ]
     },
     {
@@ -45,6 +55,6 @@ export const enUSSidebar = {
 
 export const enUSNav = [
   { text: 'Home', link: '/' },
-  { text: 'Guide', link: '/en-US/docs/guide/getting-started' },
-  { text: 'CLI', link: '/en-US/api/' }
+  { text: 'Docs', link: '/en-US/docs/guide/introduction' },
+  { text: 'API', link: '/en-US/api/' }
 ]

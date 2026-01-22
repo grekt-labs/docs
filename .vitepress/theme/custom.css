@@ -33,6 +33,12 @@
   display: none !important;
 }
 
+/* Hide dark/light toggle on homepage */
+.Layout:has(.is-home) .VPNavBarAppearance,
+.Layout:has(.is-home) .VPSwitchAppearance {
+  display: none !important;
+}
+
 /* Nav text colors for homepage - light mode */
 .Layout:has(.is-home) .VPNav .VPNavBarTitle .title {
   color: #1a1a2e !important;
@@ -92,6 +98,7 @@
   padding: 0 !important;
   max-width: none !important;
   width: 100% !important;
+  margin-bottom: 0 !important;
 }
 
 .VPContent.is-home .container,

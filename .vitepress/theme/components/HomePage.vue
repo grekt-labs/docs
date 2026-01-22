@@ -74,6 +74,36 @@ onMounted(() => {
 onUnmounted(() => {
   if (timeout) clearTimeout(timeout)
 })
+
+// FAQ
+const faqItems = [
+  {
+    question: 'What is grekt?',
+    answer: 'grekt is an AI artifact manager that helps you install, sync, and share AI configurations (agents, skills, commands) across tools like Claude Code, Cursor, and Windsurf.'
+  },
+  {
+    question: 'How does grekt work?',
+    answer: 'grekt downloads artifacts to your project, then syncs them to your AI tools by writing the appropriate configuration files. Each tool has its own format, and grekt handles the translation automatically.'
+  },
+  {
+    question: 'Is grekt free?',
+    answer: 'Yes, grekt is open source and free to use under the MIT license. The CLI and all core features are completely free.'
+  },
+  {
+    question: 'Which AI tools are supported?',
+    answer: 'Currently grekt supports Claude Code, Cursor, and Windsurf. More targets are being added based on community feedback.'
+  },
+  {
+    question: 'Can I create my own artifacts?',
+    answer: 'Yes! You can create artifacts for your own use or publish them to share with others. Check the documentation for the artifact format specification.'
+  }
+]
+
+const openFaqIndex = ref(null)
+
+const toggleFaq = (index) => {
+  openFaqIndex.value = openFaqIndex.value === index ? null : index
+}
 </script>
 
 <template>
@@ -115,6 +145,19 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
+
+        <!-- Used by -->
+        <div class="used-by">
+          <span class="used-by-label">Used by</span>
+          <div class="used-by-logos">
+            <a href="https://sesamehr.com" target="_blank" rel="noopener" class="used-by-logo" title="Sesame">
+              <img src="/logos/Sesame.png" alt="Sesame" height="48" />
+            </a>
+            <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="used-by-logo" title="The Hotels Network">
+              <img src="/logos/thn.png" alt="The Hotels Network" height="48" />
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- Decorative elements -->
@@ -125,7 +168,7 @@ onUnmounted(() => {
 
     <!-- USE CASES -->
     <section class="use-cases">
-      <h2 class="section-title">What can it do?</h2>
+      <h2 class="section-title">What could you do?</h2>
       <div class="use-case-grid">
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -133,6 +176,7 @@ onUnmounted(() => {
           </div>
           <h3>Sync Everywhere</h3>
           <p>Push your agents, skills, and commands to Claude, Cursor, and more with one command.</p>
+          <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -140,20 +184,23 @@ onUnmounted(() => {
           </div>
           <h3>Share with Teams</h3>
           <p>Publish artifacts to share AI configurations across your organization.</p>
+          <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41-.39.39-1.03.39-1.42.01A9.969 9.969 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13z"/></svg>
           </div>
           <h3>Version Control</h3>
-          <p>Track changes with lockfiles. Update, rollback, and manage dependencies like npm.</p>
+          <p>Track changes with lockfiles. Update, rollback, and manage dependencies easily.</p>
+          <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
         </div>
-        <div class="use-case-card">
+        <div class="use-case-card use-case-card--coming-soon">
+          <span class="badge-coming-soon">Coming Soon</span>
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
-          <h3>Install from Registry</h3>
-          <p><code>grekt add artifact</code> — discover and install community-created artifacts.</p>
+          <h3>Discover & Share</h3>
+          <p>Explore community-created artifacts or publish your own for others to use.</p>
         </div>
       </div>
     </section>
@@ -163,43 +210,139 @@ onUnmounted(() => {
 
     <!-- FEATURES -->
     <section class="features">
-      <h2 class="section-title">How it works</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8A5.9 5.9 0 0 1 6 12c0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
+      <div class="feature-list">
+        <!-- Feature Row 1 -->
+        <div class="feature-row">
+          <div class="feature-left">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M14 10H2v2h12v-2m0-4H2v2h12V6M2 16h8v-2H2v2m19.5-4.5L23 13l-6.99 7-4.51-4.5L13 14l3.01 3 5.49-5.5z"/></svg>
+            </div>
+            <h3>Pick What You Need</h3>
           </div>
-          <h3>Target Adapters</h3>
-          <p>Each AI tool has its own config format. grekt handles the translation automatically.</p>
+          <ul class="feature-right">
+            <li>Install only the components you want</li>
+            <li>Keep your AI context lean and focused</li>
+            <li>No unnecessary bloat in your project</li>
+          </ul>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17.5h11l-4.54-5.21z"/></svg>
+
+        <!-- Feature Row 2 -->
+        <div class="feature-row">
+          <div class="feature-left">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <h3>Install from Anywhere</h3>
           </div>
-          <h3>Lockfiles</h3>
-          <p><code>grekt.lock</code> tracks exact versions for reproducible setups across machines.</p>
+          <ul class="feature-right">
+            <li>Public registry, GitHub, or GitLab</li>
+            <li>Self-hosted instances supported</li>
+            <li>Pin specific versions or branches</li>
+          </ul>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m0 4.9a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V17h-2v-5.27c-1.17-.41-2-1.52-2-2.83a3 3 0 0 1 3-3z"/></svg>
+
+        <!-- Feature Row 3 -->
+        <div class="feature-row">
+          <div class="feature-left">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m0 4.9a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V17h-2v-5.27c-1.17-.41-2-1.52-2-2.83a3 3 0 0 1 3-3z"/></svg>
+            </div>
+            <h3>Built-in Integrity</h3>
           </div>
-          <h3>Non-destructive Sync</h3>
-          <p>Preview changes before applying. Your manual configurations stay safe.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
-          </div>
-          <h3>Artifact Types</h3>
-          <p>Agents, skills, commands — organize your AI toolbox in <code>.grekt/</code>.</p>
+          <ul class="feature-right">
+            <li>Know instantly when files change</li>
+            <li>Drift detection catches modifications</li>
+            <li>Reproducible installs across your team</li>
+          </ul>
         </div>
       </div>
     </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div
+          v-for="(item, index) in faqItems"
+          :key="index"
+          class="faq-item"
+          :class="{ 'faq-item--open': openFaqIndex === index }"
+        >
+          <button class="faq-question" @click="toggleFaq(index)">
+            <span>{{ item.question }}</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p>{{ item.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <!-- Brand column -->
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <span class="logo-text">grekt</span>
+            </div>
+            <p class="footer-tagline">AI artifact manager for the modern developer.</p>
+          </div>
+
+          <!-- Resources -->
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/en-US/docs/guide/introduction">Introduction</a></li>
+              <li><a href="/en-US/docs/guide/getting-started">Quick Start</a></li>
+              <li><a href="/en-US/api/">CLI Reference</a></li>
+              <li><a href="/en-US/docs/guide/authentication">Authentication</a></li>
+            </ul>
+          </div>
+
+          <!-- Community -->
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/grekt-labs" target="_blank">GitHub</a></li>
+              <li><a href="https://github.com/grekt-labs/grekt/discussions" target="_blank">Discussions</a></li>
+              <li><a href="https://github.com/grekt-labs/grekt/issues" target="_blank">Issues</a></li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="https://github.com/grekt-labs/grekt/blob/main/LICENSE" target="_blank">License (MIT)</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">Released under the MIT License.</p>
+          <p class="copyright">Copyright © {{ new Date().getFullYear() }} grekt contributors.</p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
 .home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
   /* grekt Brand Colors - Scale */
   --grekt-primary-100: #e5f5f2;
   --grekt-primary-200: #c0e8e1;
@@ -253,6 +396,8 @@ onUnmounted(() => {
   --divider-color: rgba(0, 0, 0, 0.08);
   --section-bg: #f5f5f7;
   --section-bg-alt: #ffffff;
+  --footer-bg: #f5f5f7;
+  --logo-filter: none;
 
   max-width: 100%;
   overflow-x: hidden;
@@ -278,12 +423,14 @@ onUnmounted(() => {
   --divider-color: rgba(255, 255, 255, 0.1);
   --section-bg: #161618;
   --section-bg-alt: #1c1c1e;
+  --footer-bg: #0d0d0e;
+  --logo-filter: brightness(0) invert(1);
 }
 
 /* HERO */
 .hero {
   background: linear-gradient(180deg, var(--hero-bg-start) 0%, var(--hero-bg-start) 60%, var(--hero-bg-end) 100%);
-  padding: 120px 20px 140px;
+  padding: 120px 20px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -299,8 +446,9 @@ onUnmounted(() => {
 }
 
 .hero h1 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
   font-size: 3.5rem;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.15;
   margin-bottom: 1.5rem;
   min-height: 8.5rem;
@@ -475,6 +623,48 @@ onUnmounted(() => {
   color: var(--grekt-highlight-500);
 }
 
+/* Used by section */
+.used-by {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.used-by-label {
+  font-size: 0.85rem;
+  color: var(--hero-tagline-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.used-by-logos {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.used-by-logo {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.used-by-logo:hover {
+  opacity: 1;
+}
+
+.used-by-logo img {
+  height: auto;
+  max-height: 48px;
+  filter: var(--logo-filter);
+}
+
 /* Decorative elements */
 .deco {
   position: absolute;
@@ -533,10 +723,13 @@ onUnmounted(() => {
 }
 
 .section-title {
+  font-family: 'Cal Sans', system-ui, sans-serif;
   text-align: center;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 3rem;
+  border-top: none !important;
+  padding-top: 0 !important;
 }
 
 .use-case-grid {
@@ -578,8 +771,9 @@ onUnmounted(() => {
 }
 
 .use-case-card h3 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
   margin-top: 0;
   color: var(--card-title);
@@ -592,72 +786,278 @@ onUnmounted(() => {
   margin: 0;
 }
 
+.use-case-card--coming-soon {
+  position: relative;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--grekt-primary-500);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.card-link:hover {
+  color: var(--grekt-primary-300);
+}
+
+.badge-coming-soon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--grekt-tertiary-500);
+  color: #0d1117;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
 /* FEATURES */
 .features {
   background: var(--section-bg);
-  padding: 80px 20px 100px;
+  padding: 60px 20px 80px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
-.features > * {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+.feature-list {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.feature-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 40px 0;
+  border-top: 1px solid var(--divider-color);
+  gap: 60px;
+}
+
+.feature-row:first-child {
+  border-top: none;
+}
+
+.feature-left {
+  display: flex;
+  align-items: center;
   gap: 16px;
-}
-
-.feature-card {
-  padding: 32px;
-  border-radius: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  border-color: var(--card-border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow);
+  min-width: 280px;
+  flex-shrink: 0;
 }
 
 .feature-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: var(--card-icon-bg);
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
-  color: var(--grekt-primary-500);
+  color: var(--card-text);
+  flex-shrink: 0;
 }
 
-.feature-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+.feature-left h3 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
   color: var(--card-title);
 }
 
-.feature-card p {
+.feature-right {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+  flex: 1;
+}
+
+.feature-right li {
+  font-size: 0.95rem;
+  color: var(--card-text);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.feature-right li:last-child {
+  margin-bottom: 0;
+}
+
+.feature-right code {
+  background: var(--card-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--grekt-primary-500);
+}
+
+/* FOOTER */
+.site-footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--divider-color);
+  padding: 60px 20px 40px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand {
+  max-width: 280px;
+}
+
+.footer-logo {
+  margin-bottom: 16px;
+}
+
+.logo-text {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--grekt-primary-500);
+}
+
+.footer-tagline {
   font-size: 0.9rem;
   color: var(--card-text);
   line-height: 1.6;
   margin: 0;
 }
 
-.feature-card code {
-  background: var(--card-code-bg);
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 0.8rem;
+.footer-column h4 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--card-title);
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
   color: var(--grekt-primary-500);
+}
+
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid var(--divider-color);
+  text-align: center;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--card-text);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* FAQ */
+.faq {
+  background: var(--section-bg-alt);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.faq > * {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--divider-color);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--card-title);
+  transition: color 0.2s ease;
+}
+
+.faq-question:hover {
+  color: var(--grekt-primary-500);
+}
+
+.faq-icon {
+  flex-shrink: 0;
+  color: var(--card-text);
+  transition: transform 0.3s ease;
+}
+
+.faq-item--open .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item--open .faq-answer {
+  max-height: 200px;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding: 0 0 24px 0;
+  font-size: 0.95rem;
+  color: var(--card-text);
+  line-height: 1.7;
 }
 
 /* Responsive */
@@ -701,6 +1101,34 @@ onUnmounted(() => {
 
   .deco {
     display: none;
+  }
+
+  .feature-row {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 0;
+  }
+
+  .feature-left {
+    min-width: auto;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 12px;
   }
 }
 </style>

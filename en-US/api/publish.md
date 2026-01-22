@@ -27,6 +27,21 @@ grekt publish ./my-artifact --local -o ./dist/artifact.tar.gz
 grekt publish ./my-artifact -r company
 ```
 
+## Behavior
+
+When publishing:
+
+1. **Version check**: Verifies the version doesn't already exist in the registry
+2. **Upload**: Uploads tarball to `artifacts/@author/name/version.tar.gz`
+3. **Metadata**: Creates/updates `metadata.json` with latest version info
+
+If the version already exists, publish will fail:
+
+```bash
+✗ Version 1.0.0 already exists for @author/name
+ℹ Bump the version in grekt.yaml and try again
+```
+
 ## Configuration
 
 See [Authentication](/en-US/docs/guide/authentication#registry-publishing).
@@ -59,8 +74,19 @@ default:
 | AWS S3 | `https://s3.<region>.amazonaws.com` |
 | MinIO | `https://minio.example.com` |
 
-## Notes
+## Registry Structure
 
-- Artifact name from `grekt.yaml`: `@<author>/<name>`
-- Uploaded to `artifacts/` prefix in bucket
-- Use `--local` for CI pipelines
+```
+artifacts/
+  @author/name/
+    metadata.json     # Version info and deprecations
+    1.0.0.tar.gz
+    1.0.1.tar.gz
+    2.0.0.tar.gz
+```
+
+## Related Commands
+
+- [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
+- [grekt versions](/en-US/api/versions) — List available versions
+- [grekt info](/en-US/api/info) — Show artifact metadata
