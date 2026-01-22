@@ -1,12 +1,23 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
-const installCommand = 'curl -fsSL https://grekt.sh/install | bash'
+const installMethods = [
+  { id: 'curl', label: 'curl', command: 'curl -fsSL grekt.com | sh' },
+  { id: 'brew', label: 'brew', command: 'brew install grekt' },
+  { id: 'npm', label: 'npm', command: 'npm install -g grekt' },
+  { id: 'pnpm', label: 'pnpm', command: 'pnpm add -g grekt' },
+  { id: 'bun', label: 'bun', command: 'bun add -g grekt' },
+]
+
+const activeInstall = ref('curl')
+const installCommand = computed(() =>
+  installMethods.find(m => m.id === activeInstall.value)?.command || ''
+)
 const copied = ref(false)
 
 const copyCommand = async () => {
   try {
-    await navigator.clipboard.writeText(installCommand)
+    await navigator.clipboard.writeText(installCommand.value)
     copied.value = true
     setTimeout(() => {
       copied.value = false
@@ -78,24 +89,31 @@ onUnmounted(() => {
           Install, sync, and share AI configurations across Claude, Cursor, and other coding assistants. <strong class="typing-text">Version controlled. Lockfile backed. Zero friction.</strong>
         </p>
         <div class="hero-buttons">
-          <div class="install-box">
-            <span class="install-prompt">$</span>
-            <code class="install-command">{{ installCommand }}</code>
-            <button class="copy-btn" @click="copyCommand" :class="{ copied }">
-              <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
-                <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-              </svg>
-              <svg v-else viewBox="0 0 24 24" width="18" height="18">
-                <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
-              </svg>
-            </button>
+          <div class="install-wrapper">
+            <div class="install-tabs">
+              <button
+                v-for="method in installMethods"
+                :key="method.id"
+                class="install-tab"
+                :class="{ active: activeInstall === method.id }"
+                @click="activeInstall = method.id"
+              >
+                {{ method.label }}
+              </button>
+            </div>
+            <div class="install-box">
+              <span class="install-prompt">$</span>
+              <code class="install-command">{{ installCommand }}</code>
+              <button class="copy-btn" @click="copyCommand" :class="{ copied }">
+                <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                </svg>
+                <svg v-else viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
+                </svg>
+              </button>
+            </div>
           </div>
-          <a class="secondary" href="https://github.com/grekt-labs">
-            <svg class="github-icon" viewBox="0 0 24 24" width="20" height="20">
-              <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            GitHub
-          </a>
         </div>
       </div>
 
@@ -139,6 +157,9 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
 
     <!-- FEATURES -->
     <section class="features">
@@ -218,8 +239,45 @@ onUnmounted(() => {
   --hero-btn-secondary-color: #1a1a2e;
   --hero-deco-opacity: 0.3;
 
+  /* Card theme - light mode defaults */
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-border-hover: rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  --card-icon-bg: rgba(0, 0, 0, 0.04);
+  --card-title: #1a1a2e;
+  --card-text: rgba(26, 26, 46, 0.65);
+  --card-code-bg: rgba(0, 0, 0, 0.06);
+
+  /* Divider & section backgrounds - light mode */
+  --divider-color: rgba(0, 0, 0, 0.08);
+  --section-bg: #f5f5f7;
+  --section-bg-alt: #ffffff;
+
   max-width: 100%;
   overflow-x: hidden;
+}
+
+/* Dark mode overrides */
+.dark .home-container {
+  /* Hero - dark mode */
+  --hero-bg-start: #1c1c1e;
+  --hero-bg-end: #1c1c1e;
+
+  /* Cards - dark mode */
+  --card-bg: #2c2c2e;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-hover: rgba(255, 255, 255, 0.15);
+  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  --card-icon-bg: rgba(255, 255, 255, 0.05);
+  --card-title: #ffffff;
+  --card-text: rgba(255, 255, 255, 0.6);
+  --card-code-bg: rgba(255, 255, 255, 0.1);
+
+  /* Divider & section backgrounds - dark mode */
+  --divider-color: rgba(255, 255, 255, 0.1);
+  --section-bg: #161618;
+  --section-bg-alt: #1c1c1e;
 }
 
 /* HERO */
@@ -331,13 +389,52 @@ onUnmounted(() => {
   height: 20px;
 }
 
+/* Install wrapper */
+.install-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.install-tabs {
+  display: flex;
+  gap: 0;
+  background: #161b22;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
+  padding: 4px 4px 0 4px;
+}
+
+.install-tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.install-tab:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.install-tab.active {
+  background: #0d1117;
+  color: var(--grekt-primary-500);
+}
+
 /* Install box */
 .install-box {
   display: flex;
   align-items: center;
   background: #0d1117;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
   padding: 12px 16px;
   gap: 12px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
@@ -413,11 +510,26 @@ onUnmounted(() => {
   transform: rotate(25deg);
 }
 
+/* Section Divider */
+.section-divider {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 1px;
+  background: var(--divider-color);
+}
+
 /* USE CASES */
 .use-cases {
-  padding: 0px 20px;
+  background: var(--section-bg-alt);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.use-cases > * {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-title {
@@ -434,55 +546,64 @@ onUnmounted(() => {
 }
 
 .use-case-card {
-  padding: 24px;
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  transition: border-color 0.2s ease;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
   text-align: left;
 }
 
 .use-case-card:hover {
-  border-color: var(--vp-c-brand-1);
+  border-color: var(--card-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
 }
 
 .use-case-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background: var(--vp-c-bg);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--card-icon-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: var(--grekt-primary-500);
 }
 
 .use-case-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .use-case-card h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
   margin-top: 0;
-  color: var(--grekt-primary-500);
+  color: var(--card-title);
 }
 
 .use-case-card p {
-  font-size: 0.875rem;
-  color: var(--vp-c-text-2);
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--card-text);
+  line-height: 1.6;
   margin: 0;
 }
 
 /* FEATURES */
 .features {
-  padding: 60px 20px 100px;
+  background: var(--section-bg);
+  padding: 80px 20px 100px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.features > * {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .feature-grid {
@@ -492,48 +613,51 @@ onUnmounted(() => {
 }
 
 .feature-card {
-  padding: 24px;
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  transition: border-color 0.2s ease;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
 }
 
 .feature-card:hover {
-  border-color: var(--vp-c-brand-1);
+  border-color: var(--card-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
 }
 
 .feature-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background: var(--vp-c-bg-mute);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--card-icon-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: var(--grekt-primary-500);
 }
 
 .feature-card h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--grekt-primary-500);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--card-title);
 }
 
 .feature-card p {
-  font-size: 0.875rem;
-  color: var(--vp-c-text-2);
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--card-text);
+  line-height: 1.6;
   margin: 0;
 }
 
 .feature-card code {
-  background: var(--vp-c-bg-mute);
-  padding: 2px 6px;
-  border-radius: 4px;
+  background: var(--card-code-bg);
+  padding: 3px 8px;
+  border-radius: 6px;
   font-size: 0.8rem;
+  color: var(--grekt-primary-500);
 }
 
 /* Responsive */
@@ -549,6 +673,20 @@ onUnmounted(() => {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .install-wrapper {
+    width: 100%;
+  }
+
+  .install-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .install-tab {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 
   .install-box {
