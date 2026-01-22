@@ -200,7 +200,7 @@ const toggleFaq = (index) => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
           <h3>Discover & Share</h3>
-          <p>Explore community-created artifacts or publish your own for others to use.</p>
+          <p>Explore community created artifacts or publish your own for others to use.</p>
         </div>
       </div>
     </section>
@@ -236,7 +236,7 @@ const toggleFaq = (index) => {
           </div>
           <ul class="feature-right">
             <li>Public registry, GitHub, or GitLab</li>
-            <li>Self-hosted instances supported</li>
+            <li>Self hosted instances supported</li>
             <li>Pin specific versions or branches</li>
           </ul>
         </div>
@@ -250,7 +250,7 @@ const toggleFaq = (index) => {
             <h3>Built-in Integrity</h3>
           </div>
           <ul class="feature-right">
-            <li>Know instantly when files change</li>
+            <li>Detect when files change</li>
             <li>Drift detection catches modifications</li>
             <li>Reproducible installs across your team</li>
           </ul>

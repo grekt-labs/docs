@@ -30,7 +30,7 @@ gitlab.com:
   token: glpat-xxxxxxxxxxxx
 ```
 
-### Self-hosted GitLab
+### Self hosted GitLab
 
 ```bash
 # Host-specific: GITLAB_TOKEN_{HOST}

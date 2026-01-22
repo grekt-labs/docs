@@ -39,7 +39,7 @@ grekt sync -t claude      # Specific target
 
 Updates `.cursorrules` with grekt metadata.
 
-## Non-destructive
+## Non destructive
 
 - Preserves content outside managed sections
 - Marks managed sections with `<!-- grekt:start/end -->`

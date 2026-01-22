@@ -21,7 +21,7 @@ grekt add <source>
 | GitHub | `github:owner/repo` |
 | GitHub (ref) | `github:owner/repo#v1.0.0` |
 | GitLab | `gitlab:owner/repo` |
-| GitLab (self-hosted) | `gitlab:host.com/owner/repo` |
+| GitLab (self hosted) | `gitlab:host.com/owner/repo` |
 
 ## Examples
 

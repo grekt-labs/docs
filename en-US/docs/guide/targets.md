@@ -38,7 +38,7 @@ Creates organized directories:
 
 Appends to `.cursorrules` with markers for managed sections.
 
-## Non-destructive Sync
+## Non destructive Sync
 
 grekt preserves your manual changes:
 
