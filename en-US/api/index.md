@@ -6,6 +6,15 @@ grekt provides a command-line interface for managing AI artifacts.
 
 <div class="api-groups">
   <div class="api-group">
+    <h3>Authentication</h3>
+    <ul>
+      <li><a href="/en-US/api/login">grekt login</a> — Log in to registry</li>
+      <li><a href="/en-US/api/logout">grekt logout</a> — Log out from registry</li>
+      <li><a href="/en-US/api/whoami">grekt whoami</a> — Show current user</li>
+    </ul>
+  </div>
+
+  <div class="api-group">
     <h3>Artifact Management</h3>
     <ul>
       <li><a href="/en-US/api/init">grekt init</a> — Initialize a project</li>
@@ -47,6 +56,12 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Quick Reference
 
 ```bash
+# Authentication
+grekt login                      # Log in to registry
+grekt logout                     # Log out
+grekt whoami                     # Show current user
+
+# Artifacts
 grekt init                       # Initialize
 grekt add @author/artifact       # Add from registry
 grekt add @author/artifact@1.0.0 # Add specific version
@@ -57,11 +72,15 @@ grekt sync                       # Apply
 grekt list                       # List artifacts
 grekt check                      # Verify integrity
 grekt remove artifact            # Remove
+
+# Registry
 grekt publish ./artifact         # Publish
 grekt deprecate @a/b@1.0 -m "x"  # Deprecate version
 grekt undeprecate @a/b@1.0       # Remove deprecation
 grekt info @author/artifact      # Show artifact info
 grekt versions @author/artifact  # List versions
+
+# Config
 grekt config set autoSync true   # Configure
 ```
 

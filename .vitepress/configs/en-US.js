@@ -19,9 +19,23 @@ export const enUSSidebar = {
       items: [
         { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
       ]
+    },
+    {
+      text: 'Publishing',
+      items: [
+        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' }
+      ]
     }
   ],
   '/en-US/api/': [
+    {
+      text: 'Authentication',
+      items: [
+        { text: 'grekt login', link: '/en-US/api/login' },
+        { text: 'grekt logout', link: '/en-US/api/logout' },
+        { text: 'grekt whoami', link: '/en-US/api/whoami' }
+      ]
+    },
     {
       text: 'Artifact Management',
       items: [
