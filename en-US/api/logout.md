@@ -1,6 +1,6 @@
 # grekt logout
 
-Log out from a grekt registry.
+Log out from the grekt registry.
 
 ```bash
 grekt logout
@@ -8,35 +8,11 @@ grekt logout
 
 ## Behavior
 
-Removes the stored token from `~/.grekt/credentials.yaml`.
+Clears the stored session from `~/.grekt/session.yaml` and invalidates it on the server.
 
 ```bash
 $ grekt logout
 ✓ Logged out
-```
-
-If not logged in:
-
-```bash
-$ grekt logout
-ℹ Not logged in
-```
-
-## Environment Variable
-
-If using `GREKT_TOKEN` environment variable, logout will not clear it:
-
-```bash
-$ export GREKT_TOKEN=grk_xxxxxxxxxxxx
-$ grekt logout
-ℹ Using GREKT_TOKEN environment variable
-ℹ Unset the environment variable to log out
-```
-
-Unset manually:
-
-```bash
-unset GREKT_TOKEN
 ```
 
 ## Related Commands

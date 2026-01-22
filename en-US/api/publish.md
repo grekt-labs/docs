@@ -10,7 +10,6 @@ grekt publish <path>
 
 | Option | Description |
 |--------|-------------|
-| `-r, --registry <name>` | Registry from credentials (default: "default") |
 | `--local` | Only create tarball, don't upload |
 | `-o, --output <path>` | Output path for tarball (with `--local`) |
 | `--s3` | Use S3-compatible storage (legacy mode) |
@@ -39,18 +38,12 @@ $ grekt publish ./artifact
 ℹ Run 'grekt login' first
 ```
 
-For CI/CD, use `GREKT_TOKEN`:
-
-```bash
-export GREKT_TOKEN=grk_xxxxxxxxxxxx
-grekt publish ./artifact
-```
-
 ## Behavior
 
-1. **Version check**: Verifies the version doesn't already exist
-2. **Upload**: Uploads tarball to registry
-3. **Metadata**: Updates registry metadata
+1. Validates the manifest (`grekt.yaml`)
+2. Creates a tarball
+3. Checks version doesn't already exist
+4. Uploads to registry
 
 If the version already exists:
 
@@ -61,31 +54,13 @@ If the version already exists:
 
 ## S3 Legacy Mode
 
-For backwards compatibility with S3-compatible storage, use `--s3`:
+For backwards compatibility with S3-compatible storage:
 
 ```bash
 grekt publish ./artifact --s3
 ```
 
-Requires S3 credentials in environment or `~/.grekt/credentials.yaml`:
-
-```bash
-export GREKT_STORAGE_ENDPOINT="https://xxx.r2.cloudflarestorage.com"
-export GREKT_STORAGE_ACCESS_KEY_ID="..."
-export GREKT_STORAGE_SECRET_ACCESS_KEY="..."
-export GREKT_STORAGE_BUCKET="my-bucket"
-```
-
-Or:
-
-```yaml
-default:
-  type: s3
-  endpoint: https://xxx.r2.cloudflarestorage.com
-  accessKeyId: your-key
-  secretAccessKey: your-secret
-  bucket: my-artifacts
-```
+Requires S3 credentials. See [Authentication](/en-US/docs/guide/authentication#s3-storage-legacy).
 
 ## Related Commands
 

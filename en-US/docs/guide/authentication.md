@@ -12,22 +12,22 @@ For publishing, deprecating, and other registry operations.
 grekt login
 ```
 
-Opens browser for authentication. Token is saved to `~/.grekt/credentials.yaml`.
+Opens browser for authentication. Session is saved to `~/.grekt/session.yaml`.
 
 ### CI/CD
 
-Use `GREKT_TOKEN` environment variable:
+For CI/CD, use email/password login:
 
 ```bash
-export GREKT_TOKEN=grk_xxxxxxxxxxxx
-grekt publish ./artifact
+grekt login --email user@example.com --password $PASSWORD
 ```
 
-Or pass token directly:
+Or use API keys (recommended):
 
-```bash
-grekt login --token $GREKT_TOKEN
-```
+1. Create an API key via the web dashboard
+2. Pass the key in the `Authorization` header
+
+API keys start with `grk_` prefix and can be scoped to specific namespaces.
 
 ### Check Status
 
@@ -47,13 +47,6 @@ For private repositories with `github:user/repo` source.
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
 ```
 
-Or in `~/.grekt/credentials.yaml`:
-
-```yaml
-github:
-  token: ghp_xxxxxxxxxxxx
-```
-
 Required scopes: `repo`
 
 ## GitLab
@@ -64,25 +57,10 @@ For private repositories with `gitlab:user/repo` source.
 export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
 ```
 
-Or:
-
-```yaml
-gitlab.com:
-  token: glpat-xxxxxxxxxxxx
-```
-
 ### Self-hosted GitLab
 
 ```bash
-# Host-specific: GITLAB_TOKEN_{HOST}
 export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
-```
-
-Or:
-
-```yaml
-gitlab.company.com:
-  token: glpat-xxxxxxxxxxxx
 ```
 
 Required scopes: `read_api`, `read_repository`
@@ -98,7 +76,7 @@ export GREKT_STORAGE_SECRET_ACCESS_KEY=your-secret
 export GREKT_STORAGE_BUCKET=your-bucket
 ```
 
-Or:
+Or in `~/.grekt/credentials.yaml`:
 
 ```yaml
 default:
@@ -116,8 +94,10 @@ default:
 ```yaml
 - name: Publish artifact
   env:
-    GREKT_TOKEN: ${{ secrets.GREKT_TOKEN }}
-  run: grekt publish ./artifact
+    GREKT_PASSWORD: ${{ secrets.GREKT_PASSWORD }}
+  run: |
+    grekt login --email ci@example.com --password $GREKT_PASSWORD
+    grekt publish ./artifact
 
 - name: Install from private repo
   env:
@@ -130,9 +110,8 @@ default:
 ```yaml
 publish:
   script:
+    - grekt login --email $CI_EMAIL --password $CI_PASSWORD
     - grekt publish ./artifact
-  variables:
-    GREKT_TOKEN: $GREKT_REGISTRY_TOKEN
 
 install:
   script:
@@ -140,10 +119,3 @@ install:
   variables:
     GITLAB_TOKEN: $CI_JOB_TOKEN
 ```
-
-## Priority
-
-Token resolution order:
-
-1. Environment variable (`GREKT_TOKEN`, `GITHUB_TOKEN`, `GITLAB_TOKEN`)
-2. Credentials file (`~/.grekt/credentials.yaml`)

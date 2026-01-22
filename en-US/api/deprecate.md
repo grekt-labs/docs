@@ -11,7 +11,6 @@ grekt deprecate <artifact@version>
 | Option | Description |
 |--------|-------------|
 | `-m, --message <message>` | Deprecation message (default: "This version is deprecated") |
-| `-r, --registry <name>` | Registry from credentials (default: "default") |
 | `--s3` | Use S3-compatible storage (legacy mode) |
 
 ## Examples
@@ -24,7 +23,7 @@ grekt deprecate @author/agent@1.0.0
 grekt deprecate @author/agent@1.0.0 -m "Security vulnerability, use 2.x"
 
 # Legacy: deprecate on S3 registry
-grekt deprecate @author/agent@1.0.0 --s3 -r company
+grekt deprecate @author/agent@1.0.0 --s3
 ```
 
 ## Authentication
@@ -53,20 +52,10 @@ $ grekt add @author/agent@1.0.0
 
 ## Use Cases
 
-- Security vulnerabilities discovered in old versions
-- Breaking changes in external APIs the agent depends on
+- Security vulnerabilities in old versions
+- Breaking changes in external dependencies
 - Recommending users upgrade to newer versions
 - Marking versions with known bugs
-
-## S3 Legacy Mode
-
-For backwards compatibility with S3-compatible storage, use `--s3`:
-
-```bash
-grekt deprecate @author/agent@1.0.0 --s3
-```
-
-Requires S3 credentials. See [grekt publish](/en-US/api/publish#s3-legacy-mode).
 
 ## Related Commands
 

@@ -1,6 +1,6 @@
 # grekt login
 
-Log in to a grekt registry.
+Log in to the grekt registry.
 
 ```bash
 grekt login
@@ -10,8 +10,8 @@ grekt login
 
 | Option | Description |
 |--------|-------------|
-| `-r, --registry <url>` | Registry URL (default: "https://registry.grekt.com") |
-| `--token <token>` | Use token directly (for CI/CD) |
+| `--email <email>` | Email for non-interactive login |
+| `--password <password>` | Password for non-interactive login |
 
 ## Examples
 
@@ -19,57 +19,50 @@ grekt login
 # Interactive login (opens browser)
 grekt login
 
-# Login to custom registry
-grekt login -r https://registry.company.com
-
-# CI/CD: use token directly
-grekt login --token $GREKT_TOKEN
+# Non-interactive login (CI/CD)
+grekt login --email user@example.com --password $PASSWORD
 ```
 
 ## Behavior
 
 ### Interactive Mode
 
-1. Opens browser to registry's auth page
-2. User authenticates in browser
-3. Token is received and saved to `~/.grekt/credentials.yaml`
+1. Opens browser to authentication page
+2. User authenticates (GitHub, email, etc.)
+3. Session is saved to `~/.grekt/session.yaml`
 
 ```bash
 $ grekt login
 ℹ Opening browser for authentication...
 
   If the browser doesn't open, visit:
-  https://registry.grekt.com/auth/cli?redirect=...
+  https://...
 
 ✓ Logged in
 ```
 
-### CI/CD Mode
+### Non-Interactive Mode
 
-With `--token`, saves the token directly without browser flow:
-
-```bash
-grekt login --token $GREKT_TOKEN
-```
-
-## Credential Storage
-
-Tokens are stored in `~/.grekt/credentials.yaml`:
-
-```yaml
-default:
-  url: https://registry.grekt.com
-  token: grk_xxxxxxxxxxxx
-```
-
-## Environment Variable
-
-`GREKT_TOKEN` takes priority over credentials file:
+For CI/CD environments without a browser:
 
 ```bash
-export GREKT_TOKEN=grk_xxxxxxxxxxxx
-grekt publish ./artifact  # Uses env token
+grekt login --email user@example.com --password $PASSWORD
 ```
+
+Both `--email` and `--password` are required together.
+
+## Session Storage
+
+Sessions are stored in `~/.grekt/session.yaml` (auto-refreshed).
+
+## API Keys (CI/CD)
+
+For CI/CD pipelines, API keys are recommended over email/password:
+
+1. Create an API key via the web dashboard
+2. Use the key as a Bearer token
+
+API keys start with `grk_` prefix and can be scoped to specific namespaces.
 
 ## Related Commands
 

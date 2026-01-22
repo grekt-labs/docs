@@ -10,7 +10,6 @@ grekt undeprecate <artifact@version>
 
 | Option | Description |
 |--------|-------------|
-| `-r, --registry <name>` | Registry from credentials (default: "default") |
 | `--s3` | Use S3-compatible storage (legacy mode) |
 
 ## Examples
@@ -20,7 +19,7 @@ grekt undeprecate <artifact@version>
 grekt undeprecate @author/agent@1.0.0
 
 # Legacy: on S3 registry
-grekt undeprecate @author/agent@1.0.0 --s3 -r company
+grekt undeprecate @author/agent@1.0.0 --s3
 ```
 
 ## Authentication
@@ -38,16 +37,6 @@ $ grekt undeprecate @author/agent@1.0.0
 - Deprecation was added by mistake
 - Issue was fixed in the same version (hotfix)
 - Version is now considered safe again
-
-## S3 Legacy Mode
-
-For backwards compatibility with S3-compatible storage, use `--s3`:
-
-```bash
-grekt undeprecate @author/agent@1.0.0 --s3
-```
-
-Requires S3 credentials. See [grekt publish](/en-US/api/publish#s3-legacy-mode).
 
 ## Related Commands
 
