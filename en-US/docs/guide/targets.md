@@ -8,6 +8,7 @@ Targets are AI tools that grekt syncs artifacts to.
 |--------|--------|-------------|
 | `claude` | `.claude/` | Claude Code and Claude Desktop |
 | `cursor` | `.cursorrules` | Cursor IDE |
+| `opencode` | `.opencode/` | OpenCode |
 
 ## How Sync Works
 
@@ -37,6 +38,17 @@ Creates organized directories:
 ### Cursor
 
 Appends to `.cursorrules` with markers for managed sections.
+
+### OpenCode
+
+Creates organized directories similar to Claude:
+
+```
+.opencode/
+├── agents/
+├── skills/
+└── commands/
+```
 
 ## Non destructive Sync
 

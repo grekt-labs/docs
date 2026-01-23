@@ -21,6 +21,7 @@ grekt config <subcommand>
 | `targets` | AI tools to sync to |
 | `autoSync` | Sync after `grekt add` |
 | `registry` | Custom registry URL |
+| `options.autoCheck` | Run integrity check after `add`/`install` |
 
 ## Examples
 
@@ -28,5 +29,17 @@ grekt config <subcommand>
 grekt config list
 grekt config set targets claude,cursor
 grekt config set autoSync true
+grekt config set options.autoCheck true
 grekt config get targets
 ```
+
+## Options Block
+
+The `options` block in `grekt.yaml` contains optional settings:
+
+```yaml
+options:
+  autoCheck: true  # Run integrity check after add/install
+```
+
+When `autoCheck` is enabled, `grekt add` and `grekt install` will automatically verify artifact integrity after completion.

@@ -82,6 +82,22 @@ artifacts:
 
 For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/authentication).
 
+## Auto Check
+
+When `options.autoCheck` is enabled in `grekt.yaml`, an integrity check runs automatically after adding:
+
+```yaml
+options:
+  autoCheck: true
+```
+
+```
+✓ Installed @grekt/code-reviewer@1.0.0
+
+Integrity check:
+✓ All 3 artifact(s) verified
+```
+
 ## Notes
 
 - Downloads to `.grekt/artifacts/<artifact-id>/`
