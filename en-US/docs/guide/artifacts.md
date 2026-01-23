@@ -82,7 +82,7 @@ description: Review code changes
 | `description` | Yes | What it does |
 | `agent` | No | Parent agent (for skills) |
 
-## Project Files
+## Project files
 
 ### grekt.yaml
 

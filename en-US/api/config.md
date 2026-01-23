@@ -33,7 +33,7 @@ grekt config set options.autoCheck true
 grekt config get targets
 ```
 
-## Options Block
+## Options block
 
 The `options` block in `grekt.yaml` contains optional settings:
 

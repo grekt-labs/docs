@@ -51,7 +51,7 @@ project/
 └── grekt.lock          # Lockfile with exact versions and checksums
 ```
 
-## Add an Artifact
+## Add an artifact
 
 Artifacts can come from the grekt registry, GitHub, or GitLab. The `add` command downloads the artifact and updates your configuration.
 
@@ -91,7 +91,7 @@ grekt sync
 
 If you have `autoSync: true` in your config, syncing happens automatically when you add or remove artifacts.
 
-## Verify Your Setup
+## Verify your setup
 
 Check that everything is installed correctly and see what's in your project:
 

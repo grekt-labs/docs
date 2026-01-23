@@ -25,7 +25,7 @@ grekt login --email user@example.com --password $PASSWORD
 
 ## Behavior
 
-### Interactive Mode
+### Interactive mode
 
 1. Opens browser to authentication page
 2. User authenticates (GitHub, email, etc.)
@@ -51,7 +51,7 @@ grekt login --email user@example.com --password $PASSWORD
 
 Both `--email` and `--password` are required together.
 
-## Session Storage
+## Session storage
 
 Sessions are stored in `~/.grekt/session.yaml` (auto-refreshed).
 
@@ -64,7 +64,7 @@ For CI/CD pipelines, API keys are recommended over email/password:
 
 API keys start with `grk_` prefix and can be scoped to specific namespaces.
 
-## Related Commands
+## Related commands
 
 - [grekt logout](/en-US/api/logout) — Log out from registry
 - [grekt whoami](/en-US/api/whoami) — Show current user

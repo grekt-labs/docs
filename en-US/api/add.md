@@ -12,7 +12,7 @@ grekt add <source>
 |--------|-------------|
 | `-c, --choose` | Interactively select which components to install |
 
-## Source Formats
+## Source formats
 
 | Format | Example |
 |--------|---------|
@@ -41,7 +41,7 @@ grekt add gitlab:group/my-artifact
 grekt add gitlab:gitlab.company.com/team/artifact#main
 ```
 
-## Component Selection
+## Component selection
 
 Artifacts can contain multiple components: agents, skills, and commands. By default, all components are installed. Use `--choose` to select only what you need:
 
@@ -82,7 +82,7 @@ artifacts:
 
 For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/authentication).
 
-## Auto Check
+## Auto check
 
 When `options.autoCheck` is enabled in `grekt.yaml`, an integrity check runs automatically after adding:
 

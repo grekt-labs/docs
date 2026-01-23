@@ -15,7 +15,7 @@ $ grekt logout
 ✓ Logged out
 ```
 
-## Related Commands
+## Related commands
 
 - [grekt login](/en-US/api/login) — Log in to registry
 - [grekt whoami](/en-US/api/whoami) — Show current user

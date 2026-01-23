@@ -32,13 +32,13 @@ $ grekt undeprecate @author/agent@1.0.0
 ℹ Run 'grekt login' first
 ```
 
-## Use Cases
+## Use cases
 
 - Deprecation was added by mistake
 - Issue was fixed in the same version (hotfix)
 - Version is now considered safe again
 
-## Related Commands
+## Related commands
 
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
 - [grekt versions](/en-US/api/versions) — List versions with deprecation status

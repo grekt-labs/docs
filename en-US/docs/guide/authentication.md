@@ -6,7 +6,7 @@ Credentials for registry operations and private repos.
 
 For publishing, deprecating, and other registry operations.
 
-### Interactive Login
+### Interactive login
 
 ```bash
 grekt login
@@ -29,7 +29,7 @@ Or use API keys (recommended):
 
 API keys start with `grk_` prefix and can be scoped to specific namespaces.
 
-### Check Status
+### Check status
 
 ```bash
 grekt whoami
@@ -39,33 +39,9 @@ grekt logout
 # ✓ Logged out
 ```
 
-## GitHub
+## Private sources & registries
 
-For private repositories with `github:user/repo` source.
-
-```bash
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
-```
-
-Required scopes: `repo`
-
-## GitLab
-
-For private repositories with `gitlab:user/repo` source.
-
-```bash
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
-```
-
-### Self-hosted GitLab
-
-```bash
-export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
-```
-
-Required scopes: `read_api`, `read_repository`
-
-For publishing to GitLab Generic Package Registry, see [Self-Hosted Registries](/en-US/docs/guide/self-hosted-registries).
+For authentication with Git sources and self-hosted registries, see [Registry Authentication](/en-US/docs/guide/registries/authentication).
 
 ## S3 Storage (Legacy)
 

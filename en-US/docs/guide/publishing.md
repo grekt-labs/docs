@@ -2,7 +2,7 @@
 
 Publish artifacts to the registry for others to install.
 
-## Before You Publish
+## Before you publish
 
 Your artifact needs a valid manifest (`grekt.yaml`) with required fields:
 
@@ -50,7 +50,7 @@ grekt publish ./my-artifact
 grekt publish ./my-artifact --local -o ./dist/
 ```
 
-## Version Management
+## Version management
 
 Each publish requires a unique version. If the version exists, publish fails:
 
@@ -61,7 +61,7 @@ Each publish requires a unique version. If the version exists, publish fails:
 
 Bump your version in `grekt.yaml` before publishing updates.
 
-### Deprecating Versions
+### Deprecating versions
 
 Mark old versions as deprecated to warn users:
 
@@ -75,7 +75,7 @@ Deprecated versions remain installable but show a warning. To remove deprecation
 grekt undeprecate @author/my-artifact@1.0.0
 ```
 
-### Listing Versions
+### Listing versions
 
 ```bash
 grekt versions @author/my-artifact

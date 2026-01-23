@@ -41,7 +41,7 @@ $ grekt versions @author/code-reviewer
   1.0.0 ⚠ deprecated: "Security fix in 1.1.0"
 ```
 
-## Installing Specific Versions
+## Installing specific versions
 
 ```bash
 # Install latest
@@ -51,7 +51,7 @@ grekt add @author/agent
 grekt add @author/agent@1.0.0
 ```
 
-## Related Commands
+## Related commands
 
 - [grekt info](/en-US/api/info) — Show artifact summary
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated

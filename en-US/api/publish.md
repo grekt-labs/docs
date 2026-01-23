@@ -62,7 +62,7 @@ grekt publish ./artifact --s3
 
 Requires S3 credentials. See [Authentication](/en-US/docs/guide/authentication#s3-storage-legacy).
 
-## Related Commands
+## Related commands
 
 - [grekt login](/en-US/api/login) — Log in to registry
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated

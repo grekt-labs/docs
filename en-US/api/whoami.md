@@ -24,11 +24,11 @@ Not logged in
 Registry: https://...
 ```
 
-## Exit Code
+## Exit code
 
 Always exits with code 0. This command is informational only.
 
-## Related Commands
+## Related commands
 
 - [grekt login](/en-US/api/login) — Log in to registry
 - [grekt logout](/en-US/api/logout) — Log out from registry

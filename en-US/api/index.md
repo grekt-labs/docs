@@ -46,14 +46,14 @@ grekt provides a command-line interface for managing AI artifacts.
   </div>
 </div>
 
-## Global Options
+## Global options
 
 | Option | Description |
 |--------|-------------|
 | `-h, --help` | Show help for command |
 | `-V, --version` | Show version number |
 
-## Quick Reference
+## Quick reference
 
 ```bash
 # Authentication

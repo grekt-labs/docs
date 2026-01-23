@@ -1,8 +1,8 @@
 # Introduction
 
-grekt is a package manager for AI artifacts. It lets you install, manage, and share agents, skills, and commands across your projects — and sync them to AI tools like Claude Code, Cursor, Windsurf, and others.
+grekt is an artifact manager for AI tools. It lets you install, manage, and share agents, skills, and commands across your projects — and sync them to AI tools like Claude Code, Cursor, Windsurf, and others.
 
-## The Problem
+## The problem
 
 AI tools need context to be useful. You write custom instructions, create agents with specific behaviors, define skills... but this context is:
 
@@ -11,7 +11,7 @@ AI tools need context to be useful. You write custom instructions, create agents
 - **Tedious to sync** when you make changes
 - **Not versioned** like the rest of your code
 
-## The Solution
+## The solution
 
 grekt treats AI context like dependencies. You declare what you need, install it, and sync it to your tools.
 
@@ -22,7 +22,7 @@ grekt sync                        # Sync to Claude, Cursor...
 
 When someone publishes a better code reviewer agent, you `grekt add` it. When you improve your own, you `grekt publish` it.
 
-## What are Artifacts?
+## What are artifacts?
 
 Artifacts are packages of AI context. They can contain:
 

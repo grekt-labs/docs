@@ -35,7 +35,7 @@ grekt sync
 grekt install --force
 ```
 
-## Integrity Verification
+## Integrity verification
 
 Each file's SHA256 hash is verified against the lockfile:
 
@@ -45,7 +45,7 @@ Error: Integrity check failed for code-reviewer
   modified: agent.md
 ```
 
-## Auto Check
+## Auto check
 
 When `options.autoCheck` is enabled in `grekt.yaml`, an integrity check runs automatically after installing:
 

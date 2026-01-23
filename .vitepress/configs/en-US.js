@@ -4,7 +4,8 @@ export const enUSSidebar = {
       text: 'Getting Started',
       items: [
         { text: 'Introduction', link: '/en-US/docs/guide/introduction' },
-        { text: 'Quick Start', link: '/en-US/docs/guide/getting-started' }
+        { text: 'Quick Start', link: '/en-US/docs/guide/getting-started' },
+        { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
       ]
     },
     {
@@ -15,16 +16,18 @@ export const enUSSidebar = {
       ]
     },
     {
-      text: 'Configuration',
+      text: 'Registries',
       items: [
-        { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
+        { text: 'Overview', link: '/en-US/docs/guide/registries/overview' },
+        { text: 'GitHub', link: '/en-US/docs/guide/registries/github' },
+        { text: 'GitLab', link: '/en-US/docs/guide/registries/gitlab' },
+        { text: 'Authentication', link: '/en-US/docs/guide/registries/authentication' }
       ]
     },
     {
       text: 'Publishing',
       items: [
-        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' },
-        { text: 'Self-Hosted Registries', link: '/en-US/docs/guide/self-hosted-registries' }
+        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' }
       ]
     }
   ],

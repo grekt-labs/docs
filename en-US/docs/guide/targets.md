@@ -2,7 +2,7 @@
 
 Targets are AI tools that grekt syncs artifacts to.
 
-## Supported Targets
+## Supported targets
 
 | Target | Output | Description |
 |--------|--------|-------------|
@@ -10,7 +10,7 @@ Targets are AI tools that grekt syncs artifacts to.
 | `cursor` | `.cursorrules` | Cursor IDE |
 | `opencode` | `.opencode/` | OpenCode |
 
-## How Sync Works
+## How sync works
 
 ```bash
 grekt sync
@@ -58,7 +58,7 @@ grekt preserves your manual changes:
 - Only updates grekt-managed content
 - Preview with `grekt sync --dry-run`
 
-## Custom Targets
+## Custom targets
 
 Define custom targets in `grekt.yaml`:
 

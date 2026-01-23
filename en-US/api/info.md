@@ -40,7 +40,7 @@ $ grekt info @author/code-reviewer
   Updated:    2025-01-20
 ```
 
-## Related Commands
+## Related commands
 
 - [grekt versions](/en-US/api/versions) — List all versions with details
 - [grekt add](/en-US/api/add) — Install an artifact
