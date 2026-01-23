@@ -112,3 +112,4 @@ publish:
 - [grekt versions](/en-US/api/versions) — List versions
 - [Artifacts](/en-US/docs/guide/artifacts) — Artifact structure
 - [Authentication](/en-US/docs/guide/authentication) — Credentials setup
+- [Self-Hosted Registries](/en-US/docs/guide/self-hosted-registries) — GitLab registry setup

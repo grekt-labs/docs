@@ -23,7 +23,8 @@ export const enUSSidebar = {
     {
       text: 'Publishing',
       items: [
-        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' }
+        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' },
+        { text: 'Self-Hosted Registries', link: '/en-US/docs/guide/self-hosted-registries' }
       ]
     }
   ],

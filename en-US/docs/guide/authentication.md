@@ -65,6 +65,8 @@ export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
 
 Required scopes: `read_api`, `read_repository`
 
+For publishing to GitLab Generic Package Registry, see [Self-Hosted Registries](/en-US/docs/guide/self-hosted-registries).
+
 ## S3 Storage (Legacy)
 
 For self-hosted S3-compatible registries using `--s3` flag.
