@@ -9,6 +9,14 @@
   --vp-c-brand-3: #3d6a62;
 }
 
+/* Dark mode - near black background */
+.dark {
+  --vp-c-bg: #0a0a0a;
+  --vp-c-bg-soft: #111111;
+  --vp-c-bg-mute: #1a1a1a;
+  --vp-c-bg-alt: #0f0f0f;
+}
+
 /* Logo size */
 .VPNavBarTitle .logo {
   height: 65px;
@@ -74,7 +82,7 @@
    ======================================== */
 
 .dark .home-container {
-  --hero-bg-start: #0d1117;
+  --hero-bg-start: #0a0a0a;
   --hero-text-color: #fff;
   --hero-tagline-color: rgba(255, 255, 255, 0.8);
   --hero-btn-secondary-bg: rgba(255, 255, 255, 0.1);

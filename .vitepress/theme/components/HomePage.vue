@@ -110,6 +110,62 @@ const toggleFaq = (index) => {
   <div class="home-container">
     <!-- HERO -->
     <section class="hero">
+      <!-- Convergent Lines Background -->
+      <div class="lines-container">
+        <svg class="convergent-lines" viewBox="0 0 2000 480" preserveAspectRatio="xMidYMid slice">
+          <!-- Lines converging to grekt icon -->
+          <path class="line line-1" d="M-500,-50 Q-200,120 1000,450" />
+          <path class="line line-2" d="M-150,60 Q180,200 1000,450" />
+          <path class="line line-3" d="M-80,150 Q250,280 1000,450" />
+          <path class="line line-4" d="M-30,260 Q350,350 1000,450" />
+          <path class="line line-5" d="M50,370 Q450,410 1000,450" />
+          <path class="line line-6" d="M2500,-50 Q2200,120 1000,450" />
+          <path class="line line-7" d="M2150,60 Q1820,200 1000,450" />
+          <path class="line line-8" d="M2080,150 Q1750,280 1000,450" />
+          <path class="line line-9" d="M2030,260 Q1650,350 1000,450" />
+          <path class="line line-10" d="M1950,370 Q1550,410 1000,450" />
+          <!-- Extra lines from top - wider curves -->
+          <path class="line line-11" d="M300,-100 Q150,200 1000,450" />
+          <path class="line line-12" d="M1700,-100 Q1850,200 1000,450" />
+          <!-- Lines pointing down to edges -->
+          <path class="line line-13" d="M1000,450 Q600,460 -200,520" />
+          <path class="line line-14" d="M1000,450 Q1400,460 2200,520" />
+        </svg>
+
+        <!-- AI Tool Icons floating on lines -->
+        <div class="floating-icons">
+          <div class="floating-icon icon-claude" title="Claude">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </div>
+          <div class="floating-icon icon-cursor" title="Cursor">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M13.64 21.97C13.14 22.21 12.54 22 12.31 21.5L10.13 16.76L7.62 18.78C7.45 18.92 7.24 19 7.02 19C6.55 19 6.16 18.61 6.16 18.14V5.86C6.16 5.39 6.55 5 7.02 5C7.24 5 7.45 5.08 7.62 5.22L18.09 13.81C18.46 14.11 18.52 14.65 18.22 15.02C18.06 15.21 17.83 15.33 17.58 15.35L13.83 15.68L16.01 20.42C16.24 20.92 16.03 21.52 15.53 21.75L13.64 21.97Z"/>
+            </svg>
+          </div>
+          <div class="floating-icon icon-opencode" title="OpenCode">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+            </svg>
+          </div>
+          <div class="floating-icon icon-windsurf" title="Windsurf">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+            </svg>
+          </div>
+          <div class="floating-icon icon-copilot" title="GitHub Copilot">
+            <svg viewBox="0 0 24 24" width="28" height="28">
+              <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+            </svg>
+          </div>
+          <!-- Central grekt icon -->
+          <div class="floating-icon icon-grekt" title="grekt">
+            <img src="/logos/grekt-isologo.svg" alt="grekt" width="40" height="40" />
+          </div>
+        </div>
+      </div>
+
       <div class="hero-content">
         <h1>
           <span class="static-text">Your AI tools finally</span><br>
@@ -120,17 +176,18 @@ const toggleFaq = (index) => {
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
-            <div class="install-tabs">
-              <button
+            <select
+              v-model="activeInstall"
+              class="install-select"
+            >
+              <option
                 v-for="method in installMethods"
                 :key="method.id"
-                class="install-tab"
-                :class="{ active: activeInstall === method.id }"
-                @click="activeInstall = method.id"
+                :value="method.id"
               >
                 {{ method.label }}
-              </button>
-            </div>
+              </option>
+            </select>
             <div class="install-box">
               <span class="install-prompt">$</span>
               <code class="install-command">{{ installCommand }}</code>
@@ -145,25 +202,23 @@ const toggleFaq = (index) => {
             </div>
           </div>
         </div>
-
-        <!-- Used by -->
-        <div class="used-by">
-          <span class="used-by-label">Used by</span>
-          <div class="used-by-logos">
-            <a href="https://sesamehr.com" target="_blank" rel="noopener" class="used-by-logo" title="Sesame">
-              <img src="/logos/Sesame.png" alt="Sesame" height="48" />
-            </a>
-            <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="used-by-logo" title="The Hotels Network">
-              <img src="/logos/thn.png" alt="The Hotels Network" height="48" />
-            </a>
-          </div>
-        </div>
       </div>
 
-      <!-- Decorative elements -->
-      <div class="deco deco-1"></div>
-      <div class="deco deco-2"></div>
-      <div class="deco deco-3"></div>
+    </section>
+
+    <!-- TRUSTED BY - Separate section -->
+    <section class="trusted-by">
+      <div class="trusted-by-content">
+        <span class="trusted-by-label">Used by</span>
+        <div class="trusted-by-logos">
+          <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
+            <img src="/logos/Sesame.png" alt="Sesame" />
+          </a>
+          <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
+            <img src="/logos/thn.png" alt="The Hotels Network" />
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- USE CASES -->
@@ -403,39 +458,244 @@ const toggleFaq = (index) => {
   overflow-x: hidden;
 }
 
-/* Dark mode overrides */
+/* Dark mode overrides - near black theme */
 .dark .home-container {
   /* Hero - dark mode */
-  --hero-bg-start: #1c1c1e;
-  --hero-bg-end: #1c1c1e;
+  --hero-bg-start: #0a0a0a;
+  --hero-bg-end: #0a0a0a;
 
   /* Cards - dark mode */
-  --card-bg: #2c2c2e;
-  --card-border: rgba(255, 255, 255, 0.08);
-  --card-border-hover: rgba(255, 255, 255, 0.15);
-  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-  --card-icon-bg: rgba(255, 255, 255, 0.05);
+  --card-bg: #141414;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-border-hover: rgba(255, 255, 255, 0.12);
+  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --card-icon-bg: rgba(255, 255, 255, 0.04);
   --card-title: #ffffff;
   --card-text: rgba(255, 255, 255, 0.6);
-  --card-code-bg: rgba(255, 255, 255, 0.1);
+  --card-code-bg: rgba(255, 255, 255, 0.08);
 
   /* Divider & section backgrounds - dark mode */
-  --divider-color: rgba(255, 255, 255, 0.1);
-  --section-bg: #161618;
-  --section-bg-alt: #1c1c1e;
-  --footer-bg: #0d0d0e;
+  --divider-color: rgba(255, 255, 255, 0.08);
+  --section-bg: #0f0f0f;
+  --section-bg-alt: #0a0a0a;
+  --footer-bg: #050505;
   --logo-filter: brightness(0) invert(1);
 }
 
 /* HERO */
 .hero {
   background: linear-gradient(180deg, var(--hero-bg-start) 0%, var(--hero-bg-start) 60%, var(--hero-bg-end) 100%);
-  padding: 120px 20px 0;
+  padding: 100px 20px 120px;
   text-align: center;
   position: relative;
   overflow: hidden;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+}
+
+/* Convergent Lines */
+.lines-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.convergent-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.line {
+  fill: none;
+  stroke: var(--grekt-primary-500);
+  stroke-width: 1.5;
+  opacity: 0.25;
+  stroke-linecap: round;
+}
+
+.line-1, .line-6 { animation: line-pulse 4s ease-in-out infinite; }
+.line-2, .line-7 { animation: line-pulse 4s ease-in-out infinite 0.3s; }
+.line-3, .line-8 { animation: line-pulse 4s ease-in-out infinite 0.6s; }
+.line-4, .line-9 { animation: line-pulse 4s ease-in-out infinite 0.9s; }
+.line-5, .line-10 { animation: line-pulse 4s ease-in-out infinite 1.2s; }
+.line-11, .line-12 { animation: line-pulse 4s ease-in-out infinite 1.5s; }
+.line-13, .line-14 { animation: line-pulse 4s ease-in-out infinite 1.8s; }
+
+@keyframes line-pulse {
+  0%, 100% { opacity: 0.15; stroke-width: 1; }
+  50% { opacity: 0.35; stroke-width: 2; }
+}
+
+/* Floating Icons */
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.floating-icon:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.floating-icon svg {
+  color: white;
+}
+
+/* Icon positions - random floating over lines */
+.icon-claude {
+  top: 48%;
+  left: 3%;
+  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+  animation: float-1 6s ease-in-out infinite;
+}
+
+.icon-cursor {
+  top: 72%;
+  left: 8%;
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  animation: float-2 5s ease-in-out infinite 0.5s;
+}
+
+.icon-opencode {
+  top: 60%;
+  left: 18%;
+  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+  animation: float-3 7s ease-in-out infinite 1s;
+}
+
+.icon-windsurf {
+  top: 52%;
+  right: 4%;
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  animation: float-2 6s ease-in-out infinite 0.3s;
+}
+
+.icon-copilot {
+  top: 68%;
+  right: 14%;
+  background: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
+  animation: float-1 5.5s ease-in-out infinite 0.8s;
+}
+
+.icon-grekt {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
+  border-radius: 20px;
+  animation: float-center 4s ease-in-out infinite;
+  z-index: 10;
+  padding: 12px;
+}
+
+.icon-grekt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.icon-grekt:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-3deg); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes float-center {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* Trusted By Section */
+.trusted-by {
+  background: var(--section-bg);
+  border-top: 1px solid var(--divider-color);
+  padding: 40px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.trusted-by-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.trusted-by-label {
+  font-size: 0.75rem;
+  color: var(--card-text);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.trusted-by-logos {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.trusted-by-logo {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.trusted-by-logo:hover {
+  opacity: 1;
+}
+
+.trusted-by-logo img {
+  height: 36px;
+  width: auto;
+  filter: var(--logo-filter);
 }
 
 .hero-content {
@@ -540,40 +800,41 @@ const toggleFaq = (index) => {
 /* Install wrapper */
 .install-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
   gap: 0;
 }
 
-.install-tabs {
-  display: flex;
-  gap: 0;
-  background: #161b22;
-  border-radius: 8px 8px 0 0;
+/* Install select dropdown */
+.install-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%2377CABD' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: none;
-  padding: 4px 4px 0 4px;
-}
-
-.install-tab {
-  padding: 8px 16px;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.5);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 12px 42px 12px 16px;
+  color: var(--grekt-primary-500);
   font-size: 0.85rem;
   font-weight: 500;
-  cursor: pointer;
-  border-radius: 6px 6px 0 0;
-  transition: all 0.2s ease;
   font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.install-tab:hover {
-  color: rgba(255, 255, 255, 0.8);
+.install-select:hover {
+  background-color: #1c2128;
 }
 
-.install-tab.active {
-  background: #0d1117;
-  color: var(--grekt-primary-500);
+.install-select:focus {
+  outline: none;
+  border-color: var(--grekt-primary-500);
+}
+
+.install-select option {
+  background: #161b22;
+  color: #e6edf3;
+  padding: 8px;
 }
 
 /* Install box */
@@ -582,10 +843,11 @@ const toggleFaq = (index) => {
   align-items: center;
   background: #0d1117;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 8px 8px 0;
   padding: 12px 16px;
   gap: 12px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  flex: 1;
 }
 
 .install-prompt {
@@ -623,82 +885,6 @@ const toggleFaq = (index) => {
   color: var(--grekt-highlight-500);
 }
 
-/* Used by section */
-.used-by {
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.used-by-label {
-  font-size: 0.85rem;
-  color: var(--hero-tagline-color);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
-
-.used-by-logos {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.used-by-logo {
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-.used-by-logo:hover {
-  opacity: 1;
-}
-
-.used-by-logo img {
-  height: auto;
-  max-height: 48px;
-  filter: var(--logo-filter);
-}
-
-/* Decorative elements */
-.deco {
-  position: absolute;
-  border-radius: 8px;
-  opacity: var(--hero-deco-opacity);
-}
-
-.deco-1 {
-  width: 60px;
-  height: 60px;
-  background: var(--grekt-primary-500);
-  top: 15%;
-  left: 10%;
-  transform: rotate(15deg);
-}
-
-.deco-2 {
-  width: 40px;
-  height: 40px;
-  background: var(--grekt-primary-300);
-  top: 25%;
-  right: 15%;
-  transform: rotate(-10deg);
-}
-
-.deco-3 {
-  width: 80px;
-  height: 80px;
-  border: 3px solid var(--grekt-primary-500);
-  background: transparent;
-  bottom: 15%;
-  left: 8%;
-  transform: rotate(25deg);
-}
 
 /* Section Divider */
 .section-divider {
@@ -711,7 +897,7 @@ const toggleFaq = (index) => {
 /* USE CASES */
 .use-cases {
   background: var(--section-bg-alt);
-  padding: 80px 20px;
+  padding: 40px 20px 80px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
@@ -1061,7 +1247,34 @@ const toggleFaq = (index) => {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .floating-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .floating-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .icon-grekt {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon-claude { left: 2%; top: 50%; }
+  .icon-cursor { left: 6%; top: 74%; }
+  .icon-opencode { left: 14%; top: 62%; }
+  .icon-windsurf { right: 2%; top: 54%; }
+  .icon-copilot { right: 10%; top: 70%; }
+}
+
 @media (max-width: 768px) {
+  .hero {
+    padding: 80px 20px 80px;
+  }
+
   .hero h1 {
     font-size: 2.5rem;
   }
@@ -1077,30 +1290,40 @@ const toggleFaq = (index) => {
 
   .install-wrapper {
     width: 100%;
+    flex-direction: column;
   }
 
-  .install-tabs {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .install-tab {
-    padding: 6px 12px;
-    font-size: 0.8rem;
+  .install-select {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+    background-position: right 12px center;
   }
 
   .install-box {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    border-radius: 0 0 8px 8px;
   }
 
   .install-command {
     font-size: 0.8rem;
   }
 
-  .deco {
+  /* Hide complex visual elements on mobile */
+  .lines-container,
+  .floating-icons {
     display: none;
+  }
+
+  .trusted-by-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .trusted-by-logos {
+    gap: 32px;
   }
 
   .feature-row {
