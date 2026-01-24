@@ -42,14 +42,18 @@ grekt init
 
 You'll be prompted to select your targets — the AI tools where artifacts will be synced (Claude Code, Cursor, Windsurf...).
 
-This creates three things in your project:
+This creates the following structure in your project:
 
 ```
 project/
-├── .grekt/artifacts/   # Where downloaded artifacts live
+├── .grekt/
+│   ├── artifacts/      # Downloaded artifacts
+│   └── config.yaml     # Local config (tokens, session) - gitignored
 ├── grekt.yaml          # Project configuration
 └── grekt.lock          # Lockfile with exact versions and checksums
 ```
+
+The `.grekt/config.yaml` file stores your authentication session and tokens. It's automatically added to `.gitignore`.
 
 ## Add an artifact
 

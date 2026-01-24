@@ -2,6 +2,10 @@
 
 Configure authentication for private registries and Git sources.
 
+::: info Project Required
+All commands requiring authentication need a grekt project. Run `grekt init` first.
+:::
+
 ## Token priority
 
 For each registry type, grekt checks tokens in this order:
@@ -17,6 +21,7 @@ For each registry type, grekt checks tokens in this order:
 1. Platform env var: `GITHUB_TOKEN` / `GITLAB_TOKEN`
 2. Alternative names: `GH_TOKEN` / `GL_TOKEN`
 3. Host-specific (GitLab): `GITLAB_TOKEN_HOSTNAME`
+4. Config file token in `.grekt/config.yaml` `tokens` section
 
 ## Environment variables
 
@@ -65,11 +70,18 @@ export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
 Store tokens in `.grekt/config.yaml` (add to `.gitignore`):
 
 ```yaml
+# Registry backend tokens (for @scope/name artifacts)
 registries:
   "@myteam":
     type: gitlab
     project: myteam/artifacts
     token: glpat-xxxxxxxxxxxx
+
+# Git source tokens (for github: and gitlab: sources)
+tokens:
+  github: ghp_xxxxxxxxxxxx
+  gitlab.com: glpat-xxxxxxxxxxxx
+  gitlab.company.com: glpat-xxxxxxxxxxxx
 ```
 
 Environment variables always take precedence over config file tokens.

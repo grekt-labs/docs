@@ -2,6 +2,10 @@
 
 Credentials for registry operations and private repos.
 
+::: info Project Required
+All authentication commands require a grekt project. Run `grekt init` first.
+:::
+
 ## Registry
 
 For publishing, deprecating, and other registry operations.
@@ -12,7 +16,7 @@ For publishing, deprecating, and other registry operations.
 grekt login
 ```
 
-Opens browser for authentication. Session is saved to `~/.grekt/session.yaml`.
+Opens browser for GitHub OAuth authentication. Session is saved to `.grekt/config.yaml` in your project.
 
 ### CI/CD
 
@@ -21,13 +25,6 @@ For CI/CD, use email/password login:
 ```bash
 grekt login --email user@example.com --password $PASSWORD
 ```
-
-Or use API keys (recommended):
-
-1. Create an API key via the web dashboard
-2. Pass the key in the `Authorization` header
-
-API keys start with `grk_` prefix and can be scoped to specific namespaces.
 
 ### Check status
 
@@ -42,28 +39,6 @@ grekt logout
 ## Private sources & registries
 
 For authentication with Git sources and self-hosted registries, see [Registry Authentication](/en-US/docs/guide/registries/authentication).
-
-## S3 Storage (Legacy)
-
-For self-hosted S3-compatible registries using `--s3` flag.
-
-```bash
-export GREKT_STORAGE_ENDPOINT=https://xxx.r2.cloudflarestorage.com
-export GREKT_STORAGE_ACCESS_KEY_ID=your-key
-export GREKT_STORAGE_SECRET_ACCESS_KEY=your-secret
-export GREKT_STORAGE_BUCKET=your-bucket
-```
-
-Or in `~/.grekt/credentials.yaml`:
-
-```yaml
-default:
-  type: s3
-  endpoint: https://xxx.r2.cloudflarestorage.com
-  accessKeyId: your-key
-  secretAccessKey: your-secret
-  bucket: your-bucket
-```
 
 ## CI/CD Examples
 
