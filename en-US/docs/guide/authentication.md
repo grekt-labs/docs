@@ -6,69 +6,43 @@ Credentials for registry operations and private repos.
 All authentication commands require a grekt project. Run `grekt init` first.
 :::
 
-## Registry
+## Registry login
 
-For publishing, deprecating, and other registry operations.
-
-### Interactive login
+For publishing and other registry operations on the public grekt registry.
 
 ```bash
+# Interactive login (opens browser)
 grekt login
-```
 
-Opens browser for GitHub OAuth authentication. Session is saved to `.grekt/config.yaml` in your project.
-
-### CI/CD
-
-For CI/CD, use email/password login:
-
-```bash
-grekt login --email user@example.com --password $PASSWORD
-```
-
-### Check status
-
-```bash
+# Check current user
 grekt whoami
-# Logged in as user@email.com
 
+# Logout
 grekt logout
-# ✓ Logged out
 ```
+
+Session is saved to `.grekt/config.yaml` in your project.
 
 ## Private sources & registries
 
-For authentication with Git sources and self-hosted registries, see [Registry Authentication](/en-US/docs/guide/registries/authentication).
-
-## CI/CD Examples
-
-### GitHub Actions
+For authentication with Git sources (github:, gitlab:) and self-hosted registries, configure tokens in `.grekt/config.yaml`:
 
 ```yaml
-- name: Publish artifact
-  env:
-    GREKT_PASSWORD: ${{ secrets.GREKT_PASSWORD }}
-  run: |
-    grekt login --email ci@example.com --password $GREKT_PASSWORD
-    grekt publish ./artifact
+# Registry backends (for @scope/name artifacts)
+registries:
+  "@myteam":
+    type: gitlab
+    project: myteam/artifacts
+    token: glpat-xxxxxxxxxxxx
 
-- name: Install from private repo
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  run: grekt install
+# Git source tokens (for github: and gitlab: sources)
+tokens:
+  github: ghp_xxxxxxxxxxxx
+  gitlab.com: glpat-xxxxxxxxxxxx
 ```
 
-### GitLab CI
+::: tip Platform env vars
+If you already have `GITHUB_TOKEN` or `GITLAB_TOKEN` set, grekt will use them automatically as fallback.
+:::
 
-```yaml
-publish:
-  script:
-    - grekt login --email $CI_EMAIL --password $CI_PASSWORD
-    - grekt publish ./artifact
-
-install:
-  script:
-    - grekt install
-  variables:
-    GITLAB_TOKEN: $CI_JOB_TOKEN
-```
+For more details, see [Registry Authentication](/en-US/docs/guide/registries/authentication).

@@ -6,71 +6,12 @@ Configure authentication for private registries and Git sources.
 All commands requiring authentication need a grekt project. Run `grekt init` first.
 :::
 
-## Token priority
+## Configuration
 
-For each registry type, grekt checks tokens in this order:
-
-### Registry backends (`@scope/name`)
-
-1. Scope-specific env var: `GREKT_TOKEN_SCOPE`
-2. Config file token in `.grekt/config.yaml`
-3. Generic env var: `GITLAB_TOKEN` or `GITHUB_TOKEN`
-
-### Git sources (`github:` / `gitlab:`)
-
-1. Platform env var: `GITHUB_TOKEN` / `GITLAB_TOKEN`
-2. Alternative names: `GH_TOKEN` / `GL_TOKEN`
-3. Host-specific (GitLab): `GITLAB_TOKEN_HOSTNAME`
-4. Config file token in `.grekt/config.yaml` `tokens` section
-
-## Environment variables
-
-### Scope-Specific Tokens
-
-For registry backends, use scope-specific tokens:
-
-```bash
-# @myteam → GREKT_TOKEN_MYTEAM
-export GREKT_TOKEN_MYTEAM=glpat-xxxxxxxxxxxx
-
-# @my-org → GREKT_TOKEN_MY_ORG
-export GREKT_TOKEN_MY_ORG=glpat-xxxxxxxxxxxx
-
-# @company → GREKT_TOKEN_COMPANY
-export GREKT_TOKEN_COMPANY=glpat-xxxxxxxxxxxx
-```
-
-Naming convention: `@scope-name` → `GREKT_TOKEN_SCOPE_NAME` (uppercase, hyphens become underscores).
-
-### Platform tokens
-
-For Git sources:
-
-```bash
-# GitHub
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
-export GH_TOKEN=ghp_xxxxxxxxxxxx  # Alternative
-
-# GitLab
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
-export GL_TOKEN=glpat-xxxxxxxxxxxx  # Alternative
-```
-
-### Host-Specific Tokens (GitLab)
-
-For self-hosted GitLab instances as sources:
-
-```bash
-# gitlab.company.com → GITLAB_TOKEN_GITLAB_COMPANY_COM
-export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
-```
-
-## Config file
-
-Store tokens in `.grekt/config.yaml` (add to `.gitignore`):
+All authentication is configured in `.grekt/config.yaml` (automatically gitignored):
 
 ```yaml
-# Registry backend tokens (for @scope/name artifacts)
+# Registry backends (for @scope/name artifacts)
 registries:
   "@myteam":
     type: gitlab
@@ -84,7 +25,21 @@ tokens:
   gitlab.company.com: glpat-xxxxxxxxxxxx
 ```
 
-Environment variables always take precedence over config file tokens.
+## Token priority
+
+### Registry backends (`@scope/name`)
+
+1. Config file token in `.grekt/config.yaml`
+2. Platform env var: `GITLAB_TOKEN` or `GITHUB_TOKEN`
+
+### Git sources (`github:` / `gitlab:`)
+
+1. Config file token in `.grekt/config.yaml` `tokens` section
+2. Platform env var: `GITHUB_TOKEN` / `GITLAB_TOKEN` / `GH_TOKEN` / `GL_TOKEN`
+
+::: tip Platform env vars as fallback
+If you already have `GITHUB_TOKEN` or `GITLAB_TOKEN` set for other tools, grekt will use them automatically. No need to duplicate in the config file.
+:::
 
 ## Required permissions
 
@@ -103,82 +58,11 @@ Environment variables always take precedence over config file tokens.
 | Download (public) | None |
 | Download (private) | `repo` |
 
-## CI/CD Examples
-
-### GitLab CI
-
-```yaml
-variables:
-  # Use CI_JOB_TOKEN for same-project access
-  GREKT_TOKEN_MYTEAM: $CI_JOB_TOKEN
-
-stages:
-  - install
-  - publish
-
-install:
-  stage: install
-  script:
-    - grekt install
-
-publish:
-  stage: publish
-  script:
-    - grekt publish .
-  rules:
-    - if: $CI_COMMIT_TAG
-```
-
-For cross-project access, use a Project Access Token or Personal Access Token stored as a CI variable.
-
-### GitHub Actions
-
-```yaml
-name: CI
-
-on: [push, pull_request]
-
-jobs:
-  install:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install artifacts
-        env:
-          GREKT_TOKEN_MYTEAM: ${{ secrets.GITLAB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: grekt install
-
-  publish:
-    runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Publish
-        env:
-          GREKT_TOKEN_MYTEAM: ${{ secrets.GITLAB_TOKEN }}
-        run: grekt publish .
-```
-
-### Other CI systems
-
-```bash
-# Set tokens before running grekt
-export GREKT_TOKEN_MYTEAM="$GITLAB_TOKEN"
-export GITHUB_TOKEN="$GH_TOKEN"
-
-grekt install
-```
-
 ## Security best practices
 
-1. **Never commit tokens** — Use env vars or gitignored config files
-2. **Use scope-specific tokens** — Limit blast radius if compromised
-3. **Minimal permissions** — Only grant required scopes
-4. **Rotate regularly** — Especially for CI/CD tokens
-5. **Use CI native tokens** — Like `CI_JOB_TOKEN` in GitLab
+1. **Never commit tokens** — `.grekt/config.yaml` is gitignored by default
+2. **Minimal permissions** — Only grant required scopes
+3. **Rotate regularly** — Especially for long-lived tokens
 
 ## Troubleshooting
 
@@ -189,9 +73,8 @@ Error: Authentication required for @myteam
 ```
 
 Check:
-1. Env var name matches scope: `GREKT_TOKEN_MYTEAM` for `@myteam`
-2. Token is exported in current shell
-3. Config file path is correct
+1. Token is set in `.grekt/config.yaml` under registries or tokens section
+2. Config file path is correct (`.grekt/config.yaml`)
 
 ### Permission denied
 
@@ -218,5 +101,5 @@ Check:
 ## Related
 
 - [Overview](/en-US/docs/guide/registries/overview) — Registry concepts
-- [GitLab Backend](/en-US/docs/guide/registries/gitlab-backend) — GitLab setup
-- [Git Sources](/en-US/docs/guide/registries/sources) — Source authentication
+- [GitLab](/en-US/docs/guide/registries/gitlab) — GitLab setup
+- [GitHub](/en-US/docs/guide/registries/github) — GitHub sources
