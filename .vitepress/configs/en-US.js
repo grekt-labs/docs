@@ -25,9 +25,11 @@ export const enUSSidebar = {
       ]
     },
     {
-      text: 'Publishing',
+      text: 'Managing',
       items: [
-        { text: 'Publishing Artifacts', link: '/en-US/docs/guide/publishing' }
+        { text: 'Overview', link: '/en-US/docs/guide/managing/overview' },
+        { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' },
+        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' }
       ]
     }
   ],
