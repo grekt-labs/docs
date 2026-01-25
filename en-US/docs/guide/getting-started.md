@@ -8,29 +8,13 @@ This guide walks you through setting up grekt in a project and syncing your firs
 grekt is in early development. Expect breaking changes.
 :::
 
-::: code-group
+```bash
+# Add the tap (first time only)
+brew tap grekt-labs/grekt
 
-```bash [curl]
-curl -fsSL grekt.com | sh
-```
-
-```bash [brew]
+# Install
 brew install grekt
 ```
-
-```bash [npm]
-npm install -g grekt
-```
-
-```bash [pnpm]
-pnpm add -g grekt
-```
-
-```bash [bun]
-bun add -g grekt
-```
-
-:::
 
 ## Initialize a Project
 
