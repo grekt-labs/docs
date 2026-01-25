@@ -2,14 +2,10 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const installMethods = [
-  { id: 'curl', label: 'curl', command: 'curl -fsSL grekt.com | sh' },
-  { id: 'brew', label: 'brew', command: 'brew install grekt' },
-  { id: 'npm', label: 'npm', command: 'npm install -g grekt' },
-  { id: 'pnpm', label: 'pnpm', command: 'pnpm add -g grekt' },
-  { id: 'bun', label: 'bun', command: 'bun add -g grekt' },
+  { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
 ]
 
-const activeInstall = ref('curl')
+const activeInstall = ref('brew')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
 )
@@ -176,19 +172,7 @@ const toggleFaq = (index) => {
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
-            <select
-              v-model="activeInstall"
-              class="install-select"
-            >
-              <option
-                v-for="method in installMethods"
-                :key="method.id"
-                :value="method.id"
-              >
-                {{ method.label }}
-              </option>
-            </select>
-            <div class="install-box">
+            <div class="install-box install-box--full">
               <span class="install-prompt">$</span>
               <code class="install-command">{{ installCommand }}</code>
               <button class="copy-btn" @click="copyCommand" :class="{ copied }">
@@ -848,6 +832,10 @@ const toggleFaq = (index) => {
   gap: 12px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   flex: 1;
+}
+
+.install-box--full {
+  border-radius: 8px;
 }
 
 .install-prompt {
