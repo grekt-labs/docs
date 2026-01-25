@@ -193,14 +193,14 @@ const toggleFaq = (index) => {
     <!-- TRUSTED BY - Separate section -->
     <section class="trusted-by">
       <div class="trusted-by-content">
-        <span class="trusted-by-label">Used by</span>
+        <span class="trusted-by-label">Trusted by</span>
         <div class="trusted-by-logos">
           <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
             <img src="/logos/Sesame.png" alt="Sesame" />
           </a>
-          <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
+          <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
             <img src="/logos/thn.png" alt="The Hotels Network" />
-          </a>
+          </a> -->
         </div>
       </div>
     </section>
