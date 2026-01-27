@@ -31,6 +31,12 @@ export const enUSSidebar = {
         { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' },
         { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' }
       ]
+    },
+    {
+      text: 'Legal',
+      items: [
+        { text: 'Licensing', link: '/en-US/docs/guide/licensing' }
+      ]
     }
   ],
   '/en-US/api/': [
