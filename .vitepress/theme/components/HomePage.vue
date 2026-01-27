@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const installMethods = [
-  { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.dev/install.sh | sh' },
+  { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
 ]
 
@@ -299,6 +299,147 @@ const toggleFaq = (index) => {
             <li>Drift detection catches modifications</li>
             <li>Reproducible installs across your team</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- COMPARISON -->
+    <section class="comparison">
+      <h2 class="section-title">grekt vs skills.sh</h2>
+      <p class="comparison-subtitle">What you get with grekt that you won't find elsewhere</p>
+
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6m4 18H6V4h7v5h5v11m-8.5-5.5l-2.5 2.5 2.5 2.5 1.41-1.41L9.83 15l1.58-1.59L10 12l-1.5 1.5m5 0L12.09 15l1.58 1.59L12.26 18l1.5 1.5 2.5-2.5-2.5-2.5-.26.5z"/></svg>
+            </span>
+            <h3>Lockfile & Versioning</h3>
+          </div>
+          <p>Pin exact versions with <code>grekt.lock</code>. Your team always gets the same artifacts.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m0 4.9a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V17h-2v-5.27c-1.17-.41-2-1.52-2-2.83a3 3 0 0 1 3-3z"/></svg>
+            </span>
+            <h3>Integrity Verification</h3>
+          </div>
+          <p>SHA256 checksums for every file. Detect tampering or corruption instantly.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m1 15h-2v-2h2v2m0-4h-2V7h2v6z"/></svg>
+            </span>
+            <h3>Drift Detection</h3>
+          </div>
+          <p>Know when installed files change. <code>grekt check</code> catches modifications.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M14 10H2v2h12v-2m0-4H2v2h12V6M2 16h8v-2H2v2m19.5-4.5L23 13l-6.99 7-4.51-4.5L13 14l3.01 3 5.49-5.5z"/></svg>
+            </span>
+            <h3>Component Selection</h3>
+          </div>
+          <p>Install only what you need with <code>--choose</code>. Keep your context lean.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </span>
+            <h3>Self-hosted Registry</h3>
+          </div>
+          <p>Use GitLab or GitHub as your private registry. Full control over your artifacts.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <span class="comparison-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41-.39.39-1.03.39-1.42.01A9.969 9.969 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13z"/></svg>
+            </span>
+            <h3>Context Budget</h3>
+          </div>
+          <p>Track token usage across artifacts. Stay within your AI's context limits.</p>
+          <div class="comparison-bar">
+            <div class="bar-item bar-grekt">
+              <span class="bar-label">grekt</span>
+              <span class="bar-status bar-yes">Included</span>
+            </div>
+            <div class="bar-item bar-other">
+              <span class="bar-label">skills.sh</span>
+              <span class="bar-status bar-no">Not available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-shared">
+        <p class="shared-label">Both tools support</p>
+        <div class="shared-features">
+          <span class="shared-badge">Multi-target sync</span>
+          <span class="shared-badge">Claude Code</span>
+          <span class="shared-badge">Cursor</span>
+          <span class="shared-badge">Open source</span>
         </div>
       </div>
     </section>
@@ -1163,6 +1304,172 @@ const toggleFaq = (index) => {
   line-height: 1.8;
 }
 
+/* COMPARISON */
+.comparison {
+  background: var(--section-bg);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.comparison > * {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comparison-subtitle {
+  text-align: center;
+  color: var(--card-text);
+  font-size: 1.1rem;
+  margin-top: -1.5rem;
+  margin-bottom: 3rem;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.comparison-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.comparison-card:hover {
+  border-color: var(--grekt-primary-500);
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow);
+}
+
+.comparison-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.comparison-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comparison-icon svg {
+  color: #0d1117;
+}
+
+.comparison-card h3 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--card-title);
+}
+
+.comparison-card > p {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.comparison-card code {
+  background: var(--card-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--grekt-primary-500);
+}
+
+.comparison-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.bar-grekt {
+  background: linear-gradient(90deg, rgba(119, 202, 189, 0.15) 0%, rgba(119, 202, 189, 0.05) 100%);
+  border: 1px solid rgba(119, 202, 189, 0.3);
+}
+
+.bar-other {
+  background: var(--card-icon-bg);
+  border: 1px solid var(--divider-color);
+}
+
+.bar-label {
+  font-weight: 500;
+  color: var(--card-text);
+}
+
+.bar-status {
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.bar-yes {
+  background: var(--grekt-highlight-500);
+  color: #0d1117;
+}
+
+.bar-no {
+  background: var(--card-icon-bg);
+  color: var(--card-text);
+  opacity: 0.6;
+}
+
+.comparison-shared {
+  text-align: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--divider-color);
+}
+
+.shared-label {
+  font-size: 0.85rem;
+  color: var(--card-text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.shared-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.shared-badge {
+  background: var(--card-bg);
+  border: 1px solid var(--divider-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--card-text);
+}
+
 /* FAQ */
 .faq {
   background: var(--section-bg-alt);
@@ -1346,6 +1653,23 @@ const toggleFaq = (index) => {
 
   .footer-column h4 {
     margin-bottom: 12px;
+  }
+
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card {
+    padding: 20px;
+  }
+
+  .shared-features {
+    gap: 8px;
+  }
+
+  .shared-badge {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
 </style>
