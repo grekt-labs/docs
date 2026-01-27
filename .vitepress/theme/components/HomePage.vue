@@ -84,7 +84,7 @@ const faqItems = [
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes, grekt is open source and free to use under the MIT license. The CLI and all core features are completely free.'
+    answer: 'The CLI is open source under the Apache 2.0 license. The engine is source-available under BSL 1.1. All core features are free to use.'
   },
   {
     question: 'Which AI tools are supported?',
@@ -306,6 +306,73 @@ const toggleFaq = (index) => {
     <!-- Section Divider -->
     <div class="section-divider"></div>
 
+    <!-- COMPARISON -->
+    <section class="comparison">
+      <h2 class="section-title">What's different about grekt?</h2>
+      <div class="comparison-wrapper">
+        <div class="comparison-header">
+          <div class="comparison-col-label"></div>
+          <div class="comparison-col-grekt">grekt</div>
+          <div class="comparison-col-other">skills.sh</div>
+        </div>
+
+        <div class="comparison-group">
+          <div class="comparison-group-title">Approach</div>
+          <div class="comparison-row">
+            <div class="comparison-label">What it is</div>
+            <div class="comparison-value comparison-value--grekt">AI artifact governance</div>
+            <div class="comparison-value comparison-value--other">Skills catalog</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Core structure</div>
+            <div class="comparison-value comparison-value--grekt">Versioned artifact + schema</div>
+            <div class="comparison-value comparison-value--other">Text file</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Philosophy</div>
+            <div class="comparison-value comparison-value--grekt">Control & policies</div>
+            <div class="comparison-value comparison-value--other">Reusability</div>
+          </div>
+        </div>
+
+        <div class="comparison-group">
+          <div class="comparison-group-title">Context management</div>
+          <div class="comparison-row">
+            <div class="comparison-label">Token budget</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Protected</div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Context bloat</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Prevented</div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
+          </div>
+        </div>
+
+        <div class="comparison-group">
+          <div class="comparison-group-title">Reliability</div>
+          <div class="comparison-row">
+            <div class="comparison-label">Versioning</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Lockfile + SHA</div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span>Manual updates</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Drift detection</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">Consistency</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Per-project lockfile</div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span>Global, remember to sync</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- FAQ -->
     <section class="faq">
       <h2 class="section-title">Frequently Asked Questions</h2>
@@ -366,13 +433,13 @@ const toggleFaq = (index) => {
           <div class="footer-column">
             <h4>Legal</h4>
             <ul>
-              <li><a href="https://github.com/grekt-labs/grekt/blob/main/LICENSE" target="_blank">License (MIT)</a></li>
+              <li><a href="/en-US/docs/guide/licensing">Licensing</a></li>
             </ul>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <p class="copyright">Released under the MIT License.</p>
+          <p class="copyright">CLI: Apache 2.0 · Engine: BSL 1.1</p>
           <p class="copyright">Copyright © {{ new Date().getFullYear() }} grekt contributors.</p>
         </div>
       </div>
@@ -1164,6 +1231,176 @@ const toggleFaq = (index) => {
   line-height: 1.8;
 }
 
+/* COMPARISON */
+.comparison {
+  background: var(--section-bg);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.comparison .section-title {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comparison-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dark .comparison-wrapper {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0 0 20px 0;
+  border-bottom: 2px solid var(--divider-color);
+  margin-bottom: 8px;
+}
+
+.comparison-col-label {
+  font-weight: 600;
+  color: var(--card-text);
+}
+
+.comparison-col-grekt {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--grekt-primary-500);
+  text-align: center;
+}
+
+.comparison-col-other {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--card-text);
+  text-align: center;
+  opacity: 0.6;
+}
+
+.comparison-group {
+  margin-bottom: 0;
+}
+
+.comparison-group:last-child .comparison-row:last-child {
+  border-bottom: none;
+}
+
+.comparison-group-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--grekt-primary-500);
+  padding: 24px 0 12px 0;
+}
+
+.comparison-group:first-child .comparison-group-title {
+  padding-top: 8px;
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 14px 16px;
+  margin: 0 -16px;
+  border-bottom: 1px solid var(--divider-color);
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.comparison-row:hover {
+  background: var(--card-icon-bg);
+}
+
+.comparison-label {
+  font-weight: 500;
+  color: var(--card-title);
+  font-size: 0.9rem;
+}
+
+.comparison-value {
+  text-align: center;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.comparison-value--grekt {
+  color: var(--card-title);
+}
+
+.comparison-value--other {
+  color: var(--card-text);
+  opacity: 0.6;
+}
+
+.check-yes {
+  width: 18px;
+  height: 18px;
+  background: var(--grekt-primary-500);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.check-yes::after {
+  content: "✓";
+  color: #0d1117;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.check-partial {
+  width: 18px;
+  height: 18px;
+  background: var(--grekt-tertiary-500);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.check-partial::after {
+  content: "~";
+  color: #0d1117;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.check-no {
+  width: 18px;
+  height: 18px;
+  background: var(--card-icon-bg);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.check-no::after {
+  content: "✗";
+  color: var(--card-text);
+  font-size: 10px;
+  opacity: 0.4;
+}
+
 /* FAQ */
 .faq {
   background: var(--section-bg-alt);
@@ -1347,6 +1584,51 @@ const toggleFaq = (index) => {
 
   .footer-column h4 {
     margin-bottom: 12px;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .comparison-label {
+    font-size: 0.8rem;
+  }
+
+  .comparison-value {
+    font-size: 0.75rem;
+  }
+
+  .comparison-col-grekt,
+  .comparison-col-other {
+    font-size: 0.9rem;
+  }
+
+  .check-yes,
+  .check-partial,
+  .check-no {
+    width: 16px;
+    height: 16px;
+  }
+
+  .check-yes::after,
+  .check-no::after {
+    font-size: 9px;
+  }
+
+  .check-partial::after {
+    font-size: 10px;
+  }
+
+  .comparison-wrapper {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .comparison-row {
+    padding: 12px 12px;
+    margin: 0 -12px;
   }
 }
 </style>
