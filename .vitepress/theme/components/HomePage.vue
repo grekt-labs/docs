@@ -368,6 +368,10 @@ const toggleFaq = (index) => {
           </div>
         </div>
       </div>
+      <p class="comparison-note">
+        Already using skills.sh?<br>
+        You can wrap those skills as grekt artifacts to add versioning, policies, and guarantees.
+      </p>
     </section>
 
     <!-- Section Divider -->
@@ -1399,6 +1403,15 @@ const toggleFaq = (index) => {
   color: var(--card-text);
   font-size: 10px;
   opacity: 0.4;
+}
+
+.comparison-note {
+  max-width: 800px;
+  margin: 24px auto 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--card-text);
+  opacity: 0.8;
 }
 
 /* FAQ */
