@@ -111,22 +111,22 @@ const toggleFaq = (index) => {
       <div class="lines-container">
         <svg class="convergent-lines" viewBox="0 0 2000 480" preserveAspectRatio="xMidYMid slice">
           <!-- Lines converging to grekt icon -->
-          <path class="line line-1" d="M-500,-50 Q-200,120 1000,450" />
-          <path class="line line-2" d="M-150,60 Q180,200 1000,450" />
-          <path class="line line-3" d="M-80,150 Q250,280 1000,450" />
-          <path class="line line-4" d="M-30,260 Q350,350 1000,450" />
-          <path class="line line-5" d="M50,370 Q450,410 1000,450" />
-          <path class="line line-6" d="M2500,-50 Q2200,120 1000,450" />
-          <path class="line line-7" d="M2150,60 Q1820,200 1000,450" />
-          <path class="line line-8" d="M2080,150 Q1750,280 1000,450" />
-          <path class="line line-9" d="M2030,260 Q1650,350 1000,450" />
-          <path class="line line-10" d="M1950,370 Q1550,410 1000,450" />
+          <path class="line line-1" d="M-500,-60 Q-200,110 1000,440" />
+          <path class="line line-2" d="M-150,50 Q180,190 1000,440" />
+          <path class="line line-3" d="M-80,140 Q250,270 1000,440" />
+          <path class="line line-4" d="M-30,250 Q350,340 1000,440" />
+          <path class="line line-5" d="M50,360 Q450,400 1000,440" />
+          <path class="line line-6" d="M2500,-60 Q2200,110 1000,440" />
+          <path class="line line-7" d="M2150,50 Q1820,190 1000,440" />
+          <path class="line line-8" d="M2080,140 Q1750,270 1000,440" />
+          <path class="line line-9" d="M2030,250 Q1650,340 1000,440" />
+          <path class="line line-10" d="M1950,360 Q1550,400 1000,440" />
           <!-- Extra lines from top - wider curves -->
-          <path class="line line-11" d="M300,-100 Q150,200 1000,450" />
-          <path class="line line-12" d="M1700,-100 Q1850,200 1000,450" />
+          <path class="line line-11" d="M300,-110 Q150,190 1000,440" />
+          <path class="line line-12" d="M1700,-110 Q1850,190 1000,440" />
           <!-- Lines pointing down to edges -->
-          <path class="line line-13" d="M1000,450 Q600,460 -200,520" />
-          <path class="line line-14" d="M1000,450 Q1400,460 2200,520" />
+          <path class="line line-13" d="M1000,440 Q600,450 -200,510" />
+          <path class="line line-14" d="M1000,440 Q1400,450 2200,510" />
         </svg>
 
         <!-- AI Tool Icons floating on lines -->
