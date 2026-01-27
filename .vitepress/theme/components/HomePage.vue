@@ -80,11 +80,11 @@ const faqItems = [
   },
   {
     question: 'How does grekt work?',
-    answer: 'grekt downloads artifacts to your project, then syncs them to your AI tools by writing the appropriate configuration files. Each tool has its own format, and grekt handles the translation automatically.'
+    answer: 'grekt downloads artifacts to your project and integrates with your AI tools. You can optionally sync them to specific tools like Claude Code or Cursor, or just use them directly from the .grekt folder.'
   },
   {
     question: 'Is grekt free?',
-    answer: 'The CLI is open source under the Apache 2.0 license. The engine is source-available under BSL 1.1. All core features are free to use.'
+    answer: 'Yes! The CLI is open source and free to use. The public registry for sharing artifacts will also be free when it launches.'
   },
   {
     question: 'Which AI tools are supported?',
