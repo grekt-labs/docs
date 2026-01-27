@@ -173,7 +173,12 @@ const toggleFaq = (index) => {
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
-            <div class="install-box install-box--full">
+            <select class="install-select" v-model="activeInstall">
+              <option v-for="method in installMethods" :key="method.id" :value="method.id">
+                {{ method.label }}
+              </option>
+            </select>
+            <div class="install-box">
               <span class="install-prompt">$</span>
               <code class="install-command">{{ installCommand }}</code>
               <button class="copy-btn" @click="copyCommand" :class="{ copied }">
