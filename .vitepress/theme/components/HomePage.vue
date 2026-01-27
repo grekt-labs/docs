@@ -2,10 +2,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const installMethods = [
+  { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.dev/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
 ]
 
-const activeInstall = ref('brew')
+const activeInstall = ref('curl')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
 )
