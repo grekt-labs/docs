@@ -330,7 +330,7 @@ const toggleFaq = (index) => {
           </div>
           <div class="comparison-row">
             <div class="comparison-label">Philosophy</div>
-            <div class="comparison-value comparison-value--grekt">Control & policies</div>
+            <div class="comparison-value comparison-value--grekt">Reusability & governance</div>
             <div class="comparison-value comparison-value--other">Reusability</div>
           </div>
         </div>
@@ -339,12 +339,12 @@ const toggleFaq = (index) => {
           <div class="comparison-group-title">Context management</div>
           <div class="comparison-row">
             <div class="comparison-label">Token budget</div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Protected</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Considered</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
           <div class="comparison-row">
             <div class="comparison-label">Context bloat</div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Prevented</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Minimized</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
         </div>
