@@ -46,20 +46,20 @@ $ grekt publish ./artifact
 4. Checks version doesn't already exist
 5. Uploads to registry
 
-If keywords are missing:
+If keywords are missing or invalid:
 
 ```bash
-✗ Keywords required for publishing.
+✗ Manifest requires at least 3 keywords
+ℹ Add 'keywords' array to grekt.yaml with 3-5 keywords
 
-Options to generate keywords:
-
-  1. Install grekt-keywords (~300MB):
-     pip install grekt-keywords --index-url https://download.pytorch.org/whl/cpu
-
-  2. Use @grekt/tools agent
-
-  3. Add manually to your manifest
+  Example:
+    keywords:
+      - git
+      - commit
+      - automation
 ```
+
+Keywords help with discoverability and are used in the artifact index.
 
 If the version already exists:
 

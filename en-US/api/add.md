@@ -11,6 +11,7 @@ grekt add <source>
 | Option | Description |
 |--------|-------------|
 | `-c, --choose` | Interactively select which components to install |
+| `--core` | Mark artifact as CORE mode (copied to target on sync) |
 
 ## Source formats
 
@@ -76,6 +77,34 @@ artifacts:
       - skills/branch-management.md
     commands:
       - commands/create-pr.md
+```
+
+## Sync modes
+
+Artifacts can be added in two modes:
+
+| Mode | Behavior |
+|------|----------|
+| **LAZY** (default) | Indexed in `.grekt/index`, not copied to target |
+| **CORE** | Copied to target directories (e.g., `.claude/agents/`) |
+
+Use `--core` for artifacts you need immediately available in context:
+
+```bash
+# LAZY mode (default) - only indexed
+grekt add @grekt/code-reviewer
+
+# CORE mode - copied to .claude/agents/, .claude/skills/...
+grekt add @grekt/code-reviewer --core
+```
+
+CORE mode artifacts are tracked in `grekt.yaml`:
+
+```yaml
+artifacts:
+  @grekt/code-reviewer:
+    version: "1.0.0"
+    mode: core
 ```
 
 ## Authentication

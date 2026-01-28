@@ -56,7 +56,29 @@ Preview sync to claude:
 No changes made (dry-run)
 ```
 
+## Sync modes
+
+Only **CORE** mode artifacts are copied to target directories. **LAZY** mode artifacts (default) are only indexed in `.grekt/index`.
+
+```bash
+# Add as CORE to sync files
+grekt add @grekt/code-reviewer --core
+grekt sync
+
+# LAZY artifacts are skipped during sync
+grekt add @grekt/utils
+grekt sync  # Shows: @grekt/utils (lazy mode)
+```
+
+To promote an existing LAZY artifact to CORE:
+
+```bash
+grekt remove @grekt/utils
+grekt add @grekt/utils --core
+```
+
 ## Notes
 
 - Run after `grekt add`
 - Targets configured in `grekt.yaml`
+- LAZY artifacts indexed but not copied

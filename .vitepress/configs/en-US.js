@@ -12,7 +12,8 @@ export const enUSSidebar = {
       text: 'Core Concepts',
       items: [
         { text: 'Artifacts', link: '/en-US/docs/guide/artifacts' },
-        { text: 'Targets', link: '/en-US/docs/guide/targets' }
+        { text: 'Targets', link: '/en-US/docs/guide/targets' },
+        { text: 'Sync Modes', link: '/en-US/docs/guide/sync-modes' }
       ]
     },
     {
