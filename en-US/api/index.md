@@ -45,6 +45,13 @@ grekt provides a command-line interface for managing AI artifacts.
       <li><a href="/en-US/api/config">grekt config</a> — Manage configuration</li>
     </ul>
   </div>
+
+  <div class="api-group">
+    <h3>Authoring</h3>
+    <ul>
+      <li><a href="/en-US/api/version">grekt version</a> — Auto-version artifacts</li>
+    </ul>
+  </div>
 </div>
 
 ## Global options
@@ -84,6 +91,10 @@ grekt outdated                   # Check for updates
 
 # Config
 grekt config set autoSync true   # Configure
+
+# Authoring
+grekt version --dry-run          # Preview version bumps
+grekt version                    # Apply version bumps
 ```
 
 <style>

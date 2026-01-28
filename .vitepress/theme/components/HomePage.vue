@@ -229,6 +229,14 @@ const toggleFaq = (index) => {
           <p>Track changes with lockfiles. Update, rollback, and manage dependencies easily.</p>
           <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
         </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">
+            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <h3>Install from anywhere</h3>
+          <p>GitHub, GitLab, or public registry. Self-hosted instances supported.</p>
+          <a href="/en-US/docs/guide/registries/overview" class="card-link">See sources →</a>
+        </div>
         <div class="use-case-card use-case-card--coming-soon">
           <span class="badge-coming-soon">Coming Soon</span>
           <div class="use-case-icon">
@@ -236,59 +244,6 @@ const toggleFaq = (index) => {
           </div>
           <h3>Discover & Share</h3>
           <p>Explore community created artifacts or publish your own for others to use.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- FEATURES -->
-    <section class="features">
-      <div class="feature-list">
-        <!-- Feature Row 1 -->
-        <div class="feature-row">
-          <div class="feature-left">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M14 10H2v2h12v-2m0-4H2v2h12V6M2 16h8v-2H2v2m19.5-4.5L23 13l-6.99 7-4.51-4.5L13 14l3.01 3 5.49-5.5z"/></svg>
-            </div>
-            <h3>Pick What You Need</h3>
-          </div>
-          <ul class="feature-right">
-            <li>Install only the components you want</li>
-            <li>Keep your AI context lean and focused</li>
-            <li>No unnecessary bloat in your project</li>
-          </ul>
-        </div>
-
-        <!-- Feature Row 2 -->
-        <div class="feature-row">
-          <div class="feature-left">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            </div>
-            <h3>Install from Anywhere</h3>
-          </div>
-          <ul class="feature-right">
-            <li>Public registry, GitHub, or GitLab</li>
-            <li>Self hosted instances supported</li>
-            <li>Pin specific versions or branches</li>
-          </ul>
-        </div>
-
-        <!-- Feature Row 3 -->
-        <div class="feature-row">
-          <div class="feature-left">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4m0 4.9a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V17h-2v-5.27c-1.17-.41-2-1.52-2-2.83a3 3 0 0 1 3-3z"/></svg>
-            </div>
-            <h3>Built-in Integrity</h3>
-          </div>
-          <ul class="feature-right">
-            <li>Detect when files change</li>
-            <li>Drift detection catches modifications</li>
-            <li>Reproducible installs across your team</li>
-          </ul>
         </div>
       </div>
     </section>
