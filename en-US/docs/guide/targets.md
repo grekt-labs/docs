@@ -4,15 +4,7 @@ Targets are AI tools that grekt syncs artifacts to.
 
 ## Supported targets
 
-grekt works with any AI coding assistant that reads markdown files. Built-in sync plugins:
-
-| Target | Output | Description |
-|--------|--------|-------------|
-| `claude` | `.claude/` | Claude Code, Claude Desktop |
-| `cursor` | `.cursorrules` | Cursor IDE |
-| `opencode` | `.opencode/` | OpenCode CLI |
-
-Use [custom targets](#custom-targets) for Windsurf, Cline, Copilot, or any other tool.
+grekt works with any AI coding assistant that reads markdown files: Claude, Cursor, Copilot, Codex, Antigravity, ClawdBot...
 
 ## How sync works
 
