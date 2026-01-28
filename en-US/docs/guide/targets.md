@@ -12,51 +12,39 @@ grekt works with any AI coding assistant that reads markdown files: Claude, Curs
 grekt sync
 ```
 
-1. Reads artifacts from `grekt.lock`
-2. Copies **CORE** mode artifacts to target directories
-3. Skips **LAZY** mode artifacts (indexed only)
-4. Updates target config files
+Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain indexed but not copied. See [Sync Modes](./sync-modes.md).
 
-### Claude
+### Built-in plugins
 
-For CORE artifacts, creates directories based on component type:
+Each plugin knows where to place components for its target tool.
+
+**Claude** (example):
 
 ```
 .claude/
-├── agents/           # type: agent
-├── skills/           # type: skill
-├── commands/         # type: command
-└── CLAUDE.md         # Points to .grekt/index
+├── agents/
+├── skills/
+├── commands/
+└── CLAUDE.md
 ```
 
-LAZY artifacts are discoverable via `.grekt/index`.
+**Cursor** appends to `.cursorrules`. **OpenCode** uses `.opencode/`.
 
-### Cursor
+### Custom targets
 
-Appends to `.cursorrules` with markers for managed sections.
+Define your own output paths for any tool:
 
-### OpenCode
+```yaml
+customTargets:
+  my-tool:
+    name: "My Tool"
+    rulesFile: ".my-tool-rules"
+```
 
-Similar to Claude, creates directories for CORE artifacts.
+## Non-destructive sync
 
-## Non destructive Sync
-
-grekt preserves your manual changes:
+grekt preserves manual changes:
 
 - Marks managed sections with comments
 - Only updates grekt-managed content
 - Preview with `grekt sync --dry-run`
-
-## Custom targets
-
-Define custom targets in `grekt.yaml`:
-
-```yaml
-targets:
-  - claude
-  - my-custom
-customTargets:
-  my-custom:
-    name: "My Tool"
-    rulesFile: ".my-tool-rules"
-```
