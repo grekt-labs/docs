@@ -29,7 +29,7 @@ const phrases = [
   'shared across teams.',
   'versioned and tracked.',
   'installed once, consistent everywhere.',
-  'context aware and minimal.',
+  'context aware. No bloat.',
 ]
 
 const currentPhrase = ref('')
@@ -466,7 +466,6 @@ const toggleFaq = (index) => {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
 
 .home-container {
   display: flex;
@@ -529,6 +528,9 @@ const toggleFaq = (index) => {
   --footer-bg: #f5f5f7;
   --logo-filter: none;
 
+  /* Text accent - light mode uses darker shade */
+  --grekt-text-accent: var(--grekt-primary-700);
+
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -555,6 +557,9 @@ const toggleFaq = (index) => {
   --section-bg-alt: #0a0a0a;
   --footer-bg: #050505;
   --logo-filter: brightness(0) invert(1);
+
+  /* Text accent - dark mode uses lighter shade */
+  --grekt-text-accent: var(--grekt-primary-500);
 }
 
 /* HERO */
@@ -794,7 +799,7 @@ const toggleFaq = (index) => {
 }
 
 .typing-text {
-  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
+  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -803,7 +808,7 @@ const toggleFaq = (index) => {
 
 .cursor {
   display: inline-block;
-  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
+  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -863,7 +868,7 @@ const toggleFaq = (index) => {
 
 .hero-buttons a.secondary:hover {
   background: var(--hero-btn-secondary-bg);
-  border-color: var(--grekt-primary-500);
+  border-color: var(--grekt-text-accent);
   transform: translateY(-2px);
 }
 
@@ -884,12 +889,12 @@ const toggleFaq = (index) => {
 .install-select {
   appearance: none;
   -webkit-appearance: none;
-  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%2377CABD' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-right: none;
   border-radius: 8px 0 0 8px;
   padding: 12px 42px 12px 16px;
-  color: var(--grekt-primary-500);
+  color: #ffffff;
   font-size: 0.85rem;
   font-weight: 500;
   font-family: inherit;
@@ -903,7 +908,7 @@ const toggleFaq = (index) => {
 
 .install-select:focus {
   outline: none;
-  border-color: var(--grekt-primary-500);
+  border-color: var(--grekt-text-accent);
 }
 
 .install-select option {
@@ -930,7 +935,7 @@ const toggleFaq = (index) => {
 }
 
 .install-prompt {
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
   font-weight: 600;
   user-select: none;
 }
@@ -956,7 +961,7 @@ const toggleFaq = (index) => {
 }
 
 .copy-btn:hover {
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -1065,7 +1070,7 @@ const toggleFaq = (index) => {
   padding-top: 16px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -1162,7 +1167,7 @@ const toggleFaq = (index) => {
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.85rem;
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
 }
 
 /* FOOTER */
@@ -1199,7 +1204,7 @@ const toggleFaq = (index) => {
   font-family: 'Cal Sans', system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
 }
 
 .footer-tagline {
@@ -1237,7 +1242,7 @@ const toggleFaq = (index) => {
 }
 
 .footer-column a:hover {
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
 }
 
 .footer-bottom {
@@ -1297,7 +1302,7 @@ const toggleFaq = (index) => {
 .comparison-col-grekt {
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
   text-align: center;
 }
 
@@ -1322,7 +1327,7 @@ const toggleFaq = (index) => {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
   padding: 24px 0 12px 0;
 }
 
@@ -1490,7 +1495,7 @@ const toggleFaq = (index) => {
 }
 
 .faq-question:hover {
-  color: var(--grekt-primary-500);
+  color: var(--grekt-text-accent);
 }
 
 .faq-icon {

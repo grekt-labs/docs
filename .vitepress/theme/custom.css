@@ -2,11 +2,14 @@
    grekt Custom VitePress Overrides
    ======================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
 /* Brand color override */
 :root {
   --vp-c-brand-1: #77CABD;
   --vp-c-brand-2: #5a9a8f;
   --vp-c-brand-3: #3d6a62;
+  --font-titles: "Cal Sans", sans-serif;
 }
 
 /* Dark mode - near black background */
@@ -19,7 +22,7 @@
 
 /* Logo size */
 .VPNavBarTitle .logo {
-  height: 65px;
+  height: 38px;
   width: auto;
 }
 
@@ -41,11 +44,6 @@
   display: none !important;
 }
 
-/* Hide dark/light toggle on homepage */
-.Layout:has(.is-home) .VPNavBarAppearance,
-.Layout:has(.is-home) .VPSwitchAppearance {
-  display: none !important;
-}
 
 /* Nav text colors for homepage - light mode */
 .Layout:has(.is-home) .VPNav .VPNavBarTitle .title {
