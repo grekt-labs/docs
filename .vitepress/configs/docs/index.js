@@ -1,12 +1,12 @@
 export const docsSidebar = [
   {
-    text: 'Quick Start',
+    text: 'Quick start',
     items: [
-      { text: 'Getting Started', link: '/docs/guide/getting-started' }
+      { text: 'Getting started', link: '/docs/guide/getting-started' }
     ]
   },
   {
-    text: 'Core Concepts',
+    text: 'Core concepts',
     items: [
       { text: 'Artifacts', link: '/docs/guide/artifacts' },
       { text: 'Targets', link: '/docs/guide/targets' }

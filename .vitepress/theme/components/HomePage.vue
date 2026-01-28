@@ -28,8 +28,8 @@ const phrases = [
   'synced to any AI assistant.',
   'shared across teams.',
   'versioned and tracked.',
-  'without copy-paste hell.',
-  'well managed.',
+  'installed once, consistent everywhere.',
+  'context aware and minimal.',
 ]
 
 const currentPhrase = ref('')
@@ -132,29 +132,19 @@ const toggleFaq = (index) => {
         <!-- AI Tool Icons floating on lines -->
         <div class="floating-icons">
           <div class="floating-icon icon-claude" title="Claude">
-            <svg viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/claude.png" alt="Claude" width="28" height="28" />
           </div>
           <div class="floating-icon icon-cursor" title="Cursor">
-            <svg viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M13.64 21.97C13.14 22.21 12.54 22 12.31 21.5L10.13 16.76L7.62 18.78C7.45 18.92 7.24 19 7.02 19C6.55 19 6.16 18.61 6.16 18.14V5.86C6.16 5.39 6.55 5 7.02 5C7.24 5 7.45 5.08 7.62 5.22L18.09 13.81C18.46 14.11 18.52 14.65 18.22 15.02C18.06 15.21 17.83 15.33 17.58 15.35L13.83 15.68L16.01 20.42C16.24 20.92 16.03 21.52 15.53 21.75L13.64 21.97Z"/>
-            </svg>
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/cursor.png" alt="Cursor" width="28" height="28" />
           </div>
-          <div class="floating-icon icon-opencode" title="OpenCode">
-            <svg viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-            </svg>
+          <div class="floating-icon icon-cline" title="Cline">
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/cline.png" alt="Cline" width="28" height="28" />
           </div>
-          <div class="floating-icon icon-windsurf" title="Windsurf">
-            <svg viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-            </svg>
+          <div class="floating-icon icon-openai" title="OpenAI">
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/openai.png" alt="OpenAI" width="28" height="28" />
           </div>
           <div class="floating-icon icon-copilot" title="GitHub Copilot">
-            <svg viewBox="0 0 24 24" width="28" height="28">
-              <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-            </svg>
+            <img src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/githubcopilot.png" alt="GitHub Copilot" width="28" height="28" />
           </div>
           <!-- Central grekt icon -->
           <div class="floating-icon icon-grekt" title="grekt">
@@ -169,7 +159,7 @@ const toggleFaq = (index) => {
           <span class="typing-text">{{ currentPhrase }}<span class="cursor">|</span></span>
         </h1>
         <p class="tagline">
-          Install, sync, and share AI configurations across Claude, Cursor, and other coding assistants. <strong class="typing-text">Version controlled. Lockfile backed. Zero friction.</strong>
+          Install, sync, and share AI configurations with version control, drift detection, and context management. <strong class="typing-text">AI agents, versioned like code.</strong>
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
@@ -654,7 +644,7 @@ const toggleFaq = (index) => {
 .icon-claude {
   top: 48%;
   left: 3%;
-  background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+  background: linear-gradient(135deg, #D97757 0%, #E8927A 100%);
   animation: float-1 6s ease-in-out infinite;
 }
 
@@ -665,14 +655,14 @@ const toggleFaq = (index) => {
   animation: float-2 5s ease-in-out infinite 0.5s;
 }
 
-.icon-opencode {
+.icon-cline {
   top: 60%;
   left: 18%;
-  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+  background: linear-gradient(135deg, #323B43 0%, #4A5568 100%);
   animation: float-3 7s ease-in-out infinite 1s;
 }
 
-.icon-windsurf {
+.icon-openai {
   top: 52%;
   right: 4%;
   background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
@@ -784,7 +774,7 @@ const toggleFaq = (index) => {
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -1546,8 +1536,8 @@ const toggleFaq = (index) => {
 
   .icon-claude { left: 2%; top: 50%; }
   .icon-cursor { left: 6%; top: 74%; }
-  .icon-opencode { left: 14%; top: 62%; }
-  .icon-windsurf { right: 2%; top: 54%; }
+  .icon-cline { left: 14%; top: 62%; }
+  .icon-openai { right: 2%; top: 54%; }
   .icon-copilot { right: 10%; top: 70%; }
 }
 

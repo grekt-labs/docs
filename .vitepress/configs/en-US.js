@@ -1,19 +1,19 @@
 export const enUSSidebar = {
   '/en-US/docs/': [
     {
-      text: 'Getting Started',
+      text: 'Getting started',
       items: [
         { text: 'Introduction', link: '/en-US/docs/guide/introduction' },
-        { text: 'Quick Start', link: '/en-US/docs/guide/getting-started' },
+        { text: 'Quick start', link: '/en-US/docs/guide/getting-started' },
         { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
       ]
     },
     {
-      text: 'Core Concepts',
+      text: 'Core concepts',
       items: [
         { text: 'Artifacts', link: '/en-US/docs/guide/artifacts' },
         { text: 'Targets', link: '/en-US/docs/guide/targets' },
-        { text: 'Sync Modes', link: '/en-US/docs/guide/sync-modes' }
+        { text: 'Sync modes', link: '/en-US/docs/guide/sync-modes' }
       ]
     },
     {

@@ -12,7 +12,7 @@ grekt works with any AI coding assistant that reads markdown files: Claude, Curs
 grekt sync
 ```
 
-Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain indexed but not copied. See [Sync Modes](./sync-modes.md).
+Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain indexed but not copied. See [Sync modes](./sync-modes.md).
 
 ### Built-in plugins
 

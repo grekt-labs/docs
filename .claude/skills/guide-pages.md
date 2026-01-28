@@ -5,7 +5,7 @@ description: Write conceptual guide pages
 agent: docs-writer
 ---
 
-# Guide Pages
+# Guide pages
 
 Guide pages explain concepts, not commands. Located in `docs/en-US/docs/guide/`.
 
@@ -13,13 +13,13 @@ Guide pages explain concepts, not commands. Located in `docs/en-US/docs/guide/`.
 
 Guide pages are organized by complexity:
 
-### Quick Start (getting-started.md)
+### Quick start (getting-started.md)
 - Installation
 - 4-step workflow: init → add → sync → list
 - Links to deeper docs
 - Max 80 lines
 
-### Core Concepts (artifacts.md, targets.md)
+### Core concepts (artifacts.md, targets.md)
 - What the concept is
 - Structure/components
 - Examples
