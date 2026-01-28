@@ -1010,6 +1010,8 @@ const toggleFaq = (index) => {
   border: 1px solid var(--card-border);
   transition: all 0.3s ease;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .use-case-card:hover {
@@ -1050,6 +1052,7 @@ const toggleFaq = (index) => {
   color: var(--card-text);
   line-height: 1.6;
   margin: 0;
+  flex-grow: 1;
 }
 
 .use-case-card--coming-soon {
@@ -1058,7 +1061,8 @@ const toggleFaq = (index) => {
 
 .card-link {
   display: inline-block;
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--grekt-primary-500);
