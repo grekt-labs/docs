@@ -1,80 +1,93 @@
 # grekt version
 
-Calculate and apply semantic versions to artifacts based on conventional commits.
+Bump artifact versions manually or automatically via conventional commits.
 
 ```bash
-grekt version [path]
+grekt version [bump] [path]
 ```
+
+## Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `bump` | Optional. One of `patch`, `minor`, `major`. If omitted, uses conventional commits. |
+| `path` | Optional. Path to artifact or directory. Defaults to current directory. |
 
 ## Options
 
 | Option | Description |
 |--------|-------------|
-| `--dry-run` | Show what versions would be generated without applying |
+| `--dry-run` | Show what would happen without applying changes |
 
 ## Examples
 
+### Manual bump
+
 ```bash
-# Version all artifacts in current directory
+# Bump patch version (1.0.0 → 1.0.1)
+grekt version patch
+
+# Bump minor version (1.0.0 → 1.1.0)
+grekt version minor
+
+# Bump major version (1.0.0 → 2.0.0)
+grekt version major
+
+# Bump specific artifact
+grekt version patch ./my-agent
+
+# Preview without applying
+grekt version minor --dry-run
+```
+
+### Automatic (conventional commits)
+
+```bash
+# Analyze commits and bump accordingly
 grekt version
 
 # Preview without applying
 grekt version --dry-run
 
-# Version a specific artifact
+# Analyze specific artifact
 grekt version ./my-agent
-
-# Version all artifacts in a directory
-grekt version ./my-artifacts
 ```
 
 ## Output
 
 ```bash
-$ grekt version --dry-run
+$ grekt version patch --dry-run
 
-ℹ Found 3 artifact(s)
+ℹ Found 1 artifact(s)
   (dry-run mode)
 
-  @grekt/agent-reviewer: 1.2.0 → 1.3.0 (2 minor commits)
-  @grekt/skill-commit: 2.0.1 (no changes)
-  @grekt/prompt-review: 0.5.0 → 1.0.0 (1 major commits)
+  @grekt/my-agent: 1.2.0 → 1.2.1
 ```
 
 ## How it works
 
-1. Scans for directories containing `grekt.yaml`
-2. Analyzes git commit history using [conventional commits](https://www.conventionalcommits.org/)
-3. Calculates new versions based on commit types:
-   - `fix:` → patch bump (1.0.0 → 1.0.1)
-   - `feat:` → minor bump (1.0.0 → 1.1.0)
-   - `feat!:` or `BREAKING CHANGE:` → major bump (1.0.0 → 2.0.0)
-4. Updates `version` field in `grekt.yaml`
+### Manual mode
+
+When you specify `patch`, `minor`, or `major`:
+- Directly bumps the version without analyzing commits
+- Useful when not using conventional commits
+
+### Automatic mode
+
+When no bump type is specified:
+1. Analyzes git commit history using [conventional commits](https://www.conventionalcommits.org/)
+2. Calculates versions based on commit types:
+   - `fix:` → patch (1.0.0 → 1.0.1)
+   - `feat:` → minor (1.0.0 → 1.1.0)
+   - `feat!:` or `BREAKING CHANGE:` → major (1.0.0 → 2.0.0)
+3. Updates `version` in `grekt.yaml`
+
+If no relevant commits are found, suggests using manual bump.
 
 ## Requirements
 
-- Must be run inside a git repository
-- Commits must follow [conventional commits](https://www.conventionalcommits.org/) format
 - Each artifact must have a valid `grekt.yaml` with `name`, `author`, and `version`
-
-## Directory structure
-
-Works with single artifacts or multi-artifact repositories:
-
-```
-# Single artifact
-my-agent/
-└── grekt.yaml
-
-# Multi-artifact repo
-my-artifacts/
-├── agent-reviewer/
-│   └── grekt.yaml
-├── skill-commit/
-│   └── grekt.yaml
-└── prompt-review/
-    └── grekt.yaml
-```
+- For automatic mode: must be in a git repository with conventional commits
 
 ## Related commands
 
