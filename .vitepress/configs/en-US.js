@@ -66,7 +66,8 @@ export const enUSSidebar = {
         { text: 'grekt deprecate', link: '/en-US/api/deprecate' },
         { text: 'grekt undeprecate', link: '/en-US/api/undeprecate' },
         { text: 'grekt info', link: '/en-US/api/info' },
-        { text: 'grekt versions', link: '/en-US/api/versions' }
+        { text: 'grekt versions', link: '/en-US/api/versions' },
+        { text: 'grekt outdated', link: '/en-US/api/outdated' }
       ]
     },
     {
@@ -75,6 +76,13 @@ export const enUSSidebar = {
         { text: 'grekt sync', link: '/en-US/api/sync' },
         { text: 'grekt check', link: '/en-US/api/check' },
         { text: 'grekt config', link: '/en-US/api/config' }
+      ]
+    },
+    {
+      text: 'Authoring',
+      items: [
+        { text: 'grekt pack', link: '/en-US/api/pack' },
+        { text: 'grekt version', link: '/en-US/api/version' }
       ]
     }
   ]

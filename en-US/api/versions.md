@@ -6,11 +6,6 @@ List all available versions of an artifact.
 grekt versions <artifact>
 ```
 
-::: info S3 Registry Only
-This command only works with S3-compatible registries (Cloudflare R2, AWS S3, MinIO).
-For GitHub/GitLab sources, check the repository tags/releases directly.
-:::
-
 ## Options
 
 | Option | Description |

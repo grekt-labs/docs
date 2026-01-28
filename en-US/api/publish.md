@@ -6,46 +6,39 @@ Publish an artifact to the registry.
 grekt publish <path>
 ```
 
-## Options
-
-| Option | Description |
-|--------|-------------|
-| `--local` | Only create tarball, don't upload |
-| `-o, --output <path>` | Output path for tarball (with `--local`) |
-| `--s3` | Use S3-compatible storage (legacy mode) |
-
 ## Examples
 
-```bash
-# Publish to registry (requires login)
+::: code-group
+
+```bash [Public registry]
+# Requires grekt login
 grekt login
 grekt publish ./my-artifact
-
-# Create tarball only
-grekt publish ./my-artifact --local -o ./dist/artifact.tar.gz
-
-# Legacy: publish to S3-compatible storage
-grekt publish ./my-artifact --s3
 ```
+
+```bash [GitLab / GitHub]
+# Uses GITLAB_TOKEN, GITHUB_TOKEN, or config
+grekt publish ./my-artifact
+```
+
+:::
 
 ## Authentication
 
-Requires authentication via `grekt login`:
+Authentication depends on the registry:
 
-```bash
-$ grekt publish ./artifact
-✗ Not logged in
-ℹ Run 'grekt login' first
-```
+- **Public registry:** `grekt login` (stores token in `~/.grekt/credentials.yaml`)
+- **GitLab / GitHub:** `GITLAB_TOKEN`, `GITHUB_TOKEN`, or token in `.grekt/config.yaml`
 
 ## Behavior
 
 1. Validates the manifest (`grekt.yaml`)
 2. Validates version is valid semver
 3. Checks keywords (3-5 required)
-4. Creates a tarball
+4. Creates a tarball in `.grekt/tmp/`
 5. Checks version doesn't already exist
 6. Uploads to registry
+7. Cleans up tarball
 
 ## Version requirements
 
@@ -92,18 +85,8 @@ If the version already exists:
 ℹ Bump the version in grekt.yaml and try again
 ```
 
-## S3 Legacy Mode
-
-For backwards compatibility with S3-compatible storage:
-
-```bash
-grekt publish ./artifact --s3
-```
-
-Requires S3 credentials. See [Authentication](/en-US/docs/guide/authentication#s3-storage-legacy).
-
 ## Related commands
 
-- [grekt login](/en-US/api/login) — Log in to registry
+- [grekt pack](/en-US/api/pack) — Create tarball without publishing
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
 - [grekt versions](/en-US/api/versions) — List available versions

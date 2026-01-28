@@ -11,7 +11,6 @@ grekt deprecate <artifact@version>
 | Option | Description |
 |--------|-------------|
 | `-m, --message <message>` | Deprecation message (default: "This version is deprecated") |
-| `--s3` | Use S3-compatible storage (legacy mode) |
 
 ## Examples
 
@@ -21,20 +20,14 @@ grekt deprecate @author/agent@1.0.0
 
 # Deprecate with custom message
 grekt deprecate @author/agent@1.0.0 -m "Security vulnerability, use 2.x"
-
-# Legacy: deprecate on S3 registry
-grekt deprecate @author/agent@1.0.0 --s3
 ```
 
 ## Authentication
 
-Requires authentication via `grekt login`:
+Authentication depends on the registry:
 
-```bash
-$ grekt deprecate @author/agent@1.0.0
-✗ Not logged in
-ℹ Run 'grekt login' first
-```
+- **Public registry:** `grekt login` (stores token in `~/.grekt/credentials.yaml`)
+- **GitLab / GitHub:** `GITLAB_TOKEN`, `GITHUB_TOKEN`, or token in `.grekt/config.yaml`
 
 ## Behavior
 
@@ -61,4 +54,3 @@ $ grekt add @author/agent@1.0.0
 
 - [grekt undeprecate](/en-US/api/undeprecate) — Remove deprecation
 - [grekt versions](/en-US/api/versions) — List versions with deprecation status
-- [grekt login](/en-US/api/login) — Log in to registry

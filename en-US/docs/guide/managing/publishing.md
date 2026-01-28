@@ -57,35 +57,36 @@ Write keywords directly in your `grekt.yaml`.
 
 ## Publishing
 
-```bash
-# Login first
-grekt login
+::: code-group
 
-# Publish
+```bash [Public registry]
+# Requires grekt login
+grekt login
 grekt publish ./path/to/artifact
 ```
+
+```bash [GitLab / GitHub]
+# Uses GITLAB_TOKEN, GITHUB_TOKEN, or config
+grekt publish ./path/to/artifact
+```
+
+:::
 
 ### What happens
 
 1. **Validates manifest** — Checks required fields in `grekt.yaml`
-2. **Creates tarball** — Packages files into `.tar.gz`
+2. **Creates tarball** — Packages files into `.grekt/tmp/`
 3. **Checks uniqueness** — Fails if version already exists
-4. **Uploads** — Sends to registry (public or configured backend)
+4. **Uploads** — Sends to configured registry
+5. **Cleans up** — Removes the temporary tarball
 
-### Options
+### Pack only
 
-| Option | Description |
-|--------|-------------|
-| `--local` | Create tarball only, don't upload |
-| `-o, --output <path>` | Output path for tarball (with `--local`) |
-| `--s3` | Use S3-compatible storage (legacy) |
-
-### Local mode
-
-Create a tarball without uploading:
+To create a tarball without publishing, use [grekt pack](/en-US/api/pack):
 
 ```bash
-grekt publish ./my-artifact --local -o ./dist/
+grekt pack ./my-artifact
+# Output: .grekt/tmp/@author-my-artifact.tar.gz
 ```
 
 Useful for inspecting what gets packaged or distributing through other channels.
@@ -117,6 +118,7 @@ version: 1.0.0
 
 ## Related
 
+- [grekt pack](/en-US/api/pack) — Create tarball without publishing
 - [grekt publish](/en-US/api/publish) — Command reference
 - [GitLab registry](/en-US/docs/guide/registries/gitlab) — GitLab backend setup
 - [Versioning](/en-US/docs/guide/managing/versioning) — Version management

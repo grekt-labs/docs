@@ -6,31 +6,19 @@ Remove deprecation from an artifact version.
 grekt undeprecate <artifact@version>
 ```
 
-## Options
-
-| Option | Description |
-|--------|-------------|
-| `--s3` | Use S3-compatible storage (legacy mode) |
-
 ## Examples
 
 ```bash
 # Remove deprecation
 grekt undeprecate @author/agent@1.0.0
-
-# Legacy: on S3 registry
-grekt undeprecate @author/agent@1.0.0 --s3
 ```
 
 ## Authentication
 
-Requires authentication via `grekt login`:
+Authentication depends on the registry:
 
-```bash
-$ grekt undeprecate @author/agent@1.0.0
-✗ Not logged in
-ℹ Run 'grekt login' first
-```
+- **Public registry:** `grekt login` (stores token in `~/.grekt/credentials.yaml`)
+- **GitLab / GitHub:** `GITLAB_TOKEN`, `GITHUB_TOKEN`, or token in `.grekt/config.yaml`
 
 ## Use cases
 
@@ -42,4 +30,3 @@ $ grekt undeprecate @author/agent@1.0.0
 
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
 - [grekt versions](/en-US/api/versions) — List versions with deprecation status
-- [grekt login](/en-US/api/login) — Log in to registry

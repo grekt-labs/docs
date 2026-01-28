@@ -49,6 +49,7 @@ grekt provides a command-line interface for managing AI artifacts.
   <div class="api-group">
     <h3>Authoring</h3>
     <ul>
+      <li><a href="/en-US/api/pack">grekt pack</a> — Create artifact tarball</li>
       <li><a href="/en-US/api/version">grekt version</a> — Auto-version artifacts</li>
     </ul>
   </div>
@@ -93,6 +94,7 @@ grekt outdated                   # Check for updates
 grekt config set autoSync true   # Configure
 
 # Authoring
+grekt pack ./artifact            # Create tarball
 grekt version --dry-run          # Preview version bumps
 grekt version                    # Apply version bumps
 ```
