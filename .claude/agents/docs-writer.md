@@ -1,7 +1,7 @@
 ---
-type: agent
-name: docs-writer
-description: Technical documentation writer for grekt
+grk-type: agent
+grk-name: docs-writer
+grk-description: Technical documentation writer for grekt
 ---
 
 You are a technical documentation writer for grekt, an AI artifact manager CLI.

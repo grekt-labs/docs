@@ -16,7 +16,7 @@ my-artifact/
     └── mcp.json
 ```
 
-The `type` field in frontmatter defines what each file is, not its location.
+The `grk-type` field in frontmatter defines what each file is, not its location.
 
 Artifacts are stored in `.grekt/artifacts/` after installation.
 
@@ -45,9 +45,9 @@ AI personas with specific behaviors:
 
 ```markdown
 ---
-type: agent
-name: code-reviewer
-description: Expert code reviewer
+grk-type: agent
+grk-name: code-reviewer
+grk-description: Expert code reviewer
 ---
 
 You are an expert code reviewer. Focus on:
@@ -62,10 +62,10 @@ Reusable capabilities for agents:
 
 ```markdown
 ---
-type: skill
-name: testing
-description: Testing patterns knowledge
-agent: code-reviewer
+grk-type: skill
+grk-name: testing
+grk-description: Testing patterns knowledge
+grk-agent: code-reviewer
 ---
 
 When reviewing tests, check for edge cases and meaningful assertions.
@@ -77,9 +77,9 @@ User-invokable actions:
 
 ```markdown
 ---
-type: command
-name: review
-description: Review code changes
+grk-type: command
+grk-name: review
+grk-description: Review code changes
 ---
 
 /review - Analyze changes and provide feedback
@@ -91,9 +91,9 @@ MCP server configurations (JSON format):
 
 ```json
 {
-  "type": "mcp",
-  "name": "database",
-  "description": "Database MCP server",
+  "grk-type": "mcp",
+  "grk-name": "database",
+  "grk-description": "Database MCP server",
   "config": { ... }
 }
 ```
@@ -104,9 +104,9 @@ Reusable rules and guidelines:
 
 ```markdown
 ---
-type: rule
-name: code-style
-description: Code style guidelines
+grk-type: rule
+grk-name: code-style
+grk-description: Code style guidelines
 ---
 
 Follow these coding conventions...
@@ -114,12 +114,14 @@ Follow these coding conventions...
 
 ## Frontmatter
 
+All component files use `grk-` prefixed properties to avoid collisions with other tools' frontmatter.
+
 | Field | Required | Description |
 |-------|----------|-------------|
-| `type` | Yes | `agent`, `skill`, `command`, `mcp`, or `rule` |
-| `name` | Yes | Unique identifier |
-| `description` | Yes | What it does |
-| `agent` | No | Parent agent (for skills/commands) |
+| `grk-type` | Yes | `agent`, `skill`, `command`, `mcp`, or `rule` |
+| `grk-name` | Yes | Unique identifier |
+| `grk-description` | Yes | What it does |
+| `grk-agent` | No | Parent agent (for skills/commands) |
 
 ## Project files
 
