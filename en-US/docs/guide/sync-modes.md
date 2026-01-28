@@ -1,8 +1,8 @@
-# Sync Modes
+# Sync modes
 
 Artifacts can be installed in two modes that determine how they're synced to AI tools.
 
-## LAZY (default)
+## Lazy mode (default)
 
 Artifacts are indexed in `.grekt/index` but not copied to target directories. This is the default mode.
 
@@ -15,7 +15,7 @@ Benefits:
 - Faster syncs
 - AI tools can still discover artifacts via the index
 
-## CORE
+## Core mode
 
 Artifacts are copied to target directories (e.g., `.claude/agents/`) during sync. Use for frequently accessed artifacts.
 
@@ -48,16 +48,14 @@ grekt sync
 
 ## The index file
 
-All artifacts (LAZY and CORE) are indexed in `.grekt/index`:
+Lazy artifacts are indexed in `.grekt/index` for discovery:
 
 ```
 [agents]
-*@grekt/code-reviewer:code,review,quality
 @grekt/utils:utility,helpers
 
 [skills]
-@grekt/code-reviewer:refactor,lint
+@grekt/utils:testing,mocks
 ```
 
-- `*` prefix indicates CORE mode
-- Keywords after `:` aid discovery
+CORE artifacts are not indexed they're already in the AI context.
