@@ -1,8 +1,8 @@
 ---
-type: skill
-name: guide-pages
-description: Write conceptual guide pages
-agent: docs-writer
+grk-type: skill
+grk-name: guide-pages
+grk-description: Write conceptual guide pages
+grk-agent: docs-writer
 ---
 
 # Guide pages

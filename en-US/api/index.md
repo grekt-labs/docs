@@ -33,6 +33,7 @@ grekt provides a command-line interface for managing AI artifacts.
       <li><a href="/en-US/api/undeprecate">grekt undeprecate</a> — Remove deprecation</li>
       <li><a href="/en-US/api/info">grekt info</a> — Show artifact info</li>
       <li><a href="/en-US/api/versions">grekt versions</a> — List versions</li>
+      <li><a href="/en-US/api/outdated">grekt outdated</a> — Check for updates</li>
     </ul>
   </div>
 
@@ -79,6 +80,7 @@ grekt deprecate @a/b@1.0 -m "x"  # Deprecate version
 grekt undeprecate @a/b@1.0       # Remove deprecation
 grekt info @author/artifact      # Show artifact info
 grekt versions @author/artifact  # List versions
+grekt outdated                   # Check for updates
 
 # Config
 grekt config set autoSync true   # Configure
