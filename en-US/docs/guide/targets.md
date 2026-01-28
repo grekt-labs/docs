@@ -32,13 +32,14 @@ Each plugin knows where to place components for its target tool.
 
 ### Custom targets
 
-Define your own output paths for any tool:
+Define output paths for any tool via `grekt init` or in `grekt.yaml`.
 
-```yaml
-customTargets:
-  my-tool:
-    name: "My Tool"
-    rulesFile: ".my-tool-rules"
+```bash
+? Where do you want to store artifact contents? custom
+? Custom target name: my-tool
+? Rules file path: .my-tool/rules.md
+? Skills folder path: .my-tool/skills/
+? Agents folder path: .my-tool/agents/
 ```
 
 ## Non-destructive sync
