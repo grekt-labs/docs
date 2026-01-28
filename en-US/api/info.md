@@ -6,11 +6,6 @@ Show information about an artifact in the registry.
 grekt info <artifact>
 ```
 
-::: info S3 Registry Only
-This command only works with S3-compatible registries (Cloudflare R2, AWS S3, MinIO).
-For GitHub/GitLab sources, check the repository directly.
-:::
-
 ## Options
 
 | Option | Description |
