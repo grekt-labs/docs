@@ -41,10 +41,34 @@ $ grekt publish ./artifact
 ## Behavior
 
 1. Validates the manifest (`grekt.yaml`)
-2. Checks keywords (3-5 required)
-3. Creates a tarball
-4. Checks version doesn't already exist
-5. Uploads to registry
+2. Validates version is valid semver
+3. Checks keywords (3-5 required)
+4. Creates a tarball
+5. Checks version doesn't already exist
+6. Uploads to registry
+
+## Version requirements
+
+Versions must be valid [semantic versioning](https://semver.org/):
+
+```yaml
+# Valid
+version: "1.0.0"
+version: "2.1.0-beta.1"
+version: "1.0.0+build.123"
+
+# Invalid (will be rejected)
+version: "v1.0.0"    # No 'v' prefix
+version: "1.0"       # Must be X.Y.Z
+version: "latest"    # Must be numeric
+```
+
+If the version is invalid:
+
+```bash
+✗ Invalid version: v1.0.0
+ℹ Version must be valid semver (e.g., 1.0.0, 2.1.0-beta.1)
+```
 
 If keywords are missing or invalid:
 

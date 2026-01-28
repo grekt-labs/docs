@@ -127,9 +127,29 @@ Integrity check:
 ✓ All 3 artifact(s) verified
 ```
 
+## Updating artifacts
+
+If an artifact is already installed, `grekt add` will update it to the new version if it's higher:
+
+```bash
+$ grekt add @grekt/code-reviewer
+Updating @grekt/code-reviewer: 1.0.0 → 2.0.0
+✓ Installed @grekt/code-reviewer@2.0.0
+```
+
+If the installed version is the same or newer, it will skip:
+
+```bash
+$ grekt add @grekt/code-reviewer
+Already installed: @grekt/code-reviewer@2.0.0
+```
+
+Use `grekt outdated` to check which artifacts have updates available.
+
 ## Notes
 
 - Downloads to `.grekt/artifacts/<artifact-id>/`
 - Updates `grekt.yaml` and `grekt.lock`
 - Run `grekt sync` after adding
 - Deprecated versions show a warning but still install
+- Versions must be valid semver (no `v` prefix)
