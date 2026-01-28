@@ -1,18 +1,24 @@
 # Artifacts
 
-An artifact is a package containing AI configurations: agents, skills, commands...
+An artifact is a package containing AI configurations: agents, skills, commands, MCPs, rules...
 
 ## Structure
 
+Only `grekt.yaml` is required. Organize files however you want:
+
 ```
-.grekt/artifacts/code-review/
+my-artifact/
 ├── grekt.yaml        # Manifest (required)
-├── agent.md          # Agent definition
-├── skills/
-│   └── testing.md
-└── commands/
-    └── review.md
+├── agent.md
+├── review-skill.md
+└── tools/
+    ├── linter.md
+    └── mcp.json
 ```
+
+The `type` field in frontmatter defines what each file is, not its location.
+
+Artifacts are stored in `.grekt/artifacts/` after installation.
 
 ## Manifest
 
@@ -23,7 +29,13 @@ name: "code-review"
 author: "grekt"
 version: "1.0.0"
 description: "Code review assistant"
+keywords:
+  - code
+  - review
+  - quality
 ```
+
+Keywords (3-5) are required for publishing.
 
 ## Components
 
@@ -73,14 +85,41 @@ description: Review code changes
 /review - Analyze changes and provide feedback
 ```
 
+### MCPs
+
+MCP server configurations (JSON format):
+
+```json
+{
+  "type": "mcp",
+  "name": "database",
+  "description": "Database MCP server",
+  "config": { ... }
+}
+```
+
+### Rules
+
+Reusable rules and guidelines:
+
+```markdown
+---
+type: rule
+name: code-style
+description: Code style guidelines
+---
+
+Follow these coding conventions...
+```
+
 ## Frontmatter
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `type` | Yes | `agent`, `skill`, or `command` |
+| `type` | Yes | `agent`, `skill`, `command`, `mcp`, or `rule` |
 | `name` | Yes | Unique identifier |
 | `description` | Yes | What it does |
-| `agent` | No | Parent agent (for skills) |
+| `agent` | No | Parent agent (for skills/commands) |
 
 ## Project files
 
@@ -91,24 +130,17 @@ Project configuration:
 ```yaml
 targets:
   - claude
-autoSync: false
 artifacts:
-  code-review: "1.0.0"
+  "@grekt/utils": "1.0.0"              # LAZY mode (default)
+  "@grekt/code-review":
+    version: "1.0.0"
+    mode: core                          # CORE mode
 ```
 
 ### grekt.lock
 
-Lockfile with exact versions and checksums:
+Lockfile with exact versions and checksums. Generated automatically, do not edit.
 
-```yaml
-version: 1
-artifacts:
-  code-review:
-    version: "1.0.0"
-    integrity: "sha256:abc123..."
-    source: "github:grekt/code-review"
-    files:
-      "agent.md": "sha256:def456..."
-```
+### .grekt/index
 
-Ensures reproducible installs and integrity verification.
+Index of all installed artifacts. Used by AI tools for discovery. Generated automatically.

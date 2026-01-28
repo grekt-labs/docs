@@ -17,23 +17,23 @@ grekt sync
 ```
 
 1. Reads artifacts from `grekt.lock`
-2. Transforms to target-specific format
-3. Writes to target locations
+2. Copies **CORE** mode artifacts to target directories
+3. Skips **LAZY** mode artifacts (indexed only)
+4. Updates target config files
 
 ### Claude
 
-Creates organized directories:
+For CORE artifacts, creates directories based on component type:
 
 ```
 .claude/
-├── agents/
-│   └── code-reviewer.md
-├── skills/
-│   └── testing.md
-├── commands/
-│   └── review.md
-└── CLAUDE.md
+├── agents/           # type: agent
+├── skills/           # type: skill
+├── commands/         # type: command
+└── CLAUDE.md         # Points to .grekt/index
 ```
+
+LAZY artifacts are discoverable via `.grekt/index`.
 
 ### Cursor
 
@@ -41,14 +41,7 @@ Appends to `.cursorrules` with markers for managed sections.
 
 ### OpenCode
 
-Creates organized directories similar to Claude:
-
-```
-.opencode/
-├── agents/
-├── skills/
-└── commands/
-```
+Similar to Claude, creates directories for CORE artifacts.
 
 ## Non destructive Sync
 
