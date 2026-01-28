@@ -209,7 +209,7 @@ const toggleFaq = (index) => {
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8A5.9 5.9 0 0 1 6 12c0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
           </div>
-          <h3>Sync Everywhere</h3>
+          <h3>Sync to any AI</h3>
           <p>Push your agents, skills, and commands to Claude, Cursor, OpenCode, and more with one command.</p>
           <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
         </div>
@@ -217,7 +217,7 @@ const toggleFaq = (index) => {
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7z"/></svg>
           </div>
-          <h3>Share with Teams</h3>
+          <h3>Share within teams</h3>
           <p>Publish artifacts to share AI configurations across your organization.</p>
           <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
         </div>
@@ -1017,6 +1017,23 @@ const toggleFaq = (index) => {
 
 .use-case-card--coming-soon {
   position: relative;
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 32px;
+}
+
+.use-case-card--coming-soon .use-case-icon {
+  margin-bottom: 0;
+}
+
+.use-case-card--coming-soon h3 {
+  margin-bottom: 4px;
+}
+
+.use-case-card--coming-soon p {
+  flex-grow: 0;
 }
 
 .card-link {
@@ -1036,8 +1053,9 @@ const toggleFaq = (index) => {
 
 .badge-coming-soon {
   position: absolute;
-  top: 16px;
+  top: 50%;
   right: 16px;
+  transform: translateY(-50%);
   background: var(--grekt-tertiary-500);
   color: #0d1117;
   font-size: 0.7rem;
