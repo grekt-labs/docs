@@ -319,17 +319,26 @@ const toggleFaq = (index) => {
         <div class="comparison-group">
           <div class="comparison-group-title">Approach</div>
           <div class="comparison-row">
-            <div class="comparison-label">What it is</div>
+            <div class="comparison-label">
+              <span class="label-title">What it is</span>
+              <span class="label-desc">Core purpose and focus</span>
+            </div>
             <div class="comparison-value comparison-value--grekt">AI artifact governance</div>
             <div class="comparison-value comparison-value--other">Skills catalog</div>
           </div>
           <div class="comparison-row">
-            <div class="comparison-label">Core structure</div>
+            <div class="comparison-label">
+              <span class="label-title">Core structure</span>
+              <span class="label-desc">How artifacts are defined</span>
+            </div>
             <div class="comparison-value comparison-value--grekt">Versioned artifact + schema</div>
             <div class="comparison-value comparison-value--other">Text file</div>
           </div>
           <div class="comparison-row">
-            <div class="comparison-label">Philosophy</div>
+            <div class="comparison-label">
+              <span class="label-title">Philosophy</span>
+              <span class="label-desc">Design principles</span>
+            </div>
             <div class="comparison-value comparison-value--grekt">Reusability & governance</div>
             <div class="comparison-value comparison-value--other">Reusability</div>
           </div>
@@ -338,12 +347,18 @@ const toggleFaq = (index) => {
         <div class="comparison-group">
           <div class="comparison-group-title">Context management</div>
           <div class="comparison-row">
-            <div class="comparison-label">Token budget</div>
+            <div class="comparison-label">
+              <span class="label-title">Token budget</span>
+              <span class="label-desc">Context-aware loading</span>
+            </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Considered</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
           <div class="comparison-row">
-            <div class="comparison-label">Context bloat</div>
+            <div class="comparison-label">
+              <span class="label-title">Context bloat</span>
+              <span class="label-desc">Loading only what you need</span>
+            </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Minimized</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
@@ -352,17 +367,26 @@ const toggleFaq = (index) => {
         <div class="comparison-group">
           <div class="comparison-group-title">Reliability</div>
           <div class="comparison-row">
-            <div class="comparison-label">Versioning</div>
+            <div class="comparison-label">
+              <span class="label-title">Versioning</span>
+              <span class="label-desc">Reproducible installs across team</span>
+            </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Lockfile + SHA</div>
             <div class="comparison-value comparison-value--other"><span class="check-partial"></span>Manual updates</div>
           </div>
           <div class="comparison-row">
-            <div class="comparison-label">Drift detection</div>
+            <div class="comparison-label">
+              <span class="label-title">Drift detection</span>
+              <span class="label-desc">Detect artifact changes</span>
+            </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
           <div class="comparison-row">
-            <div class="comparison-label">Consistency</div>
+            <div class="comparison-label">
+              <span class="label-title">Consistency</span>
+              <span class="label-desc">Same artifacts everywhere</span>
+            </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Per-project lockfile</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span>Global, remember to sync</div>
           </div>
@@ -1328,9 +1352,21 @@ const toggleFaq = (index) => {
 }
 
 .comparison-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label-title {
   font-weight: 500;
   color: var(--card-title);
   font-size: 0.9rem;
+}
+
+.label-desc {
+  font-size: 0.8rem;
+  color: var(--card-text);
+  opacity: 0.6;
 }
 
 .comparison-value {
@@ -1605,8 +1641,12 @@ const toggleFaq = (index) => {
     gap: 8px;
   }
 
-  .comparison-label {
+  .label-title {
     font-size: 0.8rem;
+  }
+
+  .label-desc {
+    display: none;
   }
 
   .comparison-value {
