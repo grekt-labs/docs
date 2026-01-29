@@ -87,12 +87,8 @@ If no relevant commits are found, suggests using manual bump.
 ## Requirements
 
 - Each artifact must have a valid `grekt.yaml` with `name`, `author`, and `version`
-- For automatic mode:
-  - Must be in a git repository with conventional commits
-  - Requires `multi-semantic-release` and `semantic-release` installed:
-    ```bash
-    bun add -D multi-semantic-release semantic-release
-    ```
+- For automatic mode: must be in a git repository with conventional commits
+- For monorepo: tags should follow `@scope/name@version` convention
 
 ## Related commands
 
