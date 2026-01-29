@@ -8,15 +8,19 @@ This guide walks you through setting up grekt in a project and syncing your firs
 grekt is in early development. Expect breaking changes.
 :::
 
-```bash
-# Add the tap (first time only)
-brew tap grekt-labs/grekt
+::: code-group
 
-# Install
-brew install grekt
+```bash [curl]
+curl -fsSL https://grekt.com/install.sh | sh
 ```
 
-## Initialize a Project
+```bash [brew]
+brew tap grekt-labs/grekt && brew install grekt
+```
+
+:::
+
+## Initialize a project
 
 Every project using grekt needs to be initialized. This creates the configuration files and sets up which AI tools you want to sync to.
 
@@ -41,7 +45,7 @@ The `.grekt/config.yaml` file stores your authentication session and tokens. It'
 
 ## Add an artifact
 
-Artifacts can come from the grekt registry, GitHub, or GitLab. The `add` command downloads the artifact and updates your configuration.
+Artifacts are packages containing AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, or GitLab.
 
 ```bash
 # From the registry
@@ -57,7 +61,14 @@ grekt add github:user/repo#v1.0.0
 grekt add gitlab:group/repo
 ```
 
-::: tip Selective Installation
+When you add an artifact:
+1. grekt downloads it to `.grekt/artifacts/`
+2. Updates `grekt.yaml` with the artifact reference
+3. Creates a lockfile entry with the exact version and checksum
+
+By default, artifacts are added in **LAZY** mode (indexed but not copied to AI tools). Use `--core` to copy them directly to target directories like `.claude/agents/`.
+
+::: tip Selective installation
 Large artifacts may contain components you don't need. Use `--choose` to interactively select which agents, skills, or commands to install:
 
 ```bash
@@ -65,9 +76,12 @@ grekt add @grekt/git-flow --choose
 ```
 :::
 
-## Sync to Your Tools
+## Sync to your tools
 
-After adding artifacts, sync them to your AI tools. The sync command reads your artifacts and writes the appropriate configuration files for each target.
+Sync writes your artifacts to AI tool directories. Each target (Claude, Cursor...) has its own structure:
+
+- **Claude**: Creates `.claude/agents/`, `.claude/skills/`, updates `CLAUDE.md`
+- **Cursor**: Updates `.cursorrules` with artifact content
 
 ```bash
 # Preview what will change
@@ -77,21 +91,31 @@ grekt sync --dry-run
 grekt sync
 ```
 
-If you have `autoSync: true` in your config, syncing happens automatically when you add or remove artifacts.
+Only **CORE** mode artifacts are copied to target directories. **LAZY** mode artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
+
+::: tip Auto sync
+Set `autoSync: true` in your config to sync automatically when you add or remove artifacts.
+:::
 
 ## Verify your setup
 
-Check that everything is installed correctly and see what's in your project:
+Run `grekt check` to verify artifact integrity and detect issues:
 
 ```bash
-# List installed artifacts
-grekt list
-
-# Verify integrity and check for issues
 grekt check
 ```
 
-The `check` command verifies that artifact files haven't been modified and warns about potential conflicts like duplicate skill names.
+This command:
+- Verifies SHA256 checksums against the lockfile
+- Detects local modifications (drift)
+- Warns about conflicts like duplicate skill names
+- Shows total context size and estimated tokens
+
+To see what's installed:
+
+```bash
+grekt list
+```
 
 ## Configuration
 

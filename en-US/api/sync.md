@@ -42,10 +42,10 @@ Updates `.cursorrules` with grekt metadata.
 ## Non destructive
 
 - Preserves content outside managed sections
-- Marks managed sections with `<!-- grekt:start/end -->`
+- Marks managed sections with `<grekt-context>` blocks
 - Never deletes manually created files
 
-## Dry-run Output
+## Dry run output
 
 ```
 Preview sync to claude:

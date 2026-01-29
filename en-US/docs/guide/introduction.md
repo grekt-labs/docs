@@ -20,7 +20,7 @@ grekt add @grekt/code-reviewer    # Install an artifact
 grekt sync                        # Sync to Claude, Cursor...
 ```
 
-When someone publishes a better code reviewer agent, you `grekt add` it. When you improve your own, you `grekt publish` it.
+Artifacts work like dependencies: install what others have built, or publish your own for your team (or the community) to use.
 
 ## What are artifacts?
 
@@ -54,4 +54,4 @@ Install from multiple sources:
 
 ## Next
 
-Ready to start? Head to the [Quick Start](/en-US/docs/guide/getting-started).
+Ready to start? Head to the [Quick start](/en-US/docs/guide/getting-started).

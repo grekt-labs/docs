@@ -2,6 +2,10 @@
 
 An artifact is a package containing AI configurations: agents, skills, commands, MCPs, rules...
 
+::: tip File organization
+You can organize files however you want. The `grk-type` field in frontmatter defines what each file is — not its location. A file in `tools/linter.md` can be an agent, a skill, or anything else based on its frontmatter.
+:::
+
 ## Structure
 
 Only `grekt.yaml` is required. Organize files however you want:
@@ -15,8 +19,6 @@ my-artifact/
     ├── linter.md
     └── mcp.json
 ```
-
-The `grk-type` field in frontmatter defines what each file is, not its location.
 
 Artifacts are stored in `.grekt/artifacts/` after installation.
 

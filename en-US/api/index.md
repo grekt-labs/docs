@@ -1,4 +1,4 @@
-# CLI Reference
+# CLI reference
 
 grekt provides a command-line interface for managing AI artifacts.
 

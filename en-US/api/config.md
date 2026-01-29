@@ -21,6 +21,7 @@ grekt config <subcommand>
 | `targets` | AI tools to sync to |
 | `autoSync` | Sync after `grekt add` |
 | `registry` | Custom registry URL |
+| `customTargets` | Custom target definitions |
 | `options.autoCheck` | Run integrity check after `add`/`install` |
 
 ## Examples

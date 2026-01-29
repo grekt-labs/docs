@@ -8,6 +8,10 @@ All authentication commands require a grekt project. Run `grekt init` first.
 
 ## Registry login
 
+::: warning COMING SOON
+The public grekt registry is not yet available. Currently, only GitLab and self-hosted registries are supported, and they use token-based authentication (see below).
+:::
+
 For publishing and other registry operations on the public grekt registry.
 
 ```bash
