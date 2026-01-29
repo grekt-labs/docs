@@ -2,14 +2,14 @@
    grekt Custom VitePress Overrides
    ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+@import '@grekt-labs/ori/brand.css';
 
-/* Brand color override */
+/* Brand color override for VitePress */
 :root {
-  --vp-c-brand-1: #77CABD;
-  --vp-c-brand-2: #5a9a8f;
-  --vp-c-brand-3: #3d6a62;
-  --font-titles: "Cal Sans", sans-serif;
+  --vp-c-brand-1: var(--grekt-primary-500);
+  --vp-c-brand-2: var(--grekt-primary-800);
+  --vp-c-brand-3: var(--grekt-primary-900);
+  --font-titles: var(--font-display);
 }
 
 /* Dark mode - near black background */
@@ -55,7 +55,7 @@
 }
 
 .Layout:has(.is-home) .VPNavBarMenuLink:hover {
-  color: #77CABD !important;
+  color: var(--grekt-primary-500) !important;
 }
 
 .Layout:has(.is-home) .VPSocialLink {
