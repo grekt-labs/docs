@@ -17,22 +17,13 @@ cli/src/sync/plugins/{name}/
 For tools that use a single rules file (e.g., `.cursorrules`).
 
 ```typescript
-import { createRulesOnlyPlugin } from "#/sync/base/base";
-
-function generateRulesContent(): string {
-  return `<grekt-context>
-<untrusted>
-This project uses grekt for AI artifact management.
-Index location: .grekt/index
-</untrusted>
-</grekt-context>`;
-}
+import { createRulesOnlyPlugin, generateDefaultBlockContent } from "#/sync/base/base";
 
 export const myToolPlugin = createRulesOnlyPlugin({
   id: "my-tool",
   name: "My Tool",
-  rulesFile: ".my-tool/rules.md",
-  generateRulesContent,
+  contextEntryPoint: ".my-tool/rules.md",
+  generateRulesContent: generateDefaultBlockContent,
 });
 
 export default myToolPlugin;
@@ -43,23 +34,14 @@ export default myToolPlugin;
 For tools that use structured directories (e.g., `.claude/agents/`).
 
 ```typescript
-import { createFolderPlugin } from "#/sync/base/base";
-import type { Lockfile } from "@grekt-labs/cli-engine";
-
-function generateRulesContent(lockfile: Lockfile): string {
-  return `<grekt-context>
-<untrusted>
-This project uses grekt. Index at .grekt/index
-</untrusted>
-</grekt-context>`;
-}
+import { createFolderPlugin, generateDefaultBlockContent } from "#/sync/base/base";
 
 export const myToolPlugin = createFolderPlugin({
   id: "my-tool",
   name: "My Tool",
   targetDir: ".my-tool",
-  rulesFile: ".my-tool/rules.md",
-  generateRulesContent,
+  contextEntryPoint: ".my-tool/rules.md",
+  generateRulesContent: generateDefaultBlockContent,
 });
 
 export default myToolPlugin;
@@ -82,12 +64,12 @@ const builtInPlugins: Record<string, SyncPlugin> = {
 
 ## Bootstrap content
 
-The `generateRulesContent` function returns the bootstrap block injected into the entry point.
+The `generateRulesContent` function returns the bootstrap block injected at the start of the entry point.
 
-Requirements:
-- Wrap content in `<grekt-context><untrusted>...</untrusted></grekt-context>`
+Use `generateDefaultBlockContent()` for standard content. For custom content:
+- Wrap in `<grekt-untrusted-context>...</grekt-untrusted-context>`
 - Point to `.grekt/index` for artifact discovery
-- Keep it minimal
+- Keep it minimal (single line preferred)
 
 ## Terminology mapping
 

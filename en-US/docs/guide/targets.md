@@ -55,27 +55,27 @@ For AI tools without a built-in plugin, define output paths via `grekt init` or 
 customTargets:
   my-tool:
     name: "My Tool"
-    rulesFile: ".my-tool/rules.md"
+    contextEntryPoint: ".my-tool/rules.md"
+    paths:
+      agent: ".my-tool/agents"
+      skill: ".my-tool/skills"
+      command: ".my-tool/commands"
 ```
 
 ## Bootstrap block
 
-grekt injects a `<grekt-context>` block into each entry point:
+grekt injects a `<grekt-untrusted-context>` block at the start of each entry point:
 
 ```xml
-<grekt-context>
-<untrusted>
-This project uses grekt. Index at .grekt/index
-</untrusted>
-</grekt-context>
+<grekt-untrusted-context>This project uses grekt for AI artifact management. Index location: .grekt/index</grekt-untrusted-context>
 ```
 
-The `<untrusted>` wrapper signals content managed by grekt, not project authors.
+The tag signals content managed by grekt (untrusted third-party artifacts), not project authors.
 
 ## Non-destructive sync
 
 grekt preserves manual changes:
 
-- Only updates content within `<grekt-context>` blocks
+- Only updates content within `<grekt-untrusted-context>` blocks
 - Never deletes manually created files
 - Preview with `grekt sync --dry-run`
