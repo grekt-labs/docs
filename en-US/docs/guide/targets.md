@@ -4,21 +4,20 @@ Targets are AI tools that grekt syncs artifacts to.
 
 ## Supported targets
 
-grekt works with any AI coding assistant that reads markdown files: Claude, Cursor, Copilot, Codex, Antigravity, ClawdBot...
+grekt uses a **plugin system** for sync targets. Each plugin knows:
+- The entry point file path (e.g., `.cursorrules`, `CLAUDE.md`)
+- How to generate bootstrap content
+- Whether it needs folder structure or just rules injection
 
-## How sync works
+## Built-in plugins
 
-```bash
-grekt sync
-```
+| Plugin | Entry Point | Type |
+|--------|-------------|------|
+| `claude` | `.claude/CLAUDE.md` | Folder + Rules |
+| `cursor` | `.cursorrules` | Rules only |
+| `opencode` | `.opencode/` | Folder only |
 
-Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain indexed but not copied. See [Sync modes](./sync-modes.md).
-
-### Built-in plugins
-
-Each plugin knows where to place components for its target tool.
-
-**Claude** (example):
+**Claude** example structure:
 
 ```
 .claude/
@@ -28,24 +27,55 @@ Each plugin knows where to place components for its target tool.
 └── CLAUDE.md
 ```
 
-**Cursor** appends to `.cursorrules`. **OpenCode** uses `.opencode/`.
+## Planned plugins
 
-### Custom targets
+Community contributions welcome. See [Creating plugins](./creating-plugins.md).
 
-Define output paths for any tool via `grekt init` or in `grekt.yaml`.
+| Plugin | Entry Point | Status |
+|--------|-------------|--------|
+| `copilot` | `.github/copilot-instructions.md` | Planned |
+| `gemini` | `GEMINI.md` | Planned |
+| `windsurf` | `.windsurfrules` | Planned |
+| `amazonq` | `.amazonq/rules/` | Planned |
+
+## How sync works
 
 ```bash
-? Where do you want to store artifact contents? custom
-? Custom target name: my-tool
-? Rules file path: .my-tool/rules.md
-? Skills folder path: .my-tool/skills/
-? Agents folder path: .my-tool/agents/
+grekt sync
 ```
+
+Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain indexed but not copied. See [Sync modes](./sync-modes.md).
+
+## Custom targets
+
+For AI tools without a built-in plugin, define output paths via `grekt init` or `grekt.yaml`:
+
+```yaml
+# grekt.yaml
+customTargets:
+  my-tool:
+    name: "My Tool"
+    rulesFile: ".my-tool/rules.md"
+```
+
+## Bootstrap block
+
+grekt injects a `<grekt-context>` block into each entry point:
+
+```xml
+<grekt-context>
+<untrusted>
+This project uses grekt. Index at .grekt/index
+</untrusted>
+</grekt-context>
+```
+
+The `<untrusted>` wrapper signals content managed by grekt, not project authors.
 
 ## Non-destructive sync
 
 grekt preserves manual changes:
 
-- Marks managed sections with comments
-- Only updates grekt-managed content
+- Only updates content within `<grekt-context>` blocks
+- Never deletes manually created files
 - Preview with `grekt sync --dry-run`

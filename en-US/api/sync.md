@@ -13,6 +13,7 @@ grekt sync
 | `--dry-run` | Preview without applying |
 | `-f, --force` | Skip confirmation |
 | `-t, --target <targets>` | Override targets (comma-separated) |
+| `-n, --new` | Configure new targets interactively |
 
 ## Examples
 
@@ -21,6 +22,7 @@ grekt sync --dry-run      # Preview
 grekt sync                # Apply
 grekt sync -f             # No confirmation
 grekt sync -t claude      # Specific target
+grekt sync --new          # Add/configure targets
 ```
 
 ## Targets

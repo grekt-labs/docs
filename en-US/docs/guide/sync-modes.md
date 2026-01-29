@@ -48,14 +48,15 @@ grekt sync
 
 ## The index file
 
-Lazy artifacts are indexed in `.grekt/index` for discovery:
+All artifacts are indexed in `.grekt/index` for discovery. CORE artifacts are marked with `|core` suffix:
 
 ```
 [agents]
+@grekt/reviewer:code,review|core
 @grekt/utils:utility,helpers
 
 [skills]
-@grekt/utils:testing,mocks
+@grekt/testing:test,mocks
 ```
 
-CORE artifacts are not indexed they're already in the AI context.
+The index also includes a terminology block for AI tools that need term translation.
