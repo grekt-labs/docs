@@ -8,49 +8,49 @@ grekt provides a command-line interface for managing AI artifacts.
   <div class="api-group">
     <h3>Authentication</h3>
     <ul>
-      <li><a href="/en-US/api/login">grekt login</a> Log in to registry</li>
-      <li><a href="/en-US/api/logout">grekt logout</a> Log out from registry</li>
-      <li><a href="/en-US/api/whoami">grekt whoami</a> Show current user</li>
+      <li><a href="/en-US/api/login">grekt login</a><span class="desc">Log in to registry</span></li>
+      <li><a href="/en-US/api/logout">grekt logout</a><span class="desc">Log out from registry</span></li>
+      <li><a href="/en-US/api/whoami">grekt whoami</a><span class="desc">Show current user</span></li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Artifact Management</h3>
     <ul>
-      <li><a href="/en-US/api/init">grekt init</a> Initialize a project</li>
-      <li><a href="/en-US/api/add">grekt add</a> Add an artifact</li>
-      <li><a href="/en-US/api/install">grekt install</a> Install from lockfile</li>
-      <li><a href="/en-US/api/remove">grekt remove</a> Remove an artifact</li>
-      <li><a href="/en-US/api/list">grekt list</a> List installed artifacts</li>
+      <li><a href="/en-US/api/init">grekt init</a><span class="desc">Initialize a project</span></li>
+      <li><a href="/en-US/api/add">grekt add</a><span class="desc">Add an artifact</span></li>
+      <li><a href="/en-US/api/install">grekt install</a><span class="desc">Install from lockfile</span></li>
+      <li><a href="/en-US/api/remove">grekt remove</a><span class="desc">Remove an artifact</span></li>
+      <li><a href="/en-US/api/list">grekt list</a><span class="desc">List installed artifacts</span></li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Registry Operations</h3>
     <ul>
-      <li><a href="/en-US/api/publish">grekt publish</a> Publish an artifact</li>
-      <li><a href="/en-US/api/deprecate">grekt deprecate</a> Deprecate a version</li>
-      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a> Remove deprecation</li>
-      <li><a href="/en-US/api/info">grekt info</a> Show artifact info</li>
-      <li><a href="/en-US/api/versions">grekt versions</a> List versions</li>
-      <li><a href="/en-US/api/outdated">grekt outdated</a> Check for updates</li>
+      <li><a href="/en-US/api/publish">grekt publish</a><span class="desc">Publish an artifact</span></li>
+      <li><a href="/en-US/api/deprecate">grekt deprecate</a><span class="desc">Deprecate a version</span></li>
+      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a><span class="desc">Remove deprecation</span></li>
+      <li><a href="/en-US/api/info">grekt info</a><span class="desc">Show artifact info</span></li>
+      <li><a href="/en-US/api/versions">grekt versions</a><span class="desc">List versions</span></li>
+      <li><a href="/en-US/api/outdated">grekt outdated</a><span class="desc">Check for updates</span></li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Sync & Diagnostics</h3>
     <ul>
-      <li><a href="/en-US/api/sync">grekt sync</a> Sync to AI tools</li>
-      <li><a href="/en-US/api/check">grekt check</a> Check artifact integrity</li>
-      <li><a href="/en-US/api/config">grekt config</a> Manage configuration</li>
+      <li><a href="/en-US/api/sync">grekt sync</a><span class="desc">Sync to AI tools</span></li>
+      <li><a href="/en-US/api/check">grekt check</a><span class="desc">Check artifact integrity</span></li>
+      <li><a href="/en-US/api/config">grekt config</a><span class="desc">Manage configuration</span></li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Authoring</h3>
     <ul>
-      <li><a href="/en-US/api/pack">grekt pack</a> Create artifact tarball</li>
-      <li><a href="/en-US/api/version">grekt version</a> Auto-version artifacts</li>
+      <li><a href="/en-US/api/pack">grekt pack</a><span class="desc">Create artifact tarball</span></li>
+      <li><a href="/en-US/api/version">grekt version</a><span class="desc">Auto-version artifacts</span></li>
     </ul>
   </div>
 </div>
@@ -128,17 +128,26 @@ grekt version                    # Apply version bumps
 }
 
 .api-group li {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .api-group li a {
   color: var(--vp-c-text-1);
   text-decoration: none;
   transition: color 0.2s;
+  font-weight: 500;
 }
 
 .api-group li a:hover {
   color: var(--vp-c-brand-1);
+}
+
+.api-group li .desc {
+  color: var(--vp-c-text-2);
+  font-size: 0.85rem;
+  margin-top: 2px;
 }
 </style>
