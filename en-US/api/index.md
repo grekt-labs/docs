@@ -8,49 +8,49 @@ grekt provides a command-line interface for managing AI artifacts.
   <div class="api-group">
     <h3>Authentication</h3>
     <ul>
-      <li><a href="/en-US/api/login">grekt login</a> — Log in to registry</li>
-      <li><a href="/en-US/api/logout">grekt logout</a> — Log out from registry</li>
-      <li><a href="/en-US/api/whoami">grekt whoami</a> — Show current user</li>
+      <li><a href="/en-US/api/login">grekt login</a> Log in to registry</li>
+      <li><a href="/en-US/api/logout">grekt logout</a> Log out from registry</li>
+      <li><a href="/en-US/api/whoami">grekt whoami</a> Show current user</li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Artifact Management</h3>
     <ul>
-      <li><a href="/en-US/api/init">grekt init</a> — Initialize a project</li>
-      <li><a href="/en-US/api/add">grekt add</a> — Add an artifact</li>
-      <li><a href="/en-US/api/install">grekt install</a> — Install from lockfile</li>
-      <li><a href="/en-US/api/remove">grekt remove</a> — Remove an artifact</li>
-      <li><a href="/en-US/api/list">grekt list</a> — List installed artifacts</li>
+      <li><a href="/en-US/api/init">grekt init</a> Initialize a project</li>
+      <li><a href="/en-US/api/add">grekt add</a> Add an artifact</li>
+      <li><a href="/en-US/api/install">grekt install</a> Install from lockfile</li>
+      <li><a href="/en-US/api/remove">grekt remove</a> Remove an artifact</li>
+      <li><a href="/en-US/api/list">grekt list</a> List installed artifacts</li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Registry Operations</h3>
     <ul>
-      <li><a href="/en-US/api/publish">grekt publish</a> — Publish an artifact</li>
-      <li><a href="/en-US/api/deprecate">grekt deprecate</a> — Deprecate a version</li>
-      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a> — Remove deprecation</li>
-      <li><a href="/en-US/api/info">grekt info</a> — Show artifact info</li>
-      <li><a href="/en-US/api/versions">grekt versions</a> — List versions</li>
-      <li><a href="/en-US/api/outdated">grekt outdated</a> — Check for updates</li>
+      <li><a href="/en-US/api/publish">grekt publish</a> Publish an artifact</li>
+      <li><a href="/en-US/api/deprecate">grekt deprecate</a> Deprecate a version</li>
+      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a> Remove deprecation</li>
+      <li><a href="/en-US/api/info">grekt info</a> Show artifact info</li>
+      <li><a href="/en-US/api/versions">grekt versions</a> List versions</li>
+      <li><a href="/en-US/api/outdated">grekt outdated</a> Check for updates</li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Sync & Diagnostics</h3>
     <ul>
-      <li><a href="/en-US/api/sync">grekt sync</a> — Sync to AI tools</li>
-      <li><a href="/en-US/api/check">grekt check</a> — Check artifact integrity</li>
-      <li><a href="/en-US/api/config">grekt config</a> — Manage configuration</li>
+      <li><a href="/en-US/api/sync">grekt sync</a> Sync to AI tools</li>
+      <li><a href="/en-US/api/check">grekt check</a> Check artifact integrity</li>
+      <li><a href="/en-US/api/config">grekt config</a> Manage configuration</li>
     </ul>
   </div>
 
   <div class="api-group">
     <h3>Authoring</h3>
     <ul>
-      <li><a href="/en-US/api/pack">grekt pack</a> — Create artifact tarball</li>
-      <li><a href="/en-US/api/version">grekt version</a> — Auto-version artifacts</li>
+      <li><a href="/en-US/api/pack">grekt pack</a> Create artifact tarball</li>
+      <li><a href="/en-US/api/version">grekt version</a> Auto-version artifacts</li>
     </ul>
   </div>
 </div>
