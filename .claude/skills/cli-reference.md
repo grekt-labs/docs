@@ -1,8 +1,8 @@
 ---
-grk-type: skill
+grk-type: skills
 grk-name: cli-reference
 grk-description: Write CLI command reference pages
-grk-agent: docs-writer
+grk-agents: docs-writer
 ---
 
 # CLI Reference Pages

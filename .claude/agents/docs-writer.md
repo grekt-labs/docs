@@ -1,5 +1,5 @@
 ---
-grk-type: agent
+grk-type: agents
 grk-name: docs-writer
 grk-description: Technical documentation writer for grekt
 ---
