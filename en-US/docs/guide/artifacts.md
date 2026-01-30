@@ -47,7 +47,7 @@ AI personas with specific behaviors:
 
 ```markdown
 ---
-grk-type: agent
+grk-type: agents
 grk-name: code-reviewer
 grk-description: Expert code reviewer
 ---
@@ -64,10 +64,10 @@ Reusable capabilities for agents:
 
 ```markdown
 ---
-grk-type: skill
+grk-type: skills
 grk-name: testing
 grk-description: Testing patterns knowledge
-grk-agent: code-reviewer
+grk-agents: code-reviewer
 ---
 
 When reviewing tests, check for edge cases and meaningful assertions.
@@ -79,7 +79,7 @@ User-invokable actions:
 
 ```markdown
 ---
-grk-type: command
+grk-type: commands
 grk-name: review
 grk-description: Review code changes
 ---
@@ -93,7 +93,7 @@ MCP server configurations (JSON format):
 
 ```json
 {
-  "grk-type": "mcp",
+  "grk-type": "mcps",
   "grk-name": "database",
   "grk-description": "Database MCP server",
   "config": { ... }
@@ -106,7 +106,7 @@ Reusable rules and guidelines:
 
 ```markdown
 ---
-grk-type: rule
+grk-type: rules
 grk-name: code-style
 grk-description: Code style guidelines
 ---
@@ -120,10 +120,10 @@ All component files use `grk-` prefixed properties to avoid collisions with othe
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `grk-type` | Yes | `agent`, `skill`, `command`, `mcp`, or `rule` |
+| `grk-type` | Yes | `agents`, `skills`, `commands`, `mcps`, or `rules` |
 | `grk-name` | Yes | Unique identifier |
 | `grk-description` | Yes | What it does |
-| `grk-agent` | No | Parent agent (for skills/commands) |
+| `grk-agents` | No | Parent agent (for skills/commands) |
 
 ## Project files
 
