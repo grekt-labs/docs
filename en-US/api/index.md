@@ -5,8 +5,8 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Commands
 
 <div class="api-groups">
-  <div class="api-group">
-    <h3>Authentication</h3>
+  <div class="api-group coming-soon">
+    <h3>Authentication <span class="badge">Coming Soon</span></h3>
     <ul>
       <li><a href="/en-US/api/login">grekt login</a><span class="desc">Log in to registry</span></li>
       <li><a href="/en-US/api/logout">grekt logout</a><span class="desc">Log out from registry</span></li>
@@ -29,11 +29,11 @@ grekt provides a command-line interface for managing AI artifacts.
     <h3>Registry Operations</h3>
     <ul>
       <li><a href="/en-US/api/publish">grekt publish</a><span class="desc">Publish an artifact</span></li>
-      <li><a href="/en-US/api/deprecate">grekt deprecate</a><span class="desc">Deprecate a version</span></li>
-      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a><span class="desc">Remove deprecation</span></li>
       <li><a href="/en-US/api/info">grekt info</a><span class="desc">Show artifact info</span></li>
       <li><a href="/en-US/api/versions">grekt versions</a><span class="desc">List versions</span></li>
       <li><a href="/en-US/api/outdated">grekt outdated</a><span class="desc">Check for updates</span></li>
+      <li><a href="/en-US/api/deprecate">grekt deprecate</a><span class="desc coming-soon-text">Deprecate a version (Coming Soon)</span></li>
+      <li><a href="/en-US/api/undeprecate">grekt undeprecate</a><span class="desc coming-soon-text">Remove deprecation (Coming Soon)</span></li>
     </ul>
   </div>
 
@@ -65,16 +65,12 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Quick reference
 
 ```bash
-# Authentication
-grekt login                      # Log in to registry
-grekt logout                     # Log out
-grekt whoami                     # Show current user
-
 # Artifacts
 grekt init                       # Initialize
 grekt add @author/artifact       # Add from registry
 grekt add @author/artifact@1.0.0 # Add specific version
 grekt add github:user/repo       # Add from GitHub
+grekt add gitlab:user/repo       # Add from GitLab
 grekt install                    # Install from lockfile
 grekt sync --dry-run             # Preview sync
 grekt sync                       # Apply
@@ -84,14 +80,13 @@ grekt remove artifact            # Remove
 
 # Registry
 grekt publish ./artifact         # Publish
-grekt deprecate @a/b@1.0 -m "x"  # Deprecate version
-grekt undeprecate @a/b@1.0       # Remove deprecation
 grekt info @author/artifact      # Show artifact info
 grekt versions @author/artifact  # List versions
 grekt outdated                   # Check for updates
 
 # Config
 grekt config set autoSync true   # Configure
+grekt config registry set @scope # Configure registry
 
 # Authoring
 grekt pack ./artifact            # Create tarball
@@ -113,12 +108,27 @@ grekt version                    # Apply version bumps
   border-radius: 12px;
 }
 
+.api-group.coming-soon {
+  opacity: 0.7;
+}
+
 .api-group h3 {
   margin-top: 0 !important;
   margin-bottom: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--vp-c-brand-1);
+}
+
+.api-group h3 .badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  background-color: var(--vp-c-warning-soft);
+  color: var(--vp-c-warning-1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
 .api-group ul {
@@ -149,5 +159,10 @@ grekt version                    # Apply version bumps
   color: var(--vp-c-text-2);
   font-size: 0.85rem;
   margin-top: 2px;
+}
+
+.api-group li .desc.coming-soon-text {
+  color: var(--vp-c-text-3);
+  font-style: italic;
 }
 </style>

@@ -235,7 +235,7 @@ const toggleFaq = (index) => {
           </div>
           <h3>Install from anywhere</h3>
           <p>GitHub, GitLab, or public registry. Self-hosted instances supported.</p>
-          <a href="/en-US/docs/guide/registries/overview" class="card-link">See sources →</a>
+          <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
           <span class="badge-coming-soon">Coming Soon</span>

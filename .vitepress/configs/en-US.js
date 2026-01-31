@@ -17,12 +17,12 @@ export const enUSSidebar = {
       ]
     },
     {
-      text: 'Registries',
+      text: 'Sources',
       items: [
-        { text: 'Overview', link: '/en-US/docs/guide/registries/overview' },
-        { text: 'GitHub', link: '/en-US/docs/guide/registries/github' },
-        { text: 'GitLab', link: '/en-US/docs/guide/registries/gitlab' },
-        { text: 'Authentication', link: '/en-US/docs/guide/registries/authentication' }
+        { text: 'Overview', link: '/en-US/docs/guide/sources/overview' },
+        { text: 'GitHub', link: '/en-US/docs/guide/sources/github' },
+        { text: 'GitLab', link: '/en-US/docs/guide/sources/gitlab' },
+        { text: 'Authentication', link: '/en-US/docs/guide/sources/authentication' }
       ]
     },
     {

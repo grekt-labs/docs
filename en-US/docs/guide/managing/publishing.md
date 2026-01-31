@@ -1,6 +1,6 @@
 # Publishing
 
-Upload artifacts to the registry.
+Upload artifacts to a registry.
 
 ## Manifest requirements
 
@@ -57,20 +57,16 @@ Write keywords directly in your `grekt.yaml`.
 
 ## Publishing
 
-::: code-group
-
-```bash [Public registry]
-# Requires grekt login
-grekt login
+```bash
+# Uses GITLAB_TOKEN, GITHUB_TOKEN, or token from config
 grekt publish ./path/to/artifact
 ```
 
-```bash [GitLab / GitHub]
-# Uses GITLAB_TOKEN, GITHUB_TOKEN, or config
-grekt publish ./path/to/artifact
-```
+Configure your registry first:
 
-:::
+```bash
+grekt config registry set @myteam
+```
 
 ### What happens
 
@@ -96,10 +92,9 @@ Useful for inspecting what gets packaged or distributing through other channels.
 grekt determines where to publish based on the `author` field in your manifest:
 
 1. Checks `.grekt/config.yaml` for a registry matching `@author`
-2. If found, publishes to that backend (e.g., GitLab)
-3. If not found, publishes to public registry (`registry.grekt.com`)
+2. If found, publishes to that registry (e.g., GitLab)
 
-Example with GitLab backend:
+Example with GitLab registry:
 
 ```yaml
 # .grekt/config.yaml
@@ -120,5 +115,5 @@ version: 1.0.0
 
 - [grekt pack](/en-US/api/pack) — Create tarball without publishing
 - [grekt publish](/en-US/api/publish) — Command reference
-- [GitLab registry](/en-US/docs/guide/registries/gitlab) — GitLab backend setup
+- [GitLab](/en-US/docs/guide/sources/gitlab) — GitLab registry setup
 - [Versioning](/en-US/docs/guide/managing/versioning) — Version management

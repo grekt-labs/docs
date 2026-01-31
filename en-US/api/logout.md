@@ -1,18 +1,13 @@
 # grekt logout
 
+::: warning Coming Soon
+This command will be available when the public grekt registry launches.
+:::
+
 Log out from the grekt registry.
 
 ```bash
 grekt logout
-```
-
-## Behavior
-
-Clears the stored session from `~/.grekt/session.yaml` and invalidates it on the server.
-
-```bash
-$ grekt logout
-✓ Logged out
 ```
 
 ## Related commands

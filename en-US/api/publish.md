@@ -1,6 +1,6 @@
 # grekt publish
 
-Publish an artifact to the registry.
+Publish an artifact to a registry.
 
 ```bash
 grekt publish <path>
@@ -8,27 +8,25 @@ grekt publish <path>
 
 ## Examples
 
-::: code-group
-
-```bash [Public registry]
-# Requires grekt login
-grekt login
+```bash
+# Uses GITLAB_TOKEN, GITHUB_TOKEN, or token from config
 grekt publish ./my-artifact
 ```
-
-```bash [GitLab / GitHub]
-# Uses GITLAB_TOKEN, GITHUB_TOKEN, or config
-grekt publish ./my-artifact
-```
-
-:::
 
 ## Authentication
 
-Authentication depends on the registry:
+Configure your registry first:
 
-- **Public registry:** `grekt login` (stores token in `~/.grekt/credentials.yaml`)
-- **GitLab / GitHub:** `GITLAB_TOKEN`, `GITHUB_TOKEN`, or token in `.grekt/config.yaml`
+```bash
+grekt config registry set @myteam
+```
+
+Token priority:
+
+1. Token in `.grekt/config.yaml` registry entry
+2. Environment variable: `GITLAB_TOKEN` or `GITHUB_TOKEN`
+
+See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 
 ## Behavior
 
@@ -76,8 +74,6 @@ If keywords are missing or invalid:
       - automation
 ```
 
-Keywords help with discoverability and are used in the artifact index.
-
 If the version already exists:
 
 ```bash
@@ -88,5 +84,4 @@ If the version already exists:
 ## Related commands
 
 - [grekt pack](/en-US/api/pack) — Create tarball without publishing
-- [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
 - [grekt versions](/en-US/api/versions) — List available versions

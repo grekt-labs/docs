@@ -8,31 +8,16 @@ All authentication commands require a grekt project. Run `grekt init` first.
 
 ## Registry login
 
-::: warning COMING SOON
-The public grekt registry is not yet available. Currently, only GitLab and self-hosted registries are supported, and they use token-based authentication (see below).
+::: warning Coming Soon
+The public grekt registry is not yet available. Currently, only GitLab and GitHub registries are supported using token-based authentication (see below).
 :::
-
-For publishing and other registry operations on the public grekt registry.
-
-```bash
-# Interactive login (opens browser)
-grekt login
-
-# Check current user
-grekt whoami
-
-# Logout
-grekt logout
-```
-
-Session is saved to `.grekt/config.yaml` in your project.
 
 ## Private sources & registries
 
 Use interactive commands to configure authentication:
 
 ```bash
-# Configure a registry backend for a scope
+# Configure a registry for a scope
 grekt config registry set @myteam
 
 # Add a token for a git host (private repos)
@@ -42,7 +27,7 @@ grekt config token set
 Or edit `.grekt/config.yaml` directly:
 
 ```yaml
-# Registry backends (for @scope/name artifacts)
+# Registries (for @scope/name artifacts)
 registries:
   "@myteam":
     type: gitlab
@@ -60,4 +45,4 @@ tokens:
 `GITHUB_TOKEN` and `GITLAB_TOKEN` work as fallback for `github.com` and `gitlab.com`. For self-hosted instances, use `grekt config token set`.
 :::
 
-For more details, see [Registry Authentication](/en-US/docs/guide/registries/authentication).
+For more details, see [Sources authentication](/en-US/docs/guide/sources/authentication).
