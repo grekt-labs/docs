@@ -6,39 +6,92 @@ Configure authentication for private registries and Git sources.
 All commands requiring authentication need a grekt project. Run `grekt init` first.
 :::
 
-## Configuration
+## Quick setup
 
-All authentication is configured in `.grekt/config.yaml` (automatically gitignored):
+Use interactive commands to configure authentication:
+
+```bash
+# Configure a registry backend for a scope
+grekt config registry set @myteam
+
+# Add a token for a git host
+grekt config token set
+```
+
+Both commands will prompt you for the required information.
+
+## Configuration file
+
+All authentication is stored in `.grekt/config.yaml` (automatically gitignored):
 
 ```yaml
 # Registry backends (for @scope/name artifacts)
 registries:
   "@myteam":
     type: gitlab
+    host: gitlab.company.com
     project: myteam/artifacts
     token: glpat-xxxxxxxxxxxx
 
 # Git source tokens (for github: and gitlab: sources)
 tokens:
-  github: ghp_xxxxxxxxxxxx
+  github.com: ghp_xxxxxxxxxxxx
   gitlab.com: glpat-xxxxxxxxxxxx
   gitlab.company.com: glpat-xxxxxxxxxxxx
+```
+
+## Registry backends
+
+Registry backends allow you to host artifacts on GitLab or GitHub Package Registry.
+
+```bash
+grekt config registry set @myteam
+```
+
+You'll be prompted for:
+- **Registry type**: GitLab or GitHub
+- **Host**: e.g., `gitlab.com` or `gitlab.company.com`
+- **Project path**: e.g., `myteam/artifacts`
+- **Token**: (optional if using env vars)
+
+To remove a registry:
+
+```bash
+grekt config registry unset @myteam
+```
+
+## Git source tokens
+
+Tokens for accessing private Git repositories directly.
+
+```bash
+grekt config token set
+```
+
+You'll be prompted for:
+- **Host**: e.g., `github.com`, `gitlab.company.com`
+- **Token**: your personal access token
+
+To remove a token:
+
+```bash
+grekt config token unset gitlab.company.com
 ```
 
 ## Token priority
 
 ### Registry backends (`@scope/name`)
 
-1. Config file token in `.grekt/config.yaml`
-2. Platform env var: `GITLAB_TOKEN` or `GITHUB_TOKEN`
+1. Token in `.grekt/config.yaml` registry entry
+2. Platform env var: `GITLAB_TOKEN` or `GITHUB_TOKEN` (only for `gitlab.com` / `github.com`)
 
 ### Git sources (`github:` / `gitlab:`)
 
-1. Config file token in `.grekt/config.yaml` `tokens` section
-2. Platform env var: `GITHUB_TOKEN` / `GITLAB_TOKEN` / `GH_TOKEN` / `GL_TOKEN`
+1. Token in `.grekt/config.yaml` `tokens` section
+2. Platform env var: `GITHUB_TOKEN` / `GITLAB_TOKEN` (only for `github.com` / `gitlab.com`)
 
-::: tip Platform env vars as fallback
-If you already have `GITHUB_TOKEN` or `GITLAB_TOKEN` set for other tools, grekt will use them automatically. No need to duplicate in the config file.
+::: warning Self-hosted requires explicit configuration
+Environment variables like `GITHUB_TOKEN` and `GITLAB_TOKEN` only work for the default hosts (`github.com`, `gitlab.com`). For self-hosted instances, you must configure tokens explicitly using `grekt config token set`.
 :::
 
 ## Required permissions

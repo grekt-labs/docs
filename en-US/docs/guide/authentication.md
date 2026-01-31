@@ -29,24 +29,35 @@ Session is saved to `.grekt/config.yaml` in your project.
 
 ## Private sources & registries
 
-For authentication with Git sources (github:, gitlab:) and self-hosted registries, configure tokens in `.grekt/config.yaml`:
+Use interactive commands to configure authentication:
+
+```bash
+# Configure a registry backend for a scope
+grekt config registry set @myteam
+
+# Add a token for a git host (private repos)
+grekt config token set
+```
+
+Or edit `.grekt/config.yaml` directly:
 
 ```yaml
 # Registry backends (for @scope/name artifacts)
 registries:
   "@myteam":
     type: gitlab
+    host: gitlab.company.com
     project: myteam/artifacts
     token: glpat-xxxxxxxxxxxx
 
 # Git source tokens (for github: and gitlab: sources)
 tokens:
-  github: ghp_xxxxxxxxxxxx
-  gitlab.com: glpat-xxxxxxxxxxxx
+  github.com: ghp_xxxxxxxxxxxx
+  gitlab.company.com: glpat-xxxxxxxxxxxx
 ```
 
 ::: tip Platform env vars
-If you already have `GITHUB_TOKEN` or `GITLAB_TOKEN` set, grekt will use them automatically as fallback.
+`GITHUB_TOKEN` and `GITLAB_TOKEN` work as fallback for `github.com` and `gitlab.com`. For self-hosted instances, use `grekt config token set`.
 :::
 
 For more details, see [Registry Authentication](/en-US/docs/guide/registries/authentication).
