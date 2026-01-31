@@ -1,10 +1,10 @@
 # GitLab
 
-GitLab supports two modes: **source** (one artifact per repo) and **registry backend** (multiple artifacts per project).
+GitLab supports two modes: **source** (one artifact per repo) and **registry** (multiple artifacts per project).
 
 ## Comparison
 
-| Feature | Source | Registry Backend |
+| Feature | Source | Registry |
 |---------|--------|------------------|
 | Syntax | `gitlab:owner/repo` | `@scope/name` |
 | Artifacts per project | 1 | Unlimited |
@@ -34,12 +34,12 @@ grekt add gitlab:gitlab.company.com/owner/repo#main
 ### Authentication
 
 ```bash
-# gitlab.com
 export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
-
-# Self-hosted (host-specific)
-export GITLAB_TOKEN_GITLAB_COMPANY_COM=glpat-xxxxxxxxxxxx
 ```
+
+::: tip
+For permanent configuration (including self-hosted), use `grekt config token set`.
+:::
 
 ### Limitations
 
@@ -47,7 +47,7 @@ Same as GitHub: one artifact per repository, no version listing, no deprecation.
 
 ---
 
-## Registry backend (monorepo)
+## Registry (monorepo)
 
 Use GitLab's Generic Package Registry to host multiple artifacts in a single project.
 
@@ -170,40 +170,6 @@ Scope tokens: `@myteam` → `GREKT_TOKEN_MYTEAM`, `@my-team` → `GREKT_TOKEN_MY
 | Download | `read_api` |
 | Publish | `write_repository` |
 
-### CI/CD
-
-#### GitLab CI
-
-```yaml
-variables:
-  GREKT_TOKEN_MYTEAM: $CI_JOB_TOKEN
-
-install:
-  script:
-    - grekt install
-
-publish:
-  script:
-    - grekt publish .
-  rules:
-    - if: $CI_COMMIT_TAG
-```
-
-#### GitHub Actions
-
-```yaml
-- name: Install
-  env:
-    GREKT_TOKEN_MYTEAM: ${{ secrets.GITLAB_TOKEN }}
-  run: grekt install
-
-- name: Publish
-  if: startsWith(github.ref, 'refs/tags/')
-  env:
-    GREKT_TOKEN_MYTEAM: ${{ secrets.GITLAB_TOKEN }}
-  run: grekt publish .
-```
-
 ### How it works
 
 grekt uses GitLab's [Generic Package Registry](https://docs.gitlab.com/ee/user/packages/generic_packages/):
@@ -218,6 +184,6 @@ Versions are immutable once published.
 
 ## Related
 
-- [Overview](/en-US/docs/guide/registries/overview) — Registry concepts
-- [GitHub](/en-US/docs/guide/registries/github) — GitHub source
-- [Authentication](/en-US/docs/guide/registries/authentication) — Full auth guide
+- [Overview](/en-US/docs/guide/sources/overview) — Sources overview
+- [GitHub](/en-US/docs/guide/sources/github) — GitHub source
+- [Authentication](/en-US/docs/guide/sources/authentication) — Full auth guide

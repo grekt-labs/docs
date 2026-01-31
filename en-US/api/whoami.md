@@ -1,32 +1,14 @@
 # grekt whoami
 
+::: warning Coming Soon
+This command will be available when the public grekt registry launches.
+:::
+
 Show current authenticated user.
 
 ```bash
 grekt whoami
 ```
-
-## Behavior
-
-Displays the email of the currently authenticated user:
-
-```bash
-$ grekt whoami
-Logged in as user@email.com
-Registry: https://...
-```
-
-If not logged in:
-
-```bash
-$ grekt whoami
-Not logged in
-Registry: https://...
-```
-
-## Exit code
-
-Always exits with code 0. This command is informational only.
 
 ## Related commands
 

@@ -2,7 +2,7 @@
 
 grekt uses a multi-license strategy to balance openness with sustainability.
 
-## License Overview
+## License overview
 
 | Component | License | Purpose |
 |-----------|---------|---------|
@@ -10,7 +10,7 @@ grekt uses a multi-license strategy to balance openness with sustainability.
 | **Engine** | BSL 1.1 | Source-available, protected core |
 | **Keywords** | MIT | Fully open utility |
 
-## Why This Structure?
+## Why this structure?
 
 ### CLI (Apache 2.0)
 
@@ -36,7 +36,7 @@ This protects the project's sustainability while keeping the code transparent.
 
 The keyword extraction utility is fully open source under MIT. Use it however you want.
 
-## For Artifact Authors
+## For artifact authors
 
 Artifacts published to the grekt registry are owned by their authors. You choose your own license. grekt does not claim any rights over community-created artifacts.
 

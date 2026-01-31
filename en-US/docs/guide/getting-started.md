@@ -1,4 +1,4 @@
-# Quick Start
+# Quick start
 
 This guide walks you through setting up grekt in a project and syncing your first artifact.
 

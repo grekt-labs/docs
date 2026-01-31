@@ -15,7 +15,7 @@ grekt i
 
 ## Description
 
-Installs all artifacts from `grekt.lock` with integrity verification. Use after cloning a project or in CI/CD.
+Installs all artifacts from `grekt.lock` with integrity verification. Use after cloning a project.
 
 Unlike `grekt add`, this command:
 - Reads from lockfile (not grekt.yaml)

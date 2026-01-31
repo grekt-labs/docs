@@ -1,24 +1,14 @@
 # grekt undeprecate
 
+::: warning Coming Soon
+This command will be available when the public grekt registry launches.
+:::
+
 Remove deprecation from an artifact version.
 
 ```bash
 grekt undeprecate <artifact@version>
 ```
-
-## Examples
-
-```bash
-# Remove deprecation
-grekt undeprecate @author/agent@1.0.0
-```
-
-## Authentication
-
-Authentication depends on the registry:
-
-- **Public registry:** `grekt login` (stores token in `~/.grekt/credentials.yaml`)
-- **GitLab / GitHub:** `GITLAB_TOKEN`, `GITHUB_TOKEN`, or token in `.grekt/config.yaml`
 
 ## Use cases
 

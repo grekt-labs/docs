@@ -38,7 +38,6 @@ Packing @author/my-artifact@1.0.0...
 The tarball can be:
 - Inspected before publishing
 - Moved manually to another location
-- Used in CI/CD pipelines where packing and publishing are separate steps
 
 ## Output location
 
