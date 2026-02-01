@@ -93,8 +93,8 @@ grekt sync
 
 Only **CORE** mode artifacts are copied to target directories. **LAZY** mode artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
 
-::: tip Auto sync
-Set `autoSync: true` in your config to sync automatically when you add or remove artifacts.
+::: tip Auto sync with --core
+When you add an artifact with `--core`, sync runs automatically.
 :::
 
 ## Verify your setup
@@ -125,7 +125,6 @@ Your `grekt.yaml` tracks which artifacts are installed and how the project is co
 targets:
   - claude
   - cursor
-autoSync: false
 artifacts:
   @grekt/code-reviewer: "1.0.0"
   @grekt/git-flow:
@@ -140,6 +139,6 @@ Manage settings with the config command:
 # View current config
 grekt config list
 
-# Enable auto-sync
-grekt config set autoSync true
+# Change targets
+grekt config set targets claude,cursor
 ```
