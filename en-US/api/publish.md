@@ -3,14 +3,17 @@
 Publish an artifact to a registry.
 
 ```bash
-grekt publish <path>
+grekt publish [path]
 ```
 
 ## Examples
 
 ```bash
-# Uses GITLAB_TOKEN, GITHUB_TOKEN, or token from config
+# Publish to configured registry
 grekt publish ./my-artifact
+
+# Publish current directory
+grekt publish
 ```
 
 ## Authentication
@@ -33,10 +36,17 @@ See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 1. Validates the manifest (`grekt.yaml`)
 2. Validates version is valid semver
 3. Checks keywords (3-5 required)
-4. Creates a tarball in `.grekt/tmp/`
-5. Checks version doesn't already exist
-6. Uploads to registry
-7. Cleans up tarball
+4. Scans components and auto-generates `components` section
+5. Creates a tarball in `.grekt/tmp/`
+6. Checks version doesn't already exist
+7. Uploads to registry
+8. Cleans up tarball
+
+::: info Auto-generated components
+The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually — it will be overwritten.
+
+This field helps AI tools discover what's inside the artifact without scanning every file.
+:::
 
 ## Version requirements
 

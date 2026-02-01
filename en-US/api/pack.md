@@ -33,7 +33,14 @@ Packing @author/my-artifact@1.0.0...
 1. Validates the manifest (`grekt.yaml`)
 2. Validates version is valid semver
 3. Scans for valid components
-4. Creates tarball in `.grekt/tmp/`
+4. Auto-generates `components` section in manifest
+5. Creates tarball in `.grekt/tmp/`
+
+::: info Auto-generated components
+The `components` field in the packaged `grekt.yaml` is **auto-generated**. Your original file is not modified — only the tarball contains the generated field.
+
+This helps AI tools discover what's inside the artifact without scanning every file.
+:::
 
 The tarball can be:
 - Inspected before publishing
