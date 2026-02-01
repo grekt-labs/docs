@@ -48,7 +48,7 @@ Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain 
 
 ## Custom targets
 
-For AI tools without a built-in plugin, define output paths via `grekt init` or `grekt.yaml`:
+For AI tools without a built-in plugin, define a custom target via `grekt init` or `grekt.yaml`:
 
 ```yaml
 # grekt.yaml
@@ -56,11 +56,22 @@ customTargets:
   my-tool:
     name: "My Tool"
     contextEntryPoint: ".my-tool/rules.md"
-    paths:
-      agent: ".my-tool/agents"
-      skill: ".my-tool/skills"
-      command: ".my-tool/commands"
+    paths:                              # Optional
+      agents: ".my-tool/agents"
+      skills: ".my-tool/skills"
+      commands: ".my-tool/commands"
 ```
+
+If `paths` is omitted, grekt uses default paths based on the target ID:
+
+```
+my-tool/
+├── agents/
+├── skills/
+└── commands/
+```
+
+The entry point will include an explanation of these folders for AI tools that don't know grekt's structure.
 
 ## Bootstrap block
 

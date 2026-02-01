@@ -85,7 +85,7 @@ grekt versions @author/artifact  # List versions
 grekt outdated                   # Check for updates
 
 # Config
-grekt config set autoSync true   # Configure
+grekt config set targets claude  # Configure targets
 grekt config registry set @scope # Configure registry
 
 # Authoring

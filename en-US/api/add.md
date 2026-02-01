@@ -11,7 +11,7 @@ grekt add <source>
 | Option | Description |
 |--------|-------------|
 | `-c, --choose` | Interactively select which components to install |
-| `--core` | Mark artifact as CORE mode (copied to target on sync) |
+| `--core` | Mark artifact as CORE mode (copied to target, syncs automatically) |
 
 ## Source formats
 
@@ -150,6 +150,7 @@ Use `grekt outdated` to check which artifacts have updates available.
 
 - Downloads to `.grekt/artifacts/<artifact-id>/`
 - Updates `grekt.yaml` and `grekt.lock`
-- Run `grekt sync` after adding
+- LAZY mode requires `grekt sync` to update index
+- CORE mode (`--core`) syncs automatically
 - Deprecated versions show a warning but still install
 - Versions must be valid semver (no `v` prefix)
