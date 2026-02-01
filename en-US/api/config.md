@@ -18,20 +18,16 @@ grekt config <subcommand>
 
 | Key | Description |
 |-----|-------------|
-| `targets` | AI tools to sync to |
-| `autoSync` | Sync after `grekt add` |
 | `registry` | Custom registry URL |
-| `customTargets` | Custom target definitions |
-| `options.autoCheck` | Run integrity check after `add`/`install` |
+
+Use [`grekt add-target`](/en-US/api/add-target) to configure sync targets interactively.
 
 ## Examples
 
 ```bash
 grekt config list
-grekt config set targets claude,cursor
-grekt config set autoSync true
-grekt config set options.autoCheck true
-grekt config get targets
+grekt config set registry https://my-registry.com
+grekt config get registry
 ```
 
 ## Options block

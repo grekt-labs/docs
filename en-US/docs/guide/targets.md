@@ -48,7 +48,7 @@ Sync copies **CORE** artifacts to target directories. **LAZY** artifacts remain 
 
 ## Custom targets
 
-For AI tools without a built-in plugin, define a custom target via `grekt init` or `grekt.yaml`:
+For AI tools without a built-in plugin, define a custom target via `grekt init`, `grekt add-target`, or `grekt.yaml`:
 
 ```yaml
 # grekt.yaml
