@@ -681,6 +681,7 @@ const toggleFaq = (index) => {
 
 /* Trusted By Section */
 .trusted-by {
+  display: none; /* Hidden until we have real sponsors */
   background: var(--section-bg);
   border-top: 1px solid var(--divider-color);
   padding: 40px 20px;
