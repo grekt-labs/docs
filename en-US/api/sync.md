@@ -62,19 +62,19 @@ Only **CORE** mode artifacts are copied to target directories. **LAZY** mode art
 
 ```bash
 # Add as CORE to sync files
-grekt add @grekt/code-reviewer --core
+grekt add @scope/my-artifact --core
 grekt sync
 
 # LAZY artifacts are skipped during sync
-grekt add @grekt/utils
-grekt sync  # Shows: @grekt/utils (lazy mode)
+grekt add @scope/utils
+grekt sync  # Shows: @scope/utils (lazy mode)
 ```
 
 To promote an existing LAZY artifact to CORE:
 
 ```bash
-grekt remove @grekt/utils
-grekt add @grekt/utils --core
+grekt remove @scope/utils
+grekt add @scope/utils --core
 ```
 
 ## Notes

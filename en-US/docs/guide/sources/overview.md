@@ -1,10 +1,12 @@
 # Sources overview
 
-grekt supports multiple ways to install and publish artifacts.
+grekt supports multiple ways to install artifacts.
 
 ## Git sources
 
-Install directly from GitHub or GitLab repositories. One repo = one artifact.
+Install directly from GitHub or GitLab repositories. Best for single artifacts — no registry configuration needed, just a token for private repos.
+
+One repo = one artifact.
 
 ```bash
 grekt add github:user/my-agent
@@ -14,9 +16,9 @@ grekt add gitlab:user/my-agent
 grekt add gitlab:gitlab.company.com/user/my-agent#v1.0.0
 ```
 
-## GitLab registry
+## Registry
 
-Multiple artifacts in one GitLab project. Requires configuration:
+Host multiple artifacts in a single project. Requires [registry configuration](/en-US/docs/guide/sources/gitlab#registry-monorepo) but gives you version listing, deprecation, and better organization:
 
 ```bash
 grekt add @myteam/agent-tools

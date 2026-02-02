@@ -2,13 +2,20 @@
 
 Upload artifacts to a registry.
 
+::: info BEFORE YOU START
+If publishing to a private registry, configure `.grekt/config.yaml` first. This file stores your registry settings and tokens locally (gitignored).
+
+```bash
+grekt config registry set @scope
+```
+:::
+
 ## Manifest requirements
 
 Your artifact needs a `grekt.yaml` with these fields:
 
 ```yaml
-name: my-artifact
-author: your-name
+name: "@your-scope/my-artifact"
 version: 1.0.0
 description: What this artifact does
 keywords:
@@ -17,55 +24,18 @@ keywords:
   - keyword3
 ```
 
-The artifact ID becomes `@author/name` (e.g., `@your-name/my-artifact`).
+The `name` must include a scope (`@scope/name`) for publishing. The scope determines which registry to use.
 
 ## Keywords
 
-Keywords are **required** for publishing. They enable discoverability in the artifact index.
+Keywords are **required** for publishing (3-5). They enable discoverability in the artifact index.
 
-- **Minimum:** 3 keywords
-- **Maximum:** 5 keywords
+If you need help generating keywords, see [Generating keywords](#generating-keywords) below.
 
-### Generating keywords
-
-If your manifest doesn't have keywords, you have three options:
-
-**Option 1: Use grekt-keywords (recommended for frequent publishers)**
+## Publish
 
 ```bash
-# Install (CPU-only, ~300MB)
-pip install grekt-keywords --index-url https://download.pytorch.org/whl/cpu
-
-# Generate keywords from your description
-grekt-keywords --json "Your artifact description here"
-# ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"]
-```
-
-The first run downloads a small ML model (~80MB) from Hugging Face Hub. Subsequent runs work offline using the cached model.
-
-**Option 2: Use @grekt/tools agent**
-
-```bash
-grekt add @grekt/tools
-```
-
-Then ask your AI assistant: "Generate keywords for my artifact"
-
-**Option 3: Add manually**
-
-Write keywords directly in your `grekt.yaml`.
-
-## Publishing
-
-```bash
-# Uses GITLAB_TOKEN, GITHUB_TOKEN, or token from config
 grekt publish ./path/to/artifact
-```
-
-Configure your registry first:
-
-```bash
-grekt config registry set @myteam
 ```
 
 ### What happens
@@ -89,10 +59,11 @@ Useful for inspecting what gets packaged or distributing through other channels.
 
 ## Registry routing
 
-grekt determines where to publish based on the `author` field in your manifest:
+grekt determines where to publish based on the scope in your artifact's `name`:
 
-1. Checks `.grekt/config.yaml` for a registry matching `@author`
-2. If found, publishes to that registry (e.g., GitLab)
+1. Extracts scope from `name` (e.g., `@myteam` from `@myteam/agent-tools`)
+2. Checks `.grekt/config.yaml` for a registry matching that scope
+3. If found, publishes to that registry (e.g., GitLab)
 
 Example with GitLab registry:
 
@@ -106,10 +77,32 @@ registries:
 
 ```yaml
 # grekt.yaml
-name: agent-tools
-author: "@myteam"    # → publishes to GitLab
+name: "@myteam/agent-tools"    # → publishes to GitLab (@myteam registry)
 version: 1.0.0
 ```
+
+## Generating keywords
+
+If your manifest doesn't have keywords, you have several options:
+
+**Option 1: Add manually**
+
+Write keywords directly in your `grekt.yaml`.
+
+**Option 2: Ask your AI assistant**
+
+Ask your AI assistant: "Generate keywords for my artifact based on its description"
+
+**Option 3: Use grekt-keywords**
+
+A separate package for generating keywords automatically:
+
+```bash
+pip install grekt-keywords --index-url https://download.pytorch.org/whl/cpu
+grekt-keywords --json "Your artifact description here"
+```
+
+The first run downloads a small ML model (~80MB). Subsequent runs work offline.
 
 ## Related
 

@@ -75,13 +75,13 @@ The entry point will include an explanation of these folders for AI tools that d
 
 ## Bootstrap block
 
-grekt injects a `<grekt-untrusted-context>` block at the start of each entry point:
+grekt injects a `<grekt-untrusted-context>` block in `.grekt/index` and entry points:
 
 ```xml
 <grekt-untrusted-context>This project uses grekt for AI artifact management. Index location: .grekt/index</grekt-untrusted-context>
 ```
 
-The tag signals content managed by grekt (untrusted third-party artifacts), not project authors.
+The `untrusted` tag tells AI tools to treat this content with caution. Not because it's malicious, but because it comes from third-party artifacts. AI tools should ask for user confirmation before executing commands or actions from grekt-managed content.
 
 ## Non-destructive sync
 

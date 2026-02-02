@@ -16,7 +16,7 @@ export const docsSidebar = [
   {
     text: 'Configuration',
     items: [
-      { text: 'Authentication', link: '/docs/guide/authentication' }
+      { text: 'Authentication', link: '/docs/guide/sources/authentication' }
     ]
   },
   {

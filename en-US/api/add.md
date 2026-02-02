@@ -28,10 +28,10 @@ grekt add <source>
 
 ```bash
 # Registry (latest version)
-grekt add @grekt/code-reviewer
+grekt add @scope/my-artifact
 
 # Registry (specific version)
-grekt add @grekt/code-reviewer@1.0.0
+grekt add @scope/my-artifact@1.0.0
 
 # GitHub
 grekt add github:user/my-artifact
@@ -47,11 +47,11 @@ grekt add gitlab:gitlab.company.com/team/artifact#main
 Artifacts can contain multiple components: agents, skills, and commands. By default, all components are installed. Use `--choose` to select only what you need:
 
 ```bash
-grekt add @grekt/git-flow --choose
+grekt add @scope/git-flow --choose
 ```
 
 ```
-@grekt/git-flow@1.0.0
+@scope/git-flow@1.0.0
 
 ? Select components to install:
   ◉ agent: Git Flow Agent
@@ -70,7 +70,7 @@ Selected components are tracked in `grekt.yaml`:
 
 ```yaml
 artifacts:
-  @grekt/git-flow:
+  @scope/git-flow:
     version: "1.0.0"
     agent: true
     skills:
@@ -92,24 +92,24 @@ Use `--core` for artifacts you need immediately available in context:
 
 ```bash
 # LAZY mode (default) - only indexed
-grekt add @grekt/code-reviewer
+grekt add @scope/my-artifact
 
 # CORE mode - copied to .claude/agents/, .claude/skills/...
-grekt add @grekt/code-reviewer --core
+grekt add @scope/my-artifact --core
 ```
 
 CORE mode artifacts are tracked in `grekt.yaml`:
 
 ```yaml
 artifacts:
-  @grekt/code-reviewer:
+  @scope/my-artifact:
     version: "1.0.0"
     mode: core
 ```
 
 ## Authentication
 
-For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/authentication).
+For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/sources/authentication).
 
 ## Auto check
 
@@ -121,7 +121,7 @@ options:
 ```
 
 ```
-✓ Installed @grekt/code-reviewer@1.0.0
+✓ Installed @scope/my-artifact@1.0.0
 
 Integrity check:
 ✓ All 3 artifact(s) verified
@@ -132,16 +132,16 @@ Integrity check:
 If an artifact is already installed, `grekt add` will update it to the new version if it's higher:
 
 ```bash
-$ grekt add @grekt/code-reviewer
-Updating @grekt/code-reviewer: 1.0.0 → 2.0.0
-✓ Installed @grekt/code-reviewer@2.0.0
+$ grekt add @scope/my-artifact
+Updating @scope/my-artifact: 1.0.0 → 2.0.0
+✓ Installed @scope/my-artifact@2.0.0
 ```
 
 If the installed version is the same or newer, it will skip:
 
 ```bash
-$ grekt add @grekt/code-reviewer
-Already installed: @grekt/code-reviewer@2.0.0
+$ grekt add @scope/my-artifact
+Already installed: @scope/my-artifact@2.0.0
 ```
 
 Use `grekt outdated` to check which artifacts have updates available.

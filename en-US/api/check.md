@@ -17,8 +17,8 @@ grekt check
 ```
 Checking artifacts...
 
-✓ @grekt/code-reviewer v1.0.0 - OK
-⚠ @grekt/testing-helper v2.0.0 - DRIFT DETECTED
+✓ @scope/my-artifact v1.0.0 - OK
+⚠ @scope/testing v2.0.0 - DRIFT DETECTED
   • Modified: skills/analyze.md
 
 Context summary:
