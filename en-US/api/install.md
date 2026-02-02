@@ -55,8 +55,8 @@ options:
 ```
 
 ```
-✓ Installed @grekt/code-reviewer@1.0.0
-✓ Installed @grekt/git-flow@2.1.0
+✓ Installed @scope/my-artifact@1.0.0
+✓ Installed @scope/git-flow@2.1.0
 
 Integrity check:
 ✓ All 2 artifact(s) verified

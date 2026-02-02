@@ -16,6 +16,8 @@ Both commands are interactive and store credentials in `.grekt/config.yaml` (git
 
 ## Token priority
 
+grekt checks these locations in order and uses the first token found:
+
 ### Git sources (`github:` / `gitlab:`)
 
 1. Token in `.grekt/config.yaml` `tokens` section

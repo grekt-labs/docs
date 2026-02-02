@@ -16,8 +16,8 @@ AI tools need context to be useful. You write custom instructions, create agents
 grekt treats AI context like dependencies. You declare what you need, install it, and sync it to your tools.
 
 ```bash
-grekt add @grekt/code-reviewer    # Install an artifact
-grekt sync                        # Sync to Claude, Cursor...
+grekt add @scope/my-artifact    # Install an artifact
+grekt sync                      # Sync to Claude, Cursor...
 ```
 
 Artifacts work like dependencies: install what others have built, or publish your own for your team (or the community) to use.

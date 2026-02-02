@@ -18,8 +18,8 @@ $ grekt outdated
 Outdated artifacts:
 
   Artifact              Current   Latest
-  @grekt/code-reviewer  1.0.0     2.1.0
-  @team/utils           2.0.0     2.5.0
+  @scope/my-artifact    1.0.0     2.1.0
+  @scope/utils          2.0.0     2.5.0
 
 Run 'grekt add <artifact>' to update
 
@@ -46,7 +46,7 @@ All artifacts are up to date
 To update an outdated artifact, simply add it again:
 
 ```bash
-grekt add @grekt/code-reviewer
+grekt add @scope/my-artifact
 ```
 
 The `add` command will:

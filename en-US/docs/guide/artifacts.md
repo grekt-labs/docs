@@ -27,8 +27,7 @@ Artifacts are stored in `.grekt/artifacts/` after installation.
 Every artifact needs a `grekt.yaml`:
 
 ```yaml
-name: "code-review"
-author: "grekt"
+name: "@your-scope/code-review"
 version: "1.0.0"
 description: "Code review assistant"
 keywords:
@@ -36,6 +35,10 @@ keywords:
   - review
   - quality
 ```
+
+**Name formats:**
+- `@scope/name` — Scoped name (required for publishing). The scope determines which registry to use.
+- `name` — Unscoped name (local use only, cannot be published)
 
 Keywords (3-5) are required for publishing.
 
@@ -135,8 +138,8 @@ Project configuration:
 targets:
   - claude
 artifacts:
-  "@grekt/utils": "1.0.0"              # LAZY mode (default)
-  "@grekt/code-review":
+  "@scope/utils": "1.0.0"              # LAZY mode (default)
+  "@scope/my-artifact":
     version: "1.0.0"
     mode: core                          # CORE mode
 ```

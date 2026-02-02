@@ -43,13 +43,25 @@ project/
 
 The `.grekt/config.yaml` file stores your authentication session and tokens. It's automatically added to `.gitignore`.
 
+## Configure a registry
+
+::: warning PRIVATE REGISTRY
+If you're using a private registry, configure it first to install artifacts with `@scope/name` syntax.
+
+```bash
+grekt config registry set
+```
+
+See [`grekt config registry set`](/en-US/api/config#registry-configuration), [GitLab registry](/en-US/docs/guide/sources/gitlab#registry-monorepo) or [GitHub](/en-US/docs/guide/sources/github) for details.
+:::
+
 ## Add an artifact
 
 Artifacts are packages containing AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, or GitLab.
 
 ```bash
 # From the registry
-grekt add @grekt/code-reviewer
+grekt add @scope/my-artifact
 
 # From GitHub (latest)
 grekt add github:user/repo
@@ -66,13 +78,13 @@ When you add an artifact:
 2. Updates `grekt.yaml` with the artifact reference
 3. Creates a lockfile entry with the exact version and checksum
 
-By default, artifacts are added in **LAZY** mode (indexed but not copied to AI tools). Use `--core` to copy them directly to target directories like `.claude/agents/`.
+By default, artifacts are added in [**LAZY** mode](/en-US/docs/guide/sync-modes) (indexed but not copied to AI tools). Use `--core` to copy them directly to target directories like `.claude/agents/`.
 
 ::: tip Selective installation
 Large artifacts may contain components you don't need. Use `--choose` to interactively select which agents, skills, or commands to install:
 
 ```bash
-grekt add @grekt/git-flow --choose
+grekt add @scope/my-artifact --choose
 ```
 :::
 
@@ -91,7 +103,7 @@ grekt sync --dry-run
 grekt sync
 ```
 
-Only **CORE** mode artifacts are copied to target directories. **LAZY** mode artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
+Only [**CORE** mode](/en-US/docs/guide/sync-modes#core-mode) artifacts are copied to target directories. [**LAZY** mode](/en-US/docs/guide/sync-modes#lazy-mode-default) artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
 
 ::: tip Auto sync with --core
 When you add an artifact with `--core`, sync runs automatically.
@@ -126,8 +138,8 @@ targets:
   - claude
   - cursor
 artifacts:
-  @grekt/code-reviewer: "1.0.0"
-  @grekt/git-flow:
+  @scope/my-artifact: "1.0.0"
+  @scope/git-flow:
     version: "2.0.0"
     skills:
       - skills/branch-naming.md

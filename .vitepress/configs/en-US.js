@@ -4,8 +4,7 @@ export const enUSSidebar = {
       text: 'Getting started',
       items: [
         { text: 'Introduction', link: '/en-US/docs/guide/introduction' },
-        { text: 'Quick start', link: '/en-US/docs/guide/getting-started' },
-        { text: 'Authentication', link: '/en-US/docs/guide/authentication' }
+        { text: 'Quick start', link: '/en-US/docs/guide/getting-started' }
       ]
     },
     {

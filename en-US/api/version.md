@@ -46,7 +46,7 @@ $ grekt version patch --dry-run
 ℹ Found 1 artifact(s)
   (dry-run mode)
 
-  @grekt/my-agent: 1.2.0 → 1.2.1
+  @scope/my-artifact: 1.2.0 → 1.2.1
 ```
 
 ## How it works

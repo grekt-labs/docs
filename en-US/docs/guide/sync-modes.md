@@ -7,7 +7,7 @@ Artifacts can be installed in two modes that determine how they're synced to AI 
 Artifacts are indexed in `.grekt/index` but not copied to target directories. This is the default mode.
 
 ```bash
-grekt add @grekt/utils
+grekt add @scope/my-artifact
 ```
 
 Benefits:
@@ -20,7 +20,7 @@ Benefits:
 Artifacts are copied to target directories (e.g., `.claude/agents/`) during sync. Use for frequently accessed artifacts.
 
 ```bash
-grekt add @grekt/code-reviewer --core
+grekt add @scope/my-artifact --core
 ```
 
 Benefits:
@@ -41,22 +41,21 @@ Benefits:
 Remove and re-add the artifact with `--core`:
 
 ```bash
-grekt remove @grekt/utils
-grekt add @grekt/utils --core
-grekt sync
+grekt remove @scope/my-artifact
+grekt add @scope/my-artifact --core
 ```
 
 ## The index file
 
-All artifacts are indexed in `.grekt/index` for discovery. CORE artifacts are marked with `|core` suffix:
+Artifacts are indexed in `.grekt/index` for discovery. CORE artifacts are not present because they don't need to be discovered:
 
 ```
 [agents]
-@grekt/reviewer:code,review|core
-@grekt/utils:utility,helpers
+@scope/reviewer:code,review
+@scope/utils:utility,helpers
 
 [skills]
-@grekt/testing:test,mocks
+@scope/testing:test,mocks
 ```
 
 The index also includes a terminology block for AI tools that need term translation.

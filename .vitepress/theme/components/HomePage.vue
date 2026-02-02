@@ -388,7 +388,7 @@ const toggleFaq = (index) => {
               <li><a href="/en-US/docs/guide/introduction">Introduction</a></li>
               <li><a href="/en-US/docs/guide/getting-started">Quick start</a></li>
               <li><a href="/en-US/api/">CLI Reference</a></li>
-              <li><a href="/en-US/docs/guide/authentication">Authentication</a></li>
+              <li><a href="/en-US/docs/guide/sources/authentication">Authentication</a></li>
             </ul>
           </div>
 

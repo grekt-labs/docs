@@ -49,7 +49,7 @@ Same as GitHub: one artifact per repository, no version listing, no deprecation.
 
 ## Registry (monorepo)
 
-Use GitLab's Generic Package Registry to host multiple artifacts in a single project.
+Use GitLab's generic package registry to host multiple artifacts in a single project.
 
 ### Why use this?
 
@@ -106,28 +106,11 @@ grekt versions @myteam/agent-tools
 
 # Get info
 grekt info @myteam/agent-tools
-
-# Publish
-grekt publish .
 ```
 
 ### Publishing
 
-Set `author` in your artifact's `grekt.yaml`:
-
-```yaml
-name: agent-tools
-author: "@myteam"
-version: 1.0.0
-```
-
-Then publish:
-
-```bash
-grekt publish .
-```
-
-grekt routes to the correct registry based on the `author` field.
+To publish artifacts to a GitLab registry, see [Publishing](/en-US/docs/guide/managing/publishing). grekt routes to the correct registry based on the scope in your artifact's `name`.
 
 ### Multiple registries
 
@@ -151,22 +134,10 @@ grekt add @backend/api-tools    # → backend/artifacts
 
 ### Authentication
 
-#### Environment variables (recommended)
+Set `GITLAB_TOKEN` or configure via `grekt config registry set`. See [Authentication](/en-US/docs/guide/sources/authentication).
 
-```bash
-# Scope-specific
-export GREKT_TOKEN_MYTEAM=glpat-xxxxxxxxxxxx
-
-# Generic fallback
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
-```
-
-Scope tokens: `@myteam` → `GREKT_TOKEN_MYTEAM`, `@my-team` → `GREKT_TOKEN_MY_TEAM`
-
-#### Required token scopes
-
-| Operation | Required Scope |
-|-----------|---------------|
+| Operation | Required GitLab Scope |
+|-----------|----------------------|
 | Download | `read_api` |
 | Publish | `write_repository` |
 
