@@ -54,7 +54,7 @@ Use GitLab's generic package registry to host multiple artifacts in a single pro
 ### Why use this?
 
 A single GitLab project can host your entire organization's artifacts:
-
+Context aware loading
 ```
 gitlab.com/myteam/artifacts/
 ├── @myteam/code-reviewer@1.0.0

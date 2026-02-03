@@ -225,7 +225,7 @@ const toggleFaq = (index) => {
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41-.39.39-1.03.39-1.42.01A9.969 9.969 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13z"/></svg>
           </div>
-          <h3>Version Control</h3>
+          <h3>Version control</h3>
           <p>Track changes with lockfiles. Update, rollback, and manage dependencies easily.</p>
           <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
         </div>
@@ -234,7 +234,7 @@ const toggleFaq = (index) => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
           </div>
           <h3>Install from anywhere</h3>
-          <p>GitHub, GitLab, or public registry. Self-hosted instances supported.</p>
+          <p>GitHub, GitLab, or public registry. Self hosted instances supported.</p>
           <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
@@ -294,7 +294,7 @@ const toggleFaq = (index) => {
           <div class="comparison-row">
             <div class="comparison-label">
               <span class="label-title">Token budget</span>
-              <span class="label-desc">Context-aware loading</span>
+              <span class="label-desc">Context aware loading</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Considered</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
