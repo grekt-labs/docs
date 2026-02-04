@@ -210,15 +210,15 @@ const toggleFaq = (index) => {
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8A5.9 5.9 0 0 1 6 12c0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
           </div>
           <h3>Sync to any AI</h3>
-          <p>Push your agents, skills, and commands to Claude, Cursor, OpenCode, and more with one command.</p>
+          <p>Push your agents, skills, etc... to Claude, OpenCode, Cursor and more with one command.</p>
           <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7z"/></svg>
           </div>
-          <h3>Share within teams</h3>
-          <p>Publish artifacts to share AI configurations across your organization.</p>
+          <h3>Share within projects</h3>
+          <p>Publish artifacts to share AI configurations across teams or your own projects.</p>
           <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
         </div>
         <div class="use-case-card">
@@ -1543,7 +1543,8 @@ const toggleFaq = (index) => {
   }
 
   .install-wrapper {
-    width: 100%;
+    width: calc(100% - 32px);
+    max-width: 400px;
     flex-direction: column;
   }
 
@@ -1557,12 +1558,14 @@ const toggleFaq = (index) => {
   .install-box {
     width: 100%;
     max-width: 100%;
-    overflow-x: auto;
     border-radius: 0 0 8px 8px;
   }
 
   .install-command {
     font-size: 0.8rem;
+    overflow-x: auto;
+    flex: 1;
+    min-width: 0;
   }
 
   /* Hide complex visual elements on mobile */
@@ -1655,6 +1658,28 @@ const toggleFaq = (index) => {
   .comparison-row {
     padding: 12px 12px;
     margin: 0 -12px;
+  }
+
+  .use-case-card--coming-soon {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 32px;
+  }
+
+  .use-case-card--coming-soon .use-case-icon {
+    margin-bottom: 20px;
+  }
+
+  .use-case-card--coming-soon h3 {
+    margin-bottom: 12px;
+  }
+
+  .badge-coming-soon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    transform: none;
   }
 }
 </style>
