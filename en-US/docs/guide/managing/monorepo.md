@@ -99,7 +99,9 @@ grekt is agnostic to versioning tools. Use whatever fits your workflow:
 - [release-it](https://github.com/release-it/release-it) — Generic release automation
 - Manual — `grekt version patch` per artifact
 
-The `--exec` flag handles the `package.json` compatibility layer automatically.
+::: info Compatibility layer
+Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed — grekt syncs versions back to `grekt.yaml` and cleans up automatically.
+:::
 
 ## Related
 

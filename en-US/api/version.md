@@ -69,6 +69,10 @@ When using `--exec`, grekt:
 
 Requires `grekt-workspace.yaml` in the current directory.
 
+::: info Why package.json?
+Most versioning tools (changeset, release-it, etc.) only support `package.json`. The `--exec` flag provides a compatibility layer until native `grekt.yaml` support is available. The generated `package.json` files are temporary and never committed.
+:::
+
 ```bash
 $ grekt version --exec "npx changeset version"
 
