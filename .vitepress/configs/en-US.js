@@ -33,6 +33,12 @@ export const enUSSidebar = {
       ]
     },
     {
+      text: 'Configuration',
+      items: [
+        { text: 'Environment', link: '/en-US/docs/guide/environment' }
+      ]
+    },
+    {
       text: 'Legal',
       items: [
         { text: 'Licensing', link: '/en-US/docs/guide/licensing' }
