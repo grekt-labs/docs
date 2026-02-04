@@ -10,6 +10,9 @@ export const apiSidebar = {
     { text: 'grekt remove-target', link: '/en-US/api/remove-target' },
     { text: 'grekt list', link: '/en-US/api/list' },
     { text: 'grekt check', link: '/en-US/api/check' },
-    { text: 'grekt config', link: '/en-US/api/config' }
+    { text: 'grekt config', link: '/en-US/api/config' },
+    { text: 'grekt publish', link: '/en-US/api/publish' },
+    { text: 'grekt version', link: '/en-US/api/version' },
+    { text: 'grekt workspace', link: '/en-US/api/workspace' }
   ]
 }
