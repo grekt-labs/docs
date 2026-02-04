@@ -4,7 +4,16 @@ Publish an artifact to a registry.
 
 ```bash
 grekt publish [path]
+grekt publish --changed
 ```
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `--s3` | Use S3-compatible storage (legacy mode) |
+| `--changed` | Publish only artifacts where local version > registry (workspace mode) |
+| `--dry-run` | Show what would be published without publishing |
 
 ## Examples
 
@@ -14,6 +23,12 @@ grekt publish ./my-artifact
 
 # Publish current directory
 grekt publish
+
+# Publish all changed artifacts in workspace
+grekt publish --changed
+
+# Preview what would be published
+grekt publish --changed --dry-run
 ```
 
 ## Authentication
@@ -44,47 +59,52 @@ See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 
 ::: info Auto-generated components
 The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually — it will be overwritten.
-
-This field helps AI tools discover what's inside the artifact without scanning every file.
 :::
 
-## Version requirements
+## Workspace mode
 
-Versions must be valid [semantic versioning](https://semver.org/):
+With `--changed`, grekt:
 
-```yaml
-# Valid
-version: "1.0.0"
-version: "2.1.0-beta.1"
-version: "1.0.0+build.123"
+1. Discovers all artifacts in the workspace
+2. Compares local version vs registry version for each
+3. Publishes only where local > registry
 
-# Invalid (will be rejected)
-version: "v1.0.0"    # No 'v' prefix
-version: "1.0"       # Must be X.Y.Z
-version: "latest"    # Must be numeric
+```bash
+$ grekt publish --changed
+
+ℹ Checking 3 artifact(s) for changes...
+
+  ↑ @myorg/auth-rules 1.2.0 (registry: 1.1.0)
+  = @myorg/api-rules 2.0.0 (up to date)
+  ↑ @myorg/ui-rules 1.0.0 (new)
+
+ℹ 2 artifact(s) to publish
+
+✓ Published @myorg/auth-rules@1.2.0
+✓ Published @myorg/ui-rules@1.0.0
+
+✓ Published 2 artifact(s)
 ```
 
-If the version is invalid:
+Requires `grekt-workspace.yaml` in the current directory.
+
+## Error handling
+
+Invalid version:
 
 ```bash
 ✗ Invalid version: v1.0.0
 ℹ Version must be valid semver (e.g., 1.0.0, 2.1.0-beta.1)
 ```
 
-If keywords are missing or invalid:
+Missing keywords:
 
 ```bash
 ✗ Manifest requires at least 3 keywords
 ℹ Add 'keywords' array to grekt.yaml with 3-5 keywords
-
-  Example:
-    keywords:
-      - git
-      - commit
-      - automation
 ```
 
-If the version already exists:
+Version exists:
 
 ```bash
 ✗ Version 1.0.0 already exists for @author/name
@@ -94,4 +114,6 @@ If the version already exists:
 ## Related commands
 
 - [grekt pack](/en-US/api/pack) — Create tarball without publishing
-- [grekt versions](/en-US/api/versions) — List available versions
+- [grekt version](/en-US/api/version) — Bump versions
+- [grekt workspace](/en-US/api/workspace) — Workspace management
+- [Monorepo guide](/en-US/docs/guide/managing/monorepo) — Full workflow

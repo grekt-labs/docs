@@ -14,6 +14,14 @@ export const docsSidebar = [
     ]
   },
   {
+    text: 'Publishing',
+    items: [
+      { text: 'Publishing', link: '/docs/guide/managing/publishing' },
+      { text: 'Versioning', link: '/docs/guide/managing/versioning' },
+      { text: 'Monorepo', link: '/docs/guide/managing/monorepo' }
+    ]
+  },
+  {
     text: 'Configuration',
     items: [
       { text: 'Authentication', link: '/docs/guide/sources/authentication' }
