@@ -104,9 +104,14 @@ grekt-keywords --json "Your artifact description here"
 
 The first run downloads a small ML model (~80MB). Subsequent runs work offline.
 
+## Monorepo
+
+For publishing multiple artifacts from a single repository, see [Monorepo](/en-US/docs/guide/managing/monorepo).
+
 ## Related
 
 - [grekt pack](/en-US/api/pack) — Create tarball without publishing
 - [grekt publish](/en-US/api/publish) — Command reference
 - [GitLab](/en-US/docs/guide/sources/gitlab) — GitLab registry setup
 - [Versioning](/en-US/docs/guide/managing/versioning) — Version management
+- [Monorepo](/en-US/docs/guide/managing/monorepo) — Multiple artifacts in one repo
