@@ -5,6 +5,10 @@ export default defineConfig({
   title: " ",
   description: "AI Artifact Manager - Manage and sync AI tool configurations",
 
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
+  ],
+
   locales: {
     'en-US': {
       label: 'English',
