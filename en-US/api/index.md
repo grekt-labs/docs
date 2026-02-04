@@ -41,7 +41,8 @@ grekt provides a command-line interface for managing AI artifacts.
     <h3>Sync & Diagnostics</h3>
     <ul>
       <li><a href="/en-US/api/sync">grekt sync</a><span class="desc">Sync to AI tools</span></li>
-      <li><a href="/en-US/api/add-target">grekt add-target</a><span class="desc">Add AI targets to sync with</span></li>
+      <li><a href="/en-US/api/add-target">grekt add-target</a><span class="desc">Add AI targets</span></li>
+      <li><a href="/en-US/api/remove-target">grekt remove-target</a><span class="desc">Remove AI targets</span></li>
       <li><a href="/en-US/api/check">grekt check</a><span class="desc">Check artifact integrity</span></li>
       <li><a href="/en-US/api/config">grekt config</a><span class="desc">Manage configuration</span></li>
     </ul>
@@ -87,6 +88,7 @@ grekt outdated                   # Check for updates
 
 # Targets & Config
 grekt add-target                 # Add AI targets
+grekt remove-target              # Remove AI targets
 grekt config registry set @scope # Configure registry
 
 # Authoring

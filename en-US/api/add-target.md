@@ -1,6 +1,6 @@
 # grekt add-target
 
-Add or configure sync targets interactively.
+Add new sync targets interactively.
 
 ```bash
 grekt add-target
@@ -8,7 +8,9 @@ grekt add-target
 
 ## Behavior
 
-Opens an interactive prompt to select AI tools to sync with. Supports both built-in plugins and custom target configuration.
+Opens an interactive prompt to add AI tools to sync with. Already configured targets are shown as disabled ("already added"). Only new targets can be selected.
+
+To remove targets, use [`grekt remove-target`](./remove-target.md).
 
 ## Built-in targets
 
