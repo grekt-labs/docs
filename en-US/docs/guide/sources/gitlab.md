@@ -157,8 +157,8 @@ This creates packages with folder prefixes in the registry:
 
 | Artifact | Package name in GitLab |
 |----------|------------------------|
-| `@sesame-frontend/utils` | `frontend/utils` |
-| `@sesame-backend/api` | `backend/api` |
+| `@sesame-frontend/utils` | `frontend-utils` |
+| `@sesame-backend/api` | `backend-api` |
 
 Both scopes share the same GitLab project while avoiding naming collisions.
 

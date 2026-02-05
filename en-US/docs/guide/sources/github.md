@@ -112,8 +112,8 @@ This creates OCI repositories with folder prefixes:
 
 | Artifact | OCI repository |
 |----------|----------------|
-| `@frontend/utils` | `ghcr.io/myorg/frontend/utils` |
-| `@backend/api` | `ghcr.io/myorg/backend/api` |
+| `@frontend/utils` | `ghcr.io/myorg/frontend-utils` |
+| `@backend/api` | `ghcr.io/myorg/backend-api` |
 
 ### Authentication
 
