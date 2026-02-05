@@ -24,7 +24,7 @@ Artifacts work like dependencies: install what others have built, or publish you
 
 ## What are artifacts?
 
-Artifacts are packages of AI context. They can contain:
+Artifacts are bundles of AI context. They can contain:
 
 | Component | Description |
 |-----------|-------------|

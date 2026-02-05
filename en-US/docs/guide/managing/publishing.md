@@ -95,7 +95,7 @@ Ask your AI assistant: "Generate keywords for my artifact based on its descripti
 
 **Option 3: Use grekt-keywords**
 
-A separate package for generating keywords automatically:
+A Python tool for generating keywords automatically:
 
 ```bash
 pip install grekt-keywords --index-url https://download.pytorch.org/whl/cpu

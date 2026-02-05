@@ -1,6 +1,6 @@
 # Artifacts
 
-An artifact is a package containing AI configurations: agents, skills, commands, MCPs, rules...
+An artifact is a bundle of AI configurations: agents, skills, commands, MCPs, rules...
 
 ::: tip File organization
 You can organize files however you want. The `grk-type` field in frontmatter defines what each file is — not its location. A file in `tools/linter.md` can be an agent, a skill, or anything else based on its frontmatter.

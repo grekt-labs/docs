@@ -57,7 +57,7 @@ See [`grekt config registry set`](/en-US/api/config#registry-configuration), [Gi
 
 ## Add an artifact
 
-Artifacts are packages containing AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, or GitLab.
+Artifacts are bundles of AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, or GitLab.
 
 ```bash
 # From the registry
