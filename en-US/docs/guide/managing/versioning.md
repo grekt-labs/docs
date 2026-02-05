@@ -36,7 +36,7 @@ Shows latest version, description, author, and components.
 Mark a version as deprecated to warn users:
 
 ```bash
-grekt deprecate @author/my-artifact@1.0.0 -m "Security fix in 1.0.1"
+grekt deprecate @author/my-artifact@1.0.0 "Security fix in 1.0.1"
 ```
 
 ### Effects
@@ -49,6 +49,10 @@ grekt deprecate @author/my-artifact@1.0.0 -m "Security fix in 1.0.1"
 ### Why deprecate instead of delete?
 
 Deleting versions breaks reproducibility. Projects using lockfiles expect specific versions to remain available. Deprecation warns users without breaking their builds.
+
+::: warning Registry only
+Deprecation only works with the official grekt registry. For artifacts hosted on GitHub or GitLab, deprecation is not supported — use delete to remove versions entirely.
+:::
 
 ## Undeprecating
 

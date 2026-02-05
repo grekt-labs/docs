@@ -1,13 +1,22 @@
 # grekt deprecate
 
-::: warning Coming Soon
-This command will be available when the public grekt registry launches.
-:::
-
 Mark an artifact version as deprecated.
 
 ```bash
-grekt deprecate <artifact@version>
+grekt deprecate <artifact@version> [message]
+```
+
+## Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `artifact@version` | Full artifact ID with version (e.g., `@scope/name@1.0.0`) |
+| `message` | Optional deprecation message shown to users |
+
+## Example
+
+```bash
+grekt deprecate @myorg/tool@1.0.0 "Security vulnerability, upgrade to 1.0.1"
 ```
 
 ## Use cases
@@ -16,6 +25,10 @@ grekt deprecate <artifact@version>
 - Breaking changes in external dependencies
 - Recommending users upgrade to newer versions
 - Marking versions with known bugs
+
+::: warning Registry only
+This command only works with the official grekt registry. For artifacts hosted on GitHub or GitLab, use [grekt delete](/en-US/api/delete) to remove versions entirely — deprecation is not supported.
+:::
 
 ## Related commands
 
