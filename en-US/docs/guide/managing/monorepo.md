@@ -4,15 +4,47 @@ Manage multiple artifacts in a single repository.
 
 ## Workspace vs Registry folder
 
-These are complementary features:
+These solve **different problems**:
 
-| Feature | Purpose | Config file |
-|---------|---------|-------------|
-| **Workspace** | Organize artifacts in your **git repo** | `grekt-workspace.yaml` |
-| **Registry folder** | Organize artifacts in the **registry** | `.grekt/config.yaml` |
+### Workspace
 
-Use workspace when you have multiple artifacts in one git repo.
-Use registry `folder` when multiple scopes publish to one registry project.
+**Problem**: You have 5 artifacts in your repo. Running `grekt publish` 5 times is tedious.
+
+**Solution**: Define a workspace, then `grekt publish --changed` publishes all at once.
+
+```yaml
+# grekt-workspace.yaml
+workspaces:
+  - "packages/*"
+```
+
+### Registry folder
+
+**Problem**: You have 2 scopes (`@acme-web`, `@acme-api`) but only one GitLab project. Without prefixes, `@acme-web/utils` and `@acme-api/utils` would both try to create a package named `utils`.
+
+**Solution**: Add a `folder` prefix to avoid naming collisions.
+
+```yaml
+# .grekt/config.yaml
+registries:
+  "@acme-web":
+    project: acme/artifacts
+    folder: web      # → package name: web-utils
+  "@acme-api":
+    project: acme/artifacts
+    folder: api      # → package name: api-utils
+```
+
+::: tip
+The `folder` is just a prefix string. It doesn't need to match any folder in your git repo.
+:::
+
+### Independence
+
+These configs don't know about each other. You can use:
+- Only workspace (each scope has its own registry project)
+- Only folder (one artifact, but avoiding collisions)
+- Both together
 
 ## Setup
 
@@ -120,41 +152,43 @@ Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec
 Combining workspace and registry folder:
 
 ```
-my-monorepo/
+acme-ai/
 ├── grekt-workspace.yaml
 ├── .grekt/
 │   └── config.yaml
-├── frontend/
-│   └── design-system/
-│       └── grekt.yaml      # @myorg-frontend/design-system
-└── backend/
-    └── api-rules/
-        └── grekt.yaml      # @myorg-backend/api-rules
+├── web/
+│   ├── components/
+│   │   └── grekt.yaml      # @acme-web/components
+│   └── rules/
+│       └── grekt.yaml      # @acme-web/rules
+└── api/
+    └── helpers/
+        └── grekt.yaml      # @acme-api/helpers
 ```
 
 `grekt-workspace.yaml`:
 ```yaml
 workspaces:
-  - "frontend/*"
-  - "backend/*"
+  - "web/*"
+  - "api/*"
 ```
 
 `.grekt/config.yaml`:
 ```yaml
 registries:
-  "@myorg-frontend":
+  "@acme-web":
     type: gitlab
-    project: myorg/artifacts
-    folder: frontend
-  "@myorg-backend":
+    project: acme/ai-artifacts
+    folder: web
+  "@acme-api":
     type: gitlab
-    project: myorg/artifacts
-    folder: backend
+    project: acme/ai-artifacts
+    folder: api
 ```
 
 Result:
-- Both scopes publish to the same GitLab project
-- Package names: `frontend-design-system`, `backend-api-rules`
+- Both scopes publish to one GitLab project (`acme/ai-artifacts`)
+- Package names: `web-components`, `web-rules`, `api-helpers`
 - `grekt publish --changed` publishes all updated artifacts at once
 
 ## Related
