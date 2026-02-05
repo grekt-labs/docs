@@ -82,7 +82,7 @@ registries:
 | `project` | Yes | GHCR namespace (e.g., `myorg` for `ghcr.io/myorg/*`) |
 | `host` | No | Registry host (default: `ghcr.io`) |
 | `token` | No | Access token (prefer env vars) |
-| `folder` | No | Repository name prefix for monorepo organization |
+| `prefix` | No | Repository name prefix for monorepo organization (immutable after first publish) |
 
 ### Usage
 
@@ -94,26 +94,32 @@ grekt versions @myorg/agent-tools
 
 ### Monorepo organization
 
-Use `folder` to organize multiple scopes within a single GHCR namespace:
+Use `prefix` to organize multiple scopes within a single GHCR namespace:
 
 ```yaml
 registries:
   "@frontend":
     type: github
     project: myorg
-    folder: frontend
+    prefix: frontend
   "@backend":
     type: github
     project: myorg
-    folder: backend
+    prefix: backend
 ```
 
-This creates OCI repositories with folder prefixes:
+This creates OCI repositories with the prefix:
 
 | Artifact | OCI repository |
 |----------|----------------|
 | `@frontend/utils` | `ghcr.io/myorg/frontend-utils` |
 | `@backend/api` | `ghcr.io/myorg/backend-api` |
+
+::: warning Immutable after first publish
+Once you publish with or without a prefix, you cannot change it. Adding, removing, or modifying the prefix will cause grekt to look for different repository names in GHCR.
+
+If you need to change the prefix, you must rename the repositories in your registry manually.
+:::
 
 ### Authentication
 

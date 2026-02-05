@@ -2,9 +2,9 @@
 
 Manage multiple artifacts in a single repository.
 
-## Workspace vs Registry folder
+## Workspace vs Registry prefix
 
-These solve **different problems**:
+Workspace coordinates **local operations** (batch publish). Registry prefix affects **remote naming** (package names in the registry). These solve different problems and can be used independently or together.
 
 ### Workspace
 
@@ -18,32 +18,36 @@ workspaces:
   - "packages/*"
 ```
 
-### Registry folder
+### Registry prefix
 
-**Problem**: You have 2 scopes (`@acme-web`, `@acme-api`) but only one GitLab project. Without prefixes, `@acme-web/utils` and `@acme-api/utils` would both try to create a package named `utils`.
+**Problem**: You have 2 scopes (`@acme-web`, `@acme-api`) but only one registry project. Without prefixes, `@acme-web/utils` and `@acme-api/utils` would both try to create a package named `utils`.
 
-**Solution**: Add a `folder` prefix to avoid naming collisions.
+**Solution**: Add a `prefix` to avoid naming collisions.
 
 ```yaml
 # .grekt/config.yaml
 registries:
   "@acme-web":
     project: acme/artifacts
-    folder: web      # → package name: web-utils
+    prefix: web      # → package name: web-utils
   "@acme-api":
     project: acme/artifacts
-    folder: api      # → package name: api-utils
+    prefix: api      # → package name: api-utils
 ```
 
 ::: tip
-The `folder` is just a prefix string. It doesn't need to match any folder in your git repo.
+The `prefix` is just a string prepended to package names. It doesn't need to match any folder in your git repo.
+:::
+
+::: warning Immutable after first publish
+Once you publish with or without a prefix, you cannot change it. Adding, removing, or modifying the prefix will cause grekt to look for different package names in the registry.
 :::
 
 ### Independence
 
 These configs don't know about each other. You can use:
 - Only workspace (each scope has its own registry project)
-- Only folder (one artifact, but avoiding collisions)
+- Only prefix (one artifact, but avoiding collisions)
 - Both together
 
 ## Setup
@@ -149,7 +153,7 @@ Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec
 
 ## Full example
 
-Combining workspace and registry folder:
+Combining workspace and registry prefix:
 
 ```
 acme-ai/
@@ -179,11 +183,11 @@ registries:
   "@acme-web":
     type: gitlab
     project: acme/ai-artifacts
-    folder: web
+    prefix: web
   "@acme-api":
     type: gitlab
     project: acme/ai-artifacts
-    folder: api
+    prefix: api
 ```
 
 Result:
@@ -196,4 +200,4 @@ Result:
 - [grekt workspace](/en-US/api/workspace) — Command reference
 - [grekt version](/en-US/api/version) — Version bumping
 - [grekt publish](/en-US/api/publish) — Publishing artifacts
-- [Registry folder](/en-US/docs/guide/sources/gitlab#monorepo-organization) — Registry organization
+- [Registry prefix](/en-US/docs/guide/sources/gitlab#monorepo-organization) — Registry organization

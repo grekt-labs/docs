@@ -97,7 +97,7 @@ registries:
 | `project` | Yes | GitLab project path (e.g., `group/project`) |
 | `host` | No | GitLab host (default: `gitlab.com`) |
 | `token` | No | Access token (prefer env vars) |
-| `folder` | No | Package name prefix for monorepo organization |
+| `prefix` | No | Package name prefix for monorepo organization (immutable after first publish) |
 
 ### Usage
 
@@ -139,21 +139,21 @@ grekt add @backend/api-tools    # → backend/artifacts
 
 ### Monorepo organization
 
-Use `folder` to organize multiple scopes within a single GitLab project:
+Use `prefix` to organize multiple scopes within a single GitLab project:
 
 ```yaml
 registries:
   "@sesame-frontend":
     type: gitlab
     project: sesame/artifacts
-    folder: frontend
+    prefix: frontend
   "@sesame-backend":
     type: gitlab
     project: sesame/artifacts
-    folder: backend
+    prefix: backend
 ```
 
-This creates packages with folder prefixes in the registry:
+This creates packages with the prefix in the registry:
 
 | Artifact | Package name in GitLab |
 |----------|------------------------|
@@ -161,6 +161,12 @@ This creates packages with folder prefixes in the registry:
 | `@sesame-backend/api` | `backend-api` |
 
 Both scopes share the same GitLab project while avoiding naming collisions.
+
+::: warning Immutable after first publish
+Once you publish with or without a prefix, you cannot change it. Adding, removing, or modifying the prefix will cause grekt to look for different package names in the registry.
+
+If you need to change the prefix, you must rename the packages in your registry manually.
+:::
 
 ## Authentication {#registry-auth}
 
