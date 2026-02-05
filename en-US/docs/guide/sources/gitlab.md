@@ -172,14 +172,14 @@ If you need to change the prefix, you must rename the packages in your registry 
 
 For private GitLab registries, you need a token. Two options:
 
-### Deploy Tokens (Recommended)
+### Personal Access Tokens (PAT) — Recommended
 
-Deploy Tokens provide minimum permissions without access to repository code. Create one in: **Project Settings → Repository → Deploy tokens**.
+PATs provide full functionality including version listing and "latest" resolution.
 
 | Operation | Scope |
 |-----------|-------|
-| Download | `read_package_registry` |
-| Publish | `write_package_registry` |
+| Download | `read_api` |
+| Publish | `api` |
 
 ```yaml
 # .grekt/config.yaml
@@ -187,17 +187,28 @@ registries:
   "@myteam":
     type: gitlab
     project: myteam/artifacts
-    token: gldt-xxxxxxxxxxxx
+    token: glpat-xxxxxxxxxxxx
 ```
 
-### Personal Access Tokens (PAT)
+### Deploy Tokens
 
-PATs work but require broader permissions than necessary. GitLab couples the Package Registry with repository permissions.
+Deploy Tokens provide minimum permissions but have a limitation: they cannot list package versions due to GitLab API restrictions.
 
 | Operation | Scope |
 |-----------|-------|
-| Download | `read_api` |
-| Publish | `write_repository` |
+| Download (explicit version) | `read_package_registry` |
+| Publish | `write_package_registry` |
+
+::: warning Version required
+With deploy tokens, you must specify the version explicitly:
+
+```bash
+grekt add @myteam/artifact@1.0.0  # works
+grekt add @myteam/artifact        # fails (cannot resolve latest)
+```
+
+For "latest" resolution, use a PAT instead.
+:::
 
 ### Environment variables
 
