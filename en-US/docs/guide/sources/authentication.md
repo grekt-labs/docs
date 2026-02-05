@@ -48,7 +48,7 @@ Run `grekt config token set` or `grekt config registry set @scope`.
 Error: 403 Forbidden
 ```
 
-Check token has required scopes (`read_api` for download, `write_repository` for publish).
+Check token has required scopes. For GitLab registries, Deploy Tokens with `read_package_registry` / `write_package_registry` are recommended over PATs. See [GitLab Authentication](/en-US/docs/guide/sources/gitlab#registry-auth).
 
 ## Related
 
