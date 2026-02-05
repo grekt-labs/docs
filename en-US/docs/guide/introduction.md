@@ -48,9 +48,10 @@ Install from multiple sources:
 
 - **Reproducible**: Lockfile ensures everyone gets the same versions
 - **Composable**: Mix artifacts from registry, GitHub, GitLab
-- **Selective**: Install only the components you need with `--choose`
+- **Selective**: Install only the components you need with `--choose` pick specific agents, skills, or commands instead of the whole artifact
+- **Context-aware**: [Lazy mode](/en-US/docs/guide/sync-modes) keeps rarely-used artifacts indexed but outside your AI tool's context, avoiding clutter while maintaining discoverability
 - **Versionable**: Pin versions, check for updates, deprecate old ones
-- **Tool-agnostic**: Sync to Claude, Cursor, Windsurf, or custom targets
+- **Tool-agnostic**: Sync to Claude, Cursor, Windsurf, etc... or any custom agent
 
 ## Next
 

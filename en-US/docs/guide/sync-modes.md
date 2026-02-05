@@ -59,3 +59,19 @@ Artifacts are indexed in `.grekt/index` for discovery. CORE artifacts are not pr
 ```
 
 The index also includes a terminology block for AI tools that need term translation.
+
+## Why lazy mode matters
+
+Modern AI tools like Claude Code have built-in discovery mechanisms for skills and agents. But discovery alone doesn't solve context pollution.
+
+If you install 50 artifacts directly into `.claude/skills/`, the tool still needs to index and potentially reference all of them. Even with smart discoverability, this adds noise to the AI's context window.
+
+Lazy mode keeps artifacts **outside** the tool's directories until explicitly needed. The `.grekt/index` acts as a lightweight catalog — a few lines of text instead of full artifact content sitting in your tool's folders.
+
+This gives you the best of both worlds:
+
+- **Discoverability**: Artifacts remain findable via the index and keywords
+- **Clean context**: Only CORE artifacts consume tool attention
+- **On-demand loading**: Rare-use artifacts stay out of the way until you need them
+
+Think of it as the difference between having 100 books on your desk vs. having a catalog card that tells you where to find them in the library.
