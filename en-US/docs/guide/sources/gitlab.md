@@ -97,6 +97,7 @@ registries:
 | `project` | Yes | GitLab project path (e.g., `group/project`) |
 | `host` | No | GitLab host (default: `gitlab.com`) |
 | `token` | No | Access token (prefer env vars) |
+| `folder` | No | Package name prefix for monorepo organization |
 
 ### Usage
 
@@ -135,6 +136,31 @@ Each scope resolves to its own GitLab project:
 grekt add @frontend/components  # → frontend/artifacts
 grekt add @backend/api-tools    # → backend/artifacts
 ```
+
+### Monorepo organization
+
+Use `folder` to organize multiple scopes within a single GitLab project:
+
+```yaml
+registries:
+  "@sesame-frontend":
+    type: gitlab
+    project: sesame/artifacts
+    folder: frontend
+  "@sesame-backend":
+    type: gitlab
+    project: sesame/artifacts
+    folder: backend
+```
+
+This creates packages with folder prefixes in the registry:
+
+| Artifact | Package name in GitLab |
+|----------|------------------------|
+| `@sesame-frontend/utils` | `frontend/utils` |
+| `@sesame-backend/api` | `backend/api` |
+
+Both scopes share the same GitLab project while avoiding naming collisions.
 
 ## Authentication {#registry-auth}
 
