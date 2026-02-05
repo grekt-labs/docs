@@ -33,9 +33,13 @@ grekt add gitlab:gitlab.company.com/owner/repo#main
 
 ### Authentication
 
+For private repositories:
+
 ```bash
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
+export GITLAB_TOKEN=gldt-xxxxxxxxxxxx
 ```
+
+Deploy Tokens with `read_repository` scope work for downloading archives. PATs with `read_api` also work but grant more permissions than needed.
 
 ::: tip
 For permanent configuration (including self-hosted), use `grekt config token set`.
@@ -132,16 +136,46 @@ grekt add @frontend/components  # → frontend/artifacts
 grekt add @backend/api-tools    # → backend/artifacts
 ```
 
-### Authentication
+## Authentication {#registry-auth}
 
-Set `GITLAB_TOKEN` or configure via `grekt config registry set`. See [Authentication](/en-US/docs/guide/sources/authentication).
+For private GitLab registries, you need a token. Two options:
 
-| Operation | Required GitLab Scope |
-|-----------|----------------------|
+### Deploy Tokens (Recommended)
+
+Deploy Tokens provide minimum permissions without access to repository code. Create one in: **Project Settings → Repository → Deploy tokens**.
+
+| Operation | Scope |
+|-----------|-------|
+| Download | `read_package_registry` |
+| Publish | `write_package_registry` |
+
+```yaml
+# .grekt/config.yaml
+registries:
+  "@myteam":
+    type: gitlab
+    project: myteam/artifacts
+    token: gldt-xxxxxxxxxxxx
+```
+
+### Personal Access Tokens (PAT)
+
+PATs work but require broader permissions than necessary. GitLab couples the Package Registry with repository permissions.
+
+| Operation | Scope |
+|-----------|-------|
 | Download | `read_api` |
 | Publish | `write_repository` |
 
-### How it works
+### Environment variables
+
+```bash
+export GITLAB_TOKEN=gldt-xxxxxxxxxxxx
+```
+
+Or use `grekt config registry set @scope` for interactive setup. See [Authentication](/en-US/docs/guide/sources/authentication).
+
+## How it works
 
 grekt uses GitLab's [Generic Package Registry](https://docs.gitlab.com/ee/user/packages/generic_packages/):
 
