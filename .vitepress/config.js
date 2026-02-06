@@ -32,11 +32,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/grekt-labs' }
-    ],
-
-    footer: {
-      message: 'Released under the <a href="/en-US/docs/guide/licensing">BSL 1.1 License</a>.',
-      copyright: 'Copyright © 2025-2026 grekt-labs'
-    }
+    ]
   }
 })
