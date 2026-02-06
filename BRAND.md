@@ -107,4 +107,4 @@ These tokens change based on light/dark mode:
 ## Links
 
 - GitHub: https://github.com/grekt-labs
-- Documentation: https://grekt.dev
+- Documentation: https://grekt.com
