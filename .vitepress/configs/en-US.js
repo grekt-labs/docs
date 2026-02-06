@@ -12,7 +12,8 @@ export const enUSSidebar = {
       items: [
         { text: 'Artifacts', link: '/en-US/docs/guide/artifacts' },
         { text: 'Targets', link: '/en-US/docs/guide/targets' },
-        { text: 'Sync modes', link: '/en-US/docs/guide/sync-modes' }
+        { text: 'Sync modes', link: '/en-US/docs/guide/sync-modes' },
+        { text: 'Handling artifacts', link: '/en-US/docs/guide/handling' }
       ]
     },
     {
