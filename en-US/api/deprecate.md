@@ -27,7 +27,7 @@ grekt deprecate @myorg/tool@1.0.0 "Security vulnerability, upgrade to 1.0.1"
 - Marking versions with known bugs
 
 ::: warning Registry only
-This command only works with the official grekt registry. For artifacts hosted on GitHub or GitLab, use [grekt delete](/en-US/api/delete) to remove versions entirely — deprecation is not supported.
+This command only works with the official grekt registry.
 :::
 
 ## Related commands
