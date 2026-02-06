@@ -42,7 +42,9 @@ export const enUSSidebar = {
     {
       text: 'Legal',
       items: [
-        { text: 'Licensing', link: '/en-US/docs/guide/licensing' }
+        { text: 'Licensing', link: '/en-US/docs/guide/licensing' },
+        { text: 'Terms of Service', link: '/en-US/docs/guide/terms' },
+        { text: 'Privacy Policy', link: '/en-US/docs/guide/privacy' }
       ]
     }
   ],
