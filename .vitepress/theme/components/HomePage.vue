@@ -186,18 +186,16 @@ const toggleFaq = (index) => {
 
     </section>
 
-    <!-- TRUSTED BY - Separate section -->
+    <!-- TRUSTED BY -->
     <section class="trusted-by">
-      <div class="trusted-by-content">
-        <span class="trusted-by-label">Trusted by</span>
-        <div class="trusted-by-logos">
-          <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
-            <img src="/logos/Sesame.png" alt="Sesame" />
-          </a>
-          <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
-            <img src="/logos/thn.png" alt="The Hotels Network" />
-          </a> -->
-        </div>
+      <span class="trusted-by-label">Trusted by</span>
+      <div class="trusted-by-logos">
+        <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
+          <img src="/logos/Sesame.png" alt="Sesame" />
+        </a>
+        <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
+          <img src="/logos/thn.png" alt="The Hotels Network" />
+        </a> -->
       </div>
     </section>
 
@@ -679,59 +677,52 @@ const toggleFaq = (index) => {
   50% { transform: translateX(-50%) translateY(-8px); }
 }
 
-/* Trusted By Section */
+/* Trusted By */
 .trusted-by {
-  display: none; /* Hidden until we have real sponsors */
-  background: var(--section-bg);
-  border-top: 1px solid var(--divider-color);
-  padding: 40px 20px;
+  display: none; /* Hidden until we have more logos */
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 20px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
-.trusted-by-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
 .trusted-by-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--card-text);
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 500;
-  opacity: 0.7;
-  white-space: nowrap;
+  opacity: 0.35;
 }
 
 .trusted-by-logos {
   display: flex;
   align-items: center;
-  gap: 48px;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px 36px;
+  max-width: 1200px;
 }
 
 .trusted-by-logo {
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
   display: flex;
   align-items: center;
-}
-
-.trusted-by-logo:hover {
-  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .trusted-by-logo img {
   height: 36px;
   width: auto;
-  filter: var(--logo-filter);
+  filter: grayscale(100%) var(--logo-filter);
+  opacity: 0.35;
+  transition: all 0.3s ease;
+}
+
+.trusted-by-logo:hover img {
+  filter: grayscale(0%) var(--logo-filter);
+  opacity: 0.8;
 }
 
 .hero-content {
@@ -1572,15 +1563,6 @@ const toggleFaq = (index) => {
   .lines-container,
   .floating-icons {
     display: none;
-  }
-
-  .trusted-by-content {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .trusted-by-logos {
-    gap: 32px;
   }
 
   .feature-row {
