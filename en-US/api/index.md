@@ -32,6 +32,7 @@ grekt provides a command-line interface for managing AI artifacts.
       <li><a href="/en-US/api/info">grekt info</a><span class="desc">Show artifact info</span></li>
       <li><a href="/en-US/api/versions">grekt versions</a><span class="desc">List versions</span></li>
       <li><a href="/en-US/api/outdated">grekt outdated</a><span class="desc">Check for updates</span></li>
+      <li><a href="/en-US/api/upgrade">grekt upgrade</a><span class="desc">Upgrade outdated artifacts</span></li>
       <li><a href="/en-US/api/deprecate">grekt deprecate</a><span class="desc coming-soon-text">Deprecate a version (Coming Soon)</span></li>
       <li><a href="/en-US/api/undeprecate">grekt undeprecate</a><span class="desc coming-soon-text">Remove deprecation (Coming Soon)</span></li>
     </ul>
@@ -85,6 +86,8 @@ grekt publish ./artifact         # Publish
 grekt info @author/artifact      # Show artifact info
 grekt versions @author/artifact  # List versions
 grekt outdated                   # Check for updates
+grekt upgrade                    # Upgrade all outdated
+grekt upgrade @author/artifact   # Upgrade specific
 
 # Targets & Config
 grekt add-target                 # Add AI targets

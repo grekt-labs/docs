@@ -72,7 +72,8 @@ export const enUSSidebar = {
         { text: 'grekt undeprecate', link: '/en-US/api/undeprecate' },
         { text: 'grekt info', link: '/en-US/api/info' },
         { text: 'grekt versions', link: '/en-US/api/versions' },
-        { text: 'grekt outdated', link: '/en-US/api/outdated' }
+        { text: 'grekt outdated', link: '/en-US/api/outdated' },
+        { text: 'grekt upgrade', link: '/en-US/api/upgrade' }
       ]
     },
     {
