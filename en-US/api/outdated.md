@@ -43,19 +43,24 @@ All artifacts are up to date
 
 ## Updating artifacts
 
-To update an outdated artifact, simply add it again:
+Upgrade all outdated artifacts at once:
 
 ```bash
+grekt upgrade
+```
+
+Or update a specific artifact:
+
+```bash
+grekt upgrade @scope/my-artifact
 grekt add @scope/my-artifact
 ```
 
-The `add` command will:
-- Download the latest version
-- Replace the old version
-- Update `grekt.yaml` and `grekt.lock`
+Both `upgrade` and `add` preserve component selections from `--choose`.
 
 ## Related commands
 
+- [grekt upgrade](/en-US/api/upgrade) — Upgrade outdated artifacts
 - [grekt add](/en-US/api/add) — Add or update an artifact
 - [grekt versions](/en-US/api/versions) — List all versions
 - [grekt list](/en-US/api/list) — List installed artifacts
