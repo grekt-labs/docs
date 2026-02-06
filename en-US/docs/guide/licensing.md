@@ -1,42 +1,41 @@
 # Licensing
 
-grekt uses a multi-license strategy to balance openness with sustainability.
+grekt is source-available under the Business Source License 1.1 (BSL).
 
 ## License overview
 
-| Component | License | Purpose |
-|-----------|---------|---------|
-| **CLI** | Apache 2.0 | Open, auditable, extensible |
-| **Engine** | BSL 1.1 | Source-available, protected core |
-| **Keywords** | MIT | Fully open utility |
+| Component | License | Converts to |
+|-----------|---------|-------------|
+| **CLI** | BSL 1.1 | MIT (after 2 years) |
+| **Engine** | BSL 1.1 | MIT (after 2 years) |
+| **Keywords** | MIT | — |
 
-## Why this structure?
+## What you can do
 
-### CLI (Apache 2.0)
+- Use grekt in personal or commercial projects
+- Use grekt internally at your company
+- Read, study, and learn from the source code
+- Fork and modify for your own use
+- Contribute to the project
 
-The CLI is the user-facing tool. Apache 2.0 ensures:
+## What you cannot do
 
-- Full transparency for security audits
-- Freedom to fork and extend
-- Patent protection for contributors
-- Enterprise-friendly terms
+- Build a competing AI artifact manager using grekt's code
+- Offer grekt's functionality as a commercial service that replaces grekt
 
-### Engine (BSL 1.1)
+## Why BSL?
 
-The engine contains core business logic. BSL 1.1 provides:
+BSL keeps the code transparent and accessible while protecting the project from being cloned and commercialized.
 
-- **Source available**: You can read, audit, and learn from the code
-- **Non-production use**: Free for development, testing, and evaluation
-- **Time-limited protection**: Converts to Apache 2.0 after 4 years
-- **Commercial licensing**: Available for production use before conversion
-
-This protects the project's sustainability while keeping the code transparent.
-
-### Keywords (MIT)
-
-The keyword extraction utility is fully open source under MIT. Use it however you want.
+- **Source available**: Full code visibility for audits, learning, and contributions
+- **Production use allowed**: Use grekt as a tool without restrictions
+- **Time-limited protection**: Each version converts to MIT after 2 years
+- **No friction for users**: The restriction only targets direct competitors
 
 ## For artifact authors
 
 Artifacts published to the grekt registry are owned by their authors. You choose your own license. grekt does not claim any rights over community-created artifacts.
 
+## Commercial licensing
+
+If your use case doesn't fit the BSL terms, reach out and we'll figure it out.

@@ -412,8 +412,8 @@ const toggleFaq = (index) => {
         </div>
 
         <div class="footer-bottom">
-          <p class="copyright">CLI: Apache 2.0 · Engine: BSL 1.1</p>
-          <p class="copyright">Copyright © {{ new Date().getFullYear() }} grekt contributors.</p>
+          <p class="copyright">Released under the <a href="/en-US/docs/guide/licensing">BSL 1.1 License</a></p>
+          <p class="copyright">Copyright © {{ new Date().getFullYear() }} grekt-labs</p>
         </div>
       </div>
     </footer>
