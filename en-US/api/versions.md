@@ -55,5 +55,6 @@ grekt add @author/agent@1.0.0
 
 - [grekt info](/en-US/api/info) — Show artifact summary
 - [grekt outdated](/en-US/api/outdated) — Check for updates
+- [grekt upgrade](/en-US/api/upgrade) — Upgrade outdated artifacts
 - [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
 - [grekt add](/en-US/api/add) — Install an artifact

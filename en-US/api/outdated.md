@@ -21,7 +21,7 @@ Outdated artifacts:
   @scope/my-artifact    1.0.0     2.1.0
   @scope/utils          2.0.0     2.5.0
 
-Run 'grekt add <artifact>' to update
+Run 'grekt upgrade' to upgrade
 
 2 artifact(s) up to date
 ```

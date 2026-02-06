@@ -9,6 +9,8 @@ Lifecycle of artifacts in grekt: publishing, versioning, and deprecation.
 | `grekt publish` | Upload artifact to registry |
 | `grekt versions` | List all versions of an artifact |
 | `grekt info` | Get artifact details |
+| `grekt outdated` | Check for newer versions |
+| `grekt upgrade` | Upgrade artifacts to latest versions |
 | `grekt deprecate` | Mark a version as deprecated |
 | `grekt undeprecate` | Remove deprecation from a version |
 
