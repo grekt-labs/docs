@@ -79,6 +79,10 @@ artifacts:
       - commands/create-pr.md
 ```
 
+When updating an artifact that was installed with `--choose`, the previous selection is preserved. If the new version adds or removes components, a diff is shown and the selector re-opens with previous items pre-checked.
+
+Using `--choose` on an already partial artifact pre-checks the previous selection instead of checking all.
+
 ## Sync modes
 
 Artifacts can be added in two modes:
@@ -144,7 +148,7 @@ $ grekt add @scope/my-artifact
 Already installed: @scope/my-artifact@2.0.0
 ```
 
-Use `grekt outdated` to check which artifacts have updates available.
+Use `grekt outdated` to check which artifacts have updates available, or `grekt upgrade` to upgrade all outdated artifacts at once.
 
 ## Notes
 

@@ -34,3 +34,4 @@ This command only works with the official grekt registry. For artifacts hosted o
 
 - [grekt undeprecate](/en-US/api/undeprecate) — Remove deprecation
 - [grekt versions](/en-US/api/versions) — List versions with deprecation status
+- [grekt upgrade](/en-US/api/upgrade) — Upgrade to non-deprecated versions

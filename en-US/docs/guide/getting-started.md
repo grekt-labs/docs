@@ -129,6 +129,20 @@ To see what's installed:
 grekt list
 ```
 
+## Keep artifacts up to date
+
+Check for newer versions and upgrade:
+
+```bash
+# See which artifacts have updates
+grekt outdated
+
+# Upgrade all at once
+grekt upgrade
+```
+
+Component selections from `--choose` are preserved across upgrades.
+
 ## Configuration
 
 Your `grekt.yaml` tracks which artifacts are installed and how the project is configured:

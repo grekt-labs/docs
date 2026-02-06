@@ -13,45 +13,26 @@ AI tools need context to be useful. You write custom instructions, create agents
 
 ## The solution
 
-grekt treats AI context like dependencies. You declare what you need, install it, and sync it to your tools.
+grekt treats AI context like dependencies. You declare what you need, install it, and grekt will sync it to your tools.
 
 ```bash
 grekt add @scope/my-artifact    # Install an artifact
-grekt sync                      # Sync to Claude, Cursor...
 ```
 
 Artifacts work like dependencies: install what others have built, or publish your own for your team (or the community) to use.
 
 ## What are artifacts?
 
-Artifacts are bundles of AI context. They can contain:
-
-| Component | Description |
-|-----------|-------------|
-| **Agents** | Personas with specific behaviors and instructions |
-| **Skills** | Reusable capabilities (code review, testing, docs...) |
-| **Commands** | Slash commands for common workflows |
-
-A single artifact might contain an agent with multiple skills and commands, or just a standalone skill you can mix with others.
-
-## Sources
-
-Install from multiple sources:
-
-| Source | Example |
-|--------|---------|
-| Registry | `grekt add @author/artifact` |
-| GitHub | `grekt add github:user/repo` |
-| GitLab | `grekt add gitlab:group/repo` |
+Artifacts are <b>bundles of AI context</b>: agents, skills, commands, MCP configs, rules... anything your AI tools need to work well. A single artifact might contain a full agent with multiple skills and commands, or just a standalone rule you can mix with others.
 
 ## Why grekt?
 
 - **Reproducible**: Lockfile ensures everyone gets the same versions
 - **Composable**: Mix artifacts from registry, GitHub, GitLab
 - **Selective**: Install only the components you need with `--choose` pick specific agents, skills, or commands instead of the whole artifact
-- **Context-aware**: [Lazy mode](/en-US/docs/guide/sync-modes) keeps rarely-used artifacts indexed but outside your AI tool's context, avoiding clutter while maintaining discoverability
+- **Context aware**: [Lazy mode](/en-US/docs/guide/sync-modes) keeps rarely used artifacts indexed but outside your AI tool's context, avoiding clutter while maintaining discoverability
 - **Versionable**: Pin versions, check for updates, deprecate old ones
-- **Tool-agnostic**: Sync to Claude, Cursor, Windsurf, etc... or any custom agent
+- **Tool agnostic**: Sync to Claude, Cursor, Windsurf, etc... or any custom agent
 
 ## Next
 
