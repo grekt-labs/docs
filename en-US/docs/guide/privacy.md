@@ -2,7 +2,7 @@
 
 **Last updated:** February 2026
 
-grekt ("we", "us") is an open source project. This policy explains how we handle your data.
+grekt ("we", "us") is a source available project. This policy explains how we handle your data.
 
 ## What we collect
 

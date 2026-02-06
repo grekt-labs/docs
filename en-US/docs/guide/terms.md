@@ -2,7 +2,7 @@
 
 **Last updated:** February 2026
 
-grekt is an open source artifact manager. By using the registry, you agree to:
+grekt is a source available artifact manager. By using the registry, you agree to:
 
 1. The service is provided "as is", without warranty
 2. We may suspend accounts that abuse the service

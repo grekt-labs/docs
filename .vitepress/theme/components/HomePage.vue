@@ -84,7 +84,7 @@ const faqItems = [
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes! The CLI is open source and free to use. The public registry for sharing artifacts will also be free when it launches.'
+    answer: 'Yes! The CLI is source available and free to use. The public registry for sharing artifacts will also be free when it launches.'
   },
   {
     question: 'Which AI tools are supported?',

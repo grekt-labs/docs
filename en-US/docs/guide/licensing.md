@@ -1,6 +1,6 @@
 # Licensing
 
-grekt is source-available under the Business Source License 1.1 (BSL).
+grekt is [source available](https://en.wikipedia.org/wiki/Source-available_software) under the Business Source License 1.1 (BSL).
 
 ## License overview
 
