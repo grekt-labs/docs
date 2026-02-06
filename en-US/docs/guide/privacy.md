@@ -27,7 +27,7 @@ grekt ("we", "us") is an open source project. This policy explains how we handle
 
 ## Delete your account
 
-Contact us at grektlabs@gmail.com or open an issue on [GitHub](https://github.com/grekt-labs).
+Contact us at contact@grekt.com or open an issue on [GitHub](https://github.com/grekt-labs).
 
 ---
 

@@ -18,8 +18,8 @@ grekt is an open source artifact manager. By using the registry, you agree to:
 
 ## CLI and Libraries
 
-For the CLI and libraries, see the LICENSE file in each repository (MIT).
+For the CLI and libraries, see the [Licensing](/en-US/docs/guide/licensing) page.
 
 ## Questions
 
-Contact us at grektlabs@gmail.com or open an issue on [GitHub](https://github.com/grekt-labs).
+Contact us at contact@grekt.com or open an issue on [GitHub](https://github.com/grekt-labs).
