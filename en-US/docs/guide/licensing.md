@@ -20,7 +20,7 @@ grekt is source-available under the Business Source License 1.1 (BSL).
 
 ## What you cannot do
 
-- Build a competing AI artifact manager using grekt's code
+- Build a competing product using grekt's code
 - Offer grekt's functionality as a commercial service that replaces grekt
 
 ## Why BSL?
