@@ -135,3 +135,8 @@
 .Layout:has(.is-home) a.VPNavBarMenuLink:first-of-type {
   display: none !important;
 }
+
+/* Hide external link icon on Home link */
+a.VPNavBarMenuLink:first-of-type.vp-external-link-icon::after {
+  display: none !important;
+}
