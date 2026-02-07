@@ -101,7 +101,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const LANDING_URL = isProd ? 'https://grekt.com' : ''
 
 export const enUSNav = [
-  { text: 'Home', link: `${LANDING_URL}/` },
+  { text: 'Home', link: `${LANDING_URL}/`, target: '_self' },
   { text: 'Docs', link: '/en-US/docs/guide/introduction' },
   { text: 'API', link: '/en-US/api/' }
 ]
