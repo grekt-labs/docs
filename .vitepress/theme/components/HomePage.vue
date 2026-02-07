@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
+const DOCS_URL = 'https://docs.grekt.com'
+
 const installMethods = [
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
@@ -209,7 +211,7 @@ const toggleFaq = (index) => {
           </div>
           <h3>Sync to any AI</h3>
           <p>Push your agents, skills, etc... to Claude, OpenCode, Cursor and more with one command.</p>
-          <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
+          <a :href="`${DOCS_URL}/en-US/docs/guide/targets`" class="card-link">See targets →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -217,7 +219,7 @@ const toggleFaq = (index) => {
           </div>
           <h3>Share within projects</h3>
           <p>Publish artifacts to share AI configurations across teams or your own projects.</p>
-          <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
+          <a :href="`${DOCS_URL}/en-US/api/publish`" class="card-link">Learn to publish →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -225,7 +227,7 @@ const toggleFaq = (index) => {
           </div>
           <h3>Version control</h3>
           <p>Track changes with lockfiles. Update, rollback, and manage dependencies easily.</p>
-          <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
+          <a :href="`${DOCS_URL}/en-US/docs/guide/getting-started`" class="card-link">Get started →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
@@ -233,7 +235,7 @@ const toggleFaq = (index) => {
           </div>
           <h3>Install from anywhere</h3>
           <p>GitHub, GitLab, or public registry. Self hosted instances supported.</p>
-          <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
+          <a :href="`${DOCS_URL}/en-US/docs/guide/sources/overview`" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
           <span class="badge-coming-soon">Coming Soon</span>
@@ -383,10 +385,10 @@ const toggleFaq = (index) => {
           <div class="footer-column">
             <h4>Resources</h4>
             <ul>
-              <li><a href="/en-US/docs/guide/introduction">Introduction</a></li>
-              <li><a href="/en-US/docs/guide/getting-started">Quick start</a></li>
-              <li><a href="/en-US/api/">CLI Reference</a></li>
-              <li><a href="/en-US/docs/guide/sources/authentication">Authentication</a></li>
+              <li><a :href="`${DOCS_URL}/en-US/docs/guide/introduction`">Introduction</a></li>
+              <li><a :href="`${DOCS_URL}/en-US/docs/guide/getting-started`">Quick start</a></li>
+              <li><a :href="`${DOCS_URL}/en-US/api/`">CLI Reference</a></li>
+              <li><a :href="`${DOCS_URL}/en-US/docs/guide/sources/authentication`">Authentication</a></li>
             </ul>
           </div>
 
@@ -404,13 +406,13 @@ const toggleFaq = (index) => {
           <div class="footer-column">
             <h4>Legal</h4>
             <ul>
-              <li><a href="/en-US/docs/guide/licensing">Licensing</a></li>
+              <li><a :href="`${DOCS_URL}/en-US/docs/guide/licensing`">Licensing</a></li>
             </ul>
           </div>
         </div>
 
         <div class="footer-bottom">
-          <p class="copyright">Released under the <a href="/en-US/docs/guide/licensing">BSL 1.1 License</a></p>
+          <p class="copyright">Released under the <a :href="`${DOCS_URL}/en-US/docs/guide/licensing`">BSL 1.1 License</a></p>
           <p class="copyright">Copyright © {{ new Date().getFullYear() }} grekt-labs</p>
         </div>
       </div>
