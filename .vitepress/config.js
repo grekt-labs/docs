@@ -1,6 +1,9 @@
 import { defineConfig } from 'vitepress'
 import { enUSSidebar, enUSNav } from './configs/en-US'
 
+const isProd = process.env.NODE_ENV === 'production'
+const LANDING_URL = isProd ? 'https://grekt.com' : ''
+
 export default defineConfig({
   title: " ",
   description: "AI Artifact Manager - Manage and sync AI tool configurations",
@@ -21,7 +24,7 @@ export default defineConfig({
     logo: {
       light: '/grekt-logo-light.svg',
       dark: '/grekt-logo-dark.svg',
-      link: '/'
+      link: `${LANDING_URL}/`
     },
     nav: [
       ...enUSNav,

@@ -97,8 +97,11 @@ export const enUSSidebar = {
   ]
 }
 
+const isProd = process.env.NODE_ENV === 'production'
+const LANDING_URL = isProd ? 'https://grekt.com' : ''
+
 export const enUSNav = [
-  { text: 'Home', link: '/' },
+  { text: 'Home', link: `${LANDING_URL}/` },
   { text: 'Docs', link: '/en-US/docs/guide/introduction' },
   { text: 'API', link: '/en-US/api/' }
 ]
