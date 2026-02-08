@@ -23,9 +23,9 @@ export default defineConfig({
   themeConfig: {
     logo: {
       light: '/grekt-logo-light.svg',
-      dark: '/grekt-logo-dark.svg',
-      link: `${LANDING_URL}/`
+      dark: '/grekt-logo-dark.svg'
     },
+    logoLink: `${LANDING_URL}/`,
     nav: [
       ...enUSNav,
       { text: 'GitHub', link: 'https://github.com/grekt-labs' }
