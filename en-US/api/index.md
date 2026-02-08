@@ -5,8 +5,8 @@ grekt provides a command-line interface for managing AI artifacts.
 ## Commands
 
 <div class="api-groups">
-  <div class="api-group coming-soon">
-    <h3>Authentication <span class="badge">Coming Soon</span></h3>
+  <div class="api-group">
+    <h3>Authentication</h3>
     <ul>
       <li><a href="/en-US/api/login">grekt login</a><span class="desc">Log in to registry</span></li>
       <li><a href="/en-US/api/logout">grekt logout</a><span class="desc">Log out from registry</span></li>
