@@ -2,35 +2,27 @@
 
 Upload artifacts to a registry.
 
-::: info BEFORE YOU START
-If publishing to a private registry, configure `.grekt/config.yaml` first. This file stores your registry settings and tokens locally (gitignored).
-
-```bash
-grekt config registry set @scope
-```
-:::
-
 ## Manifest requirements
 
-Your artifact needs a `grekt.yaml` with these fields:
+Your artifact needs a `grekt.yaml`. For full details on artifact structure, see [Artifacts](/en-US/docs/guide/artifacts).
+
+The required fields for publishing are:
 
 ```yaml
 name: "@your-scope/my-artifact"
 version: 1.0.0
 description: What this artifact does
-keywords:
+keywords:             # required (3-5)
   - keyword1
   - keyword2
   - keyword3
 ```
 
-The `name` must include a scope (`@scope/name`) for publishing. The scope determines which registry to use.
+The `name` must include a scope (`@scope/name`). Your username is your scope, so if your username is `masterchief`, your artifacts are `@masterchief/my-artifact`.
 
-## Keywords
-
-Keywords are **required** for publishing (3-5). They enable discoverability in the artifact index.
-
-If you need help generating keywords, see [Generating keywords](#generating-keywords) below.
+::: warning KEYWORDS ARE REQUIRED
+Publishing will fail without 3 to 5 keywords. They are used for indexing and discoverability. If you need help generating them, see [Generating keywords](#generating-keywords).
+:::
 
 ## Publish
 
@@ -38,12 +30,14 @@ If you need help generating keywords, see [Generating keywords](#generating-keyw
 grekt publish ./path/to/artifact
 ```
 
+This publishes to the grekt public registry by default. No extra configuration needed. If you have multiple artifacts to manage, see [Monorepo](#monorepo).
+
 ### What happens
 
 1. **Validates manifest** — Checks required fields in `grekt.yaml`
 2. **Creates tarball** — Packages files into `.grekt/tmp/`
 3. **Checks uniqueness** — Fails if version already exists
-4. **Uploads** — Sends to configured registry
+4. **Uploads** — Sends to the registry
 5. **Cleans up** — Removes the temporary tarball
 
 ### Pack only
@@ -57,15 +51,27 @@ grekt pack ./my-artifact
 
 Useful for inspecting what gets packaged or distributing through other channels.
 
-## Registry routing
+## Custom registries
+
+::: info
+If you just want to publish to the grekt public registry, skip this section. Custom registries are only needed for self-hosted or platform-specific setups (GitLab, GitHub, etc).
+:::
 
 grekt determines where to publish based on the scope in your artifact's `name`:
 
 1. Extracts scope from `name` (e.g., `@myteam` from `@myteam/agent-tools`)
 2. Checks `.grekt/config.yaml` for a registry matching that scope
-3. If found, publishes to that registry (e.g., GitLab)
+3. If found, publishes to that registry instead of the public one
 
-Example with GitLab registry:
+To configure a custom registry:
+
+```bash
+grekt config registry set @scope
+```
+
+This stores registry settings and tokens in `.grekt/config.yaml` (gitignored).
+
+Example with GitLab:
 
 ```yaml
 # .grekt/config.yaml
@@ -80,6 +86,8 @@ registries:
 name: "@myteam/agent-tools"    # → publishes to GitLab (@myteam registry)
 version: 1.0.0
 ```
+
+For platform-specific setup, see [GitLab](/en-US/docs/guide/sources/gitlab) or [GitHub](/en-US/docs/guide/sources/github).
 
 ## Generating keywords
 
