@@ -159,7 +159,7 @@ const toggleFaq = (index) => {
           <span class="typing-text">{{ currentPhrase }}<span class="cursor">|</span></span>
         </h1>
         <p class="tagline">
-          Install, sync, and share AI configurations with version control, drift detection, and context management. <strong class="typing-text">AI agents, versioned like code.</strong>
+          Install, sync, and share AI configurations with version control, drift detection, and context management. <strong class="typing-text">AI configurations, versioned like code.</strong>
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
@@ -480,7 +480,7 @@ const toggleFaq = (index) => {
   --section-bg: #f5f5f7;
   --section-bg-alt: #ffffff;
   --footer-bg: #f5f5f7;
-  --logo-filter: none;
+  --logo-filter: brightness(0);
 
   /* Text accent - light mode uses darker shade */
   --grekt-text-accent: var(--grekt-primary-700);

@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { enUSSidebar, enUSNav } from './configs/en-US'
 
 export default defineConfig({
-  title: " ",
+  title: "grekt | AI Artifact Manager",
   description: "AI Artifact Manager - Manage and sync AI tool configurations",
 
   head: [
