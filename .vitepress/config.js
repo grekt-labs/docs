@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 import { enUSSidebar, enUSNav } from './configs/en-US'
 
 export default defineConfig({
-  title: "grekt | AI Artifact Manager",
-  description: "AI Artifact Manager - Manage and sync AI tool configurations",
+  title: "grekt | AI artifact manager",
+  description: "AI artifact manager - Manage and sync AI tool configurations",
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
@@ -18,6 +18,7 @@ export default defineConfig({
   },
 
   themeConfig: {
+    siteTitle: false,
     logo: {
       light: '/grekt-logo-light.svg',
       dark: '/grekt-logo-dark.svg'

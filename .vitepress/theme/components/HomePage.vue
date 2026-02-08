@@ -84,7 +84,7 @@ const faqItems = [
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes! The CLI is source available and free to use. The public registry for sharing artifacts will also be free when it launches.'
+    answer: 'Yes! The CLI is source available and free to use. The public registry will always be free for public artifacts.'
   },
   {
     question: 'Which AI tools are supported?',
@@ -837,12 +837,12 @@ const toggleFaq = (index) => {
 .install-select {
   appearance: none;
   -webkit-appearance: none;
-  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f0f0f3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-right: none;
   border-radius: 8px 0 0 8px;
   padding: 12px 42px 12px 16px;
-  color: #ffffff;
+  color: #1a1a2e;
   font-size: 0.85rem;
   font-weight: 500;
   font-family: inherit;
@@ -851,7 +851,7 @@ const toggleFaq = (index) => {
 }
 
 .install-select:hover {
-  background-color: #1c2128;
+  background-color: #e8e8ec;
 }
 
 .install-select:focus {
@@ -860,22 +860,42 @@ const toggleFaq = (index) => {
 }
 
 .install-select option {
+  background: #f0f0f3;
+  color: #1a1a2e;
+  padding: 8px;
+}
+
+.dark .install-select {
+  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.dark .install-select:hover {
+  background-color: #1c2128;
+}
+
+.dark .install-select option {
   background: #161b22;
   color: #e6edf3;
-  padding: 8px;
 }
 
 /* Install box */
 .install-box {
   display: flex;
   align-items: center;
-  background: #0d1117;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0 8px 8px 0;
   padding: 12px 16px;
   gap: 12px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   flex: 1;
+}
+
+.dark .install-box {
+  background: #0d1117;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .install-box--full {
@@ -889,10 +909,14 @@ const toggleFaq = (index) => {
 }
 
 .install-command {
-  color: #e6edf3;
+  color: #1a1a2e;
   font-size: 0.9rem;
   background: none;
   white-space: nowrap;
+}
+
+.dark .install-command {
+  color: #e6edf3;
 }
 
 .copy-btn {
@@ -901,7 +925,7 @@ const toggleFaq = (index) => {
   justify-content: center;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
@@ -910,6 +934,14 @@ const toggleFaq = (index) => {
 
 .copy-btn:hover {
   color: var(--grekt-text-accent);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dark .copy-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .copy-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -1541,10 +1573,14 @@ const toggleFaq = (index) => {
   }
 
   .install-select {
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 8px 8px 0 0;
     border-bottom: none;
     background-position: right 12px center;
+  }
+
+  .dark .install-select {
+    border-right-color: rgba(255, 255, 255, 0.1);
   }
 
   .install-box {
