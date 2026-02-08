@@ -181,6 +181,7 @@ const toggleFaq = (index) => {
               </button>
             </div>
           </div>
+          <a href="https://explore.grekt.com" class="secondary discover-btn">Explore artifacts</a>
         </div>
       </div>
 
@@ -236,7 +237,7 @@ const toggleFaq = (index) => {
           <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
-          <span class="badge-coming-soon">Coming Soon</span>
+          <span class="badge-coming-soon">Public Registry</span>
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
@@ -679,7 +680,7 @@ const toggleFaq = (index) => {
 
 /* Trusted By */
 .trusted-by {
-  display: none; /* Hidden until we have more logos */
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
@@ -928,7 +929,7 @@ const toggleFaq = (index) => {
 /* USE CASES */
 .use-cases {
   background: var(--section-bg-alt);
-  padding: 40px 20px 80px;
+  padding: 0 20px 80px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
@@ -1021,7 +1022,7 @@ const toggleFaq = (index) => {
 }
 
 .use-case-card--coming-soon h3 {
-  margin-bottom: 4px;
+  margin-bottom: 1px;
 }
 
 .use-case-card--coming-soon p {
@@ -1647,6 +1648,7 @@ const toggleFaq = (index) => {
     align-items: flex-start;
     gap: 0;
     padding: 32px;
+    order: -1;
   }
 
   .use-case-card--coming-soon .use-case-icon {
