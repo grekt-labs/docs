@@ -32,3 +32,4 @@ grekt init --yes    # Defaults
 
 - Won't overwrite existing files
 - Change config later with `grekt config`
+- If a `.gitignore` exists, `.grekt` will be added automatically. If no `.gitignore` is found, a warning will suggest adding it manually
