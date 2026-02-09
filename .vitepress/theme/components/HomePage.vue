@@ -406,6 +406,8 @@ const toggleFaq = (index) => {
             <h4>Legal</h4>
             <ul>
               <li><a href="/en-US/docs/guide/licensing">Licensing</a></li>
+              <li><a href="/en-US/docs/guide/privacy">Privacy Policy</a></li>
+              <li><a href="/en-US/docs/guide/terms">Terms of Service</a></li>
             </ul>
           </div>
         </div>
