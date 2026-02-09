@@ -96,7 +96,7 @@ grk-description: Review code changes
 /review - Analyze changes and provide feedback
 ```
 
-### MCPs
+### MCPs <Badge type="warning" text="Beta" />
 
 MCP server configurations (JSON format):
 
@@ -123,7 +123,7 @@ grk-description: Code style guidelines
 Follow these coding conventions...
 ```
 
-### Hooks
+### Hooks <Badge type="warning" text="Beta" />
 
 ::: warning Compatibility
 Hooks are currently only supported by **Claude**. Other targets will ignore hook components.
