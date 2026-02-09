@@ -117,13 +117,54 @@ grk-description: Code style guidelines
 Follow these coding conventions...
 ```
 
+### Hooks
+
+::: warning Compatibility
+Hooks are currently only supported by **Claude**. Other targets will ignore hook components.
+:::
+
+Lifecycle hooks that get installed into the target tool's settings. Hooks run shell commands at specific events (e.g. after a file is edited, before a tool is used). They are defined as JSON files:
+
+```json
+{
+  "grk-type": "hooks",
+  "grk-name": "format-on-save",
+  "grk-description": "Auto-format files after edit",
+  "target": "claude",
+  "events": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./format.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `target` | Which tool this hook is for (currently only `claude`) |
+| `events` | Map of event names to hook definitions |
+| `matcher` | Regex pattern to match tool names |
+| `command` | Shell command to run (relative paths are resolved to the artifact directory) |
+
+Hooks are **not** synced like other components. They are installed into the target's settings file (e.g. `.claude/settings.json`) when you run `grekt add`, and removed when you run `grekt remove`. During installation, grekt will show you what each hook does and ask for confirmation before modifying any settings.
+
+Referenced scripts (like `format.sh` in the example) should be included in the artifact alongside the hook JSON file.
+
 ## Frontmatter
 
 All component files use `grk-` prefixed properties to avoid collisions with other tools' frontmatter.
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `grk-type` | Yes | `agents`, `skills`, `commands`, `mcps`, or `rules` |
+| `grk-type` | Yes | `agents`, `skills`, `commands`, `mcps`, `rules`, or `hooks` |
 | `grk-name` | Yes | Unique identifier |
 | `grk-description` | Yes | What it does |
 | `grk-agents` | No | Parent agent (for skills/commands) |
