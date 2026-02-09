@@ -63,7 +63,7 @@ You are an expert code reviewer. Focus on:
 
 ### Skills
 
-Reusable capabilities for agents:
+Reusable capabilities that can be invoked on demand:
 
 ```markdown
 ---
@@ -75,6 +75,12 @@ grk-agents: code-reviewer
 
 When reviewing tests, check for edge cases and meaningful assertions.
 ```
+
+::: warning Skills with direct invocation in lazy mode
+[LAZY mode](/en-US/docs/guide/sync-modes) skills live outside your AI tool's directories, so `/skill` invocations won't work directly. Use the `/grekt` skill, available after running `grekt init`, to discover and load them on demand.
+
+See the [full guide](/en-US/docs/guide/skill-router) for usage, token cost, and plugin authoring.
+:::
 
 ### Commands
 

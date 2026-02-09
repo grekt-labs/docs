@@ -18,6 +18,7 @@ export default defineConfig({
   },
 
   themeConfig: {
+    outline: [2, 3],
     siteTitle: false,
     logo: {
       light: '/grekt-logo-light.svg',
