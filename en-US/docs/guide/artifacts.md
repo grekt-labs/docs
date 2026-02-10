@@ -34,13 +34,15 @@ keywords:
   - code
   - review
   - quality
+license: "MIT"
+repository: "https://your-repo.com/your-org/code-review"
 ```
 
 **Name formats:**
 - `@scope/name` — Scoped name (required for publishing). The scope determines which registry to use.
 - `name` — Unscoped name (local use only, cannot be published)
 
-Keywords (3-5) are required for publishing.
+Keywords (3-5) are required for publishing. `license` and `repository` are optional but recommended — they are displayed on the artifact detail page in the registry.
 
 ## Components
 

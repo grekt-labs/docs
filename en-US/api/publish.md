@@ -55,7 +55,8 @@ See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 5. Creates a tarball in `.grekt/tmp/`
 6. Checks version doesn't already exist
 7. Uploads to registry
-8. Cleans up tarball
+8. Sends `license` and `repository` (if present) to the registry
+9. Cleans up tarball
 
 ::: info Auto-generated components
 The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually — it will be overwritten.

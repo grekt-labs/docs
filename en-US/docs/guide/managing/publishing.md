@@ -16,9 +16,13 @@ keywords:             # required (3-5)
   - keyword1
   - keyword2
   - keyword3
+license: "MIT"                                      # optional
+repository: "https://your-repo.com/you/my-artifact"    # optional
 ```
 
 The `name` must include a scope (`@scope/name`). Your username is your scope, so if your username is `masterchief`, your artifacts are `@masterchief/my-artifact`.
+
+`license` and `repository` are optional. When provided, they are shown on the artifact detail page in the registry.
 
 ::: warning KEYWORDS ARE REQUIRED
 Publishing will fail without 3 to 5 keywords. They are used for indexing and discoverability. If you need help generating them, see [Generating keywords](#generating-keywords).
