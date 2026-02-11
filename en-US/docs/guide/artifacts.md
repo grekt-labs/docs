@@ -177,6 +177,20 @@ All component files use `grk-` prefixed properties to avoid collisions with othe
 | `grk-description` | Yes | What it does |
 | `grk-agents` | No | Parent agent (for skills/commands) |
 
+::: tip Compatibility with other tools
+If your files already have `type`, `name`, or `description` fields (e.g. from Claude or other AI tools), grekt will use them as fallback when the `grk-` prefixed versions are missing. You don't need to duplicate fields — but at least one variant of each required field must be present.
+
+```markdown
+---
+type: skills
+name: My Skill
+description: What this skill does
+---
+```
+
+When both exist, `grk-` prefixed fields always take priority.
+:::
+
 ## Project files
 
 ### grekt.yaml
