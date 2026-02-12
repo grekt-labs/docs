@@ -23,9 +23,9 @@ When you publish, grekt:
 3. Calculates SHA256 integrity hash
 4. Uploads to the registry
 
-Versions are **immutable** — once published, a version cannot be modified or overwritten. This ensures deterministic installs via lockfile.
+Versions are **immutable** - once published, a version cannot be modified or overwritten. This ensures deterministic installs via lockfile.
 
 ## Related
 
-- [Publishing](/en-US/docs/guide/managing/publishing) — Upload artifacts
-- [Versioning](/en-US/docs/guide/managing/versioning) — Versions and deprecation
+- [Publishing](/en-US/docs/guide/managing/publishing) - Upload artifacts
+- [Versioning](/en-US/docs/guide/managing/versioning) - Versions and deprecation

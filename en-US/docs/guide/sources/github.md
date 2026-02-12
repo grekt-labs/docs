@@ -107,6 +107,6 @@ Source mode only supports one artifact per repository. No version listing, no de
 
 ## Related
 
-- [Overview](/en-US/docs/guide/sources/overview) — Sources overview
-- [GitLab](/en-US/docs/guide/sources/gitlab) — GitLab registry
-- [Authentication](/en-US/docs/guide/sources/authentication) — Full auth guide
+- [Overview](/en-US/docs/guide/sources/overview) - Sources overview
+- [GitLab](/en-US/docs/guide/sources/gitlab) - GitLab registry
+- [Authentication](/en-US/docs/guide/sources/authentication) - Full auth guide

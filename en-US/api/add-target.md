@@ -24,10 +24,10 @@ To remove targets, use [`grekt remove-target`](./remove-target.md).
 
 Select "Other (custom)" to configure a custom target:
 
-1. **Internal ID** — kebab-case identifier for grekt config
-2. **Display name** — shown in CLI output
-3. **Context entry point** — main file for the AI tool
-4. **Paths** — optional custom paths per category
+1. **Internal ID** - kebab-case identifier for grekt config
+2. **Display name** - shown in CLI output
+3. **Context entry point** - main file for the AI tool
+4. **Paths** - optional custom paths per category
 
 Custom targets are saved to `grekt.yaml`:
 

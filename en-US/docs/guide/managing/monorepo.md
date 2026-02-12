@@ -143,12 +143,12 @@ jobs:
 
 grekt is agnostic to versioning tools. Use whatever fits your workflow:
 
-- [changesets](https://github.com/changesets/changesets) — Changelog management
-- [release-it](https://github.com/release-it/release-it) — Generic release automation
-- Manual — `grekt version patch` per artifact
+- [changesets](https://github.com/changesets/changesets) - Changelog management
+- [release-it](https://github.com/release-it/release-it) - Generic release automation
+- Manual - `grekt version patch` per artifact
 
 ::: info Compatibility layer
-Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed — grekt syncs versions back to `grekt.yaml` and cleans up automatically.
+Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed - grekt syncs versions back to `grekt.yaml` and cleans up automatically.
 :::
 
 ## Full example
@@ -197,7 +197,7 @@ Result:
 
 ## Related
 
-- [grekt workspace](/en-US/api/workspace) — Command reference
-- [grekt version](/en-US/api/version) — Version bumping
-- [grekt publish](/en-US/api/publish) — Publishing artifacts
-- [Registry prefix](/en-US/docs/guide/sources/gitlab#monorepo-organization) — Registry organization
+- [grekt workspace](/en-US/api/workspace) - Command reference
+- [grekt version](/en-US/api/version) - Version bumping
+- [grekt publish](/en-US/api/publish) - Publishing artifacts
+- [Registry prefix](/en-US/docs/guide/sources/gitlab#monorepo-organization) - Registry organization

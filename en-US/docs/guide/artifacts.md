@@ -3,7 +3,7 @@
 An artifact is a bundle of AI configurations: agents, skills, commands, MCPs, rules...
 
 ::: tip File organization
-You can organize files however you want. The `grk-type` field in frontmatter defines what each file is — not its location. A file in `tools/linter.md` can be an agent, a skill, or anything else based on its frontmatter.
+You can organize files however you want. The `grk-type` field in frontmatter defines what each file is - not its location. A file in `tools/linter.md` can be an agent, a skill, or anything else based on its frontmatter.
 :::
 
 ## Structure
@@ -39,10 +39,10 @@ repository: "https://your-repo.com/your-org/code-review"
 ```
 
 **Name formats:**
-- `@scope/name` — Scoped name (required for publishing). The scope determines which registry to use.
-- `name` — Unscoped name (local use only, cannot be published)
+- `@scope/name` - Scoped name (required for publishing). The scope determines which registry to use.
+- `name` - Unscoped name (local use only, cannot be published)
 
-Keywords (3-5) are required for publishing. `license` and `repository` are optional but recommended — they are displayed on the artifact detail page in the registry.
+Keywords (3-5) are required for publishing. `license` and `repository` are optional but recommended - they are displayed on the artifact detail page in the registry.
 
 ## Components
 
@@ -178,7 +178,7 @@ All component files use `grk-` prefixed properties to avoid collisions with othe
 | `grk-agents` | No | Parent agent (for skills/commands) |
 
 ::: tip Compatibility with other tools
-If your files already have `type`, `name`, or `description` fields (e.g. from Claude or other AI tools), grekt will use them as fallback when the `grk-` prefixed versions are missing. You don't need to duplicate fields — but at least one variant of each required field must be present.
+If your files already have `type`, `name`, or `description` fields (e.g. from Claude or other AI tools), grekt will use them as fallback when the `grk-` prefixed versions are missing. You don't need to duplicate fields - but at least one variant of each required field must be present.
 
 ```markdown
 ---

@@ -8,7 +8,7 @@ grekt is [source available](https://en.wikipedia.org/wiki/Source-available_softw
 |-----------|---------|-------------|
 | **CLI** | BSL 1.1 | MIT (after 2 years) |
 | **Engine** | BSL 1.1 | MIT (after 2 years) |
-| **Keywords** | MIT | — |
+| **Keywords** | MIT | - |
 
 ## What you can do
 

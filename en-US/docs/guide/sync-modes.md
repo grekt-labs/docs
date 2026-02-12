@@ -66,7 +66,7 @@ Modern AI tools like Claude Code have built-in discovery mechanisms for skills a
 
 If you install 50 artifacts directly into `.claude/skills/`, the tool still needs to index and potentially reference all of them. Even with smart discoverability, this adds noise to the AI's context window.
 
-Lazy mode keeps artifacts **outside** the tool's directories until explicitly needed. The `.grekt/index` acts as a lightweight catalog — a few lines of text instead of full artifact content sitting in your tool's folders.
+Lazy mode keeps artifacts **outside** the tool's directories until explicitly needed. The `.grekt/index` acts as a lightweight catalog - a few lines of text instead of full artifact content sitting in your tool's folders.
 
 This gives you the best of both worlds:
 

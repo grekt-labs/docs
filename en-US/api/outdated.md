@@ -60,7 +60,7 @@ Both `upgrade` and `add` preserve component selections from `--choose`.
 
 ## Related commands
 
-- [grekt upgrade](/en-US/api/upgrade) — Upgrade outdated artifacts
-- [grekt add](/en-US/api/add) — Add or update an artifact
-- [grekt versions](/en-US/api/versions) — List all versions
-- [grekt list](/en-US/api/list) — List installed artifacts
+- [grekt upgrade](/en-US/api/upgrade) - Upgrade outdated artifacts
+- [grekt add](/en-US/api/add) - Add or update an artifact
+- [grekt versions](/en-US/api/versions) - List all versions
+- [grekt list](/en-US/api/list) - List installed artifacts

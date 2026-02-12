@@ -8,9 +8,9 @@ grekt check
 
 ## What it checks
 
-1. **Integrity** — SHA256 checksums against lockfile
-2. **Overlaps** — Files with same name across artifacts
-3. **Context** — Total size and estimated tokens
+1. **Integrity** - SHA256 checksums against lockfile
+2. **Overlaps** - Files with same name across artifacts
+3. **Context** - Total size and estimated tokens
 
 ## Output
 

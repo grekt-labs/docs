@@ -13,7 +13,7 @@ Each publish requires a unique version. If you try to publish an existing versio
 ℹ Bump the version in grekt.yaml and try again
 ```
 
-Versions are immutable — this ensures that `grekt install` with a lockfile always produces the same result.
+Versions are immutable - this ensures that `grekt install` with a lockfile always produces the same result.
 
 ## Listing versions
 
@@ -51,7 +51,7 @@ grekt deprecate @author/my-artifact@1.0.0 "Security fix in 1.0.1"
 Deleting versions breaks reproducibility. Projects using lockfiles expect specific versions to remain available. Deprecation warns users without breaking their builds.
 
 ::: warning Registry only
-Deprecation only works with the official grekt registry. For artifacts hosted on GitHub or GitLab, deprecation is not supported — use delete to remove versions entirely.
+Deprecation only works with the official grekt registry. For artifacts hosted on GitHub or GitLab, deprecation is not supported - use delete to remove versions entirely.
 :::
 
 ## Undeprecating
@@ -64,7 +64,7 @@ grekt undeprecate @author/my-artifact@1.0.0
 
 ## Related
 
-- [grekt deprecate](/en-US/api/deprecate) — Command reference
-- [grekt undeprecate](/en-US/api/undeprecate) — Command reference
-- [grekt versions](/en-US/api/versions) — Command reference
-- [grekt info](/en-US/api/info) — Command reference
+- [grekt deprecate](/en-US/api/deprecate) - Command reference
+- [grekt undeprecate](/en-US/api/undeprecate) - Command reference
+- [grekt versions](/en-US/api/versions) - Command reference
+- [grekt info](/en-US/api/info) - Command reference

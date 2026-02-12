@@ -37,7 +37,7 @@ Packing @author/my-artifact@1.0.0...
 5. Creates tarball in `.grekt/tmp/`
 
 ::: info Auto-generated components
-The `components` field in the packaged `grekt.yaml` is **auto-generated**. Your original file is not modified — only the tarball contains the generated field.
+The `components` field in the packaged `grekt.yaml` is **auto-generated**. Your original file is not modified - only the tarball contains the generated field.
 
 This helps AI tools discover what's inside the artifact without scanning every file.
 :::
@@ -61,5 +61,5 @@ project/
 
 ## Related commands
 
-- [grekt publish](/en-US/api/publish) — Pack and publish to registry
-- [grekt version](/en-US/api/version) — Auto-version artifacts
+- [grekt publish](/en-US/api/publish) - Pack and publish to registry
+- [grekt version](/en-US/api/version) - Auto-version artifacts

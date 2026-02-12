@@ -59,6 +59,6 @@ A directory is considered an artifact if it contains `grekt.yaml`.
 
 ## Related commands
 
-- [grekt version --exec](/en-US/api/version) — Version with external tools
-- [grekt publish --changed](/en-US/api/publish) — Publish changed artifacts
-- [Monorepo guide](/en-US/docs/guide/managing/monorepo) — Full workflow
+- [grekt version --exec](/en-US/api/version) - Version with external tools
+- [grekt publish --changed](/en-US/api/publish) - Publish changed artifacts
+- [Monorepo guide](/en-US/docs/guide/managing/monorepo) - Full workflow

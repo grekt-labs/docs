@@ -30,5 +30,5 @@ This command only works with the official grekt registry. For artifacts hosted o
 
 ## Related commands
 
-- [grekt deprecate](/en-US/api/deprecate) — Mark a version as deprecated
-- [grekt versions](/en-US/api/versions) — List versions with deprecation status
+- [grekt deprecate](/en-US/api/deprecate) - Mark a version as deprecated
+- [grekt versions](/en-US/api/versions) - List versions with deprecation status

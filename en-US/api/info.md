@@ -37,5 +37,5 @@ $ grekt info @author/code-reviewer
 
 ## Related commands
 
-- [grekt versions](/en-US/api/versions) — List all versions with details
-- [grekt add](/en-US/api/add) — Install an artifact
+- [grekt versions](/en-US/api/versions) - List all versions with details
+- [grekt add](/en-US/api/add) - Install an artifact
