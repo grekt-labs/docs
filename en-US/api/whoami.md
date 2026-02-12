@@ -12,5 +12,5 @@ grekt whoami
 
 ## Related commands
 
-- [grekt login](/en-US/api/login) — Log in to registry
-- [grekt logout](/en-US/api/logout) — Log out from registry
+- [grekt login](/en-US/api/login) - Log in to registry
+- [grekt logout](/en-US/api/logout) - Log out from registry

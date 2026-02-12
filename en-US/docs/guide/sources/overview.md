@@ -2,23 +2,19 @@
 
 grekt supports multiple ways to install artifacts.
 
-## Git sources
+## Registries
 
-Install directly from GitHub or GitLab repositories. Best for single artifacts — no registry configuration needed, just a token for private repos.
+### Public registry
 
-One repo = one artifact.
+Browse and install artifacts directly from [explore.grekt.com](https://explore.grekt.com). No configuration needed.
 
 ```bash
-grekt add github:user/my-agent
-grekt add github:user/my-agent#v1.0.0
-
-grekt add gitlab:user/my-agent
-grekt add gitlab:gitlab.company.com/user/my-agent#v1.0.0
+grekt add @scope/artifact-name
 ```
 
-## Registry
+### Self-hosted registry
 
-Host multiple artifacts in a single project. Requires [registry configuration](/en-US/docs/guide/sources/gitlab#registry-monorepo) but gives you version listing, deprecation, and better organization:
+Host your own registry on GitLab with version listing, deprecation, and [monorepo](/en-US/docs/guide/managing/monorepo) support. Requires [registry configuration](/en-US/docs/guide/sources/gitlab#registry-monorepo).
 
 ```bash
 grekt add @myteam/agent-tools
@@ -33,8 +29,20 @@ registries:
     project: myteam/artifacts
 ```
 
+## Git sources
+
+Install directly from GitHub or GitLab repositories. No registry configuration needed, just a token for private repos.
+
+```bash
+grekt add github:user/my-agent
+grekt add github:user/my-agent#v1.0.0
+
+grekt add gitlab:user/my-agent
+grekt add gitlab:gitlab.company.com/user/my-agent#v1.0.0
+```
+
 ## Related
 
-- [GitHub](/en-US/docs/guide/sources/github) — GitHub source
-- [GitLab](/en-US/docs/guide/sources/gitlab) — Source + registry (monorepo)
-- [Authentication](/en-US/docs/guide/sources/authentication) — Tokens
+- [GitLab](/en-US/docs/guide/sources/gitlab) - Source + registry (monorepo)
+- [GitHub](/en-US/docs/guide/sources/github) - GitHub source
+- [Authentication](/en-US/docs/guide/sources/authentication) - Tokens

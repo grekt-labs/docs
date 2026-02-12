@@ -16,8 +16,8 @@ After removing, prompts whether to delete the target folders (e.g., `.claude/`, 
 
 When prompted "Delete the folders created by these targets?":
 
-- **Yes** — Deletes target directories and entry point files
-- **No** — Only removes from config, keeps folders
+- **Yes** - Deletes target directories and entry point files
+- **No** - Only removes from config, keeps folders
 
 | Target | What gets deleted |
 |--------|-------------------|

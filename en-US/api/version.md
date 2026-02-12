@@ -90,6 +90,6 @@ $ grekt version --exec "npx changeset version"
 
 ## Related commands
 
-- [grekt publish](/en-US/api/publish) — Publish artifacts
-- [grekt workspace](/en-US/api/workspace) — Workspace management
-- [Monorepo guide](/en-US/docs/guide/managing/monorepo) — Full workflow
+- [grekt publish](/en-US/api/publish) - Publish artifacts
+- [grekt workspace](/en-US/api/workspace) - Workspace management
+- [Monorepo guide](/en-US/docs/guide/managing/monorepo) - Full workflow

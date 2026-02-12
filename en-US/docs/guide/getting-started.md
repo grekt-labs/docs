@@ -28,7 +28,7 @@ Every project using grekt needs to be initialized. This creates the configuratio
 grekt init
 ```
 
-You'll be prompted to select your targets — the AI tools where artifacts will be synced (Claude Code, Cursor, Windsurf...).
+You'll be prompted to select your targets - the AI tools where artifacts will be synced (Claude Code, Cursor, Windsurf...).
 
 This creates the following structure in your project:
 

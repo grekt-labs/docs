@@ -81,6 +81,6 @@ When the new version adds or removes components, the upgrade shows a diff and re
 
 ## Related commands
 
-- [grekt outdated](/en-US/api/outdated) — Check which artifacts have updates
-- [grekt add](/en-US/api/add) — Add or update a single artifact
-- [grekt install](/en-US/api/install) — Install from lockfile
+- [grekt outdated](/en-US/api/outdated) - Check which artifacts have updates
+- [grekt add](/en-US/api/add) - Add or update a single artifact
+- [grekt install](/en-US/api/install) - Install from lockfile

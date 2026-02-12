@@ -59,7 +59,7 @@ See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 9. Cleans up tarball
 
 ::: info Auto-generated components
-The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually — it will be overwritten.
+The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually - it will be overwritten.
 :::
 
 ## Workspace mode
@@ -114,7 +114,7 @@ Version exists:
 
 ## Related commands
 
-- [grekt pack](/en-US/api/pack) — Create tarball without publishing
-- [grekt version](/en-US/api/version) — Bump versions
-- [grekt workspace](/en-US/api/workspace) — Workspace management
-- [Monorepo guide](/en-US/docs/guide/managing/monorepo) — Full workflow
+- [grekt pack](/en-US/api/pack) - Create tarball without publishing
+- [grekt version](/en-US/api/version) - Bump versions
+- [grekt workspace](/en-US/api/workspace) - Workspace management
+- [Monorepo guide](/en-US/docs/guide/managing/monorepo) - Full workflow

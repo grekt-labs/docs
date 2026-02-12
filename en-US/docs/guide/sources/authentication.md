@@ -52,5 +52,5 @@ Check token has required scopes. For GitLab registries, Deploy Tokens with `read
 
 ## Related
 
-- [GitHub](/en-US/docs/guide/sources/github) — GitHub setup
-- [GitLab](/en-US/docs/guide/sources/gitlab) — GitLab setup
+- [GitHub](/en-US/docs/guide/sources/github) - GitHub setup
+- [GitLab](/en-US/docs/guide/sources/gitlab) - GitLab setup

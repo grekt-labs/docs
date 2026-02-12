@@ -38,11 +38,11 @@ This publishes to the grekt public registry by default. No extra configuration n
 
 ### What happens
 
-1. **Validates manifest** — Checks required fields in `grekt.yaml`
-2. **Creates tarball** — Packages files into `.grekt/tmp/`
-3. **Checks uniqueness** — Fails if version already exists
-4. **Uploads** — Sends to the registry
-5. **Cleans up** — Removes the temporary tarball
+1. **Validates manifest** - Checks required fields in `grekt.yaml`
+2. **Creates tarball** - Packages files into `.grekt/tmp/`
+3. **Checks uniqueness** - Fails if version already exists
+4. **Uploads** - Sends to the registry
+5. **Cleans up** - Removes the temporary tarball
 
 ### Pack only
 
@@ -122,8 +122,8 @@ For publishing multiple artifacts from a single repository, see [Monorepo](/en-U
 
 ## Related
 
-- [grekt pack](/en-US/api/pack) — Create tarball without publishing
-- [grekt publish](/en-US/api/publish) — Command reference
-- [GitLab](/en-US/docs/guide/sources/gitlab) — GitLab registry setup
-- [Versioning](/en-US/docs/guide/managing/versioning) — Version management
-- [Monorepo](/en-US/docs/guide/managing/monorepo) — Multiple artifacts in one repo
+- [grekt pack](/en-US/api/pack) - Create tarball without publishing
+- [grekt publish](/en-US/api/publish) - Command reference
+- [GitLab](/en-US/docs/guide/sources/gitlab) - GitLab registry setup
+- [Versioning](/en-US/docs/guide/managing/versioning) - Version management
+- [Monorepo](/en-US/docs/guide/managing/monorepo) - Multiple artifacts in one repo

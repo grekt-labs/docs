@@ -51,7 +51,7 @@ grekt info @myteam/agent-tools
 
 For private GitLab registries, you need a token. Two options:
 
-### Personal Access Tokens (PAT) — Recommended
+### Personal Access Tokens (PAT) - Recommended
 
 PATs provide full functionality including version listing and "latest" resolution.
 
@@ -191,6 +191,6 @@ Source mode only supports one artifact per repository. No version listing, no de
 
 ## Related
 
-- [Overview](/en-US/docs/guide/sources/overview) — Sources overview
-- [GitHub](/en-US/docs/guide/sources/github) — GitHub source
-- [Authentication](/en-US/docs/guide/sources/authentication) — Full auth guide
+- [Overview](/en-US/docs/guide/sources/overview) - Sources overview
+- [GitHub](/en-US/docs/guide/sources/github) - GitHub source
+- [Authentication](/en-US/docs/guide/sources/authentication) - Full auth guide
