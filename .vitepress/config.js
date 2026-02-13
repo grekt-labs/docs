@@ -1,9 +1,15 @@
 import { defineConfig } from 'vitepress'
+import { createSitemapItems } from './sitemap'
 import { enUSSidebar, enUSNav } from './configs/en-US'
 
 export default defineConfig({
   title: "grekt | AI artifact manager",
   description: "Manage and sync AI tool configurations. The open CLI for prompt templates, system instructions, MCP configs, and more.",
+
+  sitemap: {
+    hostname: 'https://grekt.com',
+    transformItems: createSitemapItems,
+  },
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
