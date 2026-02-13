@@ -1,7 +1,6 @@
 <script setup>
 import { ref, nextTick, onUnmounted } from 'vue'
 
-const emit = defineEmits(['next-tab'])
 
 const lines = ref([])
 const animating = ref(false)
@@ -61,18 +60,33 @@ function toggleItem(targetId) {
   )
 }
 
-const configPreview = ref('')
 const configVisible = ref(false)
 
-const configContent = `# grekt.yaml
-artifacts:
-  @grekt/overseas:
-    version: "1.2.0"
-    skills:
-      - pirate-commits
-      - pirate-greetings
-    hooks:
-      - overseas-session-init`
+const beforeConfig = [
+  { num: 1, text: 'targets:', type: 'key' },
+  { num: 2, text: '  - claude', type: 'value' },
+  { num: 3, text: '  - codex', type: 'value' },
+  { num: 4, text: 'artifacts: {}', type: 'key' },
+  { num: 5, text: 'customTargets: {}', type: 'key' },
+]
+
+const afterConfig = [
+  { num: 1, text: 'targets:', type: 'key' },
+  { num: 2, text: '  - claude', type: 'value' },
+  { num: 3, text: '  - codex', type: 'value' },
+  { num: 4, text: 'artifacts:', type: 'key' },
+  { num: 5, text: '  "@grekt/overseas":', type: 'key' },
+  { num: 6, text: '    version: "1.2.0"', type: 'value' },
+  { num: 7, text: '    skills:', type: 'key' },
+  { num: 8, text: '      - pirate-commits', type: 'value' },
+  { num: 9, text: '      - pirate-greetings', type: 'value' },
+  { num: 10, text: '      # sea-metaphors skipped', type: 'comment' },
+  { num: 11, text: '    hooks:', type: 'key' },
+  { num: 12, text: '      - overseas-session-init', type: 'value' },
+  { num: 13, text: 'customTargets: {}', type: 'key' },
+]
+
+const configLines = ref(beforeConfig)
 
 function pushLine(line) {
   lines.value.push(line)
@@ -147,7 +161,7 @@ const runCommand = () => {
 
   t += 600
   scheduleTimeout(() => {
-    configPreview.value = configContent
+    configLines.value = afterConfig
     configVisible.value = true
   }, t)
 
@@ -161,6 +175,8 @@ const runCommand = () => {
 onUnmounted(() => {
   timeouts.forEach(clearTimeout)
 })
+
+defineExpose({ runCommand, animating, finished })
 </script>
 
 <template>
@@ -224,30 +240,34 @@ onUnmounted(() => {
             </template>
           </div>
 
-          <div v-if="finished" class="terminal-prompt-input">
-            <button class="run-command-btn run-command-btn--next" @click="emit('next-tab')">
-              <span class="next-tab-label">Choose what matters</span>
-              <span class="next-tab-arrow">›</span>
-            </button>
-          </div>
-          <div v-else class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
-            <button class="run-command-btn" :disabled="animating" @click="runCommand">
-              <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt add @grekt/overseas --choose</span>
-              <span class="run-hint">click to run</span>
-            </button>
-          </div>
         </div>
       </div>
 
-      <!-- Right: Config preview -->
+      <!-- Bottom: Config preview -->
       <div class="demo-config">
-        <div class="config-header">grekt.yaml</div>
-        <div class="config-content" :class="{ 'config-content--visible': configVisible }">
-          <pre class="config-code">{{ configPreview }}</pre>
+        <div class="config-editor-header">
+          <span class="config-filename">grekt.yaml</span>
+          <span v-if="configVisible" class="config-updated">Updated</span>
         </div>
-        <div v-if="!configVisible" class="config-placeholder">
-          <span class="config-placeholder-text">Your selection is saved in the config</span>
+        <div class="config-editor-content">
+          <div
+            v-for="line in configLines"
+            :key="line.num + '-' + line.text"
+            class="config-line"
+            :class="{
+              'config-line--new': configVisible && line.num >= 4 && line.num <= 12,
+            }"
+          >
+            <span class="config-line-num">{{ line.num }}</span>
+            <span
+              class="config-line-text"
+              :class="{
+                'config-line-text--comment': line.type === 'comment',
+                'config-line-text--key': line.type === 'key',
+                'config-line-text--value': line.type === 'value',
+              }"
+            >{{ line.text }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -260,11 +280,8 @@ onUnmounted(() => {
 }
 
 .demo-split {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 0;
-  height: 500px;
-  max-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Terminal */
@@ -274,8 +291,10 @@ onUnmounted(() => {
   padding: 20px 24px;
   overflow-y: auto;
   scroll-behavior: smooth;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-y: scroll;
   background: rgba(0, 0, 0, 0.5);
+  min-height: 220px;
+  max-height: 190px;
 }
 
 .terminal-content {
@@ -414,122 +433,81 @@ onUnmounted(() => {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.terminal-prompt-input {
-  padding-top: 8px;
-}
-
-.run-command-btn {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  width: 100%;
-  padding: 8px 12px;
-  background: rgba(119, 202, 189, 0.06);
-  border: 1px solid rgba(119, 202, 189, 0.2);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.78rem;
-  animation: prompt-pulse 2s ease-in-out infinite;
-}
-
-.run-command-btn:hover:not(:disabled) {
-  background: rgba(119, 202, 189, 0.12);
-  border-color: rgba(119, 202, 189, 0.4);
-  animation: none;
-}
-
-.run-command-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-  animation: none;
-}
-
-.command-preview {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-}
-
-.run-hint {
-  margin-left: auto;
-  color: rgba(119, 202, 189, 0.5);
-  font-size: 0.65rem;
-  font-style: italic;
-}
-
-.terminal-prompt-input--disabled .run-hint {
-  display: none;
-}
-
-.run-command-btn--next {
-  justify-content: center;
-  gap: 8px;
-}
-
-.next-tab-label {
-  color: #77CABD;
-  font-weight: 500;
-}
-
-.next-tab-arrow {
-  color: #77CABD;
-  font-size: 1.1em;
-  font-weight: 600;
-}
-
 /* Config panel */
 .demo-config {
-  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.config-header {
+.config-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.config-filename {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.config-updated {
+  margin-left: auto;
+  font-size: 0.62rem;
+  color: #77CABD;
+  animation: line-fade-in 0.2s ease-out;
+}
+
+.config-editor-content {
+  padding: 8px 0;
+}
+
+.config-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 16px;
+  line-height: 1.65;
+  min-height: 1.65em;
+  transition: background 0.3s ease;
+}
+
+.config-line--new {
+  background: rgba(119, 202, 189, 0.06);
+  animation: line-fade-in 0.3s ease-out;
+}
+
+.config-line-num {
+  color: rgba(255, 255, 255, 0.15);
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 12px;
-  font-weight: 600;
+  width: 20px;
+  text-align: right;
+  margin-right: 16px;
+  flex-shrink: 0;
+  user-select: none;
 }
 
-.config-content {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.config-content--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.config-code {
+.config-line-text {
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   font-size: 0.75rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.6);
   white-space: pre;
 }
 
-.config-placeholder {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.config-line-text--comment {
+  color: rgba(255, 255, 255, 0.3);
 }
 
-.config-placeholder-text {
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 0.75rem;
-  font-style: italic;
+.config-line-text--key {
+  color: #e8a838;
+}
+
+.config-line-text--value {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 @keyframes line-fade-in {
@@ -542,38 +520,18 @@ onUnmounted(() => {
   to { transform: rotate(360deg); }
 }
 
-@keyframes prompt-pulse {
-  0%, 100% { border-color: rgba(119, 202, 189, 0.15); }
-  50% { border-color: rgba(119, 202, 189, 0.35); }
-}
-
 @media (max-width: 768px) {
-  .demo-split {
-    grid-template-columns: 1fr;
-    height: auto;
-    max-height: none;
-  }
-
   .demo-terminal {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding: 16px 20px;
-    order: 1;
-    max-height: 300px;
-  }
-
-  .demo-config {
-    padding: 16px 20px;
-    order: 2;
-    max-height: 200px;
+    max-height: 280px;
   }
 
   .terminal-content {
     font-size: 0.7rem;
   }
 
-  .config-code {
-    font-size: 0.65rem;
+  .config-line-text {
+    font-size: 0.68rem;
   }
 }
 </style>

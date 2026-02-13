@@ -1,12 +1,19 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import CliDemo from './cli-demos/CliDemo.vue'
+import TerminalChrome from './cli-demos/TerminalChrome.vue'
+import { defineAsyncComponent } from 'vue'
+
+const CliDemoChoose = defineAsyncComponent(() => import('./cli-demos/CliDemoChoose.vue'))
+const CliDemoSync = defineAsyncComponent(() => import('./cli-demos/CliDemoSync.vue'))
+const CliDemoUpdate = defineAsyncComponent(() => import('./cli-demos/CliDemoUpdate.vue'))
+const CliDemoCheck = defineAsyncComponent(() => import('./cli-demos/CliDemoCheck.vue'))
 
 const installMethods = [
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
 ]
 
+const chooseRef = ref(null)
 const activeInstall = ref('curl')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
@@ -251,11 +258,85 @@ const toggleFaq = (index) => {
     <!-- Section Divider -->
     <div class="section-divider"></div>
 
-    <!-- CLI DEMOS -->
-    <section class="cli-demos-section">
-      <h2 class="section-title">What grekt does for you</h2>
-      <p class="section-subtitle">Same skills, same behavior, same results across agents, teams, and projects. Choose what matters, skip what doesn't, and keep everything in sync without drift.</p>
-      <CliDemo />
+    <!-- FEATURE: PICK & SKIP -->
+    <section class="feature-section">
+      <div class="feature-row">
+        <div class="feature-text">
+          <h2 class="feature-title">Pick only what you need</h2>
+          <p class="feature-description">Every artifact could ship with skills, hooks, and more. <strong>You choose what stays and what gets skipped.</strong> No bloat, no surprises.</p>
+          <div v-if="!chooseRef?.finished" class="feature-run-wrapper">
+            <label class="feature-run-label">Try it</label>
+            <button
+              class="feature-run-btn"
+              :disabled="chooseRef?.animating"
+              @click="chooseRef?.runCommand()"
+            >
+              <span class="dots-border"></span>
+              <span class="feature-run-cmd">See how your selection is reflected</span>
+              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+            </button>
+          </div>
+        </div>
+        <div class="feature-demo">
+          <TerminalChrome>
+            <CliDemoChoose ref="chooseRef" />
+          </TerminalChrome>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- FEATURE: CORE MODE -->
+    <section class="feature-section">
+      <div class="feature-row feature-row--reversed">
+        <div class="feature-text">
+          <h2 class="feature-title">Choose what matters</h2>
+          <p class="feature-description">By default, grekt loads artifacts in lazy mode. With <strong>--core</strong>, skills go directly into each AI tool's context folder, committed to your repo and shared with your entire team.</p>
+        </div>
+        <div class="feature-demo">
+          <TerminalChrome>
+            <CliDemoSync />
+          </TerminalChrome>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- FEATURE: UPDATE -->
+    <section class="feature-section">
+      <div class="feature-row">
+        <div class="feature-text">
+          <h2 class="feature-title">Upgrade without surprises</h2>
+          <p class="feature-description">Upgrade artifacts to the latest version with a single command. Your selections from <strong>--choose</strong> are preserved, and if the artifact structure changes, you'll be asked again.</p>
+        </div>
+        <div class="feature-demo">
+          <TerminalChrome>
+            <CliDemoUpdate />
+          </TerminalChrome>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- FEATURE: DETECT DIFFS -->
+    <section class="feature-section">
+      <div class="feature-row feature-row--reversed">
+        <div class="feature-text">
+          <h2 class="feature-title">Detect drift instantly</h2>
+          <p class="feature-description">Someone edited a managed file? grekt knows. Run <strong>grekt check</strong> to detect local modifications and decide whether to restore or keep them.</p>
+        </div>
+        <div class="feature-demo">
+          <TerminalChrome>
+            <CliDemoCheck />
+          </TerminalChrome>
+        </div>
+      </div>
     </section>
 
     <!-- Section Divider -->
@@ -1278,18 +1359,194 @@ const toggleFaq = (index) => {
   line-height: 1.8;
 }
 
-/* CLI DEMOS */
-.cli-demos-section {
+/* FEATURE SECTIONS */
+.feature-section {
   background: var(--section-bg);
   padding: 80px 20px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
-.cli-demos-section > * {
+.feature-row {
   max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.feature-row--reversed {
+  grid-template-columns: 0.6fr 0.4fr;
+}
+
+.feature-row--reversed .feature-text {
+  order: 2;
+}
+
+.feature-row--reversed .feature-demo {
+  order: 1;
+}
+
+.feature-title {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+.feature-title::after {
+  content: '';
+  display: block;
+  width: 12%;
+  height: 2px;
+  background: var(--grekt-highlight-500);
+}
+
+.feature-description {
+  font-size: 1rem;
+  color: var(--card-text);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.feature-description strong {
+  color: var(--grekt-primary);
+  font-weight: 600;
+}
+
+.feature-demo {
+  width: 100%;
+}
+
+.feature-run-wrapper {
+  margin-top: 24px;
+}
+
+.feature-run-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.feature-run-btn {
+  --border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(15, 16, 22, 0.8);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+
+.feature-run-btn:hover:not(:disabled) {
+  box-shadow: 0 0 16px rgba(119, 202, 189, 0.4);
+}
+
+.feature-run-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.feature-run-btn .dots-border {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: rgba(119, 202, 189, 0.15);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.feature-run-btn .dots-border::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(119, 202, 189, 0.8) 80%, rgba(119, 202, 189, 0.3) 90%, transparent 100%);
+  animation: rotate-border 2s linear infinite;
+}
+
+.feature-run-btn:disabled .dots-border::before {
+  animation: none;
+}
+
+.feature-run-sign {
+  color: #77CABD;
+  margin-right: 8px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-run-cmd {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-run-play {
   margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--grekt-tertiary-500);
+  color: #0f1016;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+.feature-run-btn:hover:not(:disabled) .feature-run-play {
+  transform: scale(1.1);
+}
+
+@keyframes rotate-border {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .feature-row,
+  .feature-row--reversed {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .feature-row--reversed .feature-text,
+  .feature-row--reversed .feature-demo {
+    order: unset;
+  }
+
+  .feature-title {
+    font-size: 1.4rem;
+  }
+
+  .feature-description {
+    font-size: 0.9rem;
+  }
 }
 
 /* COMPARISON */

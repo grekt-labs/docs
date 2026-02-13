@@ -1,7 +1,5 @@
 <script setup>
-import { ref, nextTick, onUnmounted, defineEmits } from 'vue'
-
-const emit = defineEmits(['next-tab'])
+import { ref, nextTick, onUnmounted } from 'vue'
 
 const lines = ref([])
 const animating = ref(false)
@@ -260,9 +258,10 @@ onUnmounted(() => {
 
           <div v-if="saved && !finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
             <button class="run-command-btn" :disabled="animating" @click="runCommand">
+              <span class="dots-border"></span>
               <span class="prompt-sign">$</span>
               <span class="command-preview">grekt check</span>
-              <span class="run-hint">click to run</span>
+              <span class="run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
             </button>
           </div>
         </div>
@@ -516,47 +515,87 @@ onUnmounted(() => {
 }
 
 .run-command-btn {
+  --border-radius: 6px;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0;
   width: 100%;
   padding: 8px 12px;
-  background: rgba(119, 202, 189, 0.06);
-  border: 1px solid rgba(119, 202, 189, 0.2);
-  border-radius: 6px;
+  background: rgba(15, 16, 22, 0.8);
+  border: none;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s ease;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   font-size: 0.78rem;
-  animation: prompt-pulse 2s ease-in-out infinite;
+  overflow: hidden;
 }
 
 .run-command-btn:hover:not(:disabled) {
-  background: rgba(119, 202, 189, 0.12);
-  border-color: rgba(119, 202, 189, 0.4);
-  animation: none;
+  box-shadow: 0 0 16px rgba(119, 202, 189, 0.4);
 }
 
 .run-command-btn:disabled {
   opacity: 0.3;
   cursor: default;
+}
+
+.run-command-btn .dots-border {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: rgba(119, 202, 189, 0.15);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.run-command-btn .dots-border::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(119, 202, 189, 0.8) 80%, rgba(119, 202, 189, 0.3) 90%, transparent 100%);
+  animation: rotate-border 2s linear infinite;
+}
+
+.run-command-btn:disabled .dots-border::before {
   animation: none;
+}
+
+.run-command-btn .prompt-sign {
+  position: relative;
+  z-index: 1;
 }
 
 .command-preview {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
-.run-hint {
+.run-play {
   margin-left: auto;
-  color: rgba(119, 202, 189, 0.5);
-  font-size: 0.65rem;
-  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ED9839;
+  color: #0f1016;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
 }
 
-.terminal-prompt-input--disabled .run-hint {
-  display: none;
+.run-command-btn:hover:not(:disabled) .run-play {
+  transform: scale(1.1);
 }
 
 @keyframes line-fade-in {
@@ -569,9 +608,8 @@ onUnmounted(() => {
   to { transform: rotate(360deg); }
 }
 
-@keyframes prompt-pulse {
-  0%, 100% { border-color: rgba(119, 202, 189, 0.15); }
-  50% { border-color: rgba(119, 202, 189, 0.35); }
+@keyframes rotate-border {
+  to { transform: rotate(360deg); }
 }
 
 @keyframes edit-pulse {
