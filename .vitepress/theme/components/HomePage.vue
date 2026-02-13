@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import CliDemo from './cli-demos/CliDemo.vue'
 
 const installMethods = [
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
@@ -245,6 +246,16 @@ const toggleFaq = (index) => {
           <p>Explore community created artifacts or publish your own for others to use.</p>
         </div>
       </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- CLI DEMOS -->
+    <section class="cli-demos-section">
+      <h2 class="section-title">What grekt does for you</h2>
+      <p class="section-subtitle">Same skills, same behavior, same results across agents, teams, and projects. Choose what matters, skip what doesn't, and keep everything in sync without drift.</p>
+      <CliDemo />
     </section>
 
     <!-- Section Divider -->
@@ -984,6 +995,15 @@ const toggleFaq = (index) => {
   padding-top: 0 !important;
 }
 
+.section-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: -1.5rem auto 2.5rem;
+}
+
 .use-case-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1256,6 +1276,20 @@ const toggleFaq = (index) => {
   color: var(--card-text);
   margin: 0;
   line-height: 1.8;
+}
+
+/* CLI DEMOS */
+.cli-demos-section {
+  background: var(--section-bg);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.cli-demos-section > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* COMPARISON */
