@@ -1,6 +1,8 @@
 <script setup>
-import { ref, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted, defineEmits } from 'vue'
 import FileTreeNode from './FileTreeNode.vue'
+
+const emit = defineEmits(['next-tab'])
 
 const lines = ref([])
 const visibleTreePaths = ref(new Set())
@@ -22,39 +24,31 @@ function scrollToBottom(el) {
 let timeouts = []
 
 const syncLines = [
-  { type: 'command', text: '$ grekt sync' },
+  { type: 'command', text: '$ grekt add @grekt/overseas --core' },
+  { type: 'blank', text: '' },
+  { type: 'spinner', text: 'Resolving @grekt/overseas...' },
   { type: 'blank', text: '' },
   { type: 'spinner', text: 'Syncing Claude...' },
   { type: 'blank', text: '' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_systematic-debugging.md' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_test-driven-development.md' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_brainstorming.md' },
+  { type: 'success', text: 'Created .claude/skills/overseas_pirate-commits/SKILL.md' },
   { type: 'success', text: 'Updated .claude/CLAUDE.md' },
   { type: 'blank', text: '' },
   { type: 'spinner', text: 'Syncing Codex...' },
   { type: 'blank', text: '' },
+  { type: 'success', text: 'Created .agents/skills/overseas_pirate-commits/SKILL.md' },
   { type: 'success', text: 'Updated AGENTS.md' },
   { type: 'blank', text: '' },
-  { type: 'success-bold', text: 'Sync complete!' },
+  { type: 'success-bold', text: 'Done! Installed @grekt/overseas in core mode' },
 ]
 
 // Existing project files
 const existingFiles = [
-  {
-    name: 'src',
-    path: 'src',
-    type: 'folder',
-    children: [
-      { name: 'index.ts', path: 'src/index.ts', type: 'file' },
-      { name: 'app.ts', path: 'src/app.ts', type: 'file' },
-      { name: 'utils.ts', path: 'src/utils.ts', type: 'file' },
-    ],
-  },
+  { name: 'src', path: 'src', type: 'folder' },
   { name: 'package.json', path: 'package.json', type: 'file' },
   { name: 'tsconfig.json', path: 'tsconfig.json', type: 'file' },
 ]
 
-// Before sync: artifacts exist but not synced to targets
+// Before: fresh project with no artifacts
 const beforeTree = [
   {
     name: 'my-project',
@@ -62,68 +56,17 @@ const beforeTree = [
     type: 'folder',
     children: [
       {
-        name: '.grekt',
-        path: '.grekt',
+        name: '.agents',
+        path: '.agents',
         type: 'folder',
-        tag: '(gitignored)',
-        children: [
-          { name: 'index', path: '.grekt/index', type: 'file' },
-          {
-            name: 'artifacts',
-            path: '.grekt/artifacts',
-            type: 'folder',
-            children: [
-              {
-                name: '@obra',
-                path: '.grekt/artifacts/@obra',
-                type: 'folder',
-                children: [
-                  {
-                    name: 'superpowers',
-                    path: '.grekt/artifacts/@obra/superpowers',
-                    type: 'folder',
-                    children: [
-                      { name: 'grekt.yaml', path: '.grekt/artifacts/@obra/superpowers/grekt.yaml', type: 'file' },
-                      {
-                        name: 'skills',
-                        path: '.grekt/artifacts/@obra/superpowers/skills',
-                        type: 'folder',
-                        children: [
-                          { name: 'systematic-debugging.md', path: '.grekt/artifacts/@obra/superpowers/skills/systematic-debugging.md', type: 'file' },
-                          { name: 'test-driven-development.md', path: '.grekt/artifacts/@obra/superpowers/skills/tdd.md', type: 'file' },
-                          { name: 'brainstorming.md', path: '.grekt/artifacts/@obra/superpowers/skills/brainstorming.md', type: 'file' },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        children: [],
       },
       {
         name: '.claude',
         path: '.claude',
         type: 'folder',
         children: [
-          {
-            name: 'skills',
-            path: '.claude/skills',
-            type: 'folder',
-            children: [
-              {
-                name: 'grekt',
-                path: '.claude/skills/grekt',
-                type: 'folder',
-                children: [
-                  { name: 'SKILL.md', path: '.claude/skills/grekt/SKILL.md', type: 'file' },
-                ],
-              },
-            ],
-          },
           { name: 'CLAUDE.md', path: '.claude/CLAUDE.md', type: 'file' },
-          { name: 'settings.json', path: '.claude/settings.json', type: 'file' },
         ],
       },
       ...existingFiles,
@@ -134,7 +77,7 @@ const beforeTree = [
   },
 ]
 
-// After sync: skills synced to .claude/skills/ and AGENTS.md updated
+// After --core: skills go directly to .claude and .agents, nothing in .grekt/artifacts
 const afterTree = [
   {
     name: 'my-project',
@@ -142,40 +85,21 @@ const afterTree = [
     type: 'folder',
     children: [
       {
-        name: '.grekt',
-        path: '.grekt',
+        name: '.agents',
+        path: '.agents',
         type: 'folder',
-        tag: '(gitignored)',
         children: [
-          { name: 'index', path: '.grekt/index', type: 'file' },
           {
-            name: 'artifacts',
-            path: '.grekt/artifacts',
+            name: 'skills',
+            path: '.agents/skills',
             type: 'folder',
             children: [
               {
-                name: '@obra',
-                path: '.grekt/artifacts/@obra',
+                name: 'overseas_pirate-commits',
+                path: '.agents/skills/overseas_pirate-commits',
                 type: 'folder',
                 children: [
-                  {
-                    name: 'superpowers',
-                    path: '.grekt/artifacts/@obra/superpowers',
-                    type: 'folder',
-                    children: [
-                      { name: 'grekt.yaml', path: '.grekt/artifacts/@obra/superpowers/grekt.yaml', type: 'file' },
-                      {
-                        name: 'skills',
-                        path: '.grekt/artifacts/@obra/superpowers/skills',
-                        type: 'folder',
-                        children: [
-                          { name: 'systematic-debugging.md', path: '.grekt/artifacts/@obra/superpowers/skills/systematic-debugging.md', type: 'file' },
-                          { name: 'test-driven-development.md', path: '.grekt/artifacts/@obra/superpowers/skills/tdd.md', type: 'file' },
-                          { name: 'brainstorming.md', path: '.grekt/artifacts/@obra/superpowers/skills/brainstorming.md', type: 'file' },
-                        ],
-                      },
-                    ],
-                  },
+                  { name: 'SKILL.md', path: '.agents/skills/overseas_pirate-commits/SKILL.md', type: 'file' },
                 ],
               },
             ],
@@ -193,20 +117,16 @@ const afterTree = [
             type: 'folder',
             children: [
               {
-                name: 'grekt',
-                path: '.claude/skills/grekt',
+                name: 'overseas_pirate-commits',
+                path: '.claude/skills/overseas_pirate-commits',
                 type: 'folder',
                 children: [
-                  { name: 'SKILL.md', path: '.claude/skills/grekt/SKILL.md', type: 'file' },
+                  { name: 'SKILL.md', path: '.claude/skills/overseas_pirate-commits/SKILL.md', type: 'file' },
                 ],
               },
-              { name: 'superpowers_systematic-debugging.md', path: '.claude/skills/sp-debug.md', type: 'file' },
-              { name: 'superpowers_test-driven-development.md', path: '.claude/skills/sp-tdd.md', type: 'file' },
-              { name: 'superpowers_brainstorming.md', path: '.claude/skills/sp-brain.md', type: 'file' },
             ],
           },
           { name: 'CLAUDE.md', path: '.claude/CLAUDE.md', type: 'file' },
-          { name: 'settings.json', path: '.claude/settings.json', type: 'file' },
         ],
       },
       ...existingFiles,
@@ -234,15 +154,8 @@ const afterPaths = getAllPaths(afterTree)
 const currentTree = ref(beforeTree)
 const expandedFolders = ref(new Set([
   'root',
-  'src',
-  '.grekt',
-  '.grekt/artifacts',
-  '.grekt/artifacts/@obra',
-  '.grekt/artifacts/@obra/superpowers',
-  '.grekt/artifacts/@obra/superpowers/skills',
+  '.agents',
   '.claude',
-  '.claude/skills',
-  '.claude/skills/grekt',
 ]))
 
 function isExpanded(path) {
@@ -318,11 +231,17 @@ const runCommand = () => {
     }
   })
 
-  // After Claude sync lines, update tree with synced skills
-  const claudeSyncEnd = 700 + 120 + 900 + 100 + 120 + (250 * 3) + 250 + 120
+  // After all sync lines, update tree with synced skills
+  const treeSwitchDelay = t - 500
   scheduleTimeout(() => {
     currentTree.value = afterTree
-    // Make all paths visible
+    // Expand new folders
+    expandedFolders.value = new Set([
+      ...expandedFolders.value,
+      '.agents', '.agents/skills', '.agents/skills/overseas_pirate-commits',
+      '.claude/skills', '.claude/skills/overseas_pirate-commits',
+    ])
+    // Make all new paths visible with staggered animation
     const newPaths = afterPaths.filter(p => !beforePaths.includes(p))
     let pathT = 0
     newPaths.forEach((path) => {
@@ -331,7 +250,7 @@ const runCommand = () => {
       }, pathT)
       pathT += 80
     })
-  }, claudeSyncEnd)
+  }, treeSwitchDelay)
 
   // Unlock interactivity and mark finished
   t += 500
@@ -406,8 +325,18 @@ onUnmounted(() => {
           <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
             <button class="run-command-btn" :disabled="animating" @click="runCommand">
               <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt sync</span>
+              <span class="command-preview">grekt add @grekt/overseas --core</span>
               <span class="run-hint">click to run</span>
+            </button>
+          </div>
+
+          <div v-if="finished" class="core-explanation">
+            By default, grekt loads artifacts in lazy mode. With <strong>--core</strong>, skills go directly into each AI tool's context folder, committed to your repo and <strong>still tracked by grekt for removal, updates, and full visibility of what's installed</strong>.
+          </div>
+
+          <div v-if="finished" class="next-tab-wrapper">
+            <button class="next-tab-btn" @click="emit('next-tab')">
+              Update ›
             </button>
           </div>
         </div>
@@ -423,7 +352,7 @@ onUnmounted(() => {
 
 .demo-split {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 0.35fr 1fr;
   gap: 0;
   height: 500px;
   max-height: 500px;
@@ -459,6 +388,7 @@ onUnmounted(() => {
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .terminal-content {
@@ -520,7 +450,6 @@ onUnmounted(() => {
 }
 
 .terminal-prompt-input {
-  margin-top: auto;
   padding-top: 8px;
 }
 
@@ -576,6 +505,57 @@ onUnmounted(() => {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.core-explanation {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: rgba(119, 202, 189, 0.06);
+  border: 1px solid rgba(119, 202, 189, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  animation: line-fade-in 0.3s ease-out;
+}
+
+.core-explanation strong {
+  color: #77CABD;
+  font-weight: 600;
+}
+
+.core-explanation code {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+.next-tab-wrapper {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  animation: line-fade-in 0.3s ease-out;
+}
+
+.next-tab-btn {
+  padding: 6px 16px;
+  background: rgba(119, 202, 189, 0.1);
+  border: 1px solid rgba(119, 202, 189, 0.25);
+  border-radius: 6px;
+  color: #77CABD;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.next-tab-btn:hover {
+  background: rgba(119, 202, 189, 0.18);
+  border-color: rgba(119, 202, 189, 0.4);
 }
 
 @keyframes prompt-pulse {

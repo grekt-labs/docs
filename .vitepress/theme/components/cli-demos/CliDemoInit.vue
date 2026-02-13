@@ -2,6 +2,8 @@
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import FileTreeNode from './FileTreeNode.vue'
 
+const emit = defineEmits(['next-tab'])
+
 const lines = ref([])
 const visibleTreePaths = ref(new Set())
 const chatMessages = ref({ claude: [], codex: [] })
@@ -722,7 +724,7 @@ onUnmounted(() => {
               <pre class="preview-code" v-html="highlightedPreview"></pre>
             </div>
             <div v-else class="preview-placeholder">
-              <span class="preview-placeholder-text">Run a command to see files</span>
+              <span class="preview-placeholder-text">Send a command to see files</span>
             </div>
           </div>
         </div>
@@ -747,8 +749,16 @@ onUnmounted(() => {
       <!-- Bottom: Terminal (full width) -->
       <div ref="terminalEl" class="demo-terminal">
         <div class="terminal-content" :class="{ 'terminal-content--bottom': currentStep >= 2 }">
+          <!-- Next tab button -->
+          <div v-if="finished" class="terminal-prompt-input terminal-next-tab">
+            <button class="run-command-btn run-command-btn--next" @click="emit('next-tab')">
+              <span class="next-tab-label">Pick & skip</span>
+              <span class="next-tab-arrow">›</span>
+            </button>
+          </div>
+
           <!-- Interactive prompt (top when ask-ai, bottom when commands) -->
-          <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
+          <div v-else class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
             <button
               v-if="steps[currentStep]?.type === 'ask-ai'"
               class="run-command-btn run-command-btn--ask"
@@ -1192,7 +1202,7 @@ onUnmounted(() => {
   padding: 12px 20px;
   overflow-y: auto;
   scroll-behavior: smooth;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   height: 280px;
@@ -1345,6 +1355,28 @@ onUnmounted(() => {
 
 .run-command-btn--ask {
   justify-content: center;
+}
+
+.run-command-btn--next {
+  justify-content: center;
+  gap: 8px;
+}
+
+.next-tab-label {
+  color: #77CABD;
+  font-weight: 500;
+}
+
+.next-tab-arrow {
+  color: #77CABD;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.terminal-next-tab {
+  order: 99;
+  margin-top: auto;
+  padding-top: 8px;
 }
 
 @keyframes ask-pulse {
