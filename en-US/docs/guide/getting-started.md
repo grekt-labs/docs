@@ -5,7 +5,7 @@ This guide walks you through setting up grekt in a project and syncing your firs
 ## Installation
 
 ::: warning EARLY ACCESS
-grekt is in early development. Expect breaking changes.
+AI tooling evolves fast — breaking changes and frequent updates are expected as the ecosystem matures.
 :::
 
 ::: code-group
