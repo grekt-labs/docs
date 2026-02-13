@@ -716,7 +716,7 @@ const toggleFaq = (index) => {
 }
 
 .trusted-by-logo img {
-  height: 36px;
+  height: 48px;
   width: auto;
   filter: grayscale(100%) var(--logo-filter);
   opacity: 0.35;
