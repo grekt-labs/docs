@@ -5,12 +5,14 @@ const CliDemoInit = defineAsyncComponent(() => import('./CliDemoInit.vue'))
 const CliDemoSync = defineAsyncComponent(() => import('./CliDemoSync.vue'))
 const CliDemoChoose = defineAsyncComponent(() => import('./CliDemoChoose.vue'))
 const CliDemoUpdate = defineAsyncComponent(() => import('./CliDemoUpdate.vue'))
+const CliDemoCheck = defineAsyncComponent(() => import('./CliDemoCheck.vue'))
 
 const tabs = [
   { id: 'getting-started', label: 'Get started', component: CliDemoInit },
-  { id: 'sync', label: 'Sync', component: CliDemoSync },
-  { id: 'choose', label: 'Choose what matters', component: CliDemoChoose },
+  { id: 'choose', label: 'Pick & skip', component: CliDemoChoose },
+  { id: 'sync', label: 'Choose what matters', component: CliDemoSync },
   { id: 'update', label: 'Update', component: CliDemoUpdate },
+  { id: 'check', label: 'Detect diffs', component: CliDemoCheck },
 ]
 
 const activeTab = ref('getting-started')
@@ -19,6 +21,12 @@ const activeComponent = shallowRef(CliDemoInit)
 const switchTab = (tab) => {
   activeTab.value = tab.id
   activeComponent.value = tab.component
+}
+
+const goToNextTab = () => {
+  const currentIndex = tabs.findIndex(t => t.id === activeTab.value)
+  const next = tabs[currentIndex + 1]
+  if (next) switchTab(next)
 }
 </script>
 
@@ -49,7 +57,7 @@ const switchTab = (tab) => {
 
       <!-- Demo content -->
       <div class="terminal-body">
-        <component :is="activeComponent" :key="activeTab" />
+        <component :is="activeComponent" :key="activeTab" @next-tab="goToNextTab" />
       </div>
     </div>
   </div>

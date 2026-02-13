@@ -1,5 +1,7 @@
 <script setup>
-import { ref, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted, defineEmits } from 'vue'
+
+const emit = defineEmits(['next-tab'])
 
 const lines = ref([])
 const animating = ref(false)
@@ -18,47 +20,32 @@ function scrollToBottom(el) {
 let timeouts = []
 
 const upgradeLines = [
-  { type: 'command', text: '$ grekt upgrade' },
+  { type: 'command', text: '$ grekt upgrade @grekt/overseas' },
   { type: 'blank', text: '' },
   { type: 'spinner', text: 'Checking for updates...' },
   { type: 'blank', text: '' },
-  { type: 'info', text: 'Upgrading 2 artifact(s):' },
+  { type: 'info', text: 'Upgrading 1 artifact(s):' },
   { type: 'blank', text: '' },
-  { type: 'upgrade-item', text: '  @obra/superpowers: 1.0.0 → 1.2.0', from: '1.0.0', to: '1.2.0', name: '@obra/superpowers' },
-  { type: 'upgrade-item', text: '  @grekt/code-reviewer: 2.1.0 → 2.3.0', from: '2.1.0', to: '2.3.0', name: '@grekt/code-reviewer' },
+  { type: 'upgrade-item', text: '  @grekt/overseas: 1.2.0 → 1.3.0', from: '1.2.0', to: '1.3.0', name: '@grekt/overseas' },
   { type: 'blank', text: '' },
-  { type: 'spinner', text: 'Downloading @obra/superpowers...' },
-  { type: 'spinner', text: 'Downloading @grekt/code-reviewer...' },
+  { type: 'spinner', text: 'Downloading @grekt/overseas...' },
   { type: 'blank', text: '' },
   { type: 'success-section', text: 'Upgraded:' },
-  { type: 'success', text: '@obra/superpowers: 1.0.0 → 1.2.0' },
-  { type: 'success', text: '@grekt/code-reviewer: 2.1.0 → 2.3.0' },
+  { type: 'success', text: '@grekt/overseas: 1.2.0 → 1.3.0' },
+  { type: 'info', text: '  (new skill added in 1.3.0: sea-metaphors)' },
   { type: 'blank', text: '' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_writing-plans.md' },
-  { type: 'info', text: '  (new skill added in 1.2.0)' },
-  { type: 'success', text: 'Updated .claude/skills/superpowers_systematic-debugging.md' },
-  { type: 'success', text: 'Updated .claude/agents/code-reviewer_review.md' },
-  { type: 'success', text: 'Updated AGENTS.md' },
-  { type: 'blank', text: '' },
-  { type: 'success-bold', text: 'Sync complete!' },
+  { type: 'success-bold', text: 'Upgrade complete!' },
 ]
 
 const artifacts = ref([])
 
 const artifactList = [
   {
-    name: '@obra/superpowers',
-    from: '1.0.0',
-    to: '1.2.0',
+    name: '@grekt/overseas',
+    from: '1.2.0',
+    to: '1.3.0',
     status: 'pending',
-    changes: ['+1 new skill', '~1 updated skill'],
-  },
-  {
-    name: '@grekt/code-reviewer',
-    from: '2.1.0',
-    to: '2.3.0',
-    status: 'pending',
-    changes: ['~1 updated agent'],
+    changes: ['+1 new skill'],
   },
 ]
 
@@ -114,7 +101,7 @@ const runCommand = () => {
   scheduleTimeout(() => pushLine(upgradeLines[3]), t)
   t += 120
 
-  // "Upgrading 2 artifact(s):"
+  // "Upgrading 1 artifact(s):"
   scheduleTimeout(() => pushLine(upgradeLines[4]), t)
   t += 300
 
@@ -122,68 +109,50 @@ const runCommand = () => {
   scheduleTimeout(() => pushLine(upgradeLines[5]), t)
   t += 120
 
-  // Upgrade items + show cards
+  // Upgrade item + show card
   scheduleTimeout(() => {
     pushLine(upgradeLines[6])
     artifacts.value = [{ ...artifactList[0] }]
   }, t)
-  t += 300
-
-  scheduleTimeout(() => {
-    pushLine(upgradeLines[7])
-    artifacts.value = [{ ...artifactList[0] }, { ...artifactList[1] }]
-  }, t)
   t += 400
 
   // Blank
-  scheduleTimeout(() => pushLine(upgradeLines[8]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[7]), t)
   t += 120
 
-  // Spinners: downloading
-  scheduleTimeout(() => pushLine(upgradeLines[9]), t)
-  t += 200
-  scheduleTimeout(() => pushLine(upgradeLines[10]), t)
-  t += 1000
+  // Spinner: downloading
+  scheduleTimeout(() => pushLine(upgradeLines[8]), t)
+  t += 1200
 
-  // Remove spinners
-  scheduleTimeout(() => removeAllSpinners(), t)
+  // Remove spinner
+  scheduleTimeout(() => removeSpinner(), t)
   t += 100
 
   // Blank
-  scheduleTimeout(() => pushLine(upgradeLines[11]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[9]), t)
   t += 120
 
   // "Upgraded:" header
-  scheduleTimeout(() => pushLine(upgradeLines[12]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[10]), t)
   t += 200
 
-  // Success lines + update card status
+  // Success line + update card status
   scheduleTimeout(() => {
-    pushLine(upgradeLines[13])
-    artifacts.value = artifacts.value.map((a, i) =>
-      i === 0 ? { ...a, status: 'done' } : a
-    )
+    pushLine(upgradeLines[11])
+    artifacts.value = artifacts.value.map(a => ({ ...a, status: 'done' }))
   }, t)
   t += 250
 
-  scheduleTimeout(() => {
-    pushLine(upgradeLines[14])
-    artifacts.value = artifacts.value.map((a, i) =>
-      i === 1 ? { ...a, status: 'done' } : a
-    )
-  }, t)
-  t += 400
+  scheduleTimeout(() => pushLine(upgradeLines[12]), t)
+  t += 300
 
   // Blank
-  scheduleTimeout(() => pushLine(upgradeLines[15]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[13]), t)
   t += 120
 
-  // Sync output
-  for (let i = 16; i < upgradeLines.length; i++) {
-    const line = upgradeLines[i]
-    scheduleTimeout(() => pushLine(line), t)
-    t += line.type === 'success-bold' ? 200 : 200
-  }
+  // Final message
+  scheduleTimeout(() => pushLine(upgradeLines[14]), t)
+  t += 200
 
   t += 500
   scheduleTimeout(() => {
@@ -279,8 +248,18 @@ onUnmounted(() => {
           <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
             <button class="run-command-btn" :disabled="animating" @click="runCommand">
               <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt upgrade</span>
+              <span class="command-preview">grekt upgrade @grekt/overseas</span>
               <span class="run-hint">click to run</span>
+            </button>
+          </div>
+
+          <div v-if="finished" class="upgrade-explanation">
+            Upgrades respect selections made with <strong>--choose</strong>. If the artifact structure changes, you will be asked again.
+          </div>
+
+          <div v-if="finished" class="next-tab-wrapper">
+            <button class="next-tab-btn" @click="emit('next-tab')">
+              Detect diffs ›
             </button>
           </div>
         </div>
@@ -420,6 +399,7 @@ onUnmounted(() => {
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .terminal-content {
@@ -490,7 +470,6 @@ onUnmounted(() => {
 }
 
 .terminal-prompt-input {
-  margin-top: auto;
   padding-top: 8px;
 }
 
@@ -536,6 +515,48 @@ onUnmounted(() => {
 
 .terminal-prompt-input--disabled .run-hint {
   display: none;
+}
+
+.upgrade-explanation {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: rgba(119, 202, 189, 0.06);
+  border: 1px solid rgba(119, 202, 189, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  animation: line-fade-in 0.3s ease-out;
+}
+
+.upgrade-explanation strong {
+  color: #77CABD;
+  font-weight: 600;
+}
+
+.next-tab-wrapper {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  animation: line-fade-in 0.3s ease-out;
+}
+
+.next-tab-btn {
+  padding: 6px 16px;
+  background: rgba(119, 202, 189, 0.1);
+  border: 1px solid rgba(119, 202, 189, 0.25);
+  border-radius: 6px;
+  color: #77CABD;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.next-tab-btn:hover {
+  background: rgba(119, 202, 189, 0.18);
+  border-color: rgba(119, 202, 189, 0.4);
 }
 
 @keyframes prompt-pulse {

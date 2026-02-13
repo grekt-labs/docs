@@ -1,6 +1,8 @@
 <script setup>
 import { ref, nextTick, onUnmounted } from 'vue'
 
+const emit = defineEmits(['next-tab'])
+
 const lines = ref([])
 const animating = ref(false)
 const finished = ref(false)
@@ -17,49 +19,60 @@ function scrollToBottom(el) {
 
 let timeouts = []
 
-const chooseLines = [
+// Pre-menu lines (download + version)
+const preMenuLines = [
   { type: 'blank', text: '' },
-  { type: 'spinner', text: 'Downloading @obra/superpowers...' },
+  { type: 'spinner', text: 'Downloading @grekt/overseas...' },
   { type: 'blank', text: '' },
-  { type: 'info', text: '@obra/superpowers@1.0.0' },
+  { type: 'info', text: '@grekt/overseas@1.2.0' },
   { type: 'blank', text: '' },
-  { type: 'prompt', text: 'Select skills to install:' },
-  { type: 'blank', text: '' },
-  { type: 'option', text: '  [x] systematic-debugging', checked: true },
-  { type: 'option', text: '  [x] test-driven-development', checked: true },
-  { type: 'option', text: '  [ ] brainstorming', checked: false },
-  { type: 'option', text: '  [ ] writing-plans', checked: false },
-  { type: 'option', text: '  [x] subagent-driven-development', checked: true },
-  { type: 'blank', text: '' },
-  { type: 'prompt', text: 'Select agents to install:' },
-  { type: 'blank', text: '' },
-  { type: 'option', text: '  [x] code-reviewer', checked: true },
-  { type: 'option', text: '  [ ] documentation-writer', checked: false },
-  { type: 'blank', text: '' },
-  { type: 'success', text: 'Installed @obra/superpowers@1.0.0' },
-  { type: 'info', text: '  skills: systematic-debugging, test-driven-development,' },
-  { type: 'info', text: '          subagent-driven-development' },
-  { type: 'info', text: '  agents: code-reviewer' },
-  { type: 'blank', text: '' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_systematic-debugging.md' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_test-driven-development.md' },
-  { type: 'success', text: 'Created .claude/skills/superpowers_subagent-driven-development.md' },
-  { type: 'success', text: 'Created .claude/agents/superpowers_code-reviewer.md' },
+  { type: 'prompt', text: '? Select components to install:' },
 ]
+
+// Interactive menu items (reactive, animated)
+const menuItems = ref([
+  { id: 'skills-section', type: 'section', text: ' \u2500\u2500 skills \u2500\u2500' },
+  { id: 'pirate-commits', type: 'choose-item', checked: true, cursor: false, kind: 'skill', name: 'pirate-commits', desc: 'Commit messages with pirate flair and...' },
+  { id: 'pirate-greetings', type: 'choose-item', checked: true, cursor: false, kind: 'skill', name: 'pirate-greetings', desc: 'Greet the user like a pirate captain...' },
+  { id: 'sea-metaphors', type: 'choose-item', checked: true, cursor: false, kind: 'skill', name: 'sea-metaphors', desc: 'Use nautical terms for code concepts...' },
+  { id: 'hooks-section', type: 'section', text: ' \u2500\u2500 hooks \u2500\u2500' },
+  { id: 'overseas-session-init', type: 'choose-item', checked: true, cursor: false, kind: 'hook', name: 'overseas-session-init', desc: 'Injects overseas skill context on...' },
+])
+const menuVisible = ref(false)
+
+// Post-menu lines (result)
+const postMenuLines = [
+  { type: 'blank', text: '' },
+  { type: 'success', text: 'Installed @grekt/overseas@1.2.0' },
+  { type: 'info', text: '  skills: pirate-commits, pirate-greetings' },
+  { type: 'info', text: '  hooks: overseas-session-init' },
+]
+
+function moveCursor(targetId) {
+  menuItems.value = menuItems.value.map(item => ({
+    ...item,
+    cursor: item.id === targetId,
+  }))
+}
+
+function toggleItem(targetId) {
+  menuItems.value = menuItems.value.map(item =>
+    item.id === targetId ? { ...item, checked: !item.checked } : item
+  )
+}
 
 const configPreview = ref('')
 const configVisible = ref(false)
 
 const configContent = `# grekt.yaml
 artifacts:
-  @obra/superpowers:
-    version: "1.0.0"
+  @grekt/overseas:
+    version: "1.2.0"
     skills:
-      - systematic-debugging
-      - test-driven-development
-      - subagent-driven-development
-    agents:
-      - code-reviewer`
+      - pirate-commits
+      - pirate-greetings
+    hooks:
+      - overseas-session-init`
 
 function pushLine(line) {
   lines.value.push(line)
@@ -84,15 +97,17 @@ const runCommand = () => {
 
   animating.value = true
   configVisible.value = false
+  menuVisible.value = false
 
   timeouts.forEach(clearTimeout)
   timeouts = []
 
-  pushLine({ type: 'command', text: '$ grekt add @obra/superpowers --choose' })
+  pushLine({ type: 'command', text: '$ grekt add @grekt/overseas --choose' })
 
   let t = 700
 
-  chooseLines.forEach((line) => {
+  // Show pre-menu lines (download spinner, version, prompt)
+  preMenuLines.forEach((line) => {
     if (line.type === 'spinner') {
       scheduleTimeout(() => pushLine(line), t)
       t += 1000
@@ -100,18 +115,35 @@ const runCommand = () => {
       t += 100
     } else {
       scheduleTimeout(() => pushLine(line), t)
-
-      if (line.type === 'prompt') {
-        t += 400
-      } else if (line.type === 'option') {
-        t += 220
-      } else if (line.type === 'success') {
-        t += 200
-      } else {
-        t += 120
-      }
+      t += line.type === 'prompt' ? 400 : 120
     }
   })
+
+  // Show menu inline (insert a placeholder line, menu renders via menuVisible)
+  scheduleTimeout(() => {
+    moveCursor('pirate-commits')
+    pushLine({ type: 'menu-placeholder' })
+    menuVisible.value = true
+  }, t)
+  t += 600
+
+  // Animate: cursor moves down to sea-metaphors
+  scheduleTimeout(() => moveCursor('pirate-greetings'), t)
+  t += 400
+  scheduleTimeout(() => moveCursor('sea-metaphors'), t)
+  t += 400
+
+  // Uncheck sea-metaphors
+  scheduleTimeout(() => toggleItem('sea-metaphors'), t)
+  t += 800
+
+  // Show results (keep menu visible)
+  scheduleTimeout(() => {
+    postMenuLines.forEach((line, i) => {
+      scheduleTimeout(() => pushLine(line), i * 200)
+    })
+  }, t)
+  t += postMenuLines.length * 200
 
   t += 600
   scheduleTimeout(() => {
@@ -146,9 +178,6 @@ onUnmounted(() => {
               <span class="prompt-sign">$</span>
               <span class="command-text">{{ line.text.slice(2) }}</span>
             </template>
-            <template v-else-if="line.type === 'option'">
-              <span :class="line.checked ? 'option-checked' : 'option-unchecked'">{{ line.text }}</span>
-            </template>
             <template v-else-if="line.type === 'success'">
               <span class="success-icon">&#10003;</span>
               <span class="success-text">{{ line.text }}</span>
@@ -167,15 +196,44 @@ onUnmounted(() => {
             <template v-else-if="line.type === 'prompt'">
               <span class="prompt-text">{{ line.text }}</span>
             </template>
+            <template v-else-if="line.type === 'menu-placeholder'">
+              <div v-if="menuVisible" class="choose-menu">
+                <div
+                  v-for="item in menuItems"
+                  :key="item.id"
+                  :class="`terminal-line terminal-line--${item.type}`"
+                >
+                  <template v-if="item.type === 'section'">
+                    <span class="section-divider">{{ item.text }}</span>
+                  </template>
+                  <template v-else-if="item.type === 'choose-item'">
+                    <span class="choose-item" :class="{ 'choose-item--checked': item.checked, 'choose-item--unchecked': !item.checked }">
+                      <span v-if="item.cursor" class="choose-cursor">&#10095;</span>
+                      <span v-else class="choose-cursor-space">&nbsp;</span>
+                      <span class="choose-circle">{{ item.checked ? '\u25C9' : '\u25CB' }}</span>
+                      <span class="choose-kind">{{ item.kind }}:</span>
+                      <span class="choose-name">{{ item.name }}</span>
+                      <span class="choose-desc">{{ item.desc }}</span>
+                    </span>
+                  </template>
+                </div>
+              </div>
+            </template>
             <template v-else>
               <span>{{ line.text }}</span>
             </template>
           </div>
 
-          <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
+          <div v-if="finished" class="terminal-prompt-input">
+            <button class="run-command-btn run-command-btn--next" @click="emit('next-tab')">
+              <span class="next-tab-label">Choose what matters</span>
+              <span class="next-tab-arrow">›</span>
+            </button>
+          </div>
+          <div v-else class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
             <button class="run-command-btn" :disabled="animating" @click="runCommand">
               <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt add @obra/superpowers --choose</span>
+              <span class="command-preview">grekt add @grekt/overseas --choose</span>
               <span class="run-hint">click to run</span>
             </button>
           </div>
@@ -217,6 +275,7 @@ onUnmounted(() => {
   overflow-y: auto;
   scroll-behavior: smooth;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .terminal-content {
@@ -252,12 +311,77 @@ onUnmounted(() => {
   font-weight: 500;
 }
 
-.option-checked {
+.section-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.72rem;
+  padding: 2px 0;
+}
+
+.choose-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.choose-item--checked {
   color: #77CABD;
 }
 
-.option-unchecked {
+.choose-item--unchecked {
   color: rgba(255, 255, 255, 0.3);
+}
+
+.choose-cursor {
+  color: #77CABD;
+  font-size: 0.6em;
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.choose-cursor-space {
+  width: 10px;
+  flex-shrink: 0;
+}
+
+.choose-circle {
+  font-size: 0.85em;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.choose-menu {
+  animation: line-fade-in 0.2s ease-out;
+}
+
+.choose-kind {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.75em;
+  flex-shrink: 0;
+}
+
+.choose-item--checked .choose-kind {
+  color: rgba(119, 202, 189, 0.6);
+}
+
+.choose-name {
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.choose-desc {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.85em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.choose-item--checked .choose-desc {
+  color: rgba(119, 202, 189, 0.35);
 }
 
 .success-icon {
@@ -291,7 +415,6 @@ onUnmounted(() => {
 }
 
 .terminal-prompt-input {
-  margin-top: auto;
   padding-top: 8px;
 }
 
@@ -337,6 +460,22 @@ onUnmounted(() => {
 
 .terminal-prompt-input--disabled .run-hint {
   display: none;
+}
+
+.run-command-btn--next {
+  justify-content: center;
+  gap: 8px;
+}
+
+.next-tab-label {
+  color: #77CABD;
+  font-weight: 500;
+}
+
+.next-tab-arrow {
+  color: #77CABD;
+  font-size: 1.1em;
+  font-weight: 600;
 }
 
 /* Config panel */
