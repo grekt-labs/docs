@@ -131,7 +131,7 @@ Follow these coding conventions...
 Hooks are currently only supported by **Claude**. Other targets will ignore hook components.
 :::
 
-Lifecycle hooks that get installed into the target tool's settings. Hooks run shell commands at specific events (e.g. after a file is edited, before a tool is used). They are defined as JSON files:
+Lifecycle hooks that get installed into the target tool's settings. Hooks run shell commands, prompts, or agents at specific events (e.g. after a file is edited, before a tool is used). They follow the [Claude Code hooks specification](https://docs.anthropic.com/en/docs/claude-code/hooks). Defined as JSON files:
 
 ```json
 {
@@ -139,7 +139,7 @@ Lifecycle hooks that get installed into the target tool's settings. Hooks run sh
   "grk-name": "format-on-save",
   "grk-description": "Auto-format files after edit",
   "target": "claude",
-  "events": {
+  "hooks": {
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
@@ -158,13 +158,13 @@ Lifecycle hooks that get installed into the target tool's settings. Hooks run sh
 | Field | Description |
 |-------|-------------|
 | `target` | Which tool this hook is for (currently only `claude`) |
-| `events` | Map of event names to hook definitions |
-| `matcher` | Regex pattern to match tool names |
-| `command` | Shell command to run (relative paths are resolved to the artifact directory) |
+| `hooks` | Map of event names to hook definitions (follows Claude Code format) |
+| `matcher` | Regex pattern to filter when a definition fires (optional) |
+| `hooks[].hooks` | Array of hook entries: `command`, `prompt`, or `agent` type |
 
 Hooks are **not** synced like other components. They are installed into the target's settings file (e.g. `.claude/settings.json`) when you run `grekt add`, and removed when you run `grekt remove`. During installation, grekt will show you what each hook does and ask for confirmation before modifying any settings.
 
-Referenced scripts (like `format.sh` in the example) should be included in the artifact alongside the hook JSON file.
+Script files (like `format.sh`) placed alongside the hook JSON are automatically copied to `.claude/hooks/` during installation. For best practices on naming and structuring hooks, see [Publishing hooks](/en-US/docs/guide/managing/hooks).
 
 ## Frontmatter
 
