@@ -2,6 +2,7 @@
 import { ref, nextTick, onUnmounted } from 'vue'
 
 const lines = ref([])
+const commandTyping = ref(null)
 const animating = ref(false)
 const finished = ref(false)
 const edited = ref(false)
@@ -135,6 +136,11 @@ const editFile = () => {
     saved.value = true
     showSaveIndicator.value = false
   }, t + 1400)
+
+  // Auto-run grekt check after save
+  scheduleTimeout(() => {
+    runCommand()
+  }, t + 2200)
 }
 
 const runCommand = () => {
@@ -142,10 +148,24 @@ const runCommand = () => {
 
   animating.value = true
 
-  let t = 0
+  const commandText = checkOutputLines[0].text.slice(2)
+  commandTyping.value = ''
 
-  pushLine(checkOutputLines[0])
-  t += 700
+  let charIndex = 0
+  const typeInterval = setInterval(() => {
+    commandTyping.value = commandText.slice(0, ++charIndex)
+    if (charIndex >= commandText.length) {
+      clearInterval(typeInterval)
+      commandTyping.value = null
+      pushLine(checkOutputLines[0])
+      startCheckOutput()
+    }
+  }, 40)
+  timeouts.push(typeInterval)
+}
+
+const startCheckOutput = () => {
+  let t = 700
 
   scheduleTimeout(() => pushLine(checkOutputLines[1]), t)
   t += 120
@@ -225,6 +245,14 @@ defineExpose({ editFile, runCommand, animating, finished, edited, saved })
       <!-- Right: Terminal output -->
       <div ref="terminalEl" class="demo-terminal">
         <div class="terminal-content">
+          <div v-if="lines.length === 0 && commandTyping === null" class="terminal-line terminal-line--idle">
+            <span class="prompt-sign">$</span>
+            <span class="idle-cursor">&#9612;</span>
+          </div>
+          <div v-if="commandTyping !== null && lines.length === 0" class="terminal-line terminal-line--command">
+            <span class="prompt-sign">$</span>
+            <span class="command-text">{{ commandTyping }}</span><span class="idle-cursor">&#9612;</span>
+          </div>
           <div
             v-for="(line, index) in lines"
             :key="index"
@@ -459,6 +487,23 @@ defineExpose({ editFile, runCommand, animating, finished, edited, saved })
   color: #77CABD;
   margin-right: 8px;
   font-weight: 600;
+}
+
+.idle-cursor {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.terminal-line--idle .idle-cursor {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.terminal-line--command .idle-cursor {
+  animation: none;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .command-text {

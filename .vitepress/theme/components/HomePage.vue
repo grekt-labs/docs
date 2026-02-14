@@ -325,7 +325,7 @@ const toggleFaq = (index) => {
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
           <h2 class="feature-title">Lock it into context</h2>
-          <p class="feature-description">grekt keeps your context clean by default. When you need it, skills go straight into each AI tool's context folder, <strong>committed to your repo and shared with your entire team</strong>.</p>
+          <p class="feature-description">grekt keeps your context clean by default. When you need it, artifacts go straight into each AI tool's context folder, <strong>committed to your repo and shared with your entire team</strong>.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': syncRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
@@ -388,26 +388,15 @@ const toggleFaq = (index) => {
           <p class="feature-description">Someone edited a managed file? grekt knows. Run <strong>grekt check</strong> to detect local modifications and decide whether to restore or keep them.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': checkRef?.finished }">
             <label class="feature-run-label">Try it</label>
-            <div class="feature-run-group">
-              <button
-                class="feature-run-btn"
-                :disabled="checkRef?.edited"
-                @click="checkRef?.editFile(); scrollToDemo(checkDemoEl)"
-              >
-                <span class="dots-border"></span>
-                <span class="feature-run-cmd">1. Edit a managed file</span>
-                <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
-              </button>
-              <button
-                class="feature-run-btn"
-                :disabled="!checkRef?.saved || checkRef?.animating"
-                @click="checkRef?.runCommand(); scrollToDemo(checkDemoEl)"
-              >
-                <span class="dots-border"></span>
-                <span class="feature-run-cmd">2. Detect the drift</span>
-                <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
-              </button>
-            </div>
+            <button
+              class="feature-run-btn"
+              :disabled="checkRef?.edited"
+              @click="checkRef?.editFile(); scrollToDemo(checkDemoEl)"
+            >
+              <span class="dots-border"></span>
+              <span class="feature-run-cmd">Edit a managed file</span>
+              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+            </button>
           </div>
         </div>
         <div ref="checkDemoEl" class="feature-demo">

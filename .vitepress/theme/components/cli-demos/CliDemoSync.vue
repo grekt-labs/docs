@@ -4,7 +4,9 @@ import FileTreeNode from './FileTreeNode.vue'
 
 
 const lines = ref([])
+const typingText = ref(null)
 const visibleTreePaths = ref(new Set())
+const highlightedPaths = ref(new Set())
 const animating = ref(false)
 const finished = ref(false)
 
@@ -176,6 +178,10 @@ function isVisible(path) {
   return visibleTreePaths.value.has(path)
 }
 
+function isHighlighted(path) {
+  return highlightedPaths.value.has(path)
+}
+
 function pushLine(line) {
   lines.value.push(line)
   scrollToBottom(terminalEl.value)
@@ -202,11 +208,44 @@ const runCommand = () => {
   timeouts.forEach(clearTimeout)
   timeouts = []
 
-  let t = 0
+  const commandText = syncLines[0].text.slice(2) // remove "$ "
+  typingText.value = ''
 
-  // Push command line first
-  pushLine(syncLines[0])
-  t += 700
+  let charIndex = 0
+  const typeInterval = setInterval(() => {
+    typingText.value = commandText.slice(0, ++charIndex)
+    if (charIndex >= commandText.length) {
+      clearInterval(typeInterval)
+      typingText.value = null
+      pushLine(syncLines[0])
+      startOutput()
+    }
+  }, 40)
+  timeouts.push(typeInterval)
+}
+
+const deployTree = () => {
+  const newPaths = afterPaths.filter(p => !beforePaths.includes(p))
+
+  currentTree.value = afterTree
+  expandedFolders.value = new Set([
+    ...expandedFolders.value,
+    '.agents', '.agents/skills', '.agents/skills/overseas_pirate-commits',
+    '.claude/skills', '.claude/skills/overseas_pirate-commits',
+  ])
+
+  let pathT = 0
+  newPaths.forEach((path) => {
+    scheduleTimeout(() => {
+      visibleTreePaths.value = new Set([...visibleTreePaths.value, path])
+      highlightedPaths.value = new Set([...highlightedPaths.value, path])
+    }, pathT)
+    pathT += 80
+  })
+}
+
+const startOutput = () => {
+  let t = 700
 
   // Run sync animation
   syncLines.slice(1).forEach((line) => {
@@ -230,29 +269,11 @@ const runCommand = () => {
     }
   })
 
-  // After all sync lines, update tree with synced skills
-  const treeSwitchDelay = t - 500
-  scheduleTimeout(() => {
-    currentTree.value = afterTree
-    // Expand new folders
-    expandedFolders.value = new Set([
-      ...expandedFolders.value,
-      '.agents', '.agents/skills', '.agents/skills/overseas_pirate-commits',
-      '.claude/skills', '.claude/skills/overseas_pirate-commits',
-    ])
-    // Make all new paths visible with staggered animation
-    const newPaths = afterPaths.filter(p => !beforePaths.includes(p))
-    let pathT = 0
-    newPaths.forEach((path) => {
-      scheduleTimeout(() => {
-        visibleTreePaths.value = new Set([...visibleTreePaths.value, path])
-      }, pathT)
-      pathT += 80
-    })
-  }, treeSwitchDelay)
+  // Deploy tree after all output lines
+  scheduleTimeout(() => deployTree(), t)
+  t += 500
 
   // Unlock interactivity and mark finished
-  t += 500
   scheduleTimeout(() => {
     animating.value = false
     finished.value = true
@@ -287,6 +308,7 @@ defineExpose({ runCommand, animating, finished })
             :depth="0"
             :is-expanded="isExpanded"
             :is-visible="isVisible"
+            :is-highlighted="isHighlighted"
             @toggle="toggleFolder"
           />
         </div>
@@ -295,6 +317,14 @@ defineExpose({ runCommand, animating, finished })
       <!-- Right: Terminal output -->
       <div ref="terminalEl" class="demo-terminal">
         <div class="terminal-content">
+          <div v-if="lines.length === 0 && typingText === null" class="terminal-line terminal-line--idle">
+            <span class="prompt-sign">$</span>
+            <span class="idle-cursor">&#9612;</span>
+          </div>
+          <div v-if="typingText !== null && lines.length === 0" class="terminal-line terminal-line--command">
+            <span class="prompt-sign">$</span>
+            <span class="command-text">{{ typingText }}</span><span class="idle-cursor">&#9612;</span>
+          </div>
           <div
             v-for="(line, index) in lines"
             :key="index"
@@ -401,6 +431,23 @@ defineExpose({ runCommand, animating, finished })
   color: #77CABD;
   margin-right: 8px;
   font-weight: 600;
+}
+
+.idle-cursor {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.terminal-line--idle .idle-cursor {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.terminal-line--command .idle-cursor {
+  animation: none;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .command-text {

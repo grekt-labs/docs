@@ -6,6 +6,7 @@ const props = defineProps({
   depth: { type: Number, default: 0 },
   isExpanded: { type: Function, required: true },
   isVisible: { type: Function, required: true },
+  isHighlighted: { type: Function, default: () => false },
 })
 
 const emit = defineEmits(['toggle'])
@@ -15,6 +16,7 @@ const expanded = computed(() => isFolder.value && props.isExpanded(props.node.pa
 const hasChildren = computed(() => isFolder.value && props.node.children?.length > 0)
 const isEmpty = computed(() => isFolder.value && props.node.children?.length === 0)
 const visible = computed(() => props.isVisible(props.node.path))
+const highlighted = computed(() => props.isHighlighted(props.node.path))
 const indent = computed(() => `${props.depth * 16}px`)
 
 function handleClick() {
@@ -28,7 +30,7 @@ function handleClick() {
   <div v-if="visible" class="tree-node" :class="{ 'tree-node--dimmed': node.tag }">
     <div
       class="tree-node-row"
-      :class="{ 'tree-node-row--folder': isFolder }"
+      :class="{ 'tree-node-row--folder': isFolder, 'tree-node-row--highlighted': highlighted }"
       :style="{ paddingLeft: indent }"
       @click="handleClick"
     >
@@ -62,6 +64,7 @@ function handleClick() {
         :depth="depth + 1"
         :is-expanded="isExpanded"
         :is-visible="isVisible"
+        :is-highlighted="isHighlighted"
         @toggle="emit('toggle', $event)"
       />
     </div>
@@ -94,6 +97,26 @@ function handleClick() {
 
 .tree-node-row:hover {
   background: rgba(255, 255, 255, 0.04);
+}
+
+.tree-node-row--highlighted {
+  background: rgba(119, 202, 189, 0.08);
+}
+
+.tree-node-row--highlighted .tree-node-name--file {
+  color: #77CABD;
+}
+
+.tree-node-row--highlighted .tree-node-name--folder {
+  color: #77CABD;
+}
+
+.tree-node-row--highlighted .tree-node-icon--file {
+  color: #77CABD;
+}
+
+.tree-node-row--highlighted .tree-node-icon--folder {
+  color: #77CABD;
 }
 
 .tree-node-children {

@@ -3,6 +3,7 @@ import { ref, nextTick, onMounted, onUnmounted, defineEmits } from 'vue'
 
 
 const lines = ref([])
+const typingText = ref(null)
 const animating = ref(false)
 const finished = ref(false)
 const terminalEl = ref(null)
@@ -66,11 +67,24 @@ const runCommand = () => {
   timeouts.forEach(clearTimeout)
   timeouts = []
 
-  let t = 0
+  const commandText = upgradeLines[0].text.slice(2)
+  typingText.value = ''
 
-  // Command
-  scheduleTimeout(() => pushLine(upgradeLines[0]), t)
-  t += 700
+  let charIndex = 0
+  const typeInterval = setInterval(() => {
+    typingText.value = commandText.slice(0, ++charIndex)
+    if (charIndex >= commandText.length) {
+      clearInterval(typeInterval)
+      typingText.value = null
+      pushLine(upgradeLines[0])
+      startUpgradeOutput()
+    }
+  }, 40)
+  timeouts.push(typeInterval)
+}
+
+const startUpgradeOutput = () => {
+  let t = 700
 
   // Blank
   scheduleTimeout(() => pushLine(upgradeLines[1]), t)
@@ -154,6 +168,14 @@ defineExpose({ runCommand, animating, finished })
     <div class="demo-split">
       <div ref="terminalEl" class="demo-terminal">
         <div class="terminal-content">
+          <div v-if="lines.length === 0 && typingText === null" class="terminal-line terminal-line--idle">
+            <span class="prompt-sign">$</span>
+            <span class="idle-cursor">&#9612;</span>
+          </div>
+          <div v-if="typingText !== null && lines.length === 0" class="terminal-line terminal-line--command">
+            <span class="prompt-sign">$</span>
+            <span class="command-text">{{ typingText }}</span><span class="idle-cursor">&#9612;</span>
+          </div>
           <div
             v-for="(line, index) in lines"
             :key="index"
@@ -243,6 +265,23 @@ defineExpose({ runCommand, animating, finished })
   color: #77CABD;
   margin-right: 8px;
   font-weight: 600;
+}
+
+.idle-cursor {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.terminal-line--idle .idle-cursor {
+  animation: blink-cursor 1s step-end infinite;
+}
+
+.terminal-line--command .idle-cursor {
+  animation: none;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .command-text {
