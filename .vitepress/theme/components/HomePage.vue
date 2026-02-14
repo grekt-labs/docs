@@ -282,6 +282,7 @@ const toggleFaq = (index) => {
 
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
+      <h2 class="init-demo-title">Stop copying prompts. <span class="init-demo-highlight">Start managing</span> AI context.</h2>
       <div class="init-demo-wrapper">
         <CliDemoInit ref="initRef" />
       </div>
@@ -2183,6 +2184,28 @@ html:not(.dark) .init-demo--synced {
   max-width: 520px;
   margin: 0 auto;
   opacity: 0.8;
+}
+
+.init-demo-title {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-top: 0;
+  margin-bottom: 32px;
+  line-height: 1.3;
+}
+
+.init-demo-highlight {
+  color: var(--grekt-primary-500);
+}
+
+@media (max-width: 768px) {
+  .init-demo-title {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+  }
 }
 
 .init-demo-wrapper {
