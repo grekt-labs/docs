@@ -306,7 +306,7 @@ const toggleFaq = (index) => {
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">See how your selection is reflected</span>
-              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              <span class="feature-run-play"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.629a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg></span>
             </button>
           </div>
         </div>
@@ -336,7 +336,7 @@ const toggleFaq = (index) => {
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">Add artifacts directly to your AI contexts</span>
-              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              <span class="feature-run-play"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.629a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg></span>
             </button>
           </div>
         </div>
@@ -366,7 +366,7 @@ const toggleFaq = (index) => {
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">Upgrade an artifact to the latest version</span>
-              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              <span class="feature-run-play"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.629a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg></span>
             </button>
           </div>
         </div>
@@ -396,7 +396,7 @@ const toggleFaq = (index) => {
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">Edit a managed file</span>
-              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              <span class="feature-run-play"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.629a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg></span>
             </button>
           </div>
         </div>
@@ -1595,9 +1595,9 @@ const toggleFaq = (index) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   background: var(--grekt-tertiary-500);
   color: #0f1016;
   position: relative;
