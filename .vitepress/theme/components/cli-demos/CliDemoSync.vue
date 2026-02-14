@@ -268,6 +268,8 @@ onMounted(() => {
 onUnmounted(() => {
   timeouts.forEach(clearTimeout)
 })
+
+defineExpose({ runCommand, animating, finished })
 </script>
 
 <template>
@@ -321,17 +323,8 @@ onUnmounted(() => {
             </template>
           </div>
 
-          <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
-            <button class="run-command-btn" :disabled="animating" @click="runCommand">
-              <span class="dots-border"></span>
-              <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt add @grekt/overseas --core</span>
-              <span class="run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
-            </button>
-          </div>
-
           <div v-if="finished" class="core-explanation">
-            By default, grekt loads artifacts in lazy mode. With <strong>--core</strong>, skills go directly into each AI tool's context folder, committed to your repo and <strong>still tracked by grekt for removal, updates, and full visibility of what's installed</strong>.
+            Even in core mode, grekt tracks every artifact. <strong>Updates, removals, and visibility of what's installed</strong>, all managed for you.
           </div>
 
         </div>
@@ -347,7 +340,7 @@ onUnmounted(() => {
 
 .demo-split {
   display: grid;
-  grid-template-columns: 0.35fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
   gap: 0;
   height: 500px;
   max-height: 500px;

@@ -89,4 +89,28 @@ defineProps({
     min-height: 240px;
   }
 }
+
+/* Custom scrollbar for all scrollable areas inside terminal */
+.terminal-body :deep(*) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.terminal-body :deep(*)::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.terminal-body :deep(*)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-body :deep(*)::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+.terminal-body :deep(*)::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
 </style>

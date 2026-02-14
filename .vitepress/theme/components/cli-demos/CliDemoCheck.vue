@@ -8,6 +8,7 @@ const edited = ref(false)
 const saved = ref(false)
 const showSaveIndicator = ref(false)
 const terminalEl = ref(null)
+const editorEl = ref(null)
 
 let timeouts = []
 
@@ -89,8 +90,16 @@ const editFile = () => {
   cursorLine.value = typingLine
   cursorVisible.value = true
 
+  // Scroll to the editing area before anything starts
+  let t = 0
+  scheduleTimeout(() => {
+    if (editorEl.value) {
+      editorEl.value.scrollTop = editorEl.value.scrollHeight
+    }
+  }, t)
+  t += 300
+
   // Clear the line first
-  let t = 300
   scheduleTimeout(() => {
     const updated = [...fileLines.value]
     updated[typeIdx] = { ...updated[typeIdx], text: '', type: 'typing' }
@@ -175,6 +184,8 @@ const runCommand = () => {
 onUnmounted(() => {
   timeouts.forEach(clearTimeout)
 })
+
+defineExpose({ editFile, runCommand, animating, finished, edited, saved })
 </script>
 
 <template>
@@ -187,7 +198,7 @@ onUnmounted(() => {
           <span v-if="showSaveIndicator" class="editor-saving">Saving...</span>
           <span v-else-if="saved" class="editor-saved">Saved</span>
         </div>
-        <div class="editor-content">
+        <div ref="editorEl" class="editor-content">
           <div
             v-for="line in fileLines"
             :key="line.num + '-' + line.text"
@@ -207,12 +218,6 @@ onUnmounted(() => {
               }"
             >{{ line.text }}<span v-if="cursorVisible && line.num === cursorLine" class="editor-cursor">|</span></span>
           </div>
-        </div>
-        <div v-if="!edited" class="editor-edit-btn-wrapper">
-          <button class="editor-edit-btn" @click="editFile">
-            Edit this file
-            <span class="edit-hint">simulate a manual change</span>
-          </button>
         </div>
       </div>
 
@@ -256,14 +261,6 @@ onUnmounted(() => {
             </template>
           </div>
 
-          <div v-if="saved && !finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
-            <button class="run-command-btn" :disabled="animating" @click="runCommand">
-              <span class="dots-border"></span>
-              <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt check</span>
-              <span class="run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -277,7 +274,8 @@ onUnmounted(() => {
 
 .demo-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   gap: 0;
   height: 500px;
   max-height: 500px;
@@ -288,7 +286,8 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  max-height: 250px;
 }
 
 .editor-header {
@@ -327,6 +326,7 @@ onUnmounted(() => {
   flex: 1;
   padding: 8px 0;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .editor-line {
@@ -630,8 +630,6 @@ onUnmounted(() => {
   }
 
   .demo-editor {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     max-height: 280px;
     order: 1;
   }

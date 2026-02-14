@@ -32,11 +32,26 @@
 .Layout:has(.is-home) .VPNav {
   background: transparent !important;
   border-bottom: none !important;
+  transition: background 0.3s ease;
 }
 
 .Layout:has(.is-home) .VPNavBar {
   background: transparent !important;
   border-bottom: none !important;
+  transition: background 0.3s ease;
+}
+
+/* Solid nav background after scrolling 5% */
+.has-scrolled .Layout:has(.is-home) .VPNav,
+.has-scrolled .Layout:has(.is-home) .VPNavBar {
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.dark.has-scrolled .Layout:has(.is-home) .VPNav,
+.dark.has-scrolled .Layout:has(.is-home) .VPNavBar {
+  background: #0a0a0a !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .Layout:has(.is-home) .VPNavBar .divider,

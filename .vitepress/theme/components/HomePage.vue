@@ -7,6 +7,7 @@ const CliDemoChoose = defineAsyncComponent(() => import('./cli-demos/CliDemoChoo
 const CliDemoSync = defineAsyncComponent(() => import('./cli-demos/CliDemoSync.vue'))
 const CliDemoUpdate = defineAsyncComponent(() => import('./cli-demos/CliDemoUpdate.vue'))
 const CliDemoCheck = defineAsyncComponent(() => import('./cli-demos/CliDemoCheck.vue'))
+const CliDemoInit = defineAsyncComponent(() => import('./cli-demos/CliDemoInit.vue'))
 
 const installMethods = [
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
@@ -14,6 +15,10 @@ const installMethods = [
 ]
 
 const chooseRef = ref(null)
+const syncRef = ref(null)
+const updateRef = ref(null)
+const checkRef = ref(null)
+const initRef = ref(null)
 const activeInstall = ref('curl')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
@@ -72,12 +77,20 @@ const type = () => {
   timeout = setTimeout(type, isDeleting.value ? 30 : 80)
 }
 
+const onScroll = () => {
+  const scrollThreshold = document.documentElement.scrollHeight * 0.05
+  document.documentElement.classList.toggle('has-scrolled', window.scrollY > scrollThreshold)
+}
+
 onMounted(() => {
   timeout = setTimeout(type, 500)
+  window.addEventListener('scroll', onScroll, { passive: true })
 })
 
 onUnmounted(() => {
   if (timeout) clearTimeout(timeout)
+  window.removeEventListener('scroll', onScroll)
+  document.documentElement.classList.remove('has-scrolled')
 })
 
 // FAQ
@@ -255,6 +268,13 @@ const toggleFaq = (index) => {
       </div>
     </section>
 
+    <!-- INTERACTIVE INIT DEMO -->
+    <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
+      <div class="init-demo-wrapper">
+        <CliDemoInit ref="initRef" />
+      </div>
+    </section>
+
     <!-- Section Divider -->
     <div class="section-divider"></div>
 
@@ -264,7 +284,7 @@ const toggleFaq = (index) => {
         <div class="feature-text">
           <h2 class="feature-title">Pick only what you need</h2>
           <p class="feature-description">Every artifact could ship with skills, hooks, and more. <strong>You choose what stays and what gets skipped.</strong> No bloat, no surprises.</p>
-          <div v-if="!chooseRef?.finished" class="feature-run-wrapper">
+          <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': chooseRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
               class="feature-run-btn"
@@ -289,15 +309,27 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: CORE MODE -->
-    <section class="feature-section">
+    <section class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
-          <h2 class="feature-title">Choose what matters</h2>
-          <p class="feature-description">By default, grekt loads artifacts in lazy mode. With <strong>--core</strong>, skills go directly into each AI tool's context folder, committed to your repo and shared with your entire team.</p>
+          <h2 class="feature-title">Lock it into context</h2>
+          <p class="feature-description">grekt keeps your context clean by default. When you need it, skills go straight into each AI tool's context folder, <strong>committed to your repo and shared with your entire team</strong>.</p>
+          <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': syncRef?.finished }">
+            <label class="feature-run-label">Try it</label>
+            <button
+              class="feature-run-btn"
+              :disabled="syncRef?.animating"
+              @click="syncRef?.runCommand()"
+            >
+              <span class="dots-border"></span>
+              <span class="feature-run-cmd">Add artifacts directly to your AI contexts</span>
+              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+            </button>
+          </div>
         </div>
         <div class="feature-demo">
           <TerminalChrome>
-            <CliDemoSync />
+            <CliDemoSync ref="syncRef" />
           </TerminalChrome>
         </div>
       </div>
@@ -311,11 +343,23 @@ const toggleFaq = (index) => {
       <div class="feature-row">
         <div class="feature-text">
           <h2 class="feature-title">Upgrade without surprises</h2>
-          <p class="feature-description">Upgrade artifacts to the latest version with a single command. Your selections from <strong>--choose</strong> are preserved, and if the artifact structure changes, you'll be asked again.</p>
+          <p class="feature-description">One command to upgrade artifacts to the latest version. Your previous selections are preserved, and if the artifact structure changes, grekt will ask you again.</p>
+          <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': updateRef?.finished }">
+            <label class="feature-run-label">Try it</label>
+            <button
+              class="feature-run-btn"
+              :disabled="updateRef?.animating"
+              @click="updateRef?.runCommand()"
+            >
+              <span class="dots-border"></span>
+              <span class="feature-run-cmd">Upgrade an artifact to the latest version</span>
+              <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+            </button>
+          </div>
         </div>
         <div class="feature-demo">
           <TerminalChrome>
-            <CliDemoUpdate />
+            <CliDemoUpdate ref="updateRef" />
           </TerminalChrome>
         </div>
       </div>
@@ -325,15 +369,38 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: DETECT DIFFS -->
-    <section class="feature-section">
+    <section class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
           <h2 class="feature-title">Detect drift instantly</h2>
           <p class="feature-description">Someone edited a managed file? grekt knows. Run <strong>grekt check</strong> to detect local modifications and decide whether to restore or keep them.</p>
+          <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': checkRef?.finished }">
+            <label class="feature-run-label">Try it</label>
+            <div class="feature-run-group">
+              <button
+                class="feature-run-btn"
+                :disabled="checkRef?.edited"
+                @click="checkRef?.editFile()"
+              >
+                <span class="dots-border"></span>
+                <span class="feature-run-cmd">1. Edit a managed file</span>
+                <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              </button>
+              <button
+                class="feature-run-btn"
+                :disabled="!checkRef?.saved || checkRef?.animating"
+                @click="checkRef?.runCommand()"
+              >
+                <span class="dots-border"></span>
+                <span class="feature-run-cmd">2. Detect the drift</span>
+                <span class="feature-run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="feature-demo">
           <TerminalChrome>
-            <CliDemoCheck />
+            <CliDemoCheck ref="checkRef" />
           </TerminalChrome>
         </div>
       </div>
@@ -1367,6 +1434,10 @@ const toggleFaq = (index) => {
   margin-left: calc(-50vw + 50%);
 }
 
+.feature-section--alt {
+  background: var(--section-bg-alt);
+}
+
 .feature-row {
   max-width: 1200px;
   margin: 0 auto;
@@ -1425,6 +1496,18 @@ const toggleFaq = (index) => {
 
 .feature-run-wrapper {
   margin-top: 24px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.feature-run-wrapper--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.feature-run-group {
+  display: flex;
+  gap: 10px;
 }
 
 .feature-run-label {
@@ -1526,6 +1609,34 @@ const toggleFaq = (index) => {
 
 @keyframes rotate-border {
   to { transform: rotate(360deg); }
+}
+
+html:not(.dark) .feature-run-btn {
+  background: #f0f0f0;
+}
+
+html:not(.dark) .feature-run-btn:hover:not(:disabled) {
+  box-shadow: 0 0 16px rgba(50, 130, 115, 0.25);
+}
+
+html:not(.dark) .feature-run-btn .dots-border {
+  background: rgba(50, 130, 115, 0.2);
+}
+
+html:not(.dark) .feature-run-btn .dots-border::before {
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(50, 130, 115, 0.8) 80%, rgba(50, 130, 115, 0.3) 90%, transparent 100%);
+}
+
+html:not(.dark) .feature-run-sign {
+  color: #2a7568;
+}
+
+html:not(.dark) .feature-run-cmd {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+html:not(.dark) .feature-run-play {
+  color: #fff;
 }
 
 @media (max-width: 900px) {
@@ -1994,5 +2105,64 @@ const toggleFaq = (index) => {
     right: 16px;
     transform: none;
   }
+}
+
+/* INIT DEMO */
+.feature-section--init {
+  padding-top: 80px;
+  padding-bottom: 0;
+}
+
+.feature-section--init-demo {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  transition: background-color 0.5s ease;
+}
+
+.init-demo--warn {
+  background-color: rgba(232, 168, 56, 0.04);
+}
+
+.init-demo--synced {
+  background-color: rgba(119, 202, 189, 0.04);
+}
+
+html:not(.dark) .init-demo--warn {
+  background-color: rgba(200, 140, 30, 0.06);
+}
+
+html:not(.dark) .init-demo--synced {
+  background-color: rgba(50, 130, 115, 0.06);
+}
+
+.init-demo-header {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.init-demo-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--grekt-text-accent);
+  border-top: none !important;
+  padding-top: 0 !important;
+  margin-bottom: 1rem;
+}
+
+.init-demo-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--card-text);
+  max-width: 520px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+.init-demo-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
 }
 </style>

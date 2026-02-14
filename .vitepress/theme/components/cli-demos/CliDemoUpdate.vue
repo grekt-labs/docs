@@ -163,6 +163,8 @@ const runCommand = () => {
 onUnmounted(() => {
   timeouts.forEach(clearTimeout)
 })
+
+defineExpose({ runCommand, animating, finished })
 </script>
 
 <template>
@@ -242,15 +244,6 @@ onUnmounted(() => {
             <template v-else>
               <span>{{ line.text }}</span>
             </template>
-          </div>
-
-          <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
-            <button class="run-command-btn" :disabled="animating" @click="runCommand">
-              <span class="dots-border"></span>
-              <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt upgrade @grekt/overseas</span>
-              <span class="run-play"><svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><path d="M1 0.5L9.5 6L1 11.5V0.5Z"/></svg></span>
-            </button>
           </div>
 
           <div v-if="finished" class="upgrade-explanation">
