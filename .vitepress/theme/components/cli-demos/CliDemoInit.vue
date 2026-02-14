@@ -683,7 +683,7 @@ onUnmounted(() => {
           class="demo-tab"
           :class="{ 'demo-tab--active': activeTab === 'with' }"
           @click="activeTab = 'with'"
-        >VERSIONED & TRACKED</button>
+        >MANAGED</button>
       </div>
 
       <!-- Chats side by side -->
@@ -1569,12 +1569,70 @@ html:not(.dark) .chat-icon {
 /* Mobile */
 @media (max-width: 768px) {
   .demo-chats {
+    flex-direction: column;
     padding: 12px;
-    gap: 8px;
+    gap: 0;
+  }
+
+  .demo-tabs {
+    align-self: stretch;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    max-width: calc(100% - 0.4rem);
+  }
+
+  .demo-tab {
+    width: auto;
+    flex: 1;
   }
 
   .chat-window {
     min-width: 0;
+  }
+
+  .chat-center {
+    width: 100%;
+    min-width: unset;
+    min-height: 150px;
+    flex-direction: row;
+    padding: 12px 0;
+  }
+
+
+  .chat-connector {
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  .connector-line {
+    width: 2px;
+    height: 150px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.15) 0px,
+      rgba(255, 255, 255, 0.15) 6px,
+      transparent 6px,
+      transparent 12px
+    ) !important;
+  }
+
+  .cli-demo-init:not(.cli-demo-init--synced) .connector-line {
+    height: 150px;
+  }
+
+  .chat-connector--synced .connector-line {
+    background: repeating-linear-gradient(
+      180deg,
+      #77CABD 0px,
+      #77CABD 6px,
+      transparent 6px,
+      transparent 12px
+    ) !important;
+    background-size: 100% 200% !important;
+    animation: connector-flow-vertical 10s linear infinite !important;
   }
 
   .chat-body {
@@ -1604,5 +1662,14 @@ html:not(.dark) .chat-icon {
   .chat-skill-indicator {
     font-size: 0.58rem;
   }
+
+  .skill-toast--inline {
+    font-size: 0.75rem;
+  }
+}
+
+@keyframes connector-flow-vertical {
+  0% { background-position: 0 0%; }
+  100% { background-position: 0 -200%; }
 }
 </style>
