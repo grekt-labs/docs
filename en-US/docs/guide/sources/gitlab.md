@@ -2,6 +2,21 @@
 
 Use GitLab's Generic Package Registry to host multiple artifacts in a single project.
 
+## Authentication {#registry-auth}
+
+You need a GitLab personal access token with the required scopes before configuring the registry.
+
+| Operation | Scope |
+|-----------|-------|
+| Download | `read_api` |
+| Publish | `api` |
+
+```bash
+grekt config registry set @myteam
+```
+
+See [Authentication](/en-US/docs/guide/sources/authentication).
+
 ## Configuration
 
 Create `.grekt/config.yaml` in your project:
@@ -46,56 +61,6 @@ grekt versions @myteam/agent-tools
 # Get info
 grekt info @myteam/agent-tools
 ```
-
-## Authentication {#registry-auth}
-
-You need a GitLab access token before configuring the registry. Two options:
-
-### Personal Access Tokens (PAT) - Recommended
-
-PATs provide full functionality including version listing and "latest" resolution.
-
-| Operation | Scope |
-|-----------|-------|
-| Download | `read_api` |
-| Publish | `api` |
-
-```yaml
-# .grekt/config.yaml
-registries:
-  "@myteam":
-    type: gitlab
-    project: myteam/artifacts
-    token: glpat-xxxxxxxxxxxx
-```
-
-### Deploy Tokens
-
-Deploy Tokens provide minimum permissions but have a limitation: they cannot list package versions due to GitLab API restrictions.
-
-| Operation | Scope |
-|-----------|-------|
-| Download (explicit version) | `read_package_registry` |
-| Publish | `write_package_registry` |
-
-::: warning Version required
-With deploy tokens, you must specify the version explicitly:
-
-```bash
-grekt add @myteam/artifact@1.0.0  # works
-grekt add @myteam/artifact        # fails (cannot resolve latest)
-```
-
-For "latest" resolution, use a PAT instead.
-:::
-
-### Interactive setup
-
-```bash
-grekt config registry set @myteam
-```
-
-See [Authentication](/en-US/docs/guide/sources/authentication).
 
 ## Publishing
 

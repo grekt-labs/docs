@@ -227,6 +227,9 @@ const toggleFaq = (index) => {
         <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
           <img src="/logos/Sesame.png" alt="Sesame" />
         </a>
+        <a href="https://metrivibe.com" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--metrivibe" title="Metrivibe">
+          <img src="/logos/metrivibe-logo.png" alt="Metrivibe" />
+        </a>
         <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
           <img src="/logos/thn.png" alt="The Hotels Network" />
         </a> -->
@@ -882,6 +885,10 @@ const toggleFaq = (index) => {
   filter: grayscale(100%) var(--logo-filter);
   opacity: 0.35;
   transition: all 0.3s ease;
+}
+
+.trusted-by-logo--metrivibe img {
+  height: 64px;
 }
 
 .trusted-by-logo:hover img {
