@@ -31,21 +31,8 @@ const upgradeLines = [
   { type: 'blank', text: '' },
   { type: 'success-section', text: 'Upgraded:' },
   { type: 'success', text: '@grekt/overseas: 1.2.0 → 1.3.0' },
-  { type: 'info', text: '  (new skill added in 1.3.0: sea-metaphors)' },
   { type: 'blank', text: '' },
   { type: 'success-bold', text: 'Upgrade complete!' },
-]
-
-const artifacts = ref([])
-
-const artifactList = [
-  {
-    name: '@grekt/overseas',
-    from: '1.2.0',
-    to: '1.3.0',
-    status: 'pending',
-    changes: ['+1 new skill'],
-  },
 ]
 
 function pushLine(line) {
@@ -74,7 +61,6 @@ const runCommand = () => {
   if (animating.value || finished.value) return
 
   lines.value = []
-  artifacts.value = []
   animating.value = true
 
   timeouts.forEach(clearTimeout)
@@ -108,10 +94,9 @@ const runCommand = () => {
   scheduleTimeout(() => pushLine(upgradeLines[5]), t)
   t += 120
 
-  // Upgrade item + show card
+  // Upgrade item
   scheduleTimeout(() => {
     pushLine(upgradeLines[6])
-    artifacts.value = [{ ...artifactList[0] }]
   }, t)
   t += 400
 
@@ -135,22 +120,18 @@ const runCommand = () => {
   scheduleTimeout(() => pushLine(upgradeLines[10]), t)
   t += 200
 
-  // Success line + update card status
+  // Success line
   scheduleTimeout(() => {
     pushLine(upgradeLines[11])
-    artifacts.value = artifacts.value.map(a => ({ ...a, status: 'done' }))
   }, t)
   t += 250
 
-  scheduleTimeout(() => pushLine(upgradeLines[12]), t)
-  t += 300
-
   // Blank
-  scheduleTimeout(() => pushLine(upgradeLines[13]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[12]), t)
   t += 120
 
   // Final message
-  scheduleTimeout(() => pushLine(upgradeLines[14]), t)
+  scheduleTimeout(() => pushLine(upgradeLines[13]), t)
   t += 200
 
   t += 500
@@ -171,45 +152,6 @@ defineExpose({ runCommand, animating, finished })
 <template>
   <div class="cli-demo-update">
     <div class="demo-split">
-      <!-- Left: Artifact cards -->
-      <div class="demo-artifacts">
-        <div class="artifacts-header">Artifacts</div>
-        <div v-if="artifacts.length === 0" class="artifacts-empty">
-          <span class="artifacts-empty-text">Checking registry...</span>
-        </div>
-        <div
-          v-for="(artifact, index) in artifacts"
-          :key="artifact.name"
-          class="artifact-card"
-          :class="{ 'artifact-card--done': artifact.status === 'done' }"
-        >
-          <div class="artifact-name">{{ artifact.name }}</div>
-          <div class="artifact-version">
-            <span class="version-from">{{ artifact.from }}</span>
-            <span class="version-arrow">→</span>
-            <span class="version-to">{{ artifact.to }}</span>
-          </div>
-          <div class="artifact-changes">
-            <div
-              v-for="change in artifact.changes"
-              :key="change"
-              class="artifact-change"
-              :class="{
-                'artifact-change--add': change.startsWith('+'),
-                'artifact-change--update': change.startsWith('~'),
-              }"
-            >
-              {{ change }}
-            </div>
-          </div>
-          <div class="artifact-status">
-            <span v-if="artifact.status === 'done'" class="status-done">&#10003; upgraded</span>
-            <span v-else class="status-pending">pending</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: Terminal output -->
       <div ref="terminalEl" class="demo-terminal">
         <div class="terminal-content">
           <div
@@ -260,125 +202,14 @@ defineExpose({ runCommand, animating, finished })
 <style scoped>
 .cli-demo-update {
   width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .demo-split {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 0;
-  height: 500px;
-  max-height: 500px;
-}
-
-/* Artifact cards */
-.demo-artifacts {
-  padding: 20px 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.artifacts-header {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.35);
-  font-weight: 600;
-}
-
-.artifacts-empty {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.artifacts-empty-text {
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 0.75rem;
-  font-style: italic;
-}
-
-.artifact-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 14px 16px;
-  animation: card-fade-in 0.3s ease-out;
-  transition: border-color 0.3s ease;
-}
-
-.artifact-card--done {
-  border-color: rgba(119, 202, 189, 0.25);
-}
-
-.artifact-name {
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #e6edf3;
-  margin-bottom: 6px;
-}
-
-.artifact-version {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.version-from {
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.version-arrow {
-  color: #77CABD;
-  font-size: 0.75rem;
-}
-
-.version-to {
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.7rem;
-  color: #77CABD;
-  font-weight: 500;
-}
-
-.artifact-changes {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin-bottom: 8px;
-}
-
-.artifact-change {
-  font-size: 0.65rem;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-}
-
-.artifact-change--add {
-  color: #7ee787;
-}
-
-.artifact-change--update {
-  color: #e8a838;
-}
-
-.artifact-status {
-  font-size: 0.65rem;
-}
-
-.status-done {
-  color: #77CABD;
-  font-weight: 500;
-}
-
-.status-pending {
-  color: rgba(255, 255, 255, 0.25);
-  font-style: italic;
+  min-height: 280px;
 }
 
 /* Terminal */
@@ -388,7 +219,7 @@ defineExpose({ runCommand, animating, finished })
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.5);
+  flex: 1;
 }
 
 .terminal-content {
@@ -572,35 +403,14 @@ defineExpose({ runCommand, animating, finished })
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes card-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 @media (max-width: 768px) {
-  .demo-split {
-    grid-template-columns: 1fr;
-    height: auto;
-    max-height: none;
-  }
-
   .demo-terminal {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding: 16px 20px;
-    order: 1;
-    max-height: 280px;
-  }
-
-  .demo-artifacts {
-    padding: 16px 20px;
-    border-right: none;
-    order: 2;
-    max-height: 220px;
   }
 
   .terminal-content {
