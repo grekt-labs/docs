@@ -1,7 +1,6 @@
 <script setup>
 import { ref, nextTick, onMounted, onUnmounted, defineEmits } from 'vue'
 
-const emit = defineEmits(['next-tab'])
 
 const lines = ref([])
 const animating = ref(false)
@@ -164,6 +163,8 @@ const runCommand = () => {
 onUnmounted(() => {
   timeouts.forEach(clearTimeout)
 })
+
+defineExpose({ runCommand, animating, finished })
 </script>
 
 <template>
@@ -245,23 +246,10 @@ onUnmounted(() => {
             </template>
           </div>
 
-          <div v-if="!finished" class="terminal-prompt-input" :class="{ 'terminal-prompt-input--disabled': animating }">
-            <button class="run-command-btn" :disabled="animating" @click="runCommand">
-              <span class="prompt-sign">$</span>
-              <span class="command-preview">grekt upgrade @grekt/overseas</span>
-              <span class="run-hint">click to run</span>
-            </button>
-          </div>
-
           <div v-if="finished" class="upgrade-explanation">
             Upgrades respect selections made with <strong>--choose</strong>. If the artifact structure changes, you will be asked again.
           </div>
 
-          <div v-if="finished" class="next-tab-wrapper">
-            <button class="next-tab-btn" @click="emit('next-tab')">
-              Detect diffs ›
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -474,47 +462,87 @@ onUnmounted(() => {
 }
 
 .run-command-btn {
+  --border-radius: 6px;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0;
   width: 100%;
   padding: 8px 12px;
-  background: rgba(119, 202, 189, 0.06);
-  border: 1px solid rgba(119, 202, 189, 0.2);
-  border-radius: 6px;
+  background: rgba(15, 16, 22, 0.8);
+  border: none;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s ease;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   font-size: 0.78rem;
-  animation: prompt-pulse 2s ease-in-out infinite;
+  overflow: hidden;
 }
 
 .run-command-btn:hover:not(:disabled) {
-  background: rgba(119, 202, 189, 0.12);
-  border-color: rgba(119, 202, 189, 0.4);
-  animation: none;
+  box-shadow: 0 0 16px rgba(119, 202, 189, 0.4);
 }
 
 .run-command-btn:disabled {
   opacity: 0.3;
   cursor: default;
+}
+
+.run-command-btn .dots-border {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: rgba(119, 202, 189, 0.15);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.run-command-btn .dots-border::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(119, 202, 189, 0.8) 80%, rgba(119, 202, 189, 0.3) 90%, transparent 100%);
+  animation: rotate-border 2s linear infinite;
+}
+
+.run-command-btn:disabled .dots-border::before {
   animation: none;
+}
+
+.run-command-btn .prompt-sign {
+  position: relative;
+  z-index: 1;
 }
 
 .command-preview {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
+  position: relative;
+  z-index: 1;
 }
 
-.run-hint {
+.run-play {
   margin-left: auto;
-  color: rgba(119, 202, 189, 0.5);
-  font-size: 0.65rem;
-  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ED9839;
+  color: #0f1016;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
 }
 
-.terminal-prompt-input--disabled .run-hint {
-  display: none;
+.run-command-btn:hover:not(:disabled) .run-play {
+  transform: scale(1.1);
 }
 
 .upgrade-explanation {
@@ -534,34 +562,8 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-.next-tab-wrapper {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-  animation: line-fade-in 0.3s ease-out;
-}
-
-.next-tab-btn {
-  padding: 6px 16px;
-  background: rgba(119, 202, 189, 0.1);
-  border: 1px solid rgba(119, 202, 189, 0.25);
-  border-radius: 6px;
-  color: #77CABD;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.next-tab-btn:hover {
-  background: rgba(119, 202, 189, 0.18);
-  border-color: rgba(119, 202, 189, 0.4);
-}
-
-@keyframes prompt-pulse {
-  0%, 100% { border-color: rgba(119, 202, 189, 0.15); }
-  50% { border-color: rgba(119, 202, 189, 0.35); }
+@keyframes rotate-border {
+  to { transform: rotate(360deg); }
 }
 
 @keyframes line-fade-in {

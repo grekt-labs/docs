@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick, onMounted, onUnmounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 import FileTreeNode from './FileTreeNode.vue'
 
 const emit = defineEmits(['next-tab'])
@@ -17,9 +17,8 @@ const treeEl = ref(null)
 const claudeChatEl = ref(null)
 const codexChatEl = ref(null)
 
-// File preview state
+// File preview state (unused, kept for potential restore)
 const previewTabs = ref([])
-const activeTab = ref(null)
 const previewVisible = ref(false)
 
 function scrollToBottom(el) {
@@ -115,27 +114,59 @@ const addLines = [
   { type: 'info', text: '  skills: pirate-commits' },
 ]
 
-// Pre-install chat (each AI commits differently)
+// Without grekt: each AI follows its own style
 const preClaudeMessages = [
-  { role: 'user', text: 'Commit my changes' },
-  { role: 'assistant', html: 'I\'ll set <strong>"feat: add user authentication flow"</strong> as commit message' },
+  { role: 'user', text: 'Commit my changes', muted: true },
+  {
+    role: 'assistant',
+    html: 'I\'ll commit with:<br><strong>"feat: add user authentication flow"</strong>',
+    annotation: 'Conventional commits',
+    highlight: 'warn',
+  },
 ]
 
 const preCodexMessages = [
-  { role: 'user', text: 'Commit my changes' },
-  { role: 'assistant', html: 'I\'ll set <strong>"added the login stuff and fixed some things"</strong> as commit message' },
+  { role: 'user', text: 'Commit my changes', muted: true },
+  {
+    role: 'assistant',
+    html: 'Done! Committed as:<br><strong>"added the login stuff and fixed some things"</strong>',
+    annotation: 'No convention at all',
+    highlight: 'warn',
+  },
 ]
 
-// Post-install chat (both follow pirate + conventional commits)
+// With grekt: both follow the same pirate-commits skill
 const postClaudeMessages = [
-  { role: 'user', text: 'Commit my changes' },
-  { role: 'assistant', html: 'I\'ll set <strong>"feat: hoist the auth sails, captain! Ahoy!"</strong> as commit message' },
+  { role: 'user', text: 'Commit my changes', muted: true },
+  {
+    role: 'assistant',
+    html: 'I\'ll commit with:<br><strong>"feat: hoist the auth sails, captain! Ahoy!"</strong>',
+    highlight: 'success',
+  },
 ]
 
 const postCodexMessages = [
-  { role: 'user', text: 'Commit my changes' },
-  { role: 'assistant', html: 'I\'ll set <strong>"feat: anchor the login flow, matey! Fair winds!"</strong> as commit message' },
+  { role: 'user', text: 'Commit my changes', muted: true },
+  {
+    role: 'assistant',
+    html: 'Done! Committed as:<br><strong>"feat: anchor the login flow, matey! Fair winds!"</strong>',
+    highlight: 'success',
+  },
 ]
+
+const activeTab = ref('without')
+
+defineExpose({ activeTab })
+
+const displayedClaudeMessages = computed(() =>
+  activeTab.value === 'with' ? postClaudeMessages : preClaudeMessages
+)
+
+const displayedCodexMessages = computed(() =>
+  activeTab.value === 'with' ? postCodexMessages : preCodexMessages
+)
+
+const isWithMode = computed(() => activeTab.value === 'with')
 
 // Existing project files (visible from the start)
 const existingFiles = [
@@ -437,7 +468,6 @@ function selectTab(fileName) {
   if (!tab) return
   previewVisible.value = false
   setTimeout(() => {
-    activeTab.value = fileName
     highlightedPreview.value = tab.highlighted
     previewVisible.value = true
   }, 100)
@@ -640,114 +670,107 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="cli-demo-init">
+  <div class="cli-demo-init" :class="{ 'cli-demo-init--synced': isWithMode }">
     <div class="demo-layout">
-      <!-- Top row: Chats | Preview | Tree -->
+      <!-- Tabs -->
+      <div class="demo-tabs">
+        <button
+          class="demo-tab"
+          :class="{ 'demo-tab--active': activeTab === 'without' }"
+          @click="activeTab = 'without'"
+        >PROMPT & PRAY</button>
+        <button
+          class="demo-tab"
+          :class="{ 'demo-tab--active': activeTab === 'with' }"
+          @click="activeTab = 'with'"
+        >VERSIONED & TRACKED</button>
+      </div>
+
+      <!-- Chats side by side -->
       <div class="demo-top">
-        <!-- Left: AI Chat windows -->
         <div class="demo-chats">
           <!-- Claude chat -->
-          <div class="chat-window">
+          <div class="chat-window" :class="{ 'chat-window--synced': isWithMode }">
             <div class="chat-titlebar">
               <img
                 src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/claude.png"
                 alt="Claude"
-                width="14"
-                height="14"
+                width="16"
+                height="16"
                 class="chat-icon"
               />
               <span class="chat-title">Claude</span>
             </div>
-            <div ref="claudeChatEl" class="chat-body">
-              <div
-                v-for="(msg, index) in chatMessages.claude"
-                :key="`claude-${index}`"
-                :class="`chat-msg chat-msg--${msg.role}`"
-              >
-                <span v-if="msg.role === 'system'" class="chat-system">{{ msg.text }}</span>
-                <span v-else-if="msg.html" class="chat-bubble" :class="`chat-bubble--${msg.role}`" v-html="msg.html"></span>
-                <span v-else class="chat-bubble" :class="`chat-bubble--${msg.role}`">{{ msg.text }}</span>
-              </div>
+            <div class="chat-body">
+              <Transition name="chat-fade" mode="out-in">
+                <div :key="activeTab" class="chat-messages-list">
+                  <div
+                    v-for="(msg, index) in displayedClaudeMessages"
+                    :key="index"
+                    :class="[`chat-msg chat-msg--${msg.role}`, { 'chat-msg--muted': msg.muted }]"
+                  >
+                    <span v-if="msg.html" class="chat-bubble" :class="[`chat-bubble--${msg.role}`, msg.highlight ? `chat-bubble--${msg.highlight}` : '']" v-html="msg.html"></span>
+                    <span v-else class="chat-bubble" :class="[`chat-bubble--${msg.role}`, msg.highlight ? `chat-bubble--${msg.highlight}` : '']">{{ msg.text }}</span>
+                    <!-- <span v-if="msg.annotation" class="chat-annotation">{{ msg.annotation }}</span> -->
+                  </div>
+                </div>
+              </Transition>
             </div>
           </div>
 
-          <!-- Status indicator -->
-          <div v-if="chatStatus !== 'idle'" class="chat-status" :class="`chat-status--${chatStatus}`">
-            <span v-if="chatStatus === 'warning'" class="chat-status-icon">&#9888;</span>
-            <span v-if="chatStatus === 'warning'" class="chat-status-text">Each one does its own thing</span>
-            <span v-if="chatStatus === 'synced'" class="chat-status-icon chat-status-icon--check">&#10003;</span>
-            <span v-if="chatStatus === 'synced'" class="chat-status-text">Same skills, consistent behavior</span>
+          <!-- Center: Connector + Skill toast -->
+          <div class="chat-center">
+            <div class="chat-connector" :class="{ 'chat-connector--synced': isWithMode }">
+              <div class="connector-line"></div>
+            </div>
+            <Transition name="toast-slide" mode="out-in">
+              <div v-if="isWithMode" key="with" class="skill-toast skill-toast--inline">
+                <span class="skill-toast-label">Synced skill</span>
+                <span class="skill-toast-name">pirate-commits</span>
+                <span class="skill-toast-source">@grekt/overseas@<span class="skill-toast-version">1.0.5</span></span>
+              </div>
+              <div v-else key="without" class="skill-toast skill-toast--inline skill-toast--warn">
+                <span class="skill-toast-name">Who? When? What?</span>
+              </div>
+            </Transition>
           </div>
 
           <!-- Codex chat -->
-          <div class="chat-window">
+          <div class="chat-window" :class="{ 'chat-window--synced': isWithMode }">
             <div class="chat-titlebar">
               <img
                 src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/openai.png"
                 alt="Codex"
-                width="14"
-                height="14"
+                width="16"
+                height="16"
                 class="chat-icon"
               />
               <span class="chat-title">Codex</span>
             </div>
-            <div ref="codexChatEl" class="chat-body">
-              <div
-                v-for="(msg, index) in chatMessages.codex"
-                :key="`codex-${index}`"
-                :class="`chat-msg chat-msg--${msg.role}`"
-              >
-                <span v-if="msg.role === 'system'" class="chat-system">{{ msg.text }}</span>
-                <span v-else-if="msg.html" class="chat-bubble" :class="`chat-bubble--${msg.role}`" v-html="msg.html"></span>
-                <span v-else class="chat-bubble" :class="`chat-bubble--${msg.role}`">{{ msg.text }}</span>
-              </div>
+            <div class="chat-body">
+              <Transition name="chat-fade" mode="out-in">
+                <div :key="activeTab" class="chat-messages-list">
+                  <div
+                    v-for="(msg, index) in displayedCodexMessages"
+                    :key="index"
+                    :class="[`chat-msg chat-msg--${msg.role}`, { 'chat-msg--muted': msg.muted }]"
+                  >
+                    <span v-if="msg.html" class="chat-bubble" :class="[`chat-bubble--${msg.role}`, msg.highlight ? `chat-bubble--${msg.highlight}` : '']" v-html="msg.html"></span>
+                    <span v-else class="chat-bubble" :class="[`chat-bubble--${msg.role}`, msg.highlight ? `chat-bubble--${msg.highlight}` : '']">{{ msg.text }}</span>
+                    <!-- <span v-if="msg.annotation" class="chat-annotation">{{ msg.annotation }}</span> -->
+                  </div>
+                </div>
+              </Transition>
             </div>
           </div>
         </div>
 
-        <!-- Center: File preview (editor) -->
-        <div class="demo-preview">
-          <div class="preview-tabs">
-            <button
-              v-for="tab in previewTabs"
-              :key="tab.name"
-              class="preview-tab"
-              :class="{ 'preview-tab--active': activeTab === tab.name }"
-              @click="selectTab(tab.name)"
-            >
-              {{ tab.name }}
-            </button>
-            <span v-if="previewTabs.length === 0" class="preview-tab-empty">No files open</span>
-          </div>
-          <div class="preview-body">
-            <div v-if="previewTabs.length > 0" class="preview-content" :class="{ 'preview-content--visible': previewVisible }">
-              <pre class="preview-code" v-html="highlightedPreview"></pre>
-            </div>
-            <div v-else class="preview-placeholder">
-              <span class="preview-placeholder-text">Send a command to see files</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: File tree -->
-        <div ref="treeEl" class="demo-tree">
-          <div class="tree-header">Project structure</div>
-          <div class="tree-content">
-            <FileTreeNode
-              v-for="node in currentTree"
-              :key="node.path"
-              :node="node"
-              :depth="0"
-              :is-expanded="isExpanded"
-              :is-visible="isVisible"
-              @toggle="toggleFolder"
-            />
-          </div>
-        </div>
       </div>
 
-      <!-- Bottom: Terminal (full width) -->
-      <div ref="terminalEl" class="demo-terminal">
+      <!-- Skill toast (moved inline between chats) -->
+
+      <!-- Bottom: Terminal (full width) — temporarily hidden -->
+      <div v-if="false" ref="terminalEl" class="demo-terminal">
         <div class="terminal-content" :class="{ 'terminal-content--bottom': currentStep >= 2 }">
           <!-- Next tab button -->
           <div v-if="finished" class="terminal-prompt-input terminal-next-tab">
@@ -832,290 +855,161 @@ onUnmounted(() => {
 <style scoped>
 .cli-demo-init {
   width: 100%;
+  transition: all 0.4s ease;
 }
 
 .demo-layout {
   display: flex;
   flex-direction: column;
-  height: 640px;
-  max-height: 640px;
+  position: relative;
 }
 
-/* Top row: 3 columns */
-.demo-top {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr 0.5fr;
-  gap: 0;
-  flex: 1;
-  min-height: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* File Tree panel */
-.demo-tree {
-  padding: 16px 20px;
+/* Skill toast */
+.skill-toast {
+  position: absolute;
+  bottom: -44px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.tree-header {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.35);
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-.tree-content {
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.75rem;
-}
-
-/* File preview panel - editor style */
-.demo-preview {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.15);
-}
-
-.preview-tabs {
-  display: flex;
-  align-items: stretch;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.02);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  height: 34px;
-  overflow-x: auto;
-}
-
-.preview-tab {
-  display: inline-flex;
   align-items: center;
-  padding: 0 14px;
-  height: 100%;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.68rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.35);
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  gap: 10px;
+  padding: 8px 18px;
+  background: #141414;
+  border: 1px solid rgba(119, 202, 189, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
+  z-index: 10;
 }
 
-.preview-tab:hover {
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.preview-tab--active {
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-  background: rgba(0, 0, 0, 0.15);
-  border-bottom-color: #77CABD;
-}
-
-.preview-tab-empty {
-  display: inline-flex;
-  align-items: center;
-  padding: 0 14px;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+.skill-toast-label {
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.preview-body {
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
-}
-
-.preview-content {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  height: 100%;
-}
-
-.preview-content--visible {
-  opacity: 1;
-}
-
-.preview-code {
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  line-height: 0.9;
-  color: rgba(255, 255, 255, 0.65);
-  margin: 0;
-  padding: 10px 0 10px 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  white-space: pre;
-  overflow: auto;
-}
-
-.preview-placeholder {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.preview-placeholder-text {
-  color: rgba(255, 255, 255, 0.12);
-  font-size: 0.75rem;
-  font-style: italic;
-}
-
-/* Line numbers */
-.preview-code :deep(.hl-line) {
-  display: block;
-}
-
-.preview-code :deep(.hl-line-number) {
-  display: inline-block;
-  width: 28px;
-  padding-right: 12px;
-  margin-right: 14px;
-  text-align: right;
-  color: rgba(255, 255, 255, 0.18);
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  user-select: none;
-}
-
-/* Syntax highlighting - YAML */
-.preview-code :deep(.hl-comment) {
+  text-transform: uppercase;
+  letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.3);
-  font-style: italic;
-}
-
-.preview-code :deep(.hl-key) {
-  color: #7dcfff;
-}
-
-.preview-code :deep(.hl-punctuation) {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.preview-code :deep(.hl-string) {
-  color: #9ece6a;
-}
-
-.preview-code :deep(.hl-value) {
-  color: #e0af68;
-}
-
-/* Syntax highlighting - Markdown */
-.preview-code :deep(.hl-md-heading) {
-  color: #7dcfff;
   font-weight: 600;
 }
 
-.preview-code :deep(.hl-md-bold) {
-  color: #bb9af7;
-  font-weight: 500;
+.skill-toast-name {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #77CABD;
+  padding: 3px 10px;
+  background: rgba(119, 202, 189, 0.1);
+  border-radius: 6px;
 }
 
-.preview-code :deep(.hl-md-text) {
-  color: rgba(255, 255, 255, 0.7);
+.skill-toast-source {
+  font-size: 0.72rem;
+  color: #77CABD;
 }
 
-/* Syntax highlighting - Frontmatter */
-.preview-code :deep(.hl-frontmatter-delimiter) {
-  color: rgba(255, 255, 255, 0.25);
+.skill-toast-version {
+  color: #77CABD;
+  font-weight: 600;
 }
 
-.preview-code :deep(.hl-frontmatter-key) {
-  color: #bb9af7;
+/* Toast transition */
+.toast-slide-enter-active,
+.toast-slide-leave-active {
+  transition: all 0.3s ease;
 }
 
-.preview-code :deep(.hl-frontmatter-value) {
-  color: #9ece6a;
+.toast-slide-enter-from,
+.toast-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
 }
 
-/* AI Chats column */
+.toast-slide-enter-to,
+.toast-slide-leave-from {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Chats area */
+.demo-top {
+  display: flex;
+  flex-direction: column;
+}
+
+/* AI Chats side by side */
 .demo-chats {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  overflow-y: auto;
+  flex-direction: row;
+  gap: 0;
+  padding: 20px 20px 20px;
+  position: relative;
+  min-height: 280px;
+  align-items: stretch;
 }
 
+/* Chat windows */
 .chat-window {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.chat-window--synced {
+  border-color: rgba(119, 202, 189, 0.15);
+  box-shadow: 0 0 24px rgba(119, 202, 189, 0.06);
 }
 
 .chat-titlebar {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px;
+  padding: 10px 16px;
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   flex-shrink: 0;
 }
 
 .chat-icon {
-  border-radius: 3px;
+  border-radius: 4px;
   flex-shrink: 0;
 }
 
 .chat-title {
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .chat-body {
-  padding: 10px 12px;
-  flex: 1;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  min-height: 0;
+  gap: 8px;
 }
 
 .chat-msg {
-  animation: msg-fade-in 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
-.chat-system {
-  display: block;
-  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-  font-size: 0.58rem;
-  color: #77CABD;
-  text-align: center;
-  padding: 3px 8px;
-  background: rgba(119, 202, 189, 0.08);
-  border-radius: 4px;
-  font-weight: 500;
+.chat-msg--user {
+  align-items: flex-end;
+}
+
+.chat-msg--assistant {
+  align-items: flex-start;
 }
 
 .chat-bubble {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 10px 14px;
   border-radius: 10px;
-  font-size: 0.65rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.6;
   max-width: 100%;
   word-wrap: break-word;
 }
@@ -1124,11 +1018,6 @@ onUnmounted(() => {
   background: rgba(119, 202, 189, 0.15);
   color: #77CABD;
   border-bottom-right-radius: 4px;
-}
-
-.chat-msg--user {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .chat-bubble--assistant {
@@ -1142,60 +1031,43 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-.chat-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  flex: 1;
+.chat-msg--muted .chat-bubble {
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.chat-empty-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  animation: dot-pulse 1.4s ease-in-out infinite;
+.chat-bubble--warn {
+  background: rgba(232, 168, 56, 0.15);
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.chat-empty-dot:nth-child(2) { animation-delay: 0.2s; }
-.chat-empty-dot:nth-child(3) { animation-delay: 0.4s; }
-
-/* Chat status indicator */
-.chat-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 4px 0;
-  animation: msg-fade-in 0.3s ease-out;
-  flex-shrink: 0;
+.chat-bubble--warn :deep(strong) {
+  color: #e8a838;
 }
 
-.chat-status-icon {
+.chat-bubble--success {
+  background: rgba(119, 202, 189, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-bubble--success :deep(strong) {
+  color: #77CABD;
+}
+
+/* Annotation labels on messages */
+.chat-annotation {
+  display: inline-block;
+  margin-top: 6px;
   font-size: 0.7rem;
-}
-
-.chat-status--warning .chat-status-icon {
-  color: #e8a838;
-}
-
-.chat-status--warning .chat-status-text {
-  color: #e8a838;
-  font-size: 0.62rem;
   font-weight: 500;
+  color: #e8a838;
+  padding: 2px 8px;
+  background: rgba(232, 168, 56, 0.08);
+  border: 1px solid rgba(232, 168, 56, 0.15);
+  border-radius: 4px;
+  letter-spacing: 0.3px;
 }
 
-.chat-status--synced .chat-status-icon--check {
-  color: #77CABD;
-  font-weight: 700;
-}
-
-.chat-status--synced .chat-status-text {
-  color: #77CABD;
-  font-size: 0.62rem;
-  font-weight: 500;
-}
 
 /* Terminal (bottom, full width) */
 .demo-terminal {
@@ -1419,67 +1291,318 @@ onUnmounted(() => {
 }
 
 
+/* Connector between chat windows */
+.chat-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  min-width: 240px;
+  position: relative;
+}
+
+.chat-connector {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.connector-line {
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15) 0px,
+    rgba(255, 255, 255, 0.15) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 200% 100%;
+  animation: connector-flow 20s linear infinite;
+  transition: all 0.4s ease;
+}
+
+.chat-connector--synced .connector-line {
+  background: repeating-linear-gradient(
+    90deg,
+    #77CABD 0px,
+    #77CABD 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 200% 100%;
+  animation: connector-flow 10s linear infinite;
+  box-shadow: 0 0 8px rgba(119, 202, 189, 0.3);
+}
+
+@keyframes connector-flow {
+  0% { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skill-toast--inline {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 14px;
+  text-align: center;
+  z-index: 1;
+}
+
+.skill-toast--warn {
+  border-color: rgba(232, 168, 56, 0.2);
+  background: #1a1400;
+}
+
+.skill-toast--warn .skill-toast-name {
+  color: #e8a838;
+  background: rgba(232, 168, 56, 0.1);
+}
+
+/* Tabs */
+.demo-tabs {
+  display: inline-flex;
+  align-self: center;
+  gap: 4px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  margin-top: 20px;
+  margin-bottom: 4px;
+}
+
+.demo-tab {
+  width: 190px;
+  padding: 10px 0;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-tab:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.demo-tab--active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Chat fade transition */
+.chat-fade-enter-active {
+  transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+}
+
+.chat-fade-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.chat-fade-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.chat-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+.chat-messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Light mode */
+html:not(.dark) .chat-window {
+  background: #f5f5f5;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+html:not(.dark) .chat-window--synced {
+  border-color: rgba(50, 130, 115, 0.4);
+  box-shadow: 0 0 24px rgba(50, 130, 115, 0.12);
+}
+
+html:not(.dark) .chat-titlebar {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+html:not(.dark) .chat-title {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+html:not(.dark) .chat-bubble--user {
+  background: rgba(50, 130, 115, 0.15);
+  color: #2a7568;
+}
+
+html:not(.dark) .chat-bubble--assistant {
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.75);
+}
+
+html:not(.dark) .chat-bubble--assistant :deep(strong) {
+  color: #111;
+}
+
+html:not(.dark) .chat-msg--muted .chat-bubble {
+  color: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+html:not(.dark) .chat-bubble--warn {
+  background: rgba(180, 120, 20, 0.14);
+  color: rgba(0, 0, 0, 0.75);
+}
+
+html:not(.dark) .chat-bubble--warn :deep(strong) {
+  color: #7a5510;
+}
+
+html:not(.dark) .chat-bubble--success {
+  background: rgba(50, 130, 115, 0.14);
+  color: rgba(0, 0, 0, 0.75);
+}
+
+html:not(.dark) .chat-bubble--success :deep(strong) {
+  color: #2a7568;
+}
+
+html:not(.dark) .connector-line {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.25) 0px,
+    rgba(0, 0, 0, 0.25) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 200% 100%;
+}
+
+html:not(.dark) .chat-connector--synced .connector-line {
+  background: repeating-linear-gradient(
+    90deg,
+    #2a7568 0px,
+    #2a7568 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 200% 100%;
+  box-shadow: 0 0 8px rgba(50, 130, 115, 0.3);
+}
+
+html:not(.dark) .skill-toast {
+  background: #eee;
+  border-color: rgba(50, 130, 115, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+html:not(.dark) .skill-toast-label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html:not(.dark) .skill-toast-name {
+  color: #2a7568;
+  background: rgba(50, 130, 115, 0.15);
+}
+
+html:not(.dark) .skill-toast-source {
+  color: #2a7568;
+}
+
+html:not(.dark) .skill-toast-version {
+  color: #2a7568;
+}
+
+html:not(.dark) .skill-toast--warn {
+  background: #f5eddb;
+  border-color: rgba(180, 120, 20, 0.35);
+}
+
+html:not(.dark) .skill-toast--warn .skill-toast-name {
+  color: #7a5510;
+  background: rgba(180, 120, 20, 0.15);
+}
+
+html:not(.dark) .demo-tab {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+html:not(.dark) .demo-tab--active {
+  background: #fff;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+html:not(.dark) .demo-tabs {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+html:not(.dark) .chat-annotation {
+  color: #7a5510;
+  background: rgba(180, 120, 20, 0.12);
+}
+
+html:not(.dark) .chat-icon {
+  filter: invert(1);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
-  .demo-layout {
-    height: auto;
-    max-height: none;
-  }
-
-  .demo-top {
-    grid-template-columns: 1fr;
-    border-bottom: none;
-  }
-
-  .demo-tree {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 12px 16px;
-    max-height: 200px;
-  }
-
-  .demo-preview {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 12px 16px;
-    max-height: 180px;
-  }
-
   .demo-chats {
-    padding: 12px 16px;
-    flex-direction: row;
+    padding: 12px;
     gap: 8px;
-    max-height: 180px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .chat-window {
-    flex: 1;
     min-width: 0;
   }
 
-  .demo-terminal {
-    height: auto;
-    min-height: 140px;
-    max-height: 200px;
-    padding: 12px 16px;
-  }
-
-  .terminal-content,
-  .tree-content {
-    font-size: 0.68rem;
-  }
-
-  .preview-code {
-    font-size: 0.65rem;
+  .chat-body {
+    padding: 12px;
   }
 
   .chat-bubble {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+    padding: 8px 12px;
   }
 
-  .chat-system {
-    font-size: 0.52rem;
+  .chat-annotation {
+    font-size: 0.62rem;
+  }
+
+  .skill-bridge {
+    padding: 8px 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .skill-bridge-name {
+    font-size: 0.7rem;
+  }
+
+  .chat-skill-indicator {
+    font-size: 0.58rem;
   }
 }
 </style>
