@@ -1,6 +1,6 @@
 # Introduction
 
-grekt is an artifact manager for AI tools. It lets you install, manage, and share agents, skills, and commands across your projects - and sync them to AI tools like Claude Code, Cursor, Windsurf, and others.
+grekt is the open artifact manager for AI tools. It lets you install, manage, and share agents, skills, and commands across your projects and sync them to AI tools like Claude Code, Cursor, Windsurf, and others.
 
 ## The problem
 

@@ -2,11 +2,11 @@
 
 ## Name
 
-**grekt** - AI Artifact Manager
+**grekt** - The open artifact manager for AI tools
 
 ## Definition
 
-An AI artifact manager for agents, skills, commands, and more that syncs configurations across AI coding assistants like Claude, Cursor, and others.
+The open artifact manager for AI tools. Install, manage, and share agents, skills, commands, and more across AI coding assistants like Claude, Cursor, and others.
 
 ## Brand Tokens
 

@@ -50,11 +50,10 @@ const copyCommand = async () => {
 }
 
 const phrases = [
-  'synced to any AI assistant.',
-  'shared across teams.',
-  'versioned and tracked.',
-  'always in sync, everywhere.',
-  'context aware. No bloat.',
+  'All agents, always in sync.',
+  'Reproducible across teams.',
+  'Versioned like code.',
+  'Drift-proof.',
 ]
 
 const currentPhrase = ref('')
@@ -109,7 +108,7 @@ onUnmounted(() => {
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is an AI artifact manager that helps you install, sync, and share AI configurations (agents, skills, commands) across tools like Claude Code, Cursor, OpenCode, and more.'
+    answer: 'grekt is the open artifact manager for AI tools. It helps you install, sync, and share AI configurations (agents, skills, commands) across tools like Claude Code, Cursor, OpenCode, and more.'
   },
   {
     question: 'How does grekt work?',
@@ -188,11 +187,11 @@ const toggleFaq = (index) => {
 
       <div class="hero-content">
         <h1>
-          <span class="static-text">Your AI tools finally</span><br>
+          <span class="static-text">The open artifact manager for AI tools.</span><br>
           <span class="typing-text">{{ currentPhrase }}<span class="cursor">|</span></span>
         </h1>
         <p class="tagline">
-          Install, sync, and share AI configurations with version control, drift detection, and context management. <strong class="typing-text">AI configurations, versioned like code.</strong>
+          Install, sync, and share AI configurations with version control, drift detection, and more.
         </p>
         <div class="hero-buttons">
           <div class="install-wrapper">
@@ -214,7 +213,10 @@ const toggleFaq = (index) => {
               </button>
             </div>
           </div>
-          <a href="https://explore.grekt.com" class="secondary discover-btn">Explore artifacts</a>
+          <div class="hero-cta-row">
+            <a href="/en-US/docs/guide/getting-started" class="primary">Get started</a>
+            <a href="https://explore.grekt.com" class="secondary discover-btn">Explore artifacts</a>
+          </div>
         </div>
       </div>
 
@@ -273,7 +275,7 @@ const toggleFaq = (index) => {
           <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
-          <span class="badge-coming-soon">Public Registry</span>
+          <a href="https://explore.grekt.com" target="_blank" rel="noopener" class="badge-coming-soon">Public Registry</a>
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
@@ -560,7 +562,7 @@ const toggleFaq = (index) => {
             <div class="footer-logo">
               <span class="logo-text">grekt</span>
             </div>
-            <p class="footer-tagline">AI artifact manager for the modern developer.</p>
+            <p class="footer-tagline">The open artifact manager for AI tools.</p>
           </div>
 
           <!-- Resources -->
@@ -970,12 +972,19 @@ const toggleFaq = (index) => {
 
 .hero-buttons {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-cta-row {
+  display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .hero-buttons a {
-  padding: 14px 28px;
+  padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
@@ -983,6 +992,7 @@ const toggleFaq = (index) => {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 0.9rem;
 }
 
 .hero-buttons a.primary {
@@ -1030,9 +1040,9 @@ const toggleFaq = (index) => {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-right: none;
   border-radius: 8px 0 0 8px;
-  padding: 12px 42px 12px 16px;
+  padding: 10px 38px 10px 14px;
   color: #1a1a2e;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
@@ -1076,8 +1086,8 @@ const toggleFaq = (index) => {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0 8px 8px 0;
-  padding: 12px 16px;
-  gap: 12px;
+  padding: 10px 14px;
+  gap: 10px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
   flex: 1;
 }
@@ -1287,6 +1297,8 @@ const toggleFaq = (index) => {
   letter-spacing: 0.5px;
   padding: 4px 10px;
   border-radius: 20px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* FEATURES */
@@ -2019,6 +2031,18 @@ html:not(.dark) .feature-run-play {
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-cta-row a {
+    width: calc(100% - 32px);
+    max-width: 400px;
+    justify-content: center;
   }
 
   .install-wrapper {

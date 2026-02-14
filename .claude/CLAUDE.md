@@ -1,6 +1,6 @@
 # grekt Documentation
 
-This is the documentation site for grekt, an AI artifact manager CLI.
+This is the documentation site for grekt, the open artifact manager for AI tools.
 
 ## Agent
 

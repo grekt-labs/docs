@@ -4,8 +4,8 @@ This guide walks you through setting up grekt in a project and syncing your firs
 
 ## Installation
 
-::: warning EARLY ACCESS
-AI tooling evolves fast — breaking changes and frequent updates are expected as the ecosystem matures.
+::: warning NOTE
+AI tooling evolves fast. Breaking changes and frequent updates are expected as the ecosystem matures.
 :::
 
 ::: code-group
