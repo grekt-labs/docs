@@ -431,8 +431,8 @@ const toggleFaq = (index) => {
               <span class="label-title">What it is</span>
               <span class="label-desc">Core purpose and focus</span>
             </div>
-            <div class="comparison-value comparison-value--grekt">AI artifact governance</div>
-            <div class="comparison-value comparison-value--other">Skills catalog</div>
+            <div class="comparison-value comparison-value--grekt">Full artifact manager</div>
+            <div class="comparison-value comparison-value--other">Markdown file copier</div>
           </div>
           <div class="comparison-row">
             <div class="comparison-label">
@@ -440,15 +440,7 @@ const toggleFaq = (index) => {
               <span class="label-desc">How artifacts are defined</span>
             </div>
             <div class="comparison-value comparison-value--grekt">Versioned artifact + schema</div>
-            <div class="comparison-value comparison-value--other">Text file</div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-label">
-              <span class="label-title">Philosophy</span>
-              <span class="label-desc">Design principles</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt">Reusability & governance</div>
-            <div class="comparison-value comparison-value--other">Reusability</div>
+            <div class="comparison-value comparison-value--other">Markdown file</div>
           </div>
         </div>
 
@@ -456,16 +448,8 @@ const toggleFaq = (index) => {
           <div class="comparison-group-title">Context management</div>
           <div class="comparison-row">
             <div class="comparison-label">
-              <span class="label-title">Token budget</span>
-              <span class="label-desc">Context aware loading</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Considered</div>
-            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-label">
               <span class="label-title">Context bloat</span>
-              <span class="label-desc">Loading only what you need</span>
+              <span class="label-desc">Keep tool directories clean</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Minimized</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
@@ -485,7 +469,7 @@ const toggleFaq = (index) => {
           <div class="comparison-row">
             <div class="comparison-label">
               <span class="label-title">Drift detection</span>
-              <span class="label-desc">Detect artifact changes</span>
+              <span class="label-desc">Someone edited a managed file?</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
@@ -493,10 +477,18 @@ const toggleFaq = (index) => {
           <div class="comparison-row">
             <div class="comparison-label">
               <span class="label-title">Consistency</span>
-              <span class="label-desc">Same artifacts everywhere</span>
+              <span class="label-desc">Same config, every project, every machine</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Per-project lockfile</div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span>Global, remember to sync</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
+              <span class="label-title">Self-hosted</span>
+              <span class="label-desc">Run your own private registry</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
         </div>
       </div>
@@ -504,6 +496,33 @@ const toggleFaq = (index) => {
         Already using skills.sh?<br>
         You can wrap those skills as grekt artifacts to add versioning, policies, and guarantees.
       </p>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
+    <!-- SELF-HOSTED / TEAMS -->
+    <section class="self-hosted">
+      <h2 class="section-title">Built for teams. Runs on your infra.</h2>
+      <p class="self-hosted-subtitle">Use the public registry for open artifacts, or run your own private instance for internal configurations.</p>
+      <div class="self-hosted-grid">
+        <div class="self-hosted-card">
+          <div class="self-hosted-card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <h3>Public registry</h3>
+          <p>Discover and share open artifacts with the community. Free forever for public configurations.</p>
+          <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
+        </div>
+        <div class="self-hosted-card self-hosted-card--highlight">
+          <div class="self-hosted-card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <h3>Self-hosted registry</h3>
+          <p>Run your own private instance. Same CLI, same workflow. Your artifacts, your infrastructure, zero external dependencies.</p>
+          <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
+        </div>
+      </div>
     </section>
 
     <!-- Section Divider -->
@@ -2218,5 +2237,121 @@ html:not(.dark) .init-demo--synced {
 .init-demo-wrapper {
   max-width: 1300px;
   margin: 0 auto;
+}
+
+/* SELF-HOSTED / TEAMS */
+.self-hosted {
+  background: var(--section-bg-alt);
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.self-hosted > * {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.self-hosted-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--card-text);
+  line-height: 1.6;
+  margin: -1.5rem auto 3rem;
+  max-width: 560px;
+}
+
+.self-hosted-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.self-hosted-card {
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.self-hosted-card:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
+}
+
+.self-hosted-card--highlight {
+  border-color: var(--grekt-primary-500);
+  position: relative;
+}
+
+.self-hosted-card--highlight::before {
+  content: 'For teams';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--grekt-primary-500);
+  color: #0d1117;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.self-hosted-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.self-hosted-card-icon svg {
+  color: #0d1117;
+}
+
+.self-hosted-card h3 {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--card-title);
+}
+
+.self-hosted-card p {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.self-hosted-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--grekt-text-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.self-hosted-link:hover {
+  color: var(--grekt-primary-300);
+}
+
+@media (max-width: 768px) {
+  .self-hosted-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
