@@ -41,7 +41,7 @@ const phrases = [
   'synced to any AI assistant.',
   'shared across teams.',
   'versioned and tracked.',
-  'installed once, consistent everywhere.',
+  'always in sync, everywhere.',
   'context aware. No bloat.',
 ]
 
@@ -1967,10 +1967,15 @@ html:not(.dark) .feature-run-play {
 
   .hero h1 {
     font-size: 2.5rem;
+    min-height: 140px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .hero .tagline {
     font-size: 1.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .hero-buttons {
