@@ -97,7 +97,7 @@ const editFile = () => {
       editorEl.value.scrollTop = editorEl.value.scrollHeight
     }
   }, t)
-  t += 300
+  t += 800
 
   // Clear the line first
   scheduleTimeout(() => {
@@ -105,7 +105,7 @@ const editFile = () => {
     updated[typeIdx] = { ...updated[typeIdx], text: '', type: 'typing' }
     fileLines.value = updated
   }, t)
-  t += 200
+  t += 400
 
   // Type the new text character by character (white while typing)
   for (let i = 0; i < typingText.length; i++) {
@@ -119,7 +119,7 @@ const editFile = () => {
       }
       fileLines.value = updated
     }, t)
-    t += 50
+    t += 80
   }
 
   // Switch to edited (orange) once done typing

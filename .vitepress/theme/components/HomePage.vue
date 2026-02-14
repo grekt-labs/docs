@@ -1658,6 +1658,14 @@ html:not(.dark) .feature-run-play {
   .feature-description {
     font-size: 0.9rem;
   }
+
+  .feature-demo {
+    max-width: 90vw;
+  }
+
+  .feature-run-group {
+    flex-direction: column;
+  }
 }
 
 /* COMPARISON */
