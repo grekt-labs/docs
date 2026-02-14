@@ -157,6 +157,7 @@ const runCommand = () => {
   scheduleTimeout(() => {
     animating.value = false
     finished.value = true
+    scrollToBottom(terminalEl.value)
   }, t)
 }
 

@@ -531,7 +531,14 @@ defineExpose({ runCommand, animating, finished })
 @media (max-width: 768px) {
   .demo-terminal {
     padding: 16px 20px;
-    max-height: 280px;
+    max-height: 200px;
+    order: 2;
+  }
+
+  .demo-config {
+    order: 1;
+    border-top: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .terminal-content {

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted, computed } from 'vue'
 import TerminalChrome from './cli-demos/TerminalChrome.vue'
 import { defineAsyncComponent } from 'vue'
 
@@ -15,10 +15,22 @@ const installMethods = [
 ]
 
 const chooseRef = ref(null)
+const chooseDemoEl = ref(null)
 const syncRef = ref(null)
+const syncDemoEl = ref(null)
 const updateRef = ref(null)
+const updateDemoEl = ref(null)
 const checkRef = ref(null)
+const checkDemoEl = ref(null)
 const initRef = ref(null)
+
+const scrollToDemo = (el) => {
+  if (window.innerWidth <= 768 && el) {
+    nextTick(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+  }
+}
 const activeInstall = ref('curl')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
@@ -289,7 +301,7 @@ const toggleFaq = (index) => {
             <button
               class="feature-run-btn"
               :disabled="chooseRef?.animating"
-              @click="chooseRef?.runCommand()"
+              @click="chooseRef?.runCommand(); scrollToDemo(chooseDemoEl)"
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">See how your selection is reflected</span>
@@ -297,7 +309,7 @@ const toggleFaq = (index) => {
             </button>
           </div>
         </div>
-        <div class="feature-demo">
+        <div ref="chooseDemoEl" class="feature-demo">
           <TerminalChrome>
             <CliDemoChoose ref="chooseRef" />
           </TerminalChrome>
@@ -319,7 +331,7 @@ const toggleFaq = (index) => {
             <button
               class="feature-run-btn"
               :disabled="syncRef?.animating"
-              @click="syncRef?.runCommand()"
+              @click="syncRef?.runCommand(); scrollToDemo(syncDemoEl)"
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">Add artifacts directly to your AI contexts</span>
@@ -327,7 +339,7 @@ const toggleFaq = (index) => {
             </button>
           </div>
         </div>
-        <div class="feature-demo">
+        <div ref="syncDemoEl" class="feature-demo">
           <TerminalChrome>
             <CliDemoSync ref="syncRef" />
           </TerminalChrome>
@@ -349,7 +361,7 @@ const toggleFaq = (index) => {
             <button
               class="feature-run-btn"
               :disabled="updateRef?.animating"
-              @click="updateRef?.runCommand()"
+              @click="updateRef?.runCommand(); scrollToDemo(updateDemoEl)"
             >
               <span class="dots-border"></span>
               <span class="feature-run-cmd">Upgrade an artifact to the latest version</span>
@@ -357,7 +369,7 @@ const toggleFaq = (index) => {
             </button>
           </div>
         </div>
-        <div class="feature-demo">
+        <div ref="updateDemoEl" class="feature-demo">
           <TerminalChrome>
             <CliDemoUpdate ref="updateRef" />
           </TerminalChrome>
@@ -380,7 +392,7 @@ const toggleFaq = (index) => {
               <button
                 class="feature-run-btn"
                 :disabled="checkRef?.edited"
-                @click="checkRef?.editFile()"
+                @click="checkRef?.editFile(); scrollToDemo(checkDemoEl)"
               >
                 <span class="dots-border"></span>
                 <span class="feature-run-cmd">1. Edit a managed file</span>
@@ -389,7 +401,7 @@ const toggleFaq = (index) => {
               <button
                 class="feature-run-btn"
                 :disabled="!checkRef?.saved || checkRef?.animating"
-                @click="checkRef?.runCommand()"
+                @click="checkRef?.runCommand(); scrollToDemo(checkDemoEl)"
               >
                 <span class="dots-border"></span>
                 <span class="feature-run-cmd">2. Detect the drift</span>
@@ -398,7 +410,7 @@ const toggleFaq = (index) => {
             </div>
           </div>
         </div>
-        <div class="feature-demo">
+        <div ref="checkDemoEl" class="feature-demo">
           <TerminalChrome>
             <CliDemoCheck ref="checkRef" />
           </TerminalChrome>
@@ -1665,6 +1677,16 @@ html:not(.dark) .feature-run-play {
 
   .feature-run-group {
     flex-direction: column;
+  }
+
+  .feature-section {
+    padding: 40px 20px;
+  }
+
+  .feature-run-wrapper--hidden {
+    opacity: 0.3;
+    visibility: visible;
+    pointer-events: none;
   }
 }
 

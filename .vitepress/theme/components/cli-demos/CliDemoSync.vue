@@ -256,6 +256,7 @@ const runCommand = () => {
   scheduleTimeout(() => {
     animating.value = false
     finished.value = true
+    scrollToBottom(terminalEl.value)
   }, t)
 }
 
@@ -573,18 +574,19 @@ defineExpose({ runCommand, animating, finished })
   }
 
   .demo-terminal {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding: 16px 20px;
-    order: 1;
-    max-height: 280px;
+    order: 2;
+    max-height: 220px;
   }
 
   .demo-tree {
     padding: 16px 20px;
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    order: 2;
-    max-height: 260px;
+    order: 1;
+    max-height: 300px;
   }
 
   .terminal-content,
