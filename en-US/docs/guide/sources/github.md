@@ -2,6 +2,18 @@
 
 Use GitHub Container Registry (GHCR) to host multiple artifacts in a single namespace.
 
+## Authentication
+
+You need a GitHub personal access token with the required scopes before configuring the registry.
+
+Required scopes: `read:packages` (download), `write:packages` (publish).
+
+```bash
+grekt config registry set @myorg
+```
+
+See [Authentication](/en-US/docs/guide/sources/authentication).
+
 ## Configuration
 
 ```yaml
@@ -18,7 +30,7 @@ registries:
 | `type` | Yes | Must be `github` |
 | `project` | Yes | GHCR namespace (e.g., `myorg` for `ghcr.io/myorg/*`) |
 | `host` | No | Registry host (default: `ghcr.io`) |
-| `token` | No | Access token (prefer env vars) |
+| `token` | No | Access token (prefer `grekt config registry set`) |
 | `prefix` | No | Repository name prefix for monorepo organization (immutable after first publish) |
 
 ## Usage
@@ -31,14 +43,6 @@ grekt add @myorg/agent-tools@2.0.0
 # List versions
 grekt versions @myorg/agent-tools
 ```
-
-## Authentication
-
-```bash
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
-```
-
-Required scopes: `read:packages` (download), `write:packages` (publish).
 
 ## Monorepo organization
 
@@ -94,10 +98,8 @@ grekt add github:owner/repo#abc1234
 For private repositories:
 
 ```bash
-export GITHUB_TOKEN=ghp_xxxxxxxxxxxx
+grekt config token set github
 ```
-
-Required scopes: `repo`
 
 ::: info Limitations
 Source mode only supports one artifact per repository. No version listing, no deprecation, no `grekt info`.
@@ -107,6 +109,6 @@ Source mode only supports one artifact per repository. No version listing, no de
 
 ## Related
 
-- [Overview](/en-US/docs/guide/sources/overview) - Sources overview
+- [Overview](/en-US/docs/guide/sources/overview) - Registries overview
 - [GitLab](/en-US/docs/guide/sources/gitlab) - GitLab registry
 - [Authentication](/en-US/docs/guide/sources/authentication) - Full auth guide

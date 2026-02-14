@@ -30,7 +30,7 @@ registries:
 | `type` | Yes | Must be `gitlab` |
 | `project` | Yes | GitLab project path or ID (e.g., `group/project` or `1413`) |
 | `host` | No | GitLab host (default: `gitlab.com`) |
-| `token` | No | Access token (prefer env vars) |
+| `token` | No | Access token (prefer `grekt config registry set`) |
 | `prefix` | No | Package name prefix for monorepo organization (immutable after first publish) |
 
 ## Usage
@@ -49,7 +49,7 @@ grekt info @myteam/agent-tools
 
 ## Authentication {#registry-auth}
 
-For private GitLab registries, you need a token. Two options:
+You need a GitLab access token before configuring the registry. Two options:
 
 ### Personal Access Tokens (PAT) - Recommended
 
@@ -89,13 +89,13 @@ grekt add @myteam/artifact        # fails (cannot resolve latest)
 For "latest" resolution, use a PAT instead.
 :::
 
-### Environment variables
+### Interactive setup
 
 ```bash
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
+grekt config registry set @myteam
 ```
 
-Or use `grekt config registry set @scope` for interactive setup. See [Authentication](/en-US/docs/guide/sources/authentication).
+See [Authentication](/en-US/docs/guide/sources/authentication).
 
 ## Publishing
 
@@ -180,7 +180,7 @@ grekt add gitlab:gitlab.company.com/owner/repo
 For private repositories:
 
 ```bash
-export GITLAB_TOKEN=glpat-xxxxxxxxxxxx
+grekt config token set gitlab.company.com
 ```
 
 ::: info Limitations
@@ -191,6 +191,6 @@ Source mode only supports one artifact per repository. No version listing, no de
 
 ## Related
 
-- [Overview](/en-US/docs/guide/sources/overview) - Sources overview
+- [Overview](/en-US/docs/guide/sources/overview) - Registries overview
 - [GitHub](/en-US/docs/guide/sources/github) - GitHub source
 - [Authentication](/en-US/docs/guide/sources/authentication) - Full auth guide

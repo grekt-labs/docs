@@ -17,11 +17,11 @@ export const enUSSidebar = {
       ]
     },
     {
-      text: 'Sources',
+      text: 'Registries',
       items: [
         { text: 'Overview', link: '/en-US/docs/guide/sources/overview' },
-        { text: 'GitHub', link: '/en-US/docs/guide/sources/github' },
-        { text: 'GitLab', link: '/en-US/docs/guide/sources/gitlab' },
+        { text: 'GitHub / GitHub Enterprise', link: '/en-US/docs/guide/sources/github' },
+        { text: 'GitLab / GitLab Self-hosted', link: '/en-US/docs/guide/sources/gitlab' },
         { text: 'Authentication', link: '/en-US/docs/guide/sources/authentication' }
       ]
     },

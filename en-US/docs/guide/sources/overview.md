@@ -1,6 +1,6 @@
-# Sources overview
+# Registries overview
 
-grekt supports multiple ways to install artifacts.
+grekt supports multiple ways to host and install artifacts.
 
 ## Registries
 
