@@ -68,6 +68,14 @@ const beforeConfig = [
   { num: 3, text: '  - codex', type: 'value' },
   { num: 4, text: 'artifacts: {}', type: 'key' },
   { num: 5, text: 'customTargets: {}', type: 'key' },
+  { num: 6, text: '', type: 'blank' },
+  { num: 7, text: '', type: 'blank' },
+  { num: 8, text: '', type: 'blank' },
+  { num: 9, text: '', type: 'blank' },
+  { num: 10, text: '', type: 'blank' },
+  { num: 11, text: '', type: 'blank' },
+  { num: 12, text: '', type: 'blank' },
+  { num: 13, text: '', type: 'blank' },
 ]
 
 const afterConfig = [
