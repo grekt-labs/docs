@@ -231,7 +231,13 @@ defineExpose({ runCommand, animating, finished })
 .demo-split {
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  min-height: 320px;
+}
+
+@media (max-width: 768px) {
+  .demo-split {
+    min-height: 280px;
+  }
 }
 
 /* Terminal */

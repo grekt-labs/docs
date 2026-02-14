@@ -625,6 +625,7 @@ defineExpose({ runCommand, animating, finished })
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding: 16px 20px;
     order: 2;
+    min-height: 220px;
     max-height: 220px;
   }
 
