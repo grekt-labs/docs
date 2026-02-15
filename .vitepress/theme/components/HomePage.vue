@@ -301,7 +301,7 @@ const toggleFaq = (index) => {
       <div class="feature-row">
         <div class="feature-text">
           <h2 class="feature-title">Pick only what you need</h2>
-          <p class="feature-description">Every artifact could ship with skills, hooks, and more. <strong>You choose what stays and what gets skipped.</strong> No bloat, no surprises.</p>
+          <p class="feature-description">Every artifact could ship with skills, agents, hooks, and more. <strong>You choose what stays and what gets skipped.</strong> No bloat, no surprises.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': chooseRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
