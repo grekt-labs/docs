@@ -143,6 +143,18 @@ grekt upgrade
 
 Component selections from `--choose` are preserved across upgrades.
 
+## Git worktrees
+
+When using `git worktree`, gitignored directories like `.grekt/` are not present in the new worktree. Use `grekt worktree sync` to copy it from the original repo:
+
+```bash
+git worktree add ../agent-wt main
+cd ../agent-wt
+grekt worktree sync
+```
+
+See [`grekt worktree`](/en-US/api/worktree) for details.
+
 ## Configuration
 
 Your `grekt.yaml` tracks which artifacts are installed and how the project is configured:

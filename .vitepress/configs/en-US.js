@@ -94,6 +94,12 @@ export const enUSSidebar = {
         { text: 'grekt pack', link: '/en-US/api/pack' },
         { text: 'grekt version', link: '/en-US/api/version' }
       ]
+    },
+    {
+      text: 'Worktree',
+      items: [
+        { text: 'grekt worktree', link: '/en-US/api/worktree' }
+      ]
     }
   ]
 }
