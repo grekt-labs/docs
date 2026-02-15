@@ -230,7 +230,7 @@ const toggleFaq = (index) => {
           <img src="/logos/Sesame.png" alt="Sesame" />
         </a>
         <a href="https://metrivibe.com" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--metrivibe" title="Metrivibe">
-          <img src="/logos/metrivibe-logo.png" alt="Metrivibe" />
+          <img src="/logos/metrivibe-logov2.png" alt="Metrivibe" />
         </a>
         <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
           <img src="/logos/thn.png" alt="The Hotels Network" />
