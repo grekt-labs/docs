@@ -285,6 +285,33 @@ const toggleFaq = (index) => {
       </div>
     </section>
 
+    <!-- SELF-HOSTED / TEAMS -->
+    <section class="self-hosted">
+      <h2 class="section-title">Built for teams. Runs on your infra. <span class="self-hosted-free">Free.</span></h2>
+      <p class="self-hosted-subtitle">Use the public registry for open artifacts, or run your own private instance for internal configurations.</p>
+      <div class="self-hosted-grid">
+        <div class="self-hosted-card">
+          <div class="self-hosted-card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <h3>Public registry</h3>
+          <p>Discover and share open artifacts with the community. Free forever for public configurations.</p>
+          <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
+        </div>
+        <div class="self-hosted-card self-hosted-card--highlight">
+          <div class="self-hosted-card-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <h3>Self-hosted registry</h3>
+          <p>Run your own private instance. Same CLI, same workflow. Your artifacts, your infrastructure, zero external dependencies.</p>
+          <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
       <h2 class="init-demo-title">Stop copying prompts. <span class="init-demo-highlight">Start managing</span> AI context.</h2>
@@ -498,33 +525,6 @@ const toggleFaq = (index) => {
         Already using skills.sh?<br>
         You can wrap those skills as grekt artifacts to add versioning, policies, and guarantees.
       </p>
-    </section>
-
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-
-    <!-- SELF-HOSTED / TEAMS -->
-    <section class="self-hosted">
-      <h2 class="section-title">Built for teams. Runs on your infra.</h2>
-      <p class="self-hosted-subtitle">Use the public registry for open artifacts, or run your own private instance for internal configurations.</p>
-      <div class="self-hosted-grid">
-        <div class="self-hosted-card">
-          <div class="self-hosted-card-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          </div>
-          <h3>Public registry</h3>
-          <p>Discover and share open artifacts with the community. Free forever for public configurations.</p>
-          <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
-        </div>
-        <div class="self-hosted-card self-hosted-card--highlight">
-          <div class="self-hosted-card-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-          </div>
-          <h3>Self-hosted registry</h3>
-          <p>Run your own private instance. Same CLI, same workflow. Your artifacts, your infrastructure, zero external dependencies.</p>
-          <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
-        </div>
-      </div>
     </section>
 
     <!-- Section Divider -->
@@ -909,7 +909,7 @@ const toggleFaq = (index) => {
 }
 
 .trusted-by-logo--metrivibe img {
-  height: 64px;
+  height: 40px;
 }
 
 .trusted-by-logo:hover img {
@@ -2275,6 +2275,10 @@ html:not(.dark) .init-demo--synced {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.self-hosted-free {
+  color: var(--grekt-primary-500);
 }
 
 .self-hosted-subtitle {
