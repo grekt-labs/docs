@@ -42,11 +42,6 @@ Benefits:
 - Target files always reflect the artifact source
 - Saves disk space with many core artifacts
 
-::: warning Limitations
-- Symlinks may break if you move the project directory
-- On Windows, symlinks require Developer Mode or admin privileges
-- If the artifact uses content transformations, files are copied instead of symlinked
-:::
 
 ## Choosing a mode
 
