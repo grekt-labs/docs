@@ -2017,7 +2017,7 @@ html:not(.dark) .feature-run-play {
 
   .hero h1 {
     font-size: 2.5rem;
-    min-height: 140px;
+    min-height: 185px;
     padding-left: 1rem;
     padding-right: 1rem;
   }
