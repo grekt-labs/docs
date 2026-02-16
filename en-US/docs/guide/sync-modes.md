@@ -1,6 +1,6 @@
 # Sync modes
 
-Artifacts can be installed in two modes that determine how they're synced to AI tools.
+Artifacts can be installed in three modes that determine how they're synced to AI tools.
 
 ## Lazy mode (default)
 
@@ -28,21 +28,45 @@ Benefits:
 - No index lookup needed
 - Best for critical agents and skills
 
+## Core-sym mode
+
+Artifacts are symlinked to target directories instead of copied. Works like core mode but avoids file duplication.
+
+```bash
+grekt add @scope/my-artifact --core-sym
+```
+
+Benefits:
+- Same immediate availability as core mode
+- No file duplication (symlinks point to `.grekt/artifacts/`)
+- Target files always reflect the artifact source
+- Saves disk space with many core artifacts
+
+::: warning Limitations
+- Symlinks may break if you move the project directory
+- On Windows, symlinks require Developer Mode or admin privileges
+- If the artifact uses content transformations, files are copied instead of symlinked
+:::
+
 ## Choosing a mode
 
-| Use LAZY when... | Use CORE when... |
-|------------------|------------------|
-| Artifact is rarely used | Artifact is used frequently |
-| Reducing context size | Need immediate availability |
-| Many artifacts installed | Few critical artifacts |
+| Use LAZY when... | Use CORE when... | Use CORE-SYM when... |
+|------------------|------------------|----------------------|
+| Artifact is rarely used | Artifact is used frequently | Same as CORE, but want no duplication |
+| Reducing context size | Need immediate availability | Disk space matters |
+| Many artifacts installed | Few critical artifacts | Development environment |
 
 ## Promoting LAZY to CORE
 
-Remove and re-add the artifact with `--core`:
+Remove and re-add the artifact with `--core` or `--core-sym`:
 
 ```bash
 grekt remove @scope/my-artifact
 grekt add @scope/my-artifact --core
+
+# Or with symlinks
+grekt remove @scope/my-artifact
+grekt add @scope/my-artifact --core-sym
 ```
 
 ## The index file
@@ -71,7 +95,7 @@ Lazy mode keeps artifacts **outside** the tool's directories until explicitly ne
 This gives you the best of both worlds:
 
 - **Discoverability**: Artifacts remain findable via the index and keywords
-- **Clean context**: Only CORE artifacts consume tool attention
+- **Clean context**: Only CORE/CORE-SYM artifacts consume tool attention
 - **On-demand loading**: Rare-use artifacts stay out of the way until you need them
 
 Think of it as the difference between having 100 books on your desk vs. having a catalog card that tells you where to find them in the library.

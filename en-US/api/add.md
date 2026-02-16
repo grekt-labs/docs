@@ -12,6 +12,7 @@ grekt add <source>
 |--------|-------------|
 | `-c, --choose` | Interactively select which components to install |
 | `--core` | Mark artifact as CORE mode (copied to target, syncs automatically) |
+| `--core-sym` | Mark artifact as CORE mode with symlinks (symlinked to target, syncs automatically) |
 
 ## Source formats
 
@@ -85,14 +86,15 @@ Using `--choose` on an already partial artifact pre-checks the previous selectio
 
 ## Sync modes
 
-Artifacts can be added in two modes:
+Artifacts can be added in three modes:
 
 | Mode | Behavior |
 |------|----------|
-| **LAZY** (default) | Indexed in `.grekt/index`, not copied to target |
+| **LAZY** (default) | Indexed in `.grekt/index`, not synced to target |
 | **CORE** | Copied to target directories (e.g., `.claude/agents/`) |
+| **CORE-SYM** | Symlinked to target directories (no file duplication) |
 
-Use `--core` for artifacts you need immediately available in context:
+Use `--core` or `--core-sym` for artifacts you need immediately available in context:
 
 ```bash
 # LAZY mode (default) - only indexed
@@ -100,15 +102,18 @@ grekt add @scope/my-artifact
 
 # CORE mode - copied to .claude/agents/, .claude/skills/...
 grekt add @scope/my-artifact --core
+
+# CORE-SYM mode - symlinked to .claude/agents/, .claude/skills/...
+grekt add @scope/my-artifact --core-sym
 ```
 
-CORE mode artifacts are tracked in `grekt.yaml`:
+CORE and CORE-SYM mode artifacts are tracked in `grekt.yaml`:
 
 ```yaml
 artifacts:
   @scope/my-artifact:
     version: "1.0.0"
-    mode: core
+    mode: core          # or core-sym
 ```
 
 ## Authentication
@@ -155,6 +160,6 @@ Use `grekt outdated` to check which artifacts have updates available, or `grekt 
 - Downloads to `.grekt/artifacts/<artifact-id>/`
 - Updates `grekt.yaml` and `grekt.lock`
 - LAZY mode requires `grekt sync` to update index
-- CORE mode (`--core`) syncs automatically
+- CORE mode (`--core`) and CORE-SYM mode (`--core-sym`) sync automatically
 - Deprecated versions show a warning but still install
 - Versions must be valid semver (no `v` prefix)

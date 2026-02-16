@@ -204,7 +204,10 @@ artifacts:
   "@scope/utils": "1.0.0"              # LAZY mode (default)
   "@scope/my-artifact":
     version: "1.0.0"
-    mode: core                          # CORE mode
+    mode: core                          # CORE mode (copied)
+  "@scope/dev-tools":
+    version: "1.0.0"
+    mode: core-sym                      # CORE mode (symlinked)
 ```
 
 ### grekt.lock

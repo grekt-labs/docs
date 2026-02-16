@@ -18,10 +18,11 @@ Use `--choose` to select specific components instead of installing everything:
 grekt add @scope/my-artifact --choose
 ```
 
-Use `--core` to copy the artifact directly into your AI tool's context (instead of lazy indexing):
+Use `--core` to copy the artifact directly into your AI tool's context (instead of lazy indexing), or `--core-sym` to create symlinks instead of copies:
 
 ```bash
 grekt add @scope/my-artifact --core
+grekt add @scope/my-artifact --core-sym
 ```
 
 See [`grekt add`](/en-US/api/add) for all options and source formats.

@@ -58,11 +58,18 @@ No changes made (dry-run)
 
 ## Sync modes
 
-Only **CORE** mode artifacts are copied to target directories. **LAZY** mode artifacts (default) are only indexed in `.grekt/index`.
+Only **CORE** and **CORE-SYM** mode artifacts are synced to target directories. **LAZY** mode artifacts (default) are only indexed in `.grekt/index`.
+
+- **CORE**: Files are copied to target directories
+- **CORE-SYM**: Files are symlinked to target directories (no duplication)
 
 ```bash
-# Add as CORE to sync files
+# Add as CORE to sync files (copy)
 grekt add @scope/my-artifact --core
+grekt sync
+
+# Add as CORE-SYM to sync files (symlink)
+grekt add @scope/my-artifact --core-sym
 grekt sync
 
 # LAZY artifacts are skipped during sync
@@ -75,6 +82,8 @@ To promote an existing LAZY artifact to CORE:
 ```bash
 grekt remove @scope/utils
 grekt add @scope/utils --core
+# Or with symlinks:
+grekt add @scope/utils --core-sym
 ```
 
 ## Notes

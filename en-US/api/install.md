@@ -29,7 +29,6 @@ Unlike `grekt add`, this command:
 git clone <repo>
 cd <repo>
 grekt install
-grekt sync
 
 # Reinstall all
 grekt install --force
@@ -65,5 +64,5 @@ Integrity check:
 ## Notes
 
 - Requires `grekt.lock` (run `grekt add` first if missing)
-- Run `grekt sync` after installing
+- Automatically syncs to targets after installing (same as `grekt add` and `grekt upgrade`)
 - For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`

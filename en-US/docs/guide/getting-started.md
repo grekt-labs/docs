@@ -78,7 +78,7 @@ When you add an artifact:
 2. Updates `grekt.yaml` with the artifact reference
 3. Creates a lockfile entry with the exact version and checksum
 
-By default, artifacts are added in [**LAZY** mode](/en-US/docs/guide/sync-modes) (indexed but not copied to AI tools). Use `--core` to copy them directly to target directories like `.claude/agents/`.
+By default, artifacts are added in [**LAZY** mode](/en-US/docs/guide/sync-modes) (indexed but not copied to AI tools). Use `--core` to copy them directly to target directories like `.claude/agents/`, or `--core-sym` to create symlinks instead of copies.
 
 ::: tip Selective installation
 Large artifacts may contain components you don't need. Use `--choose` to interactively select which agents, skills, or commands to install:
@@ -103,10 +103,10 @@ grekt sync --dry-run
 grekt sync
 ```
 
-Only [**CORE** mode](/en-US/docs/guide/sync-modes#core-mode) artifacts are copied to target directories. [**LAZY** mode](/en-US/docs/guide/sync-modes#lazy-mode-default) artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
+Only [**CORE**](/en-US/docs/guide/sync-modes#core-mode) and [**CORE-SYM**](/en-US/docs/guide/sync-modes#core-sym-mode) mode artifacts are synced to target directories. [**LAZY** mode](/en-US/docs/guide/sync-modes#lazy-mode-default) artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
 
-::: tip Auto sync with --core
-When you add an artifact with `--core`, sync runs automatically.
+::: tip Auto sync with --core / --core-sym
+When you add an artifact with `--core` or `--core-sym`, sync runs automatically.
 :::
 
 ## Verify your setup
