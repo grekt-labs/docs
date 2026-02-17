@@ -12,7 +12,7 @@ grekt add <source>
 |--------|-------------|
 | `-c, --choose` | Interactively select which components to install |
 | `--core` | Mark artifact as CORE mode (copied to target, syncs automatically) |
-| `--core-sym` | Mark artifact as CORE mode with symlinks (symlinked to target, syncs automatically) |
+| `--core-sym` | Mark artifact as CORE mode with symlinks (symlinked to target, syncs automatically, no transforms) |
 
 ## Source formats
 
@@ -99,7 +99,7 @@ Artifacts can be added in three modes:
 |------|----------|
 | **LAZY** (default) | Indexed in `.grekt/index`, not synced to target |
 | **CORE** | Copied to target directories (e.g., `.claude/agents/`) |
-| **CORE-SYM** | Symlinked to target directories (no file duplication) |
+| **CORE-SYM** | Symlinked to target directories (no file duplication, no transforms) |
 
 Use `--core` or `--core-sym` for artifacts you need immediately available in context:
 

@@ -61,7 +61,7 @@ No changes made (dry-run)
 Only **CORE** and **CORE-SYM** mode artifacts are synced to target directories. **LAZY** mode artifacts (default) are only indexed in `.grekt/index`.
 
 - **CORE**: Files are copied to target directories
-- **CORE-SYM**: Files are symlinked to target directories (no duplication)
+- **CORE-SYM**: Files are symlinked as is to target directories (no duplication, no transforms applied)
 
 ```bash
 # Add as CORE to sync files (copy)

@@ -46,6 +46,10 @@ Benefits:
 - Target files always reflect the artifact source
 - Saves disk space with many core artifacts
 
+::: warning AS IS copy
+`--core-sym` symlinks artifact folders directly, no transforms are applied to adapt the structure for the destination target. Use `--core-sym` only when the artifact already matches the expected directory layout of your target tool. If it doesn't, use `--core` instead, which copies and transforms artifacts to fit each target.
+:::
+
 
 ## Choosing a mode
 
