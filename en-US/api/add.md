@@ -127,22 +127,6 @@ artifacts:
 
 For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`. See [Authentication](/en-US/docs/guide/sources/authentication).
 
-## Auto check
-
-When `options.autoCheck` is enabled in `grekt.yaml`, an integrity check runs automatically after adding:
-
-```yaml
-options:
-  autoCheck: true
-```
-
-```
-✓ Installed @scope/my-artifact@1.0.0
-
-Integrity check:
-✓ All 3 artifact(s) verified
-```
-
 ## Updating artifacts
 
 If an artifact is already installed, `grekt add` will update it to the new version if it's higher:

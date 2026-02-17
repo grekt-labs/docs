@@ -44,23 +44,6 @@ Error: Integrity check failed for code-reviewer
   modified: agent.md
 ```
 
-## Auto check
-
-When `options.autoCheck` is enabled in `grekt.yaml`, an integrity check runs automatically after installing:
-
-```yaml
-options:
-  autoCheck: true
-```
-
-```
-✓ Installed @scope/my-artifact@1.0.0
-✓ Installed @scope/git-flow@2.1.0
-
-Integrity check:
-✓ All 2 artifact(s) verified
-```
-
 ## Notes
 
 - Requires `grekt.lock` (run `grekt add` first if missing)

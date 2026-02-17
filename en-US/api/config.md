@@ -70,13 +70,3 @@ Tokens are used when adding artifacts from `github:` or `gitlab:` sources. Prior
 1. Token in `.grekt/config.yaml`
 2. Environment variable (`GITHUB_TOKEN`, `GITLAB_TOKEN`)
 
-## Options block
-
-The `options` block in `grekt.yaml` contains optional settings:
-
-```yaml
-options:
-  autoCheck: true  # Run integrity check after add/install
-```
-
-When `autoCheck` is enabled, `grekt add` and `grekt install` will automatically verify artifact integrity after completion.
