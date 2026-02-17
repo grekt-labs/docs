@@ -60,6 +60,10 @@ export default defineConfig({
 
     sidebar: enUSSidebar,
 
+    search: {
+      provider: 'local'
+    },
+
     socialLinks: [
       { icon: 'github', link: 'https://github.com/grekt-labs' }
     ]

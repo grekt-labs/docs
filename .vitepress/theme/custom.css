@@ -146,6 +146,11 @@
   width: 100vw !important;
 }
 
+/* Hide search on homepage */
+.Layout:has(.is-home) .VPNavBarSearch {
+  display: none !important;
+}
+
 /* Hide Home link on homepage (redundant) */
 .Layout:has(.is-home) a.VPNavBarMenuLink:first-of-type {
   display: none !important;
