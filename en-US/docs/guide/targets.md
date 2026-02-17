@@ -9,34 +9,180 @@ grekt uses a **plugin system** for sync targets. Each plugin knows:
 - How to generate bootstrap content
 - Whether it needs folder structure or just rules injection
 
+There are two plugin types:
+
+| Type | Behavior |
+|------|----------|
+| **Folder** | Creates directories per category (agents, skills, commands...) |
+| **Rules only** | Injects all content into a single entry point file |
+
+Some targets support both (folder structure + rules injection in the entry point).
+
 ## Built-in plugins
 
 | Plugin | Entry Point | Type |
 |--------|-------------|------|
-| `claude` | `.claude/CLAUDE.md` | Folder + Rules |
-| `cursor` | `.cursorrules` | Rules only |
-| `opencode` | `.opencode/` | Folder only |
+| [`global`](#global) | `.agents/` | Folder |
+| [`claude`](#claude) | `.claude/CLAUDE.md` | Folder + Rules |
+| [`cursor`](#cursor) | `.cursorrules` | Rules only |
+| [`copilot`](#copilot) | `.github/copilot-instructions.md` | Rules only |
+| [`opencode`](#opencode) | `.opencode/` | Folder |
+| [`openclaw`](#openclaw) | `skills/` + `AGENTS.md` | Folder |
+| [`windsurf`](#windsurf) | `.windsurfrules` | Folder + Rules |
+| [`cline`](#cline) | `.clinerules` | Rules only |
+| [`aider`](#aider) | `CONVENTIONS.md` | Rules only |
+| [`continue`](#continue) | `.continue/` | Folder |
+| [`amazonq`](#amazonq) | `.amazonq/` | Folder |
 
-**Claude** example structure:
+---
+
+### Global
+
+Syncs to the `.agents/` directory following the [agentskills.io](https://agentskills.io) standard. Covers tools that don't have a dedicated plugin but support agentskills.io: Codex, Gemini CLI, Jules, Zed, Warp, Goose, Devin, RooCode, Kilo Code, Amp...
+
+- **Entry point**: `AGENTS.md`
+- **Directory**: `.agents/`
+- **Categories**: Skills only
+- Strips tool-specific fields and normalizes metadata to agentskills.io format
+
+```
+.agents/
+└── my-skill/
+    └── SKILL.md
+```
+
+### Claude
+
+Syncs to Claude Code's `.claude/` directory. Creates folder structure for agents, skills, and commands. Injects bootstrap content in `CLAUDE.md`.
+
+- **Entry point**: `.claude/CLAUDE.md` or `CLAUDE.md`
+- **Directory**: `.claude/`
+- **Categories**: All (agents, skills, commands, rules)
+- Creates a skill router at `.claude/skills/grekt/SKILL.md`
 
 ```
 .claude/
 ├── agents/
 ├── skills/
+│   └── grekt/
+│       └── SKILL.md
 ├── commands/
 └── CLAUDE.md
 ```
 
-## Planned plugins
+### Cursor
 
-Community contributions welcome. See [Creating plugins](./creating-plugins.md).
+Syncs all artifact content into a single `.cursorrules` file.
 
-| Plugin | Entry Point | Status |
-|--------|-------------|--------|
-| `copilot` | `.github/copilot-instructions.md` | Planned |
-| `gemini` | `GEMINI.md` | Planned |
-| `windsurf` | `.windsurfrules` | Planned |
-| `amazonq` | `.amazonq/rules/` | Planned |
+- **Entry point**: `.cursorrules`
+- **Type**: Rules only (no folder structure)
+- **Categories**: All (merged into managed block)
+
+### Copilot
+
+Syncs all artifact content into GitHub Copilot's instructions file.
+
+- **Entry point**: `.github/copilot-instructions.md`
+- **Type**: Rules only (no folder structure)
+- **Categories**: All (merged into managed block)
+
+### OpenCode
+
+Syncs to OpenCode's `.opencode/` directory.
+
+- **Directory**: `.opencode/`
+- **Categories**: All (agents, skills, commands, rules)
+
+```
+.opencode/
+├── agents/
+├── skills/
+└── commands/
+```
+
+### OpenClaw
+
+::: warning EXPERIMENTAL
+OpenClaw support is experimental and may have issues.
+:::
+
+Syncs to OpenClaw's `skills/` directory following OpenClaw conventions. Transforms grekt frontmatter to OpenClaw format. Agents get the `agent-` prefix.
+
+- **Entry point**: `AGENTS.md`
+- **Directory**: `skills/`
+- **Categories**: Skills, agents, commands
+- Generates `AGENTS.md` with skill routing and listings
+- Metadata serialized as single-line JSON per OpenClaw spec
+
+```
+skills/
+├── agent-my-agent/
+│   └── SKILL.md
+├── my-skill/
+│   └── SKILL.md
+└── AGENTS.md
+```
+
+### Windsurf
+
+Syncs to Windsurf's `.windsurf/` directory. Also injects rules in `.windsurfrules`.
+
+- **Entry point**: `.windsurfrules`
+- **Directory**: `.windsurf/`
+- **Categories**: All (agents, skills, commands, rules)
+
+```
+.windsurf/
+├── agents/
+├── skills/
+└── commands/
+```
+
+### Cline
+
+Syncs all artifact content into a single `.clinerules` file.
+
+- **Entry point**: `.clinerules`
+- **Type**: Rules only (no folder structure)
+- **Categories**: All (merged into managed block)
+
+### Aider
+
+Syncs all artifact content into Aider's conventions file.
+
+- **Entry point**: `CONVENTIONS.md`
+- **Type**: Rules only (no folder structure)
+- **Categories**: All (merged into managed block)
+
+### Continue
+
+Syncs to Continue's `.continue/` directory.
+
+- **Directory**: `.continue/`
+- **Categories**: All (agents, skills, commands, rules)
+
+```
+.continue/
+├── agents/
+├── skills/
+└── commands/
+```
+
+### Amazon Q
+
+Syncs to Amazon Q's `.amazonq/` directory.
+
+- **Directory**: `.amazonq/`
+- **Categories**: All (agents, skills, commands, rules)
+
+```
+.amazonq/
+├── agents/
+├── skills/
+└── commands/
+```
+
+---
 
 ## How sync works
 

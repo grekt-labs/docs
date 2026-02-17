@@ -10,6 +10,10 @@ Artifacts are indexed in `.grekt/index` but not copied to target directories. Th
 grekt add @scope/my-artifact
 ```
 
+::: info NOTE
+In large or compacted sessions, AI tools may lose track of indexed artifacts as earlier context gets dropped. If a lazy artifact isn't being picked up, try being more specific in your request (e.g., "find me the skill that handles branch naming" instead of just "create a branch").
+:::
+
 Benefits:
 - Reduces context pollution
 - Faster syncs

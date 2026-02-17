@@ -16,9 +16,17 @@ To remove targets, use [`grekt remove-target`](./remove-target.md).
 
 | Target | Entry Point |
 |--------|-------------|
+| `global` | `.agents/` |
 | `claude` | `.claude/CLAUDE.md` |
 | `cursor` | `.cursorrules` |
+| `cline` | `.clinerules` |
+| `windsurf` | `.windsurfrules` |
+| `copilot` | `.github/copilot-instructions.md` |
+| `aider` | `CONVENTIONS.md` |
+| `continue` | `.continue/` |
+| `amazonq` | `.amazonq/` |
 | `opencode` | `.opencode/` |
+| `openclaw` | `skills/` + `AGENTS.md` |
 
 ## Custom targets
 

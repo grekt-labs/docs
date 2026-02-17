@@ -21,9 +21,17 @@ When prompted "Delete the folders created by these targets?":
 
 | Target | What gets deleted |
 |--------|-------------------|
+| `global` | `.agents/` directory |
 | `claude` | `.claude/` directory |
 | `cursor` | `.cursorrules` file |
+| `cline` | `.clinerules` file |
+| `windsurf` | `.windsurf/` directory, `.windsurfrules` file |
+| `copilot` | `.github/copilot-instructions.md` file |
+| `aider` | `CONVENTIONS.md` file |
+| `continue` | `.continue/` directory |
+| `amazonq` | `.amazonq/` directory |
 | `opencode` | `.opencode/` directory |
+| `openclaw` | `skills/` directory, `AGENTS.md` file |
 | custom | Target directory and entry point |
 
 ## Examples

@@ -24,6 +24,9 @@ grekt add <source>
 | GitHub (ref) | `github:owner/repo#v1.0.0` |
 | GitLab | `gitlab:owner/repo` |
 | GitLab (self hosted) | `gitlab:host.com/owner/repo` |
+| Local (relative) | `./path/to/artifact` |
+| Local (absolute) | `/absolute/path` |
+| Local (home) | `~/shared/artifact` |
 
 ## Examples
 
@@ -41,6 +44,10 @@ grekt add github:user/my-artifact#v1.0.0
 # GitLab
 grekt add gitlab:group/my-artifact
 grekt add gitlab:gitlab.company.com/team/artifact#main
+
+# Local
+grekt add ./my-artifact
+grekt add ~/shared/artifacts/my-agent
 ```
 
 ## Component selection

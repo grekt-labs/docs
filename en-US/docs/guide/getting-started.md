@@ -57,7 +57,7 @@ See [`grekt config registry set`](/en-US/api/config#registry-configuration), [Gi
 
 ## Add an artifact
 
-Artifacts are bundles of AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, or GitLab.
+Artifacts are bundles of AI configurations: agents, skills, commands, rules... They can come from the grekt registry, GitHub, GitLab, or local directories.
 
 ```bash
 # From the registry
@@ -71,6 +71,9 @@ grekt add github:user/repo#v1.0.0
 
 # From GitLab
 grekt add gitlab:group/repo
+
+# From a local directory
+grekt add ./path/to/artifact
 ```
 
 When you add an artifact:
@@ -90,10 +93,12 @@ grekt add @scope/my-artifact --choose
 
 ## Sync to your tools
 
-Sync writes your artifacts to AI tool directories. Each target (Claude, Cursor...) has its own structure:
+Sync writes your artifacts to AI tool directories. Each target has its own structure:
 
 - **Claude**: Creates `.claude/agents/`, `.claude/skills/`, updates `CLAUDE.md`
 - **Cursor**: Updates `.cursorrules` with artifact content
+- **Codex**: Updates `AGENTS.md` following agentskills.io standard
+- And [many more supported targets...](/en-US/docs/guide/targets)
 
 ```bash
 # Preview what will change
