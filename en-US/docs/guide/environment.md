@@ -26,7 +26,7 @@ grekt checks for new versions once per day and shows a notice when updates are a
   --------------------------------------------
   Update available: 2.3.0 → 2.4.0
 
-  curl -fsSL https://grekt.com/install.sh | sh
+  curl -fsSL https://cli.grekt.com/install.sh | sh
   brew upgrade grekt
   --------------------------------------------
 ```

@@ -10,7 +10,7 @@ const CliDemoCheck = defineAsyncComponent(() => import('./cli-demos/CliDemoCheck
 const CliDemoInit = defineAsyncComponent(() => import('./cli-demos/CliDemoInit.vue'))
 
 const installMethods = [
-  { id: 'curl', label: 'curl', command: 'curl -fsSL https://grekt.com/install.sh | sh' },
+  { id: 'curl', label: 'curl', command: 'curl -fsSL https://cli.grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
 ]
 

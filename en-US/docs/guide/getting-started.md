@@ -11,7 +11,7 @@ AI tooling evolves fast. Breaking changes and frequent updates are expected as t
 ::: code-group
 
 ```bash [curl]
-curl -fsSL https://grekt.com/install.sh | sh
+curl -fsSL https://cli.grekt.com/install.sh | sh
 ```
 
 ```bash [brew]
