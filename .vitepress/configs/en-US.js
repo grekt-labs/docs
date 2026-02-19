@@ -41,6 +41,12 @@ export const enUSSidebar = {
       ]
     },
     {
+      text: 'Offline mode',
+      items: [
+        { text: 'Using grekt without a registry', link: '/en-US/docs/guide/offline-mode' }
+      ]
+    },
+    {
       text: 'Legal',
       items: [
         { text: 'Licensing', link: '/en-US/docs/guide/licensing' },
@@ -106,6 +112,7 @@ export const enUSSidebar = {
 
 export const enUSNav = [
   { text: 'Home', link: '/' },
+  // { text: 'Use Cases', link: '/en-US/use-cases/' },
   { text: 'Docs', link: '/en-US/docs/guide/introduction' },
   { text: 'API', link: '/en-US/api/' }
 ]

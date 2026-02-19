@@ -7,6 +7,7 @@ const CliDemoChoose = defineAsyncComponent(() => import('./cli-demos/CliDemoChoo
 const CliDemoSync = defineAsyncComponent(() => import('./cli-demos/CliDemoSync.vue'))
 const CliDemoUpdate = defineAsyncComponent(() => import('./cli-demos/CliDemoUpdate.vue'))
 const CliDemoCheck = defineAsyncComponent(() => import('./cli-demos/CliDemoCheck.vue'))
+const CliDemoScan = defineAsyncComponent(() => import('./cli-demos/CliDemoScan.vue'))
 const CliDemoInit = defineAsyncComponent(() => import('./cli-demos/CliDemoInit.vue'))
 
 const installMethods = [
@@ -22,6 +23,8 @@ const updateRef = ref(null)
 const updateDemoEl = ref(null)
 const checkRef = ref(null)
 const checkDemoEl = ref(null)
+const scanRef = ref(null)
+const scanDemoEl = ref(null)
 const initRef = ref(null)
 
 const scrollToDemo = (el) => {
@@ -306,6 +309,14 @@ const toggleFaq = (index) => {
           <p>Run your own private instance. Same CLI, same workflow. Your artifacts, your infrastructure, zero external dependencies.</p>
           <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
         </div>
+        <div class="self-hosted-card self-hosted-card--offline">
+          <div class="self-hosted-card-icon self-hosted-card-icon--offline">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+          </div>
+          <h3>Offline mode</h3>
+          <p>No registry needed. Add artifacts from local paths or GitHub/GitLab repos. Great for solo setups. No versioning, no lockfile determinism.</p>
+          <a href="/en-US/docs/guide/offline-mode" class="self-hosted-link">Learn more →</a>
+        </div>
       </div>
     </section>
 
@@ -443,6 +454,36 @@ const toggleFaq = (index) => {
     <!-- Section Divider -->
     <div class="section-divider"></div>
 
+    <!-- FEATURE: SECURITY SCAN -->
+    <section class="feature-section">
+      <div class="feature-row">
+        <div class="feature-text">
+          <h2 class="feature-title">Scan artifacts before you install</h2>
+          <p class="feature-description">Run <strong>grekt scan</strong> anytime to check your installed artifacts for prompt injection, data exfiltration, and other threats. Artifacts published to the <a href="https://explore.grekt.com" target="_blank" rel="noopener">grekt registry</a> are always scanned automatically.</p>
+          <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': scanRef?.finished }">
+            <label class="feature-run-label">Try it</label>
+            <button
+              class="feature-run-btn"
+              :disabled="scanRef?.animating"
+              @click="scanRef?.runCommand(); scrollToDemo(scanDemoEl)"
+            >
+              <span class="dots-border"></span>
+              <span class="feature-run-cmd">Start a security scan</span>
+              <span class="feature-run-play"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.629a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg></span>
+            </button>
+          </div>
+        </div>
+        <div ref="scanDemoEl" class="feature-demo">
+          <TerminalChrome>
+            <CliDemoScan ref="scanRef" />
+          </TerminalChrome>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+
     <!-- COMPARISON -->
     <section class="comparison">
       <h2 class="section-title">What's different about grekt?</h2>
@@ -497,6 +538,14 @@ const toggleFaq = (index) => {
           </div>
           <div class="comparison-row">
             <div class="comparison-label">
+              <span class="label-title">Security scanning</span>
+              <span class="label-desc">Automated checks before install</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-yes"></span></div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
               <span class="label-title">Drift detection</span>
               <span class="label-desc">Someone edited a managed file?</span>
             </div>
@@ -520,6 +569,7 @@ const toggleFaq = (index) => {
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
         </div>
+
       </div>
       <p class="comparison-note">
         Already using skills.sh?<br>
@@ -1720,7 +1770,7 @@ html:not(.dark) .feature-run-play {
 
 /* COMPARISON */
 .comparison {
-  background: var(--section-bg);
+  background: var(--section-bg-alt);
   padding: 80px 20px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -2272,7 +2322,7 @@ html:not(.dark) .init-demo--synced {
 }
 
 .self-hosted > * {
-  max-width: 800px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -2292,7 +2342,7 @@ html:not(.dark) .init-demo--synced {
 
 .self-hosted-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -2377,9 +2427,27 @@ html:not(.dark) .init-demo--synced {
   color: var(--grekt-primary-300);
 }
 
+.self-hosted-card-icon--offline {
+  background: linear-gradient(135deg, var(--grekt-tertiary-500) 0%, var(--grekt-tertiary-300) 100%);
+}
+
+@media (max-width: 900px) {
+  .self-hosted-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .self-hosted-card--offline {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 768px) {
   .self-hosted-grid {
     grid-template-columns: 1fr;
+  }
+
+  .self-hosted-card--offline {
+    grid-column: auto;
   }
 }
 </style>
