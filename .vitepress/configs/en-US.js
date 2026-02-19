@@ -112,7 +112,7 @@ export const enUSSidebar = {
 
 export const enUSNav = [
   { text: 'Home', link: '/' },
-  { text: 'Use Cases', link: '/en-US/use-cases/' },
+  // { text: 'Use Cases', link: '/en-US/use-cases/' },
   { text: 'Docs', link: '/en-US/docs/guide/introduction' },
   { text: 'API', link: '/en-US/api/' }
 ]
