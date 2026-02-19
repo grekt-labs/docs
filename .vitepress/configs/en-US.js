@@ -31,7 +31,8 @@ export const enUSSidebar = {
         { text: 'Overview', link: '/en-US/docs/guide/managing/overview' },
         { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' },
         { text: 'Publishing hooks', link: '/en-US/docs/guide/managing/hooks' },
-        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' }
+        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' },
+        { text: 'Security scanning', link: '/en-US/docs/guide/managing/security-scanning' }
       ]
     },
     {
@@ -91,7 +92,8 @@ export const enUSSidebar = {
       items: [
         { text: 'grekt sync', link: '/en-US/api/sync' },
         { text: 'grekt check', link: '/en-US/api/check' },
-        { text: 'grekt config', link: '/en-US/api/config' }
+        { text: 'grekt config', link: '/en-US/api/config' },
+        { text: 'grekt scan', link: '/en-US/api/scan' }
       ]
     },
     {

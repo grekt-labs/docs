@@ -1,17 +1,21 @@
-# Security Scanning
+# Security scanning
 
-Every published artifact is automatically scanned for security threats. Scanning is **nonblocking** — your publish completes immediately, scans run in the background.
+Every published artifact is automatically scanned for security threats. Scanning is nonblocking: your publish completes immediately, scans run in the background.
 
 ## Scanners
 
-| Scanner | Type | Detects |
-|---------|------|---------|
-| **AgentVerus** | Local, zero network | Prompt injection, data exfiltration, credential harvesting (11 ASST categories) |
-| **Snyk scan** | AI powered API | Tool poisoning, toxic flows, malicious patterns |
+| Scanner | Type | Runs on | Detects |
+|---------|------|---------|---------|
+| AgentVerus | Local, zero network | Registry, CLI (`grekt scan`) | Prompt injection, data exfiltration, credential harvesting (11 ASST categories) |
+| Snyk scan | AI-powered API | Registry only | Tool poisoning, toxic flows, malicious patterns |
 
-Both run in parallel. If one fails, the other still completes.
+Both run in parallel on registry publishes. If one fails, the other still completes.
 
-## Trust Badges
+:::info
+Snyk scan only runs on the public registry, where the risk of malicious content is higher. Self-hosted registries and local scans use AgentVerus exclusively.
+:::
+
+## Trust badges
 
 AgentVerus assigns a badge based on the score and findings:
 
@@ -22,24 +26,48 @@ AgentVerus assigns a badge based on the score and findings:
 | Suspicious | 50-74 | Multiple findings detected |
 | Rejected | <50 | Critical findings detected |
 
-## Risk Labels
+## Risk labels
 
 Snyk provides risk scores from 0 to 1 for each artifact:
 
-- `destructive` — likelihood of destructive operations
-- `private_data` — likelihood of accessing sensitive data
-- `untrusted_content` — likelihood of unsafe content processing
-- `is_public_sink` — likelihood of sending data to public endpoints
+- `destructive` - likelihood of destructive operations
+- `private_data` - likelihood of accessing sensitive data
+- `untrusted_content` - likelihood of unsafe content processing
+- `is_public_sink` - likelihood of sending data to public endpoints
 
-## Viewing Results
+## Local scanning with the CLI
 
-Results are available via the registry API:
+You can scan artifacts locally using the `grekt scan` command. The scanner runs entirely on your machine, no data leaves your system.
 
+### Scan all installed artifacts
+
+```bash
+grekt scan
 ```
-GET /security-scans?artifactId=@scope/name&version=1.0.0
+
+### Scan a remote artifact before installing
+
+```bash
+grekt scan @author/name
+grekt scan @author/name@1.0.0
+grekt scan github:user/repo
+grekt scan gitlab:user/repo
 ```
 
-Omit `version` to get results for the latest version. No authentication required.
+The artifact is downloaded to a temporary directory, scanned, and the temp directory is cleaned up automatically.
+
+### Scan a local directory
+
+```bash
+grekt scan ./path/to/artifact
+```
+
+### JSON output
+
+```bash
+grekt scan @author/name --json
+grekt scan --json
+```
 
 ## FAQ
 

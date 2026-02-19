@@ -99,6 +99,24 @@ const onScroll = () => {
 onMounted(() => {
   timeout = setTimeout(type, 500)
   window.addEventListener('scroll', onScroll, { passive: true })
+
+  // FAQ structured data for SEO
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  }
+  const script = document.createElement('script')
+  script.type = 'application/ld+json'
+  script.textContent = JSON.stringify(faqSchema)
+  document.head.appendChild(script)
 })
 
 onUnmounted(() => {
@@ -111,15 +129,15 @@ onUnmounted(() => {
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is the open artifact manager for AI tools. It helps you install, sync, and share AI configurations (agents, skills, commands) across tools like Claude Code, Cursor, OpenCode, and more.'
+    answer: 'grekt is the open artifact manager for AI tools. It helps you install, sync, share, and check for security or drifts. It works with agents, skills, hooks, and other AI configurations across any tool available like Claude Code, Cursor, OpenCode, and more.'
   },
   {
     question: 'How does grekt work?',
-    answer: 'grekt downloads artifacts to your project and integrates with your AI tools. You can optionally sync them to specific tools like Claude Code or Cursor, or just use them directly from the .grekt folder.'
+    answer: 'Add artifacts with a single command, grekt handles downloading and organizing them in your project. Optionally sync to specific tools or use lazy mode to load artifacts on demand from the .grekt folder, keeping your context lean. A lockfile tracks versions and integrity so installs are deterministic.'
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes! The CLI is source available and free to use. The public registry will always be free for public artifacts.'
+    answer: 'Yes! The CLI is source available and free to use. The public registry is free for public artifacts, and self-hosted registries are on your own, so free too.'
   },
   {
     question: 'Which AI tools are supported?',
