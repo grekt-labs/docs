@@ -73,6 +73,20 @@ grekt scan @author/name --json
 grekt scan --json
 ```
 
+## CI/CD integration
+
+Use `--fail-on` to enforce a security threshold in your pipeline. If any artifact badge meets or exceeds the threshold, `grekt scan` exits with code 1.
+
+```bash
+grekt scan --fail-on suspicious   # Fail on suspicious or rejected
+grekt scan --fail-on conditional  # Fail on anything not certified
+grekt scan --fail-on rejected     # Fail only on rejected
+```
+
+Artifacts marked as trusted (`grekt trust <artifact>`) are excluded from `--fail-on` evaluation, allowing reviewed exceptions without lowering the threshold for everyone.
+
+For the full CI/CD workflow with examples, see the [Security first consumption](/en-US/use-cases/security-first-consumption) use case.
+
 ## FAQ
 
 **Is scanning blocking?** No. Artifacts are available immediately after publish.

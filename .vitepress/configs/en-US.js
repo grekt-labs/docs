@@ -109,7 +109,9 @@ export const enUSSidebar = {
         { text: 'grekt sync', link: '/en-US/api/sync' },
         { text: 'grekt check', link: '/en-US/api/check' },
         { text: 'grekt config', link: '/en-US/api/config' },
-        { text: 'grekt scan', link: '/en-US/api/scan' }
+        { text: 'grekt scan', link: '/en-US/api/scan' },
+        { text: 'grekt trust', link: '/en-US/api/trust' },
+        { text: 'grekt untrust', link: '/en-US/api/untrust' }
       ]
     },
     {
