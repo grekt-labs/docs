@@ -1,3 +1,7 @@
+---
+description: "List and manage artifacts across all packages in a monorepo workspace."
+---
+
 # grekt workspace
 
 Manage monorepo workspaces.

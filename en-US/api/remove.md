@@ -1,3 +1,7 @@
+---
+description: "Remove an installed artifact from the project."
+---
+
 # grekt remove
 
 Remove an artifact.

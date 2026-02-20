@@ -1,3 +1,7 @@
+---
+description: "Interactively remove sync targets from the project config, with optional folder cleanup."
+---
+
 # grekt remove-target
 
 Remove sync targets interactively.

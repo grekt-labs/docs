@@ -1,3 +1,7 @@
+---
+description: "grekt's privacy policy covering what data is collected, why it's collected, and what is never done with it."
+---
+
 # Privacy Policy
 
 **Last updated:** February 2026

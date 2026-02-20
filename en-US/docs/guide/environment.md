@@ -1,3 +1,7 @@
+---
+description: "Environment variables available to configure grekt authentication, behavior, and source token priority."
+---
+
 # Environment Variables
 
 Configure grekt behavior through environment variables.

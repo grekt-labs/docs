@@ -1,3 +1,7 @@
+---
+description: "Install grekt and sync your first artifact to an AI tool in minutes with this step-by-step quick start guide."
+---
+
 # Quick start
 
 This guide walks you through setting up grekt in a project and syncing your first artifact.

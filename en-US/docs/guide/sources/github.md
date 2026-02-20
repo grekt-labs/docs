@@ -1,3 +1,7 @@
+---
+description: "Configure GitHub Container Registry as a grekt artifact source, including required token scopes and YAML setup."
+---
+
 # GitHub
 
 Use GitHub Container Registry (GHCR) to host multiple artifacts in a single namespace.

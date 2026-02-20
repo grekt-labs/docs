@@ -1,3 +1,7 @@
+---
+description: "Set up authentication tokens for grekt registries and git sources, with token priority and storage explained."
+---
+
 # Authentication
 
 Configure authentication for private sources and registries.

@@ -1,3 +1,7 @@
+---
+description: "How the /grekt skill router discovers and loads lazy-mode skills on demand in Claude Code to keep context clean."
+---
+
 # Skills with direct invocation in lazy mode
 
 ::: warning Claude only

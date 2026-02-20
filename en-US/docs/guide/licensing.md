@@ -1,3 +1,7 @@
+---
+description: "grekt is source available under BSL 1.1, converting to MIT after two years - see what you can and cannot do."
+---
+
 # Licensing
 
 grekt is [source available](https://en.wikipedia.org/wiki/Source-available_software) under the Business Source License 1.1 (BSL).

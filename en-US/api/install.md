@@ -1,3 +1,7 @@
+---
+description: "Install all artifacts from the lockfile with integrity verification, for use after cloning a project."
+---
+
 # grekt install
 
 Install artifacts from lockfile (strict mode).

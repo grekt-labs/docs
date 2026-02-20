@@ -1,3 +1,7 @@
+---
+description: "Overview of artifact lifecycle management in grekt: publishing, versioning, deprecation, and related commands."
+---
+
 # Managing artifacts
 
 Lifecycle of artifacts in grekt: publishing, versioning, and deprecation.

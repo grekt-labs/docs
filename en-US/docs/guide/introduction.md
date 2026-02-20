@@ -1,3 +1,7 @@
+---
+description: "grekt is the open artifact manager for AI tools - learn what it is, the problem it solves, and how it works."
+---
+
 # Introduction
 
 grekt is the open artifact manager for AI tools. It lets you install, manage, and share agents, skills, and commands across your projects and sync them to AI tools like Claude Code, Cursor, Windsurf, and others.

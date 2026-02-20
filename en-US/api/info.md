@@ -1,3 +1,7 @@
+---
+description: "Show registry metadata for an artifact, including description, versions, and author."
+---
+
 # grekt info
 
 Show information about an artifact in the registry.

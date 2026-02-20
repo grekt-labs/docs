@@ -1,3 +1,7 @@
+---
+description: "List all artifacts currently installed in the project."
+---
+
 # grekt list
 
 List installed artifacts.

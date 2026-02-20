@@ -1,3 +1,7 @@
+---
+description: "Check which installed registry artifacts have newer versions available."
+---
+
 # grekt outdated
 
 Check for outdated artifacts in your project.

@@ -1,3 +1,7 @@
+---
+description: "Best practices for packaging and publishing artifacts that include Claude Code hooks, with collision avoidance guidance."
+---
+
 # Publishing hooks
 
 Best practices for publishing artifacts that include hooks.

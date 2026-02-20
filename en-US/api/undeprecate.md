@@ -1,3 +1,7 @@
+---
+description: "Remove the deprecation status from a previously deprecated artifact version."
+---
+
 # grekt undeprecate
 
 Remove deprecation from an artifact version.
