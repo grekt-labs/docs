@@ -1,3 +1,7 @@
+---
+description: "Compare grekt's three artifact sync modes - lazy, copy, and eager - and choose the right one for your workflow."
+---
+
 # Sync modes
 
 Artifacts can be installed in three modes that determine how they're synced to AI tools.

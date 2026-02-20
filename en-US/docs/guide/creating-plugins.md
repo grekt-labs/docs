@@ -1,3 +1,7 @@
+---
+description: "Step-by-step guide to contributing a grekt sync plugin to add support for a new AI tool."
+---
+
 # Creating plugins
 
 Add sync support for your AI tool by contributing a plugin.

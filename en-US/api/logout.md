@@ -1,3 +1,7 @@
+---
+description: "Sign out of the grekt registry and clear stored credentials from the current machine."
+---
+
 # grekt logout
 
 ::: warning Coming Soon

@@ -1,3 +1,7 @@
+---
+description: "Mark a specific artifact version as deprecated with an optional message for users."
+---
+
 # grekt deprecate
 
 Mark an artifact version as deprecated.

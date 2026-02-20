@@ -1,3 +1,7 @@
+---
+description: "Scan artifacts for security issues locally using AgentVerus, with no data leaving the machine."
+---
+
 # grekt scan
 
 Scan artifacts for security issues using AgentVerus. Runs entirely on your machine, no data leaves the system.

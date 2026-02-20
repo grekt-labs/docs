@@ -1,3 +1,7 @@
+---
+description: "Package an artifact directory into a tarball for inspection or manual distribution without publishing."
+---
+
 # grekt pack
 
 Create a tarball from an artifact without publishing.

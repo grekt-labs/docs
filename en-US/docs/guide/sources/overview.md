@@ -1,3 +1,7 @@
+---
+description: "Overview of the registry sources grekt supports: the public registry, self-hosted GitLab, GitHub, and local paths."
+---
+
 # Registries overview
 
 grekt supports multiple ways to host and install artifacts.

@@ -100,23 +100,6 @@ onMounted(() => {
   timeout = setTimeout(type, 500)
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  // FAQ structured data for SEO
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqItems.map(item => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer
-      }
-    }))
-  }
-  const script = document.createElement('script')
-  script.type = 'application/ld+json'
-  script.textContent = JSON.stringify(faqSchema)
-  document.head.appendChild(script)
 })
 
 onUnmounted(() => {

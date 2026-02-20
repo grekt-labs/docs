@@ -1,3 +1,7 @@
+---
+description: "Reference for adding, updating, and removing artifacts from a project using the grekt CLI."
+---
+
 # Handling artifacts
 
 How to add, update, and remove artifacts from your project.

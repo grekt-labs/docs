@@ -1,3 +1,7 @@
+---
+description: "Verify artifact integrity via SHA256 checksums and report context size and file overlaps."
+---
+
 # grekt check
 
 Check artifact integrity and context size.

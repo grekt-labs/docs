@@ -1,3 +1,7 @@
+---
+description: "Authenticate with the grekt registry to enable publishing and installing private artifacts."
+---
+
 # grekt login
 
 ::: warning Coming Soon

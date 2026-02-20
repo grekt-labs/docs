@@ -1,3 +1,7 @@
+---
+description: "How grekt automatically scans published artifacts for prompt injection, tool poisoning, and other AI security threats."
+---
+
 # Security scanning
 
 Every published artifact is automatically scanned for security threats. Scanning is nonblocking: your publish completes immediately, scans run in the background.

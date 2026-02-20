@@ -1,3 +1,7 @@
+---
+description: "Learn what artifacts are in grekt: bundles of AI configurations including agents, skills, commands, MCPs, and rules."
+---
+
 # Artifacts
 
 An artifact is a bundle of AI configurations: agents, skills, commands, MCPs, rules...

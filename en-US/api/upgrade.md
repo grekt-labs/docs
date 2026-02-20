@@ -1,3 +1,7 @@
+---
+description: "Upgrade one or all registry artifacts to their latest available versions."
+---
+
 # grekt upgrade
 
 Upgrade artifacts to their latest registry versions.

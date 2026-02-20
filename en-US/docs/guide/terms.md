@@ -1,3 +1,7 @@
+---
+description: "Terms of service for the grekt registry covering acceptable use, content ownership, and service availability."
+---
+
 # Terms of Service
 
 **Last updated:** February 2026

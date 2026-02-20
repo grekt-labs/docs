@@ -1,3 +1,7 @@
+---
+description: "Sync installed artifacts to configured AI tools, with dry-run and target override support."
+---
+
 # grekt sync
 
 Sync artifacts to AI tools.

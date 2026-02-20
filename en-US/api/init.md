@@ -1,3 +1,7 @@
+---
+description: "Initialize grekt in a project, creating the config file and artifact directory structure."
+---
+
 # grekt init
 
 Initialize grekt in a project.

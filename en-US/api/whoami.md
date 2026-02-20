@@ -1,3 +1,7 @@
+---
+description: "Display the currently authenticated grekt registry user."
+---
+
 # grekt whoami
 
 ::: warning Coming Soon

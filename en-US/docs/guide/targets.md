@@ -1,3 +1,7 @@
+---
+description: "Understand grekt sync targets - the AI tools artifacts are synced to - and how the plugin system handles each tool's format."
+---
+
 # Targets
 
 Targets are AI tools that grekt syncs artifacts to.

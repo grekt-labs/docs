@@ -1,3 +1,7 @@
+---
+description: "Bump the version of an artifact using patch, minor, major, or prerelease increments."
+---
+
 # grekt version
 
 Bump artifact versions.

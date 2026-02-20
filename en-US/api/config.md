@@ -1,3 +1,7 @@
+---
+description: "Read and write project configuration values, registry settings, and git host tokens."
+---
+
 # grekt config
 
 Manage project configuration.

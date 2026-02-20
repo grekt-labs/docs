@@ -1,3 +1,7 @@
+---
+description: "How to publish an artifact to a grekt registry, including required manifest fields and publish command usage."
+---
+
 # Publishing
 
 Upload artifacts to a registry.

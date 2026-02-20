@@ -1,3 +1,7 @@
+---
+description: "Manage and batch-publish multiple artifacts from a single repository using grekt workspaces and registry prefixes."
+---
+
 # Monorepo
 
 Manage multiple artifacts in a single repository.

@@ -1,3 +1,7 @@
+---
+description: "Publish an artifact to a registry, with support for dry-run and workspace-scoped publishing."
+---
+
 # grekt publish
 
 Publish an artifact to a registry.

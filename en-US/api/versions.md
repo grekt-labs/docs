@@ -1,3 +1,7 @@
+---
+description: "List all published versions of an artifact available in the registry."
+---
+
 # grekt versions
 
 List all available versions of an artifact.

@@ -1,3 +1,7 @@
+---
+description: "Interactively add AI tool sync targets to the project configuration."
+---
+
 # grekt add-target
 
 Add new sync targets interactively.

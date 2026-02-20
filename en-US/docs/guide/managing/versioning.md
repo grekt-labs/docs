@@ -1,3 +1,7 @@
+---
+description: "Version management in grekt using semantic versioning, including immutable versions, deprecation, and lockfiles."
+---
+
 # Versioning
 
 Version management and deprecation.

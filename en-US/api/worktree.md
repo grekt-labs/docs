@@ -1,3 +1,7 @@
+---
+description: "Copy the .grekt/ directory into a git worktree where it is otherwise absent due to gitignore."
+---
+
 # grekt worktree
 
 Manage git worktree integration.

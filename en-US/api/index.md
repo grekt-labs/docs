@@ -1,3 +1,7 @@
+---
+description: "Complete CLI reference for grekt, covering all commands for artifact management, registry, and tool sync."
+---
+
 # CLI reference
 
 grekt provides a command-line interface for managing AI artifacts.

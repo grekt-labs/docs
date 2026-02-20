@@ -1,3 +1,7 @@
+---
+description: "Configure GitLab's Generic Package Registry as a grekt source, including required token scopes and YAML setup."
+---
+
 # GitLab
 
 Use GitLab's Generic Package Registry to host multiple artifacts in a single project.

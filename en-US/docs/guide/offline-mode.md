@@ -1,3 +1,7 @@
+---
+description: "Use grekt without a registry account by installing artifacts from local paths or GitHub/GitLab repositories."
+---
+
 # Offline mode
 
 grekt works without a registry. You can add artifacts from local paths or GitHub/GitLab repositories and sync them to your AI tools directly.
