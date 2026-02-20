@@ -56,6 +56,22 @@ export const enUSSidebar = {
       ]
     }
   ],
+  '/en-US/use-cases/': [
+    {
+      text: 'Use cases',
+      items: [
+        { text: 'Overview', link: '/en-US/use-cases/' },
+        { text: 'Team onboarding', link: '/en-US/use-cases/team-onboarding' },
+        { text: 'Multitool workflow', link: '/en-US/use-cases/multi-tool-workflow' },
+        { text: 'Publishing & sharing', link: '/en-US/use-cases/publishing-and-sharing' },
+        { text: 'Context management at scale', link: '/en-US/use-cases/context-management-at-scale' },
+        { text: 'Security first consumption', link: '/en-US/use-cases/security-first-consumption' },
+        { text: 'Private registry', link: '/en-US/use-cases/private-registry' },
+        { text: 'Open source AI context', link: '/en-US/use-cases/open-source-ai-context' },
+        { text: 'Composable artifact architecture', link: '/en-US/use-cases/composable-artifact-architecture' }
+      ]
+    }
+  ],
   '/en-US/api/': [
     {
       text: 'Authentication',
@@ -114,7 +130,7 @@ export const enUSSidebar = {
 
 export const enUSNav = [
   { text: 'Home', link: '/' },
-  // { text: 'Use Cases', link: '/en-US/use-cases/' },
+  { text: 'Use cases', link: '/en-US/use-cases/' },
   { text: 'Docs', link: '/en-US/docs/guide/introduction' },
   { text: 'API', link: '/en-US/api/' }
 ]
