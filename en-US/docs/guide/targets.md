@@ -1,5 +1,5 @@
 ---
-description: "Understand grekt sync targets - the AI tools artifacts are synced to - and how the plugin system handles each tool's format."
+description: "Understand grekt sync targets - the AI tools artifacts are synced to - and how each tool's format is handled."
 ---
 
 # Targets
@@ -8,23 +8,16 @@ Targets are AI tools that grekt syncs artifacts to.
 
 ## Supported targets
 
-grekt uses a **plugin system** for sync targets. Each plugin knows:
-- The entry point file path (e.g., `.cursorrules`, `CLAUDE.md`)
-- How to generate bootstrap content
-- Whether it needs folder structure or just rules injection
+Each target syncs differently depending on how the AI tool reads configuration:
 
-There are two plugin types:
-
-| Type | Behavior |
-|------|----------|
+| Sync type | Behavior |
+|-----------|----------|
 | **Folder** | Creates directories per category (agents, skills, commands...) |
-| **Rules only** | Injects all content into a single entry point file |
+| **Rules only** | Merges all content into a single entry point file |
 
-Some targets support both (folder structure + rules injection in the entry point).
+Some targets support both.
 
-## Built-in plugins
-
-| Plugin | Entry Point | Type |
+| Target | Entry Point | Type |
 |--------|-------------|------|
 | [`global`](#global) | `.agents/` | Folder |
 | [`claude`](#claude) | `.claude/CLAUDE.md` | Folder + Rules |
