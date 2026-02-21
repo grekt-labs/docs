@@ -22,9 +22,10 @@ export const docsSidebar = [
     ]
   },
   {
-    text: 'CI/CD',
+    text: 'Security',
     items: [
-      { text: 'Security gating', link: '/docs/guide/ci-cd/security-gating' }
+      { text: 'Scanning', link: '/docs/guide/managing/security-scanning' },
+      { text: 'CI/CD', link: '/docs/guide/ci-cd/security-gating' }
     ]
   },
   {

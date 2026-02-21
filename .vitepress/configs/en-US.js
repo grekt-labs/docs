@@ -31,14 +31,14 @@ export const enUSSidebar = {
         { text: 'Overview', link: '/en-US/docs/guide/managing/overview' },
         { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' },
         { text: 'Publishing hooks', link: '/en-US/docs/guide/managing/hooks' },
-        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' },
-        { text: 'Security scanning', link: '/en-US/docs/guide/managing/security-scanning' }
+        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' }
       ]
     },
     {
-      text: 'CI/CD',
+      text: 'Security',
       items: [
-        { text: 'Security gating', link: '/en-US/docs/guide/ci-cd/security-gating' }
+        { text: 'Scanning', link: '/en-US/docs/guide/managing/security-scanning' },
+        { text: 'CI/CD', link: '/en-US/docs/guide/ci-cd/security-gating' }
       ]
     },
     {
