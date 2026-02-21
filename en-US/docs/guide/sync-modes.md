@@ -14,8 +14,10 @@ Artifacts are indexed in `.grekt/index` but not copied to target directories. Th
 grekt add @scope/my-artifact
 ```
 
-::: info NOTE
-In large or compacted sessions, AI tools may lose track of indexed artifacts as earlier context gets dropped. If a lazy artifact isn't being picked up, try being more specific in your request (e.g., "find me the skill that handles branch naming" instead of just "create a branch").
+::: info Getting the best out of your artifacts
+grekt provides **discoverability**, not autopilot. No AI tool infers perfectly on its own, not even with native rules or skills. In long conversations or with many artifacts, models tend to rely on their own knowledge instead of checking what's installed.
+
+Reference your artifacts explicitly for best results: "use my security artifact" works better than "do a security review".
 :::
 
 Benefits:

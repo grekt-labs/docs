@@ -114,6 +114,10 @@ grekt sync
 
 Only [**CORE**](/en-US/docs/guide/sync-modes#core-mode) and [**CORE-SYM**](/en-US/docs/guide/sync-modes#core-sym-mode) mode artifacts are synced to target directories. [**LAZY** mode](/en-US/docs/guide/sync-modes#lazy-mode-default) artifacts (default) are indexed in `.grekt/index` for AI tools to discover on demand.
 
+::: info grekt provides discoverability, not autopilot
+grekt makes your artifacts available to AI tools, but the model decides when to use them. This is how all AI tools work: even native rules and skills require your guidance to be applied at the right moment. Better prompts lead to better results. See [sync modes](/en-US/docs/guide/sync-modes#lazy-mode-default) for tips.
+:::
+
 ::: tip Auto sync with --core / --core-sym
 When you add an artifact with `--core` or `--core-sym`, sync runs automatically.
 :::
