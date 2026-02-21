@@ -18,10 +18,10 @@ grekt scan [source] [--json] [--fail-on <badge>]
 
 Supported source formats:
 
-- `@scope/name` or `@scope/name@1.0.0` - registry artifact
-- `github:user/repo` - GitHub repository
-- `gitlab:user/repo` - GitLab repository
-- `./path/to/dir` - local directory
+- `@scope/name` or `@scope/name@1.0.0` — registry artifact
+- `github:user/repo` — GitHub repository
+- `gitlab:user/repo` — GitLab repository
+- `./path/to/dir` — local directory
 
 ## Options
 
@@ -32,7 +32,14 @@ Supported source formats:
 
 Valid `--fail-on` values: `certified`, `conditional`, `suspicious`, `rejected`.
 
-Trusted artifacts (marked with `trusted: true` in grekt.yaml) are excluded from `--fail-on` evaluation when scanning all installed artifacts.
+## Trust and `--fail-on`
+
+Artifacts signed with a valid HMAC signature (via [`grekt trust`](/en-US/api/trust)) are excluded from `--fail-on` evaluation. This requires `GREKT_TRUST_KEY` to be set in the environment during scanning.
+
+- **Without `GREKT_TRUST_KEY`**: All artifacts are evaluated against the threshold (safe default).
+- **With `GREKT_TRUST_KEY`**: Only artifacts with a matching HMAC signature are treated as trusted.
+
+For the full CI/CD setup, see [Security gating](/en-US/docs/guide/ci-cd/security-gating).
 
 ## Examples
 
@@ -66,16 +73,10 @@ JSON output:
 grekt scan @scope/my-artifact --json
 ```
 
-Fail CI if any artifact is suspicious or worse:
+Fail if any artifact is suspicious or worse:
 
 ```bash
 grekt scan --fail-on suspicious
-```
-
-Fail CI for anything not certified:
-
-```bash
-grekt scan --fail-on conditional
 ```
 
 ## Output
@@ -93,26 +94,9 @@ Scanning @scope/my-artifact...
       → Review and verify this is intentional
 ```
 
-## CI usage
-
-Use `--fail-on` to block merges when artifacts don't meet your security threshold:
-
-```yaml
-# GitHub Actions example
-- name: Scan artifacts
-  run: grekt scan --fail-on suspicious
-```
-
-If a known-risky artifact should not block the pipeline, mark it as trusted:
-
-```bash
-grekt trust @sketchy/tool
-```
-
-Trusted artifacts show `(trusted)` in the summary table and are excluded from `--fail-on` evaluation.
-
 ## See also
 
-- [Security scanning guide](/en-US/docs/guide/managing/security-scanning) for trust badges, risk labels, and scanner details
-- [grekt trust](/en-US/api/trust) - Mark an artifact as trusted
-- [grekt untrust](/en-US/api/untrust) - Remove trusted status
+- [Security gating in CI/CD](/en-US/docs/guide/ci-cd/security-gating) — Pipeline setup, thresholds, HMAC trust workflow
+- [Security scanning guide](/en-US/docs/guide/managing/security-scanning) — Trust badges, risk labels, scanner details
+- [grekt trust](/en-US/api/trust) — Sign an artifact as trusted
+- [grekt untrust](/en-US/api/untrust) — Remove trusted status

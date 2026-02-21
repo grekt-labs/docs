@@ -36,6 +36,12 @@ export const enUSSidebar = {
       ]
     },
     {
+      text: 'CI/CD',
+      items: [
+        { text: 'Security gating', link: '/en-US/docs/guide/ci-cd/security-gating' }
+      ]
+    },
+    {
       text: 'Configuration',
       items: [
         { text: 'Environment', link: '/en-US/docs/guide/environment' }

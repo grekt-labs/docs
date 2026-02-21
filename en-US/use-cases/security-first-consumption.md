@@ -54,32 +54,24 @@ Published artifacts carry their scan results, so you can evaluate risk before in
 
 Individual scanning works for you, but teams have a different problem: someone adds an artifact without checking, pushes, and now malicious prompts are in your codebase.
 
-Use `--fail-on` to enforce a security threshold in your pipeline:
+Use `--fail-on` with HMAC signed trust to gate your pipeline while allowing reviewed exceptions. See [Security gating](/en-US/docs/guide/ci-cd/security-gating) for the full setup.
+
+The short version:
 
 ```bash
+# Repo owner generates a trust key once
+grekt trust --generate-key
+
+# Repo owner signs reviewed artifacts
+grekt trust @sketchy/tool
+
+# CI verifies signatures and blocks unsigned risky artifacts
 grekt scan --fail-on suspicious
-```
-
-If any artifact badge meets or exceeds the threshold, `grekt scan` exits with code 1 and blocks the merge.
-
-```yaml
-# GitHub Actions
-- name: Install artifacts
-  run: grekt install
-
-- name: Security gate
-  run: grekt scan --fail-on suspicious
 ```
 
 ### 5. Handle known exceptions
 
-Sometimes an artifact triggers warnings but your team has reviewed it and decided it's fine. Instead of lowering the threshold for everyone, mark that specific artifact as trusted:
-
-```bash
-grekt trust @sketchy/tool
-```
-
-Trusted artifacts are excluded from `--fail-on` evaluation. They still get scanned and their badge is still visible, but they won't block the pipeline.
+Sign reviewed artifacts with `grekt trust`. Only the holder of `GREKT_TRUST_KEY` can produce valid signatures — manually writing `trusted: true` in yaml is rejected.
 
 ```
   ✓ @grekt/tools        100  certified
@@ -107,8 +99,9 @@ Security doesn't slow you down. It runs alongside your normal workflow, individu
 
 ## Related
 
-- [Security scanning](/en-US/docs/guide/managing/security-scanning) - Full scanning guide
-- [grekt scan](/en-US/api/scan) - Scan command reference
-- [grekt trust](/en-US/api/trust) - Mark artifact as trusted
-- [grekt untrust](/en-US/api/untrust) - Remove trusted status
-- [grekt info](/en-US/api/info) - Inspect artifact details
+- [Security gating in CI/CD](/en-US/docs/guide/ci-cd/security-gating) — Pipeline setup, HMAC trust, thresholds
+- [Security scanning](/en-US/docs/guide/managing/security-scanning) — Scanners, trust badges, risk labels
+- [grekt scan](/en-US/api/scan) — Scan command reference
+- [grekt trust](/en-US/api/trust) — Sign artifact as trusted
+- [grekt untrust](/en-US/api/untrust) — Remove trusted status
+- [grekt info](/en-US/api/info) — Inspect artifact details

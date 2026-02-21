@@ -22,6 +22,12 @@ export const docsSidebar = [
     ]
   },
   {
+    text: 'CI/CD',
+    items: [
+      { text: 'Security gating', link: '/docs/guide/ci-cd/security-gating' }
+    ]
+  },
+  {
     text: 'Configuration',
     items: [
       { text: 'Authentication', link: '/docs/guide/sources/authentication' }
