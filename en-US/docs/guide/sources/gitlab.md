@@ -66,6 +66,10 @@ grekt versions @myteam/agent-tools
 grekt info @myteam/agent-tools
 ```
 
+::: info
+Use `grekt list @myteam` to see all available artifacts under this registry.
+:::
+
 ## Publishing
 
 To publish artifacts to a GitLab registry, see [Publishing](/en-US/docs/guide/managing/publishing). grekt routes to the correct registry based on the scope in your artifact's `name`.

@@ -48,6 +48,10 @@ grekt add @myorg/agent-tools@2.0.0
 grekt versions @myorg/agent-tools
 ```
 
+::: info
+Use `grekt list @myorg` to see all available artifacts under this registry.
+:::
+
 ## Monorepo organization
 
 Use `prefix` to organize multiple scopes within a single GHCR namespace:
