@@ -13,6 +13,10 @@ const CliDemoInit = defineAsyncComponent(() => import('./cli-demos/CliDemoInit.v
 const installMethods = [
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://cli.grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
+  { id: 'npm', label: 'npm', command: 'npm install -g @grekt/cli' },
+  { id: 'pnpm', label: 'pnpm', command: 'pnpm add -g @grekt/cli' },
+  { id: 'yarn', label: 'yarn', command: 'yarn global add @grekt/cli' },
+  { id: 'bun', label: 'bun', command: 'bun add -g @grekt/cli' },
 ]
 
 const chooseRef = ref(null)

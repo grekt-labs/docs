@@ -22,6 +22,22 @@ curl -fsSL https://cli.grekt.com/install.sh | sh
 brew tap grekt-labs/grekt && brew install grekt
 ```
 
+```bash [npm]
+npm install -g @grekt/cli
+```
+
+```bash [pnpm]
+pnpm add -g @grekt/cli
+```
+
+```bash [yarn]
+yarn global add @grekt/cli
+```
+
+```bash [bun]
+bun add -g @grekt/cli
+```
+
 :::
 
 ## Initialize a project

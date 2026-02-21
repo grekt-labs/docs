@@ -32,6 +32,7 @@ grekt checks for new versions once per day and shows a notice when updates are a
 
   curl -fsSL https://cli.grekt.com/install.sh | sh
   brew upgrade grekt
+  npm install -g @grekt/cli
   --------------------------------------------
 ```
 
