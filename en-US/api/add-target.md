@@ -12,25 +12,55 @@ grekt add-target
 
 ## Behavior
 
-Opens an interactive prompt to add AI tools to sync with. Already configured targets are shown as disabled ("already added"). Only new targets can be selected.
+Opens a searchable selector to add AI tools to sync with. Type to filter the list, use `Space` to select, and `Enter` to confirm. Already configured targets are shown as disabled.
 
 To remove targets, use [`grekt remove-target`](./remove-target.md).
 
 ## Built-in targets
 
+### Full plugins
+
 | Target | Entry Point |
 |--------|-------------|
-| `global` | `.agents/` |
 | `claude` | `.claude/CLAUDE.md` |
+| `kiro` | `.kiro/steering/grekt.md` |
 | `cursor` | `.cursorrules` |
-| `cline` | `.clinerules` |
-| `windsurf` | `.windsurfrules` |
 | `copilot` | `.github/copilot-instructions.md` |
+| `opencode` | `.opencode/` |
+| `openclaw` | `skills/` + `AGENTS.md` |
+| `windsurf` | `.windsurfrules` |
+| `cline` | `.clinerules` |
 | `aider` | `CONVENTIONS.md` |
 | `continue` | `.continue/` |
 | `amazonq` | `.amazonq/` |
-| `opencode` | `.opencode/` |
-| `openclaw` | `skills/` + `AGENTS.md` |
+
+### agentskills.io targets
+
+These sync to `.agents/` following the [agentskills.io](https://agentskills.io) standard:
+
+| Target | Display Name |
+|--------|-------------|
+| `codex` | Codex |
+| `gemini` | Gemini CLI |
+| `jules` | Jules |
+| `zed` | Zed |
+| `goose` | Goose |
+| `devin` | Devin |
+| `roocode` | RooCode |
+| `kilocode` | Kilo Code |
+| `amp` | Amp |
+| `warp` | Warp |
+
+The `global` target is a fallback for tools not listed above. It uses the same `.agents/` sync - select it if your tool supports agentskills.io but isn't in the list.
+
+## Searchable selector
+
+The target selector supports type-to-filter for quick navigation:
+
+- **Type** to search and filter the list
+- **Up/Down** to navigate
+- **Space** to toggle selection
+- **Enter** to confirm
 
 ## Custom targets
 
