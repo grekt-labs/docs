@@ -51,6 +51,31 @@ export const myToolPlugin = createFolderPlugin({
 export default myToolPlugin;
 ```
 
+### agentskills.io plugin
+
+For tools that sync to `.agents/` via the [agentskills.io](https://agentskills.io) standard. These reuse the global plugin's sync logic and only override their identity:
+
+```typescript
+import type { SyncPlugin } from "#/sync/sync.types";
+import { globalPlugin } from "#/sync/plugins/universal/universal";
+
+export const myToolPlugin: SyncPlugin = {
+  ...globalPlugin,
+  id: "my-tool",
+  name: "My Tool",
+};
+
+export default myToolPlugin;
+```
+
+This produces the same `.agents/` output as the global fallback, but registers as a distinct target so users can select it by name.
+
+If your tool also supports MCP, export the config separately:
+
+```typescript
+export { myToolMcpConfig } from "./my-tool.mcp";
+```
+
 ## Register the plugin
 
 Add to `cli/src/sync/manager/manager.ts`:
@@ -86,6 +111,34 @@ Create `{name}.test.ts` with tests for:
 - `sync()` creates/updates files correctly
 - `preview()` returns expected changes
 - Bootstrap content is valid
+
+## MCP support
+
+To add MCP distribution for your plugin, create a `{name}.mcp.ts` file that exports a `McpPluginConfig`:
+
+```typescript
+import { standardMcpTransform } from "#/sync/mcp/mcp.transforms";
+import type { McpPluginConfig } from "#/sync/mcp/mcp.types";
+
+export const myToolMcpConfig: McpPluginConfig = {
+  configFile: ".my-tool/mcp.json",   // Where the tool reads MCP config
+  serverKey: "mcpServers",           // Key for the servers object
+  transform: standardMcpTransform,   // Or a custom transform function
+};
+```
+
+Then register it in `cli/src/sync/mcp/mcp.config.ts`:
+
+```typescript
+import { myToolMcpConfig } from "#/sync/plugins/my-tool/my-tool.mcp";
+
+const MCP_CONFIGS: Record<string, McpPluginConfig> = {
+  // ...existing configs
+  "my-tool": myToolMcpConfig,
+};
+```
+
+The `standardMcpTransform` handles both stdio (`command`/`args`) and HTTP (`url`/`headers`) MCP formats. If your tool needs a different JSON structure, write a custom transform function instead.
 
 ## Submit a PR
 

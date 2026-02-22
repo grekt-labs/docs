@@ -104,16 +104,40 @@ grk-description: Review code changes
 
 ### MCPs <Badge type="warning" text="Beta" />
 
-MCP server configurations (JSON format):
+MCP server configurations that get automatically installed into target tools during `grekt add` and removed during `grekt remove`.
+
+**Stdio MCP** (local process):
 
 ```json
 {
   "grk-type": "mcps",
   "grk-name": "database",
   "grk-description": "Database MCP server",
-  "config": { ... }
+  "command": "npx",
+  "args": ["-y", "@my-org/db-mcp-server"],
+  "env": {
+    "DB_URL": "postgresql://localhost:5432/mydb"
+  }
 }
 ```
+
+**HTTP MCP** (remote server):
+
+```json
+{
+  "grk-type": "mcps",
+  "grk-name": "analytics",
+  "grk-description": "Analytics MCP server",
+  "url": "https://mcp.example.com/analytics",
+  "headers": {
+    "Authorization": "Bearer ${ANALYTICS_TOKEN}"
+  }
+}
+```
+
+**Auto-installation**: When you run `grekt add`, MCP components are written into each enabled target's config file. When you run `grekt remove`, they are cleaned up. No manual config editing needed.
+
+**Supported targets**: Claude, Kiro, Cursor, Copilot, Amazon Q, OpenCode, Codex, Gemini, Zed, RooCode, Kilo Code, Amp. See [Targets - MCP distribution](/en-US/docs/guide/targets#mcp-distribution) for the full list of config file paths.
 
 ### Rules
 

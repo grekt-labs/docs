@@ -23,10 +23,12 @@ When prompted "Delete the folders created by these targets?":
 - **Yes** - Deletes target directories and entry point files
 - **No** - Only removes from config, keeps folders
 
+### Full plugins
+
 | Target | What gets deleted |
 |--------|-------------------|
-| `global` | `.agents/` directory |
 | `claude` | `.claude/` directory |
+| `kiro` | `.kiro/` directory |
 | `cursor` | `.cursorrules` file |
 | `cline` | `.clinerules` file |
 | `windsurf` | `.windsurf/` directory, `.windsurfrules` file |
@@ -37,6 +39,10 @@ When prompted "Delete the folders created by these targets?":
 | `opencode` | `.opencode/` directory |
 | `openclaw` | `skills/` directory, `AGENTS.md` file |
 | custom | Target directory and entry point |
+
+### agentskills.io targets and global
+
+The targets `codex`, `gemini`, `jules`, `zed`, `goose`, `devin`, `roocode`, `kilocode`, `amp`, `warp`, and `global` all share the `.agents/` directory. The directory is only deleted when the last target using it is removed.
 
 ## Examples
 
@@ -50,3 +56,4 @@ grekt remove-target     # Interactive selection
 - Updates `grekt.yaml` to remove selected targets
 - Custom target configs are also removed from `grekt.yaml`
 - Folder deletion is optional and defaults to "No"
+- MCP configurations installed by removed targets are also cleaned up from tool config files
