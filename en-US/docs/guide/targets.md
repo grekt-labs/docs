@@ -1,5 +1,5 @@
 ---
-description: "Understand grekt sync targets - the AI tools artifacts are synced to - and how each tool's format is handled."
+description: "Understand grekt sync targets, the AI tools artifacts are synced to, and how each tool's format is handled."
 ---
 
 # Targets
@@ -17,61 +17,36 @@ Each target syncs differently depending on how the AI tool reads configuration:
 
 Some targets support both.
 
-## Full plugins
+## Supported targets
 
-Full plugins have dedicated sync logic tailored to each tool's conventions.
-
-| Target | Entry Point | Type |
-|--------|-------------|------|
-| [`claude`](#claude) | `.claude/CLAUDE.md` | Folder + Rules |
-| [`kiro`](#kiro) | `.kiro/steering/grekt.md` | Folder |
-| [`cursor`](#cursor) | `.cursorrules` | Rules only |
-| [`copilot`](#copilot) | `.github/copilot-instructions.md` | Rules only |
-| [`opencode`](#opencode) | `.opencode/` | Folder |
-| [`openclaw`](#openclaw) | `skills/` + `AGENTS.md` | Folder |
-| [`windsurf`](#windsurf) | `.windsurfrules` | Folder + Rules |
-| [`cline`](#cline) | `.clinerules` | Rules only |
-| [`aider`](#aider) | `CONVENTIONS.md` | Rules only |
-| [`continue`](#continue) | `.continue/` | Folder |
-| [`amazonq`](#amazonq) | `.amazonq/` | Folder |
-
-## agentskills.io targets
-
-These tools support the [agentskills.io](https://agentskills.io) standard and sync artifacts to the `.agents/` directory. Each one is listed as its own target so you only enable the tools you actually use.
-
-| Target | Display Name |
-|--------|-------------|
-| `codex` | Codex |
-| `gemini` | Gemini CLI |
-| `jules` | Jules |
-| `zed` | Zed |
-| `goose` | Goose |
-| `devin` | Devin |
-| `roocode` | RooCode |
-| `kilocode` | Kilo Code |
-| `amp` | Amp |
-| `warp` | Warp |
-
-All produce the same output:
-
-```
-.agents/
-├── {artifact}-{skill-name}/
-│   └── SKILL.md
-└── AGENTS.md
-```
-
-Metadata is normalized to agentskills.io format - tool-specific fields are stripped, and frontmatter is simplified to standard `name`/`description` fields.
-
-Some of these tools also support MCP distribution (Codex, Gemini, Zed, RooCode, Kilo Code, Amp). See [MCP distribution](#mcp-distribution) below.
-
-### Global (fallback)
-
-The `global` target uses the same `.agents/` sync. It exists as a fallback for tools not listed above - if your tool reads `.agents/` but doesn't appear in the list, select `global`.
+| Target | Entry Point | Type | MCP |
+|--------|-------------|------|-----|
+| [`claude`](#claude) | `.claude/CLAUDE.md` | Folder + Rules | Yes |
+| [`kiro`](#kiro) | `.kiro/steering/grekt.md` | Folder | Yes |
+| [`cursor`](#cursor) | `.cursorrules` | Rules only | Yes |
+| [`copilot`](#copilot) | `.github/copilot-instructions.md` | Rules only | Yes |
+| [`opencode`](#opencode) | `.opencode/` | Folder | Yes |
+| [`openclaw`](#openclaw) | `skills/` + `AGENTS.md` | Folder | No |
+| [`windsurf`](#windsurf) | `.windsurfrules` | Folder + Rules | No |
+| [`cline`](#cline) | `.clinerules` | Rules only | No |
+| [`aider`](#aider) | `CONVENTIONS.md` | Rules only | No |
+| [`continue`](#continue) | `.continue/` | Folder | No |
+| [`amazonq`](#amazon-q) | `.amazonq/` | Folder | Yes |
+| [`codex`](#codex) | `.agents/` | Folder | Yes |
+| [`gemini`](#gemini) | `.agents/` | Folder | Yes |
+| [`jules`](#jules) | `.agents/` | Folder | No |
+| [`zed`](#zed) | `.agents/` | Folder | Yes |
+| [`goose`](#goose) | `.agents/` | Folder | No |
+| [`devin`](#devin) | `.agents/` | Folder | No |
+| [`roocode`](#roocode) | `.agents/` | Folder | Yes |
+| [`kilocode`](#kilo-code) | `.agents/` | Folder | Yes |
+| [`amp`](#amp) | `.agents/` | Folder | Yes |
+| [`warp`](#warp) | `.agents/` | Folder | No |
+| [`global`](#global) | `.agents/` | Folder | No |
 
 ---
 
-## Full plugin details
+## Target details
 
 ### Claude
 
@@ -80,7 +55,7 @@ Syncs to Claude Code's `.claude/` directory. Creates folder structure for agents
 - **Entry point**: `.claude/CLAUDE.md` or `CLAUDE.md`
 - **Directory**: `.claude/`
 - **Categories**: All (agents, skills, commands, rules)
-- **MCP support**: Yes - `.mcp.json`
+- **MCP support**: `.mcp.json`
 - Creates a skill router at `.claude/skills/grekt/SKILL.md`
 
 ```
@@ -100,7 +75,7 @@ Syncs to Kiro's `.kiro/` directory. Skills are placed in `.kiro/skills/` and ins
 - **Entry point**: `.kiro/steering/grekt.md`
 - **Directory**: `.kiro/`
 - **Categories**: Skills only
-- **MCP support**: Yes - `.kiro/settings/mcp.json`
+- **MCP support**: `.kiro/settings/mcp.json`
 - Strips Claude-specific frontmatter fields (`argument-hint`, `disable-model-invocation`, `user-invocable`, `model`, `context`, `agent`, `hooks`, `allowed-tools`)
 - Converts grekt format to Kiro-native format
 
@@ -122,7 +97,7 @@ Syncs all artifact content into a single `.cursorrules` file.
 - **Entry point**: `.cursorrules`
 - **Type**: Rules only (no folder structure)
 - **Categories**: All (merged into managed block)
-- **MCP support**: Yes - `.cursor/mcp.json`
+- **MCP support**: `.cursor/mcp.json`
 
 ### Copilot
 
@@ -131,7 +106,7 @@ Syncs all artifact content into GitHub Copilot's instructions file.
 - **Entry point**: `.github/copilot-instructions.md`
 - **Type**: Rules only (no folder structure)
 - **Categories**: All (merged into managed block)
-- **MCP support**: Yes - `.vscode/mcp.json`
+- **MCP support**: `.vscode/mcp.json`
 
 ### OpenCode
 
@@ -139,7 +114,7 @@ Syncs to OpenCode's `.opencode/` directory.
 
 - **Directory**: `.opencode/`
 - **Categories**: All (agents, skills, commands, rules)
-- **MCP support**: Yes - `opencode.json`
+- **MCP support**: `opencode.json`
 
 ```
 .opencode/
@@ -222,7 +197,7 @@ Syncs to Amazon Q's `.amazonq/` directory.
 
 - **Directory**: `.amazonq/`
 - **Categories**: All (agents, skills, commands, rules)
-- **MCP support**: Yes - `.amazonq/mcp.json`
+- **MCP support**: `.amazonq/mcp.json`
 
 ```
 .amazonq/
@@ -231,13 +206,94 @@ Syncs to Amazon Q's `.amazonq/` directory.
 └── commands/
 ```
 
+### Codex
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.codex/config.toml` (TOML format, key: `mcp_servers`)
+
+### Gemini
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.gemini/settings.json` (key: `mcpServers`)
+
+### Jules
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+
+### Zed
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.zed/settings.json` (key: `context_servers`)
+
+### Goose
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+
+### Devin
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+
+### RooCode
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.roo/mcp.json` (key: `mcpServers`)
+
+### Kilo Code
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.kilocode/mcp.json` (key: `mcpServers`)
+
+### Amp
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+- **MCP support**: `.amp/settings.json` (key: `amp.mcpServers`)
+
+### Warp
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+
+### Global
+
+Syncs to `.agents/` following the [agentskills.io](https://agentskills.io) standard. Fallback for tools not listed individually.
+
+- **Directory**: `.agents/`
+- **Categories**: Skills
+
 ---
 
 ## MCP distribution <Badge type="warning" text="Beta" />
 
 When an artifact includes MCP server components, grekt automatically installs the MCP configuration into the target tool's config file during `grekt add` and removes it during `grekt remove`.
-
-### Supported targets
 
 | Target | Config file | Server key |
 |--------|------------|------------|
@@ -254,9 +310,9 @@ When an artifact includes MCP server components, grekt automatically installs th
 | Kilo Code | `.kilocode/mcp.json` | `mcpServers` |
 | Amp | `.amp/settings.json` | `amp.mcpServers` |
 
-MCP distribution is automatic - no extra flags or configuration needed. If a target is enabled and the artifact contains MCP components, the config is installed.
+MCP distribution is automatic. If a target is enabled and the artifact contains MCP components, the config is installed.
 
-See [Artifacts - MCPs](/en-US/docs/guide/artifacts#mcps) for the MCP component format.
+See [Artifacts MCPs](/en-US/docs/guide/artifacts#mcps) for the MCP component format.
 
 ---
 
