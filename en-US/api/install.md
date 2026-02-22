@@ -16,6 +16,7 @@ grekt i
 | Option | Description |
 |--------|-------------|
 | `--force` | Reinstall even if already present |
+| `--ci` | Fail if local artifacts are detected (also auto-detected via `CI` env var) |
 
 ## Description
 
@@ -48,8 +49,20 @@ Error: Integrity check failed for code-reviewer
   modified: agent.md
 ```
 
+## Local artifacts
+
+Local artifacts (added via `./path`) are skipped during install since their paths are machine-specific. In CI environments, this becomes a hard error to prevent broken pipelines.
+
+CI mode is activated automatically when the `CI` environment variable is set (standard in GitHub Actions, GitLab CI, etc.), or manually with `--ci`.
+
+```bash
+# CI pipeline — fails if someone committed local artifacts
+grekt install --ci
+```
+
 ## Notes
 
 - Requires `grekt.lock` (run `grekt add` first if missing)
 - Automatically syncs to targets after installing (same as `grekt add` and `grekt upgrade`)
+- Local artifacts are skipped (silently in dev, error in CI)
 - For private repos, set `GITHUB_TOKEN` or `GITLAB_TOKEN`

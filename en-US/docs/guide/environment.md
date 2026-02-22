@@ -20,6 +20,7 @@ Environment tokens take priority over file-based credentials. See [Authenticatio
 
 | Variable | Value | Description |
 |----------|-------|-------------|
+| `CI` | `true` | Enables CI mode. `grekt install` will fail if local artifacts are detected. Auto-set by most CI providers. |
 | `GREKT_NO_UPDATE_CHECK` | `1` | Disable update notifications. |
 
 ### Update check
