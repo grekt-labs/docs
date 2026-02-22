@@ -63,7 +63,53 @@ All produce the same output:
 
 Metadata is normalized to agentskills.io format - tool-specific fields are stripped, and frontmatter is simplified to standard `name`/`description` fields.
 
-Some of these tools also support MCP distribution (Codex, Gemini, Zed, RooCode, Kilo Code, Amp). See [MCP distribution](#mcp-distribution) below.
+Some of these tools also support MCP distribution. See the details below and the [MCP distribution](#mcp-distribution) table.
+
+### Codex
+
+Syncs skills to `.agents/`. MCP servers are written to `.codex/config.toml` in TOML format.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.codex/config.toml` (key: `mcp_servers`)
+
+### Gemini
+
+Syncs skills to `.agents/`. MCP servers are written to `.gemini/settings.json`.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.gemini/settings.json` (key: `mcpServers`)
+
+### Zed
+
+Syncs skills to `.agents/`. MCP servers are written to `.zed/settings.json`.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.zed/settings.json` (key: `context_servers`)
+
+### RooCode
+
+Syncs skills to `.agents/`. MCP servers are written to `.roo/mcp.json`.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.roo/mcp.json` (key: `mcpServers`)
+
+### Kilo Code
+
+Syncs skills to `.agents/`. MCP servers are written to `.kilocode/mcp.json`.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.kilocode/mcp.json` (key: `mcpServers`)
+
+### Amp
+
+Syncs skills to `.agents/`. MCP servers are written to `.amp/settings.json`.
+
+- **Skills**: `.agents/` (agentskills.io)
+- **MCP support**: Yes - `.amp/settings.json` (key: `amp.mcpServers`)
+
+### Jules, Goose, Devin, Warp
+
+Sync skills to `.agents/`. No MCP distribution - these tools only support MCP configuration through their web UI or global user settings, not project-level config files.
 
 ### Global (fallback)
 
