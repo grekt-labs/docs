@@ -21,6 +21,7 @@ grekt add @scope/artifact-name
 Host your own registry on GitLab with version listing, deprecation, and [monorepo](/en-US/docs/guide/managing/monorepo) support. Requires [registry configuration](/en-US/docs/guide/sources/gitlab#registry-monorepo).
 
 ```bash
+grekt list @myteam                    # See available artifacts under scope
 grekt add @myteam/agent-tools
 grekt add @myteam/agent-tools@2.0.0
 ```
