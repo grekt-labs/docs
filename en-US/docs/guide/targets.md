@@ -23,12 +23,12 @@ Some targets support both.
 |--------|-------------|------|-----|
 | [`claude`](#claude) | `.claude/CLAUDE.md` | Folder + Rules | Yes |
 | [`kiro`](#kiro) | `.kiro/steering/grekt.md` | Folder | Yes |
-| [`cursor`](#cursor) | `.cursorrules` | Rules only | Yes |
-| [`copilot`](#copilot) | `.github/copilot-instructions.md` | Rules only | Yes |
+| [`cursor`](#cursor) | `.cursorrules` | Folder + Rules | Yes |
+| [`copilot`](#copilot) | `.github/copilot-instructions.md` | Folder + Rules | Yes |
 | [`opencode`](#opencode) | `.opencode/` | Folder | Yes |
 | [`openclaw`](#openclaw) | `skills/` + `AGENTS.md` | Folder | No |
 | [`windsurf`](#windsurf) | `.windsurfrules` | Folder + Rules | No |
-| [`cline`](#cline) | `.clinerules` | Rules only | No |
+| [`cline`](#cline) | `.clinerules/` | Folder | No |
 | [`aider`](#aider) | `CONVENTIONS.md` | Rules only | No |
 | [`continue`](#continue) | `.continue/` | Folder | No |
 | [`amazonq`](#amazon-q) | `.amazonq/` | Folder | Yes |
@@ -92,21 +92,44 @@ Syncs to Kiro's `.kiro/` directory. Skills are placed in `.kiro/skills/` and ins
 
 ### Cursor
 
-Syncs all artifact content into a single `.cursorrules` file.
+Syncs to Cursor's `.cursor/` directory. Creates folder structure for agents, skills, and rules. Injects bootstrap content in `.cursorrules`.
 
 - **Entry point**: `.cursorrules`
-- **Type**: Rules only (no folder structure)
-- **Categories**: All (merged into managed block)
+- **Directory**: `.cursor/`
+- **Categories**: All (agents, skills, commands, rules)
 - **MCP support**: `.cursor/mcp.json`
+- Creates a skill router at `.cursor/skills/grekt/SKILL.md`
+
+```
+.cursor/
+├── agents/
+├── skills/
+│   └── grekt/
+│       └── SKILL.md
+├── rules/
+└── commands/
+```
 
 ### Copilot
 
-Syncs all artifact content into GitHub Copilot's instructions file.
+Syncs to GitHub Copilot's `.github/` directory. Creates folder structure for agents, skills, and rules. Injects bootstrap content in `copilot-instructions.md`.
 
 - **Entry point**: `.github/copilot-instructions.md`
-- **Type**: Rules only (no folder structure)
-- **Categories**: All (merged into managed block)
+- **Directory**: `.github/`
+- **Categories**: All (agents, skills, commands, rules)
 - **MCP support**: `.vscode/mcp.json`
+- Creates a skill router at `.github/skills/grekt/SKILL.md`
+
+```
+.github/
+├── agents/
+├── skills/
+│   └── grekt/
+│       └── SKILL.md
+├── rules/
+├── commands/
+└── copilot-instructions.md
+```
 
 ### OpenCode
 
@@ -163,11 +186,21 @@ Syncs to Windsurf's `.windsurf/` directory. Also injects rules in `.windsurfrule
 
 ### Cline
 
-Syncs all artifact content into a single `.clinerules` file.
+Syncs to Cline's `.clinerules/` directory. Creates folder structure for agents, skills, and rules.
 
-- **Entry point**: `.clinerules`
-- **Type**: Rules only (no folder structure)
-- **Categories**: All (merged into managed block)
+- **Directory**: `.clinerules/`
+- **Categories**: All (agents, skills, commands, rules)
+- Creates a skill router at `.clinerules/skills/grekt/SKILL.md`
+
+```
+.clinerules/
+├── agents/
+├── skills/
+│   └── grekt/
+│       └── SKILL.md
+├── rules/
+└── commands/
+```
 
 ### Aider
 

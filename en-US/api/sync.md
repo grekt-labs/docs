@@ -17,6 +17,8 @@ grekt sync
 | `--dry-run` | Preview without applying |
 | `-f, --force` | Skip confirmation |
 | `-t, --target <targets>` | Override targets (comma-separated) |
+| `--from <directory>` | Sync from a local directory (no project setup needed) |
+| `--name <id>` | Artifact identifier (required with `--from`) |
 
 ## Examples
 
@@ -27,21 +29,49 @@ grekt sync -f             # No confirmation
 grekt sync -t claude      # Specific target
 ```
 
+## Local directory sync
+
+Sync artifacts from a local directory without needing `grekt init`, `grekt.yaml`, or a lockfile. Useful for distributing AI skills alongside npm packages or any local source.
+
+```bash
+grekt sync --from ./skills --name my-tool --target claude
+```
+
+### Requirements
+
+- `--from`: Path to a directory containing `.md` files with valid frontmatter
+- `--name`: A unique identifier to namespace synced files (prevents collisions)
+- `--target`: Required (no `grekt.yaml` to read targets from)
+
+### Frontmatter format
+
+Files must include `grk-type`, plus `name` and `description`:
+
+```markdown
+---
+grk-type: skills
+name: review
+description: Code review skill
+---
+Your skill content here.
+```
+
+### Usage examples
+
+```bash
+# Dry run first
+grekt sync --from ./skills --name my-tool --target claude --dry-run
+
+# Multiple targets
+grekt sync --from ./skills --name my-tool --target claude,cursor,copilot
+
+# From an npm package
+npx @grekt/cli sync --from ./node_modules/my-tool/skills --name my-tool --target claude
+```
+
 ## Targets
 
-### Claude
-
-```
-.claude/
-├── agents/
-├── skills/
-├── commands/
-└── CLAUDE.md
-```
-
-### Cursor
-
-Updates `.cursorrules` with grekt metadata.
+See [Targets](/en-US/docs/guide/targets) for the full list of supported targets and their folder structures.
 
 ## Non destructive
 
@@ -95,3 +125,4 @@ grekt add @scope/utils --core-sym
 - Run after `grekt add`
 - Targets configured in `grekt.yaml`
 - LAZY artifacts indexed but not copied
+- `--from` mode skips project setup entirely
