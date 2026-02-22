@@ -57,8 +57,8 @@ AI personas with specific behaviors:
 ```markdown
 ---
 grk-type: agents
-grk-name: code-reviewer
-grk-description: Expert code reviewer
+name: code-reviewer
+description: Expert code reviewer
 ---
 
 You are an expert code reviewer. Focus on:
@@ -74,9 +74,8 @@ Reusable capabilities that can be invoked on demand:
 ```markdown
 ---
 grk-type: skills
-grk-name: testing
-grk-description: Testing patterns knowledge
-grk-agents: code-reviewer
+name: testing
+description: Testing patterns knowledge
 ---
 
 When reviewing tests, check for edge cases and meaningful assertions.
@@ -95,8 +94,8 @@ User-invokable actions:
 ```markdown
 ---
 grk-type: commands
-grk-name: review
-grk-description: Review code changes
+name: review
+description: Review code changes
 ---
 
 /review - Analyze changes and provide feedback
@@ -109,8 +108,8 @@ MCP server configurations (JSON format):
 ```json
 {
   "grk-type": "mcps",
-  "grk-name": "database",
-  "grk-description": "Database MCP server",
+  "name": "database",
+  "description": "Database MCP server",
   "config": { ... }
 }
 ```
@@ -122,8 +121,8 @@ Reusable rules and guidelines:
 ```markdown
 ---
 grk-type: rules
-grk-name: code-style
-grk-description: Code style guidelines
+name: code-style
+description: Code style guidelines
 ---
 
 Follow these coding conventions...
@@ -140,8 +139,8 @@ Lifecycle hooks that get installed into the target tool's settings. Hooks run sh
 ```json
 {
   "grk-type": "hooks",
-  "grk-name": "format-on-save",
-  "grk-description": "Auto-format files after edit",
+  "name": "format-on-save",
+  "description": "Auto-format files after edit",
   "target": "claude",
   "hooks": {
     "PostToolUse": [
@@ -172,27 +171,14 @@ Script files (like `format.sh`) placed alongside the hook JSON are automatically
 
 ## Frontmatter
 
-All component files use `grk-` prefixed properties to avoid collisions with other tools' frontmatter.
-
 | Field | Required | Description |
 |-------|----------|-------------|
 | `grk-type` | Yes | `agents`, `skills`, `commands`, `mcps`, `rules`, or `hooks` |
-| `grk-name` | Yes | Unique identifier |
-| `grk-description` | Yes | What it does |
-| `grk-agents` | No | Parent agent (for skills/commands) |
+| `name` | Yes | Unique identifier |
+| `description` | Yes | What it does |
 
-::: tip Compatibility with other tools
-If your files already have `type`, `name`, or `description` fields (e.g. from Claude or other AI tools), grekt will use them as fallback when the `grk-` prefixed versions are missing. You don't need to duplicate fields - but at least one variant of each required field must be present.
-
-```markdown
----
-type: skills
-name: My Skill
-description: What this skill does
----
-```
-
-When both exist, `grk-` prefixed fields always take priority.
+::: tip Why grk-type?
+`grk-type` uses the `grk-` prefix to avoid collisions with other tools' frontmatter.
 :::
 
 ## Project files

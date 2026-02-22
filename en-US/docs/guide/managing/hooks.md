@@ -130,8 +130,8 @@ my-artifact/
 ```json
 {
   "grk-type": "hooks",
-  "grk-name": "auto-format",
-  "grk-description": "Format files after edit",
+  "name": "auto-format",
+  "description": "Format files after edit",
   "target": "claude",
   "hooks": {
     "PostToolUse": [
