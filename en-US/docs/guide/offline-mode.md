@@ -27,7 +27,7 @@ That's it. No account, no registry, no network dependency beyond the initial fet
 | `list`  | Available |
 | `remove`| Available |
 | `scan`  | Available |
-| `install` | Only if original local paths still exist |
+| `install` | Skips local artifacts (installs remote ones normally) |
 | `upgrade` | Not available |
 | `outdated` | Not available |
 | `publish` | Not available |
@@ -38,7 +38,8 @@ That's it. No account, no registry, no network dependency beyond the initial fet
 - No deterministic installs across machines. Local paths are machine dependent
 - No lockfile resolution for local sources
 - No raw HTTP/HTTPS URL support as source type
-- `grekt install` requires the original local paths to still exist
+- `grekt install` skips local artifacts (they can't be reproduced from a lockfile)
+- In CI environments (`CI` env var or `--ci` flag), local artifacts cause a hard error
 
 ## When to use it
 
