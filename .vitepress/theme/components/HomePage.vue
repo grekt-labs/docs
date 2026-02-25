@@ -234,11 +234,17 @@ const toggleFaq = (index) => {
     <section class="trusted-by">
       <span class="trusted-by-label">Trusted by</span>
       <div class="trusted-by-logos">
-        <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
+        <!-- <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
           <img src="/logos/Sesame.png" alt="Sesame" />
-        </a>
+        </a> -->
         <a href="https://metrivibe.com" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--metrivibe" title="Metrivibe">
           <img src="/logos/metrivibe-logov2.png" alt="Metrivibe" />
+        </a>
+        <a href="https://tecalliance.net" target="_blank" rel="noopener" class="trusted-by-logo" title="TecAlliance">
+          <img src="/logos/TecAlliance-Logo-Web.svg" alt="TecAlliance" />
+        </a>
+        <a href="https://hiades.es" target="_blank" rel="noopener" class="trusted-by-logo" title="Hiades">
+          <img src="/logos/logo-hiades-apple.png" alt="Hiades" />
         </a>
         <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
           <img src="/logos/thn.png" alt="The Hotels Network" />
