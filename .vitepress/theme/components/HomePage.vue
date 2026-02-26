@@ -234,9 +234,9 @@ const toggleFaq = (index) => {
     <section class="trusted-by">
       <span class="trusted-by-label">Trusted by</span>
       <div class="trusted-by-logos">
-        <!-- <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
+        <a href="https://sesamehr.com" target="_blank" rel="noopener" class="trusted-by-logo" title="Sesame">
           <img src="/logos/Sesame.png" alt="Sesame" />
-        </a> -->
+        </a>
         <a href="https://metrivibe.com" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--metrivibe" title="Metrivibe">
           <img src="/logos/metrivibe-logov2.png" alt="Metrivibe" />
         </a>
