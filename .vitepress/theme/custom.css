@@ -160,3 +160,142 @@
 a.VPNavBarMenuLink:first-of-type.vp-external-link-icon::after {
   display: none !important;
 }
+
+/* ========================================
+   Cookie Consent Card
+   ======================================== */
+
+.cookie-consent {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 340px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.cookie-consent-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.cookie-consent-text {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+}
+
+.cookie-consent-link {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cookie-consent-link:hover {
+  text-decoration: underline;
+}
+
+.cookie-consent-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cookie-btn {
+  flex: 1;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.cookie-btn-reject {
+  background: transparent;
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+}
+
+.cookie-btn-reject:hover {
+  border-color: var(--vp-c-text-3);
+}
+
+.cookie-btn-accept {
+  background: var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.cookie-btn-accept:hover {
+  opacity: 0.9;
+}
+
+/* Small cookie icon to reopen preferences */
+.cookie-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cookie-trigger:hover {
+  color: var(--vp-c-text-1);
+  border-color: var(--vp-c-text-3);
+}
+
+/* Card transition */
+.cookie-banner-enter-active,
+.cookie-banner-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cookie-banner-enter-from,
+.cookie-banner-leave-to {
+  transform: translateY(12px);
+  opacity: 0;
+}
+
+/* Trigger transition */
+.cookie-trigger-enter-active,
+.cookie-trigger-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.cookie-trigger-enter-from,
+.cookie-trigger-leave-to {
+  opacity: 0;
+}
+
+/* Responsive: narrower card on small screens */
+@media (max-width: 640px) {
+  .cookie-consent {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+    max-width: none;
+  }
+
+  .cookie-trigger {
+    bottom: 12px;
+    right: 12px;
+  }
+}
