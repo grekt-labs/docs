@@ -240,15 +240,15 @@ const toggleFaq = (index) => {
         <a href="https://metrivibe.com" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--metrivibe" title="Metrivibe">
           <img src="/logos/metrivibe-logov2.png" alt="Metrivibe" />
         </a>
-        <a href="https://tecalliance.net" target="_blank" rel="noopener" class="trusted-by-logo" title="TecAlliance">
+        <a href="https://tecalliance.net" target="_blank" rel="noopener" class="trusted-by-logo trusted-by-logo--tecalliance" title="TecAlliance">
           <img src="/logos/TecAlliance-Logo-Web.svg" alt="TecAlliance" />
         </a>
         <a href="https://hiades.es" target="_blank" rel="noopener" class="trusted-by-logo" title="Hiades">
           <img src="/logos/logo-hiades-apple.png" alt="Hiades" />
         </a>
-        <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
-          <img src="/logos/thn.png" alt="The Hotels Network" />
-        </a> -->
+        <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
+          <img src="/logos/thn.svg" alt="The Hotels Network" />
+        </a>
       </div>
     </section>
 
@@ -938,12 +938,12 @@ const toggleFaq = (index) => {
 }
 
 .trusted-by-label {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--card-text);
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 500;
-  opacity: 0.35;
+  font-weight: 600;
+  opacity: 0.5;
 }
 
 .trusted-by-logos {
@@ -971,6 +971,10 @@ const toggleFaq = (index) => {
 
 .trusted-by-logo--metrivibe img {
   height: 40px;
+}
+
+.trusted-by-logo--tecalliance img {
+  height: 38px;
 }
 
 .trusted-by-logo:hover img {
