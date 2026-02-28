@@ -336,7 +336,7 @@ const toggleFaq = (index) => {
 
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
-      <h2 class="init-demo-title">Stop copying prompts. <span class="init-demo-highlight">Start managing</span> AI context.</h2>
+      <h2 class="init-demo-title">Unmanaged context drifts. Versioned context <span class="init-demo-highlight">stays aligned</span>.</h2>
       <div class="init-demo-wrapper">
         <CliDemoInit ref="initRef" />
       </div>

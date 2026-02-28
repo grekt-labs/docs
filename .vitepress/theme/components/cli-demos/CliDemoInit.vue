@@ -678,12 +678,12 @@ onUnmounted(() => {
           class="demo-tab"
           :class="{ 'demo-tab--active': activeTab === 'without' }"
           @click="activeTab = 'without'"
-        >PROMPT & PRAY</button>
+        >UNCONTROLLED</button>
         <button
           class="demo-tab"
           :class="{ 'demo-tab--active': activeTab === 'with' }"
           @click="activeTab = 'with'"
-        >MANAGED</button>
+        >CONTROLLED</button>
       </div>
 
       <!-- Chats side by side -->
