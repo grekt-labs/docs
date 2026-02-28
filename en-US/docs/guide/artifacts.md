@@ -57,8 +57,8 @@ AI personas with specific behaviors:
 ```markdown
 ---
 grk-type: agents
-grk-name: code-reviewer
-grk-description: Expert code reviewer
+name: code-reviewer
+description: Expert code reviewer
 ---
 
 You are an expert code reviewer. Focus on:
@@ -74,8 +74,8 @@ Reusable capabilities that can be invoked on demand:
 ```markdown
 ---
 grk-type: skills
-grk-name: testing
-grk-description: Testing patterns knowledge
+name: testing
+description: Testing patterns knowledge
 grk-agents: code-reviewer
 ---
 
@@ -95,8 +95,8 @@ User-invokable actions:
 ```markdown
 ---
 grk-type: commands
-grk-name: review
-grk-description: Review code changes
+name: review
+description: Review code changes
 ---
 
 /review - Analyze changes and provide feedback
@@ -111,8 +111,8 @@ MCP server configurations that get automatically installed into target tools dur
 ```json
 {
   "grk-type": "mcps",
-  "grk-name": "database",
-  "grk-description": "Database MCP server",
+  "name": "database",
+  "description": "Database MCP server",
   "command": "npx",
   "args": ["-y", "@my-org/db-mcp-server"],
   "env": {
@@ -126,8 +126,8 @@ MCP server configurations that get automatically installed into target tools dur
 ```json
 {
   "grk-type": "mcps",
-  "grk-name": "analytics",
-  "grk-description": "Analytics MCP server",
+  "name": "analytics",
+  "description": "Analytics MCP server",
   "url": "https://mcp.example.com/analytics",
   "headers": {
     "Authorization": "Bearer ${ANALYTICS_TOKEN}"
@@ -146,8 +146,8 @@ Reusable rules and guidelines:
 ```markdown
 ---
 grk-type: rules
-grk-name: code-style
-grk-description: Code style guidelines
+name: code-style
+description: Code style guidelines
 ---
 
 Follow these coding conventions...
@@ -164,8 +164,8 @@ Lifecycle hooks that get installed into the target tool's settings. Hooks run sh
 ```json
 {
   "grk-type": "hooks",
-  "grk-name": "format-on-save",
-  "grk-description": "Auto-format files after edit",
+  "name": "format-on-save",
+  "description": "Auto-format files after edit",
   "target": "claude",
   "hooks": {
     "PostToolUse": [
@@ -201,8 +201,8 @@ All component files use `grk-` prefixed properties to avoid collisions with othe
 | Field | Required | Description |
 |-------|----------|-------------|
 | `grk-type` | Yes | `agents`, `skills`, `commands`, `mcps`, `rules`, or `hooks` |
-| `grk-name` | Yes | Unique identifier |
-| `grk-description` | Yes | What it does |
+| `name` | Yes | Unique identifier |
+| `description` | Yes | What it does |
 | `grk-agents` | No | Parent agent (for skills/commands) |
 
 ::: tip Compatibility with other tools

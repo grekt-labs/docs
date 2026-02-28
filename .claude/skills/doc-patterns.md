@@ -1,7 +1,7 @@
 ---
 grk-type: skills
-grk-name: doc-patterns
-grk-description: Documentation patterns and anti-patterns
+name: doc-patterns
+description: Documentation patterns and anti-patterns
 grk-agents: docs-writer
 ---
 

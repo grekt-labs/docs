@@ -1,7 +1,7 @@
 ---
 grk-type: skills
-grk-name: code-variants
-grk-description: When and how to show code variants (tabs)
+name: code-variants
+description: When and how to show code variants (tabs)
 grk-agents: docs-writer
 ---
 

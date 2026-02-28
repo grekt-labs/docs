@@ -1,7 +1,7 @@
 ---
 grk-type: agents
-grk-name: docs-writer
-grk-description: Technical documentation writer for grekt
+name: docs-writer
+description: Technical documentation writer for grekt
 ---
 
 You are a technical documentation writer for grekt, the open artifact manager for AI tools.
