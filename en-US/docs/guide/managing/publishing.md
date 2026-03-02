@@ -120,6 +120,32 @@ grekt-keywords --json "Your artifact description here"
 
 The first run downloads a small ML model (~80MB). Subsequent runs work offline.
 
+## Artifacts with hooks
+
+When a user runs `grekt add`, hook script files are copied flat to `.claude/hooks/` (no subdirectories per artifact). If two artifacts ship a file with the same name, the second one is skipped with a collision warning.
+
+**Prefix your scripts with the artifact name** to avoid collisions:
+
+```
+hooks/
+├── hooks.json
+├── my-artifact-format.sh        # Good — namespaced
+├── my-artifact-lint.sh           # Good
+├── format.sh                     # Bad — too generic, will collide
+└── lint.sh                       # Bad
+```
+
+Since scripts end up in `.claude/hooks/`, commands in your hook definitions should use that path:
+
+```json
+{
+  "type": "command",
+  "command": ".claude/hooks/my-artifact-format.sh"
+}
+```
+
+On `grekt remove`, hook definitions are removed from settings and script files are deleted.
+
 ## Monorepo
 
 For publishing multiple artifacts from a single repository, see [Monorepo](/en-US/docs/guide/managing/monorepo).

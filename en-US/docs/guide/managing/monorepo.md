@@ -60,8 +60,8 @@ Create `grekt-workspace.yaml` at your repository root:
 
 ```yaml
 workspaces:
-  - "backend/*"
-  - "frontend/*"
+  - "web/*"
+  - "api/*"
 ```
 
 Each glob pattern points to directories containing artifacts.
@@ -69,16 +69,16 @@ Each glob pattern points to directories containing artifacts.
 ## Structure
 
 ```
-my-monorepo/
+acme-ai/
 ├── grekt-workspace.yaml
-├── backend/
-│   ├── auth-rules/
-│   │   └── grekt.yaml      # @myorg/auth-rules
-│   └── api-rules/
-│       └── grekt.yaml      # @myorg/api-rules
-└── frontend/
-    └── ui-rules/
-        └── grekt.yaml      # @myorg/ui-rules
+├── web/
+│   ├── components/
+│   │   └── grekt.yaml      # @acme-web/components
+│   └── rules/
+│       └── grekt.yaml      # @acme-web/rules
+└── api/
+    └── helpers/
+        └── grekt.yaml      # @acme-api/helpers
 ```
 
 Each artifact has its own `grekt.yaml` with independent versioning.

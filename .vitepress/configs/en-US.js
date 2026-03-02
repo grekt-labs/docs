@@ -29,9 +29,8 @@ export const enUSSidebar = {
       text: 'Managing',
       items: [
         { text: 'Overview', link: '/en-US/docs/guide/managing/overview' },
-        { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' },
-        { text: 'Publishing hooks', link: '/en-US/docs/guide/managing/hooks' },
-        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' }
+        { text: 'Versioning', link: '/en-US/docs/guide/managing/versioning' },
+        { text: 'Publishing', link: '/en-US/docs/guide/managing/publishing' }
       ]
     },
     {

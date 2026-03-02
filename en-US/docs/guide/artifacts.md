@@ -192,7 +192,7 @@ Lifecycle hooks that get installed into the target tool's settings. Hooks run sh
 
 Hooks are **not** synced like other components. They are installed into the target's settings file (e.g. `.claude/settings.json`) when you run `grekt add`, and removed when you run `grekt remove`. During installation, grekt will show you what each hook does and ask for confirmation before modifying any settings.
 
-Script files (like `format.sh`) placed alongside the hook JSON are automatically copied to `.claude/hooks/` during installation. For best practices on naming and structuring hooks, see [Publishing hooks](/en-US/docs/guide/managing/hooks).
+Script files (like `format.sh`) placed alongside the hook JSON are automatically copied to `.claude/hooks/` during installation. For best practices on naming and structuring hooks, see [Publishing](/en-US/docs/guide/managing/publishing#artifacts-with-hooks).
 
 ## Frontmatter
 
