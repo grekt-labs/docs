@@ -19,6 +19,28 @@ Each publish requires a unique version. If you try to publish an existing versio
 
 Versions are immutable - this ensures that `grekt install` with a lockfile always produces the same result.
 
+## Bumping versions
+
+### Single artifact
+
+```bash
+grekt version patch    # 1.0.0 → 1.0.1
+grekt version minor    # 1.0.0 → 1.1.0
+grekt version major    # 1.0.0 → 2.0.0
+```
+
+### Workspace (multiple artifacts)
+
+In a workspace, use `grekt changelog` to generate version bumps from conventional commits, then apply them:
+
+```bash
+grekt changelog                              # interactive — review bumps
+grekt version --exec "changeset version" # apply bumps
+grekt publish --changed                      # publish updated artifacts
+```
+
+See [Monorepo](/en-US/docs/guide/managing/monorepo) for the full workflow.
+
 ## Listing versions
 
 ```bash

@@ -85,53 +85,41 @@ acme-ai/
 
 Each artifact has its own `grekt.yaml` with independent versioning.
 
-## Commands
-
-### List artifacts
-
-```bash
-grekt workspace list
-```
-
-Shows all artifacts discovered in the workspace.
-
-### Version with external tools
-
-grekt is agnostic to versioning tools. Use `--exec` to integrate with whatever fits your workflow:
-
-- [changesets](https://github.com/changesets/changesets) - Changelog management
-- [release-it](https://github.com/release-it/release-it) - Generic release automation
-- Manual - `grekt version patch` per artifact
-
-```bash
-grekt version --exec "npx changeset version"
-```
-
-This:
-1. Generates temporary `package.json` files (for changeset compatibility)
-2. Runs your command
-3. Syncs versions back to `grekt.yaml`
-4. Cleans up temporary files
-
-::: info Compatibility layer
-Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed. grekt syncs versions back to `grekt.yaml` and cleans up automatically.
+::: warning Conventional commits
+`grekt changelog` relies on [conventional commits](https://www.conventionalcommits.org/) to calculate version bumps automatically. Enforce this in your team with [commitlint](https://commitlint.js.org/) or a similar tool. Use `--manual` mode if your team doesn't follow this convention.
 :::
 
-### Publish changed artifacts
+## Release workflow
+
+::: tip Recommended setup
+[Conventional commits](https://www.conventionalcommits.org/) + [changesets](https://github.com/changesets/changesets) is the recommended combination. It gives you automatic version calculation with human-reviewable changelog entries.
+:::
+
+### Local (manual)
+
+Review changes interactively, override bumps if needed, then publish:
 
 ```bash
-grekt publish --changed
+grekt changelog                              # review and confirm bumps
+grekt version --exec "changeset version"     # apply bumps to grekt.yaml
+grekt publish --changed                      # publish updated artifacts
 ```
 
-Publishes only artifacts where local version > registry version.
+::: info
+If you don't use changesets, use `--format json` or `--format yaml` to output the changelog to stdout and integrate with your own tooling.
+:::
 
-Preview without publishing:
+### CI (automated)
+
+Fully automated from conventional commits. No prompts:
 
 ```bash
-grekt publish --changed --dry-run
+grekt changelog --ci                         # generate changesets from commits
+grekt version --exec "changeset version"     # apply bumps to grekt.yaml
+grekt publish --changed                      # publish updated artifacts
 ```
 
-## CI workflow
+Example workflow:
 
 ```yaml
 # .github/workflows/release.yml
@@ -145,15 +133,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history for changelog detection
       - uses: oven-sh/setup-bun@v1
 
       - run: bun install
       - run: |
-          grekt version --exec "npx changeset version"
+          grekt changelog --ci
+          grekt version --exec "changeset version"
           grekt publish --changed
 ```
 
-If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs `.grekt/config.yaml` to know where to publish. Since this file is gitignored, generate it in your pipeline:
+::: warning
+`fetch-depth: 0` is required. `grekt changelog` needs full git history to detect changes and parse commits.
+:::
+
+Optionally, validate that changesets exist before merging:
+
+```yaml
+# .github/workflows/changeset-check.yml
+name: Changeset check
+on: pull_request
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v1
+
+      - run: bun install
+      - run: grekt changelog --ci --dry-run
+```
+
+### Custom registries
+
+If you're publishing to a custom registry (GitLab, GitHub, etc.), generate `.grekt/config.yaml` in your pipeline:
 
 ```yaml
 - run: |
@@ -169,12 +186,13 @@ If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs 
     EOF
 
 - run: |
-    grekt version --exec "npx changeset version"
+    grekt changelog --ci
+    grekt version --exec "changeset version"
     grekt publish --changed
 ```
 
-::: info
-Omit `host` when using standard github.com or gitlab.com.
+::: info Compatibility layer
+Most versioning tools only support `package.json`, not `grekt.yaml`. `grekt version --exec` generates temporary `package.json` files as a bridge. These are never committed.
 :::
 
 ## Full example
