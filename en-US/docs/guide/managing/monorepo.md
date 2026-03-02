@@ -32,9 +32,11 @@ workspaces:
 # .grekt/config.yaml
 registries:
   "@acme-web":
+    type: github
     project: acme/artifacts
     prefix: web      # → package name: web-utils
   "@acme-api":
+    type: github
     project: acme/artifacts
     prefix: api      # → package name: api-utils
 ```
@@ -159,19 +161,16 @@ If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs 
     cat <<EOF > .grekt/config.yaml
     registries:
       "@acme-web":
-        type: gitlab
+        type: github
         project: acme/ai-artifacts
         prefix: web
+        token: ${{ secrets.GH_REGISTRY_TOKEN }}
     EOF
 
 - run: |
     grekt version --exec "npx changeset version"
     grekt publish --changed
-  env:
-    GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
 ```
-
-Tokens are resolved automatically from environment variables (`GITLAB_TOKEN`, `GITHUB_TOKEN`). They don't need to be in the config file.
 
 ## Full example
 
@@ -203,23 +202,23 @@ workspaces:
 ```yaml
 registries:
   "@acme-web":
-    type: gitlab
+    type: github
     project: acme/ai-artifacts
     prefix: web
   "@acme-api":
-    type: gitlab
+    type: github
     project: acme/ai-artifacts
     prefix: api
 ```
 
 Result:
-- Both scopes publish to one GitLab project (`acme/ai-artifacts`)
-- Package names: `web-components`, `web-rules`, `api-helpers`
+- Both scopes publish to one GitHub project (`acme/ai-artifacts`)
 - `grekt publish --changed` publishes all updated artifacts at once
+- Installable via `grekt add @acme-web/components`, `grekt add @acme-api/helpers`, etc.
 
 ## Related
 
 - [grekt workspace](/en-US/api/workspace) - Command reference
 - [grekt version](/en-US/api/version) - Version bumping
 - [grekt publish](/en-US/api/publish) - Publishing artifacts
-- [Registry prefix](/en-US/docs/guide/sources/gitlab#monorepo-organization) - Registry organization
+- [Registry prefix](/en-US/docs/guide/sources/github#monorepo-organization) - Registry organization
