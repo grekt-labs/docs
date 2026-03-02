@@ -95,7 +95,11 @@ Shows all artifacts discovered in the workspace.
 
 ### Version with external tools
 
-Use `--exec` to integrate with versioning tools like [changesets](https://github.com/changesets/changesets):
+grekt is agnostic to versioning tools. Use `--exec` to integrate with whatever fits your workflow:
+
+- [changesets](https://github.com/changesets/changesets) - Changelog management
+- [release-it](https://github.com/release-it/release-it) - Generic release automation
+- Manual - `grekt version patch` per artifact
 
 ```bash
 grekt version --exec "npx changeset version"
@@ -106,6 +110,10 @@ This:
 2. Runs your command
 3. Syncs versions back to `grekt.yaml`
 4. Cleans up temporary files
+
+::: info Compatibility layer
+Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed. grekt syncs versions back to `grekt.yaml` and cleans up automatically.
+:::
 
 ### Publish changed artifacts
 
@@ -143,17 +151,27 @@ jobs:
           grekt publish --changed
 ```
 
-## Versioning tools
+If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs `.grekt/config.yaml` to know where to publish. Since this file is gitignored, generate it in your pipeline:
 
-grekt is agnostic to versioning tools. Use whatever fits your workflow:
+```yaml
+- run: |
+    mkdir -p .grekt
+    cat <<EOF > .grekt/config.yaml
+    registries:
+      "@acme-web":
+        type: gitlab
+        project: acme/ai-artifacts
+        prefix: web
+    EOF
 
-- [changesets](https://github.com/changesets/changesets) - Changelog management
-- [release-it](https://github.com/release-it/release-it) - Generic release automation
-- Manual - `grekt version patch` per artifact
+- run: |
+    grekt version --exec "npx changeset version"
+    grekt publish --changed
+  env:
+    GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+```
 
-::: info Compatibility layer
-Most versioning tools only support `package.json`, not `grekt.yaml`. The `--exec` flag generates temporary `package.json` files as a bridge. These are never committed - grekt syncs versions back to `grekt.yaml` and cleans up automatically.
-:::
+Tokens are resolved automatically from environment variables (`GITLAB_TOKEN`, `GITHUB_TOKEN`). They don't need to be in the config file.
 
 ## Full example
 
