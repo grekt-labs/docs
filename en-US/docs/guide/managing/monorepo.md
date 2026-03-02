@@ -162,6 +162,7 @@ If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs 
     registries:
       "@acme-web":
         type: github
+        host: ${{ vars.GH_REGISTRY_HOST }}  # only for self-hosted
         project: acme/ai-artifacts
         prefix: web
         token: ${{ secrets.GH_REGISTRY_TOKEN }}
@@ -171,6 +172,10 @@ If you're publishing to a custom registry (GitLab, GitHub, etc.), the CLI needs 
     grekt version --exec "npx changeset version"
     grekt publish --changed
 ```
+
+::: info
+Omit `host` when using standard github.com or gitlab.com.
+:::
 
 ## Full example
 
