@@ -100,9 +100,9 @@ Each artifact has its own `grekt.yaml` with independent versioning.
 Review changes interactively, override bumps if needed, then publish:
 
 ```bash
-grekt changelog                              # review and confirm bumps
-grekt version --exec "changeset version"     # apply bumps to grekt.yaml
-grekt publish --changed                      # publish updated artifacts
+grekt changelog                                        # review and confirm bumps
+grekt version --exec "npx @changesets/cli version"     # apply bumps to grekt.yaml
+grekt publish --changed                                # publish updated artifacts
 ```
 
 ::: info
@@ -111,17 +111,13 @@ If you don't use changesets, use `--format json` or `--format yaml` to output th
 
 ### CI (automated)
 
-Fully automated from conventional commits. No prompts:
+Fully automated from conventional commits. No prompts.
 
-```bash
-grekt changelog --ci                         # generate changesets from commits
-grekt version --exec "changeset version"     # apply bumps to grekt.yaml
-grekt publish --changed                      # publish updated artifacts
-```
+Use the official [grekt-labs/ci-actions](https://github.com/grekt-labs/ci-actions) setup action to install the CLI, configure registries, and set up git authentication in a single step.
 
-Example workflow:
+::: code-group
 
-```yaml
+```yaml [GitHub Actions]
 # .github/workflows/release.yml
 name: Release
 on:
@@ -135,61 +131,116 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0    # full history for changelog detection
-      - uses: oven-sh/setup-bun@v1
 
-      - run: bun install
+      - uses: grekt-labs/ci-actions/github/setup@main
+        with:
+          runtime: node
+          runtime-version: "22"
+          git-user-name: "CI"
+          git-user-email: "ci@example.com"
+          git-token: ${{ secrets.GITHUB_TOKEN }}
+
       - run: |
           grekt changelog --ci
-          grekt version --exec "changeset version"
+          grekt version --exec "npx @changesets/cli version"
+          git add **/*.yaml **/CHANGELOG.md .changeset/ || true
+          git diff --cached --quiet || git commit -m "chore(release): version artifacts [skip ci]"
+          git push origin main
           grekt publish --changed
 ```
 
-::: warning
-`fetch-depth: 0` is required. `grekt changelog` needs full git history to detect changes and parse commits.
-:::
+```yaml [GitLab CI]
+# .gitlab-ci.yml
+include:
+  - remote: "https://raw.githubusercontent.com/grekt-labs/ci-actions/main/gitlab/templates/setup.yml"
 
-Optionally, validate that changesets exist before merging:
-
-```yaml
-# .github/workflows/changeset-check.yml
-name: Changeset check
-on: pull_request
-
-jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: oven-sh/setup-bun@v1
-
-      - run: bun install
-      - run: grekt changelog --ci --dry-run
+release:
+  extends: .grekt-setup
+  stage: release
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"
+  variables:
+    GIT_DEPTH: 0
+    GIT_STRATEGY: clone
+    GREKT_GIT_USER_NAME: "${GITLAB_USER_NAME}"
+    GREKT_GIT_USER_EMAIL: "${GITLAB_USER_EMAIL}"
+    GREKT_GIT_TOKEN: "${CI_CD_TOKEN}"
+  script:
+    - git checkout main && git pull origin main
+    - grekt changelog --ci
+    - grekt version --exec "npx @changesets/cli version"
+    - "git add **/*.yaml **/CHANGELOG.md .changeset/ || true"
+    - "git diff --cached --quiet || git commit -m 'chore(release): version artifacts [skip ci]'"
+    - git push origin main
+    - grekt publish --changed
 ```
+
+:::
 
 ### Custom registries
 
-If you're publishing to a custom registry (GitLab, GitHub, etc.), generate `.grekt/config.yaml` in your pipeline:
+If you're publishing to a custom registry (GitLab, GitHub, etc.), pass the registry configuration through the setup action's `registries` input. No need to generate the config file manually.
 
-```yaml
-- run: |
-    mkdir -p .grekt
-    cat <<EOF > .grekt/config.yaml
-    registries:
+::: code-group
+
+```yaml [GitHub Actions]
+- uses: grekt-labs/ci-actions/github/setup@main
+  with:
+    runtime: node
+    runtime-version: "22"
+    git-user-name: "CI"
+    git-user-email: "ci@example.com"
+    git-token: ${{ secrets.GITHUB_TOKEN }}
+    registries: |
       "@acme-web":
         type: github
-        host: ${{ vars.GH_REGISTRY_HOST }}  # only for self-hosted
+        host: ${{ vars.GH_REGISTRY_HOST }}
         project: acme/ai-artifacts
         prefix: web
         token: ${{ secrets.GH_REGISTRY_TOKEN }}
-    EOF
 
 - run: |
     grekt changelog --ci
-    grekt version --exec "changeset version"
+    grekt version --exec "npx @changesets/cli version"
+    git add **/*.yaml **/CHANGELOG.md .changeset/ || true
+    git diff --cached --quiet || git commit -m "chore(release): version artifacts [skip ci]"
+    git push origin main
     grekt publish --changed
 ```
+
+```yaml [GitLab CI]
+include:
+  - remote: "https://raw.githubusercontent.com/grekt-labs/ci-actions/main/gitlab/templates/setup.yml"
+
+release:
+  extends: .grekt-setup
+  stage: release
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"
+  variables:
+    GIT_DEPTH: 0
+    GIT_STRATEGY: clone
+    GREKT_GIT_USER_NAME: "${GITLAB_USER_NAME}"
+    GREKT_GIT_USER_EMAIL: "${GITLAB_USER_EMAIL}"
+    GREKT_GIT_TOKEN: "${CI_CD_TOKEN}"
+    GREKT_REGISTRIES: |
+      "@acme-web":
+        type: gitlab
+        host: ${CI_SERVER_URL}
+        project: acme/ai-artifacts
+        prefix: web
+        token: ${GREKT_REGISTRY_TOKEN}
+  script:
+    - git checkout main && git pull origin main
+    - grekt changelog --ci
+    - grekt version --exec "npx @changesets/cli version"
+    - "git add **/*.yaml **/CHANGELOG.md .changeset/ || true"
+    - "git diff --cached --quiet || git commit -m 'chore(release): version artifacts [skip ci]'"
+    - git push origin main
+    - grekt publish --changed
+```
+
+:::
 
 ::: info Compatibility layer
 Most versioning tools only support `package.json`, not `grekt.yaml`. `grekt version --exec` generates temporary `package.json` files as a bridge. These are never committed.

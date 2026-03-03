@@ -58,6 +58,7 @@ grekt provides a command-line interface for managing AI artifacts.
     <ul>
       <li><a href="/en-US/api/pack">grekt pack</a><span class="desc">Create artifact tarball</span></li>
       <li><a href="/en-US/api/version">grekt version</a><span class="desc">Auto-version artifacts</span></li>
+      <li><a href="/en-US/api/changelog">grekt changelog</a><span class="desc">Generate changesets from git history</span></li>
     </ul>
   </div>
 
@@ -109,6 +110,8 @@ grekt config registry set @scope # Configure registry
 grekt pack ./artifact            # Create tarball
 grekt version --dry-run          # Preview version bumps
 grekt version                    # Apply version bumps
+grekt changelog                  # Generate changesets (interactive)
+grekt changelog --ci             # Generate changesets (CI mode)
 
 # Worktree
 grekt worktree sync              # Sync .grekt/ to a worktree

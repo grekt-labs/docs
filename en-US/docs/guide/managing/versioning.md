@@ -34,8 +34,8 @@ grekt version major    # 1.0.0 → 2.0.0
 In a workspace, use `grekt changelog` to generate version bumps from conventional commits, then apply them:
 
 ```bash
-grekt changelog                              # interactive — review bumps
-grekt version --exec "changeset version" # apply bumps
+grekt changelog                                        # interactive — review bumps
+grekt version --exec "npx @changesets/cli version"     # apply bumps
 grekt publish --changed                      # publish updated artifacts
 ```
 

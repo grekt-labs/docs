@@ -48,7 +48,7 @@ grekt version patch ./my-agent
 grekt version minor --dry-run
 
 # Use external versioning tool (workspace mode)
-grekt version --exec "npx changeset version"
+grekt version --exec "npx @changesets/cli version"
 ```
 
 ## Output
@@ -78,12 +78,12 @@ Most versioning tools (changeset, release-it, etc.) only support `package.json`.
 :::
 
 ```bash
-$ grekt version --exec "npx changeset version"
+$ grekt version --exec "npx @changesets/cli version"
 
 ℹ Workspace: 3 artifact(s)
 ✓ Generated 3 package.json file(s)
 
-ℹ Running: npx changeset version
+ℹ Running: npx @changesets/cli version
 # ... changeset output ...
 
 ✓ Updated 2 grekt.yaml file(s)

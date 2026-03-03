@@ -13,6 +13,7 @@ export const apiSidebar = {
     { text: 'grekt config', link: '/en-US/api/config' },
     { text: 'grekt publish', link: '/en-US/api/publish' },
     { text: 'grekt version', link: '/en-US/api/version' },
+    { text: 'grekt changelog', link: '/en-US/api/changelog' },
     { text: 'grekt workspace', link: '/en-US/api/workspace' }
   ]
 }

@@ -60,7 +60,8 @@ See [Authentication](/en-US/docs/guide/sources/authentication) for details.
 6. Checks version doesn't already exist
 7. Uploads to registry
 8. Sends `license` and `repository` (if present) to the registry
-9. Cleans up tarball
+9. Creates a git tag (`@scope/name@version`)
+10. Cleans up tarball
 
 ::: info Auto-generated components
 The `components` field in `grekt.yaml` is **auto-generated** during publish. Do not edit it manually - it will be overwritten.
@@ -93,6 +94,18 @@ $ grekt publish --changed
 
 Requires `grekt-workspace.yaml` in the current directory.
 
+## Artifact tagging
+
+After each successful publish, grekt creates a local git tag:
+
+```
+@scope/name@version
+```
+
+In CI environments (when `CI` env var is set), tags are automatically pushed to origin. These tags enable [`grekt changelog`](/en-US/api/changelog) to detect per-artifact changes in monorepo workspaces.
+
+Tag creation is non-blocking — if it fails, a warning is shown but the publish succeeds.
+
 ## Error handling
 
 Invalid version:
@@ -120,5 +133,6 @@ Version exists:
 
 - [grekt pack](/en-US/api/pack) - Create tarball without publishing
 - [grekt version](/en-US/api/version) - Bump versions
+- [grekt changelog](/en-US/api/changelog) - Generate changesets
 - [grekt workspace](/en-US/api/workspace) - Workspace management
 - [Monorepo guide](/en-US/docs/guide/managing/monorepo) - Full workflow

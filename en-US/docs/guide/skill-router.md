@@ -51,7 +51,7 @@ The token cost per invocation is negligible (~500-800 tokens). However, if you o
 If another AI tool adds support for skills in the future, you can add the router to its plugin by implementing `setup()`:
 
 ```typescript
-import { getSkillRouterTemplate } from "@grekt-labs/cli-engine";
+import { getSkillRouterTemplate } from "@grekt/engine";
 
 createFolderPlugin({
   // ...
