@@ -8,6 +8,7 @@ import { useRouter } from 'vitepress'
 
 function useGtmPageTracking() {
   if (typeof window === 'undefined') return
+  if (!import.meta.env.PROD) return
 
   const router = useRouter()
 

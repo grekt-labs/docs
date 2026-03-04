@@ -3,6 +3,16 @@ import { createSitemapItems } from './sitemap'
 import { enUSSidebar, enUSNav } from './configs/en-US'
 import { transformHead, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE } from './seo'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+const GA_ID = 'G-ZZTWBSWYM7'
+
+const analyticsHead = isProduction ? [
+  ['script', {}, `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});`],
+  ['script', { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}` }],
+  ['script', {}, `gtag('js',new Date());gtag('config','${GA_ID}');`],
+] : []
+
 export default defineConfig({
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
@@ -16,9 +26,7 @@ export default defineConfig({
   transformHead,
 
   head: [
-    ['script', {}, "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});"],
-    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-ZZTWBSWYM7' }],
-    ['script', {}, "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZZTWBSWYM7');"],
+    ...analyticsHead,
     ['link', { rel: 'icon', href: '/favicon.ico', sizes: '48x48' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48x48.png' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
