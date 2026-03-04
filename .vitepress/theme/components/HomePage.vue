@@ -257,15 +257,15 @@ const toggleFaq = (index) => {
 
     <!-- SELF-HOSTED / TEAMS -->
     <section class="self-hosted">
-      <h2 class="section-title">Built for teams. Runs on your infra. <span class="self-hosted-free">Free.</span></h2>
-      <p class="self-hosted-subtitle">Use the public registry for open artifacts, or run your own private instance for internal configurations.</p>
+      <h2 class="section-title">Your artifacts. Your infrastructure. <span class="self-hosted-free">Free.</span></h2>
+      <p class="self-hosted-subtitle">Public registry for open artifacts. Self-hosted for private configurations. Offline for zero-dependency setups.</p>
       <div class="self-hosted-grid">
         <div class="self-hosted-card">
           <div class="self-hosted-card-icon">
             <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
           </div>
           <h3>Public registry</h3>
-          <p>Discover and share open artifacts with the community. Free forever for public configurations.</p>
+          <p>Discover and install open artifacts. Free forever.</p>
           <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
         </div>
         <div class="self-hosted-card self-hosted-card--highlight">
@@ -273,7 +273,7 @@ const toggleFaq = (index) => {
             <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
           </div>
           <h3>Self-hosted registry</h3>
-          <p>Run your own private instance. Same CLI, same workflow. Your artifacts, your infrastructure, zero external dependencies.</p>
+          <p>Same CLI, same workflow. Your artifacts stay on your infrastructure. Zero external dependencies.</p>
           <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
         </div>
         <div class="self-hosted-card self-hosted-card--offline">
@@ -281,7 +281,7 @@ const toggleFaq = (index) => {
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
           </div>
           <h3>Offline mode</h3>
-          <p>No registry needed. Add artifacts from local paths or GitHub/GitLab repos. Great for solo setups. No versioning, no lockfile determinism.</p>
+          <p>No registry needed. Add artifacts from local paths or Git repos. No versioning, no lockfile determinism.</p>
           <a href="/en-US/docs/guide/offline-mode" class="self-hosted-link">Learn more →</a>
         </div>
       </div>
@@ -453,99 +453,133 @@ const toggleFaq = (index) => {
 
     <!-- COMPARISON -->
     <section class="comparison">
-      <h2 class="section-title">What's different about grekt?</h2>
+      <h2 class="section-title">Registries <span class="brand-highlight">list</span> tools. grekt <span class="brand-highlight">audits</span> them.</h2>
       <div class="comparison-wrapper">
         <div class="comparison-header">
-          <div class="comparison-col-label"></div>
-          <div class="comparison-col-grekt">grekt</div>
-          <div class="comparison-col-other">skills.sh</div>
+          <span class="comparison-col-label">Capability</span>
+          <span class="comparison-col-grekt">grekt</span>
+          <span class="comparison-col-other">Alternatives</span>
         </div>
 
         <div class="comparison-group">
-          <div class="comparison-group-title">Approach</div>
+          <div class="comparison-group-title">Security & Trust</div>
           <div class="comparison-row">
             <div class="comparison-label">
-              <span class="label-title">What it is</span>
-              <span class="label-desc">Core purpose and focus</span>
+              <span class="label-title">SHA-verified lockfiles</span>
+              <span class="label-desc">Deterministic, tamper-proof installs</span>
             </div>
-            <div class="comparison-value comparison-value--grekt">Full artifact manager</div>
-            <div class="comparison-value comparison-value--other">Markdown file copier</div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-label">
-              <span class="label-title">Core structure</span>
-              <span class="label-desc">How artifacts are defined</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt">Versioned artifact + schema</div>
-            <div class="comparison-value comparison-value--other">Markdown file</div>
-          </div>
-        </div>
-
-        <div class="comparison-group">
-          <div class="comparison-group-title">Context management</div>
-          <div class="comparison-row">
-            <div class="comparison-label">
-              <span class="label-title">Context bloat</span>
-              <span class="label-desc">Keep tool directories clean</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Minimized</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
-          </div>
-        </div>
-
-        <div class="comparison-group">
-          <div class="comparison-group-title">Reliability</div>
-          <div class="comparison-row">
-            <div class="comparison-label">
-              <span class="label-title">Versioning</span>
-              <span class="label-desc">Reproducible installs across team</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Lockfile + SHA</div>
-            <div class="comparison-value comparison-value--other"><span class="check-partial"></span>Manual updates</div>
           </div>
           <div class="comparison-row">
             <div class="comparison-label">
               <span class="label-title">Security scanning</span>
-              <span class="label-desc">Automated checks before install</span>
+              <span class="label-desc">Audit MCPs, skills, hooks for risks</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
-            <div class="comparison-value comparison-value--other"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Some</div>
           </div>
           <div class="comparison-row">
             <div class="comparison-label">
               <span class="label-title">Drift detection</span>
-              <span class="label-desc">Someone edited a managed file?</span>
+              <span class="label-desc">Know when configs change under you</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
+        </div>
+
+        <div class="comparison-group">
+          <div class="comparison-group-title">Workflow</div>
           <div class="comparison-row">
             <div class="comparison-label">
-              <span class="label-title">Consistency</span>
-              <span class="label-desc">Same config, every project, every machine</span>
+              <span class="label-title">Runs locally</span>
+              <span class="label-desc">No cloud dependency, no data exposure</span>
             </div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span>Per-project lockfile</div>
-            <div class="comparison-value comparison-value--other"><span class="check-no"></span>Global, remember to sync</div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Some</div>
           </div>
           <div class="comparison-row">
             <div class="comparison-label">
-              <span class="label-title">Self-hosted</span>
+              <span class="label-title">Multi-tool sync</span>
+              <span class="label-desc">Claude, Cursor, OpenCode in one config</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Some</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
+              <span class="label-title">Selective install</span>
+              <span class="label-desc">Pick what you need, skip the rest</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
+          </div>
+        </div>
+
+        <div class="comparison-group">
+          <div class="comparison-group-title">Infrastructure</div>
+          <div class="comparison-row">
+            <div class="comparison-label">
+              <span class="label-title">Version management</span>
+              <span class="label-desc">Pin, update, rollback artifacts</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Partial</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
+              <span class="label-title">Self-hosted registry</span>
               <span class="label-desc">Run your own private registry</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
           </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
+              <span class="label-title">Open source</span>
+              <span class="label-desc">Source available, audit the code yourself</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Some</div>
+          </div>
         </div>
-
       </div>
-      <p class="comparison-note">
-        Already using skills.sh?<br>
-        You can wrap those skills as grekt artifacts to add versioning, policies, and guarantees.
-      </p>
+      <p class="comparison-note">grekt is not a registry and not a cloud platform. It is infrastructure that runs on your machine.</p>
     </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
+    <!-- CTA -->
+    <section class="cta-footer">
+      <div class="cta-footer-content">
+        <h2 class="cta-headline">Know your <span class="brand-highlight">stack</span>.</h2>
+        <p class="cta-sub">The answer to "what is running?" should never be "I don't know."</p>
+        <div class="cta-actions">
+          <div class="install-wrapper">
+            <select class="install-select" v-model="activeInstall">
+              <option v-for="method in installMethods" :key="method.id" :value="method.id">
+                {{ method.label }}
+              </option>
+            </select>
+            <div class="install-box">
+              <span class="install-prompt">$</span>
+              <code class="install-command">{{ installCommand }}</code>
+              <button class="copy-btn" @click="copyCommand" :class="{ copied }">
+                <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                </svg>
+                <svg v-else viewBox="0 0 24 24" width="18" height="18">
+                  <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="cta-links">
+          <a href="/en-US/docs/guide/getting-started">Documentation →</a>
+          <a href="https://github.com/grekt-labs">GitHub →</a>
+        </div>
+      </div>
+    </section>
 
     <!-- FAQ -->
     <section class="faq">
@@ -982,32 +1016,6 @@ const toggleFaq = (index) => {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.typing-text {
-  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: block;
-  font-size: 1em;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-
-.cursor {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: blink 1s step-end infinite;
-  margin-left: 2px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
 
 .hero .tagline {
@@ -1963,7 +1971,7 @@ html:not(.dark) .feature-run-play {
 }
 
 .check-yes::after {
-  content: "✓";
+  content: "\2713";
   color: #0d1117;
   font-size: 11px;
   font-weight: 700;
@@ -1999,7 +2007,7 @@ html:not(.dark) .feature-run-play {
 }
 
 .check-no::after {
-  content: "✗";
+  content: "\2717";
   color: var(--card-text);
   font-size: 10px;
   opacity: 0.4;
@@ -2012,6 +2020,63 @@ html:not(.dark) .feature-run-play {
   font-size: 0.9rem;
   color: var(--card-text);
   opacity: 0.8;
+}
+
+/* CTA FOOTER */
+.cta-footer {
+  padding: 96px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  text-align: center;
+  border-top: 1px solid var(--divider-color);
+}
+
+.cta-footer-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cta-headline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--card-title);
+  margin-bottom: 16px;
+  line-height: 1.2;
+  border: 0;
+}
+
+.cta-sub {
+  font-size: 1.1rem;
+  color: var(--card-text);
+  opacity: 0.8;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.cta-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.cta-links a {
+  color: var(--card-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.cta-links a:hover {
+  opacity: 1;
+  color: var(--grekt-text-accent);
 }
 
 /* FAQ */
@@ -2284,28 +2349,6 @@ html:not(.dark) .feature-run-play {
     margin: 0 -12px;
   }
 
-  .use-case-card--coming-soon {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 32px;
-    order: -1;
-  }
-
-  .use-case-card--coming-soon .use-case-icon {
-    margin-bottom: 20px;
-  }
-
-  .use-case-card--coming-soon h3 {
-    margin-bottom: 12px;
-  }
-
-  .badge-coming-soon {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    transform: none;
-  }
 }
 
 /* INIT DEMO */
