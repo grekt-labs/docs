@@ -207,49 +207,50 @@ const toggleFaq = (index) => {
       </div>
     </section>
 
-    <!-- USE CASES -->
-    <section class="use-cases">
-      <h2 class="section-title">What grekt does.</h2>
-      <div class="use-case-grid">
-        <div class="use-case-card">
-          <div class="use-case-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8A5.9 5.9 0 0 1 6 12c0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
-          </div>
-          <h3>One sync. Every tool.</h3>
-          <p>Push agents, skills, hooks to Claude, Cursor, OpenCode. One command. All targets.</p>
-          <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
+    <!-- PROBLEM STATEMENT -->
+    <section class="problem-statement">
+      <h2 class="problem-headline">You are running AI tools you have <span class="problem-highlight">never checked</span>.</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">84%</div>
+          <div class="stat-label">of developers use AI tools</div>
+          <div class="stat-desc">MCPs, agents, skills, hooks are everywhere in modern development workflows.</div>
+          <a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noopener" class="stat-source">Stack Overflow 2025</a>
         </div>
-        <div class="use-case-card">
-          <div class="use-case-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7z"/></svg>
-          </div>
-          <h3>Same config. Every machine.</h3>
-          <p>Publish artifacts. Your team installs the exact same verified setup.</p>
-          <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
+        <div class="stat-card stat-card--warn">
+          <div class="stat-number">29%</div>
+          <div class="stat-label">trust what they're running</div>
+          <div class="stat-desc">Down from 40% last year. The gap between adoption and trust is growing.</div>
+          <a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noopener" class="stat-source">Stack Overflow 2025</a>
         </div>
-        <div class="use-case-card">
-          <div class="use-case-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41-.39.39-1.03.39-1.42.01A9.969 9.969 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13z"/></svg>
-          </div>
-          <h3>Lockfiles, not hope.</h3>
-          <p>Every artifact versioned and locked. Update, rollback, diff. Deterministic installs.</p>
-          <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
+        <div class="stat-card stat-card--fail">
+          <div class="stat-number">20%</div>
+          <div class="stat-label">of skills in registries are malicious</div>
+          <div class="stat-desc">800+ malicious skills found in ClawHub in a single month.</div>
+          <a href="https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html" target="_blank" rel="noopener" class="stat-source">The Hacker News 2026</a>
         </div>
-        <div class="use-case-card">
-          <div class="use-case-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          </div>
-          <h3>Any source. Your terms.</h3>
-          <p>GitHub, GitLab, public registry, or self-hosted. No vendor lock-in.</p>
-          <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
+      </div>
+    </section>
+
+    <!-- THREE PILLARS -->
+    <section class="pillars">
+      <div class="pillars-grid-bg"></div>
+      <h2 class="pillars-heading">Know <span class="brand-highlight">what's running</span>. Know <span class="brand-highlight">it's safe</span>. Know your stack.</h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-number">01</span>
+          <h3 class="pillar-title">See your stack</h3>
+          <p class="pillar-desc">Full inventory of every AI tool in your projects. MCPs, agents, skills, hooks, commands -- everything visible from the CLI.</p>
         </div>
-        <div class="use-case-card use-case-card--coming-soon">
-          <a href="https://explore.grekt.com" target="_blank" rel="noopener" class="badge-coming-soon">Public Registry</a>
-          <div class="use-case-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
-          </div>
-          <h3>Browse. Install. Publish.</h3>
-          <p>Community artifacts in the public registry. Use them or publish your own.</p>
+        <div class="pillar-card">
+          <span class="pillar-number">02</span>
+          <h3 class="pillar-title">Check your stack</h3>
+          <p class="pillar-desc">Every artifact audited for version locks, integrity, and drift. PASS, FAIL, or WARN -- no ambiguity.</p>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-number">03</span>
+          <h3 class="pillar-title">Own your stack</h3>
+          <p class="pillar-desc">Lock versions. Pin hashes. Your tools, your machine, your rules. Local-first, no cloud dependency.</p>
         </div>
       </div>
     </section>
@@ -1207,18 +1208,192 @@ const toggleFaq = (index) => {
   background: var(--divider-color);
 }
 
-/* USE CASES */
-.use-cases {
-  background: var(--section-bg-alt);
-  padding: 0 20px 80px;
+/* PROBLEM STATEMENT */
+.problem-statement {
+  padding: 0 20px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+  max-width: 100vw;
+  margin-bottom: 2rem;
 }
 
-.use-cases > * {
-  max-width: 1200px;
+.problem-headline {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--hero-text-color);
+  line-height: 1.2;
+  margin-bottom: 48px;
+  max-width: 680px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3rem;
+  border: 0;
+  text-align: center;
+}
+
+.problem-highlight {
+  color: var(--grekt-primary-500);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: var(--section-bg-alt);
+  padding: 32px 24px;
+  border-top: 3px solid var(--grekt-primary-500);
+}
+
+.stat-card--warn {
+  border-top-color: #eab308;
+}
+
+.stat-card--fail {
+  border-top-color: #ef4444;
+}
+
+.stat-number {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--grekt-primary-500);
+}
+
+.stat-card--warn .stat-number {
+  color: #eab308;
+}
+
+.stat-card--fail .stat-number {
+  color: #ef4444;
+}
+
+.stat-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--hero-text-color);
+  margin-bottom: 8px;
+}
+
+.stat-desc {
+  font-size: 0.875rem;
+  color: var(--hero-tagline-color);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.stat-source {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--grekt-primary-500);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.stat-source:hover {
+  opacity: 1;
+}
+
+/* THREE PILLARS */
+.pillars {
+  padding: 80px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  max-width: 100vw;
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.pillars-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16,171,141,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,171,141,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.pillars-overline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grekt-primary-500);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.pillars-heading, .pillars-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.pillars-heading {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--hero-text-color);
+  line-height: 1.2;
+  margin-bottom: 48px;
+  margin-top: -30px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pillar-card {
+  border: 1px solid var(--divider-color);
+  background: var(--section-bg-alt);
+  padding: 32px 24px;
+  text-align: left;
+}
+
+.pillar-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grekt-primary-500);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.pillar-title {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--hero-text-color);
+  margin: 0 0 12px;
+}
+
+.pillar-desc {
+  font-size: 0.875rem;
+  color: var(--hero-tagline-color);
+  line-height: 1.65;
+  margin: 0;
 }
 
 .section-title {
@@ -1229,126 +1404,6 @@ const toggleFaq = (index) => {
   margin-bottom: 3rem;
   border-top: none !important;
   padding-top: 0 !important;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 1rem;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: -1.5rem auto 2.5rem;
-}
-
-.use-case-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.use-case-card {
-  padding: 32px;
-  border-radius: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  transition: all 0.3s ease;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-}
-
-.use-case-card:hover {
-  border-color: var(--card-border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow);
-}
-
-.use-case-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  flex-shrink: 0;
-}
-
-.use-case-icon svg {
-  width: 24px;
-  height: 24px;
-  color: #0d1117;
-}
-
-.use-case-card h3 {
-  font-family: 'Cal Sans', system-ui, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  margin-top: 0;
-  color: var(--card-title);
-}
-
-.use-case-card p {
-  font-size: 0.9rem;
-  color: var(--card-text);
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
-}
-
-.use-case-card--coming-soon {
-  position: relative;
-  grid-column: 1 / -1;
-  flex-direction: row;
-  align-items: center;
-  gap: 24px;
-  padding: 24px 32px;
-}
-
-.use-case-card--coming-soon .use-case-icon {
-  margin-bottom: 0;
-}
-
-.use-case-card--coming-soon h3 {
-  margin-bottom: 1px;
-}
-
-.use-case-card--coming-soon p {
-  flex-grow: 0;
-}
-
-.card-link {
-  display: inline-block;
-  margin-top: auto;
-  padding-top: 16px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--grekt-text-accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.card-link:hover {
-  color: var(--grekt-primary-300);
-}
-
-.badge-coming-soon {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  background: var(--grekt-tertiary-500);
-  color: #0d1117;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 /* FEATURES */
@@ -2128,6 +2183,28 @@ html:not(.dark) .feature-run-play {
   .lines-container,
   .floating-icons {
     display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-headline {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pillars-heading {
+    font-size: 1.5rem;
+    padding: 0 1rem;
   }
 
   .feature-row {
