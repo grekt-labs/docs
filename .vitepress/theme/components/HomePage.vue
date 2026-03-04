@@ -305,8 +305,8 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Pick only what you need</h2>
-          <p class="feature-description">Every artifact could ship with skills, agents, hooks, and more. <strong>You choose what stays and what gets skipped.</strong> No bloat, no surprises.</p>
+          <h2 class="feature-title">Install what matters. Skip the rest.</h2>
+          <p class="feature-description">Artifacts ship with skills, agents, hooks, commands. <strong>You decide what stays.</strong></p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': chooseRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
@@ -365,8 +365,8 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Upgrade without surprises</h2>
-          <p class="feature-description">One command to upgrade artifacts to the latest version. Your previous selections are preserved, and if the artifact structure changes, grekt will ask you again.</p>
+          <h2 class="feature-title">Update. Rollback. No drift.</h2>
+          <p class="feature-description">One command. Previous selections preserved. Structure changes get flagged.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': updateRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
@@ -395,7 +395,7 @@ const toggleFaq = (index) => {
     <section class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
-          <h2 class="feature-title">Detect drift instantly</h2>
+          <h2 class="feature-title">Drift detection. Built in.</h2>
           <p class="feature-description">Someone edited a managed file? grekt knows. Run <strong>grekt check</strong> to detect local modifications and decide whether to restore or keep them.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': checkRef?.finished }">
             <label class="feature-run-label">Try it</label>
@@ -425,8 +425,8 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Scan artifacts before you install</h2>
-          <p class="feature-description">Run <strong>grekt scan</strong> anytime to check your installed artifacts for prompt injection, data exfiltration, and other threats. Artifacts published to the <a href="https://explore.grekt.com" target="_blank" rel="noopener">grekt registry</a> are always scanned automatically.</p>
+          <h2 class="feature-title">Security scan. Built in.</h2>
+          <p class="feature-description">Run <strong>grekt scan</strong> to check artifacts for prompt injection and data exfiltration. <a href="https://explore.grekt.com" target="_blank" rel="noopener">Registry</a> artifacts are scanned automatically.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': scanRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
