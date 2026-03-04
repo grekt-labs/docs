@@ -61,13 +61,28 @@ const onScroll = () => {
   document.documentElement.classList.toggle('has-scrolled', window.scrollY > scrollThreshold)
 }
 
+const previousTheme = ref(null)
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
+
+  previousTheme.value = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  document.documentElement.classList.add('dark')
+
+  const themeToggle = document.querySelector('.VPSwitchAppearance')
+  if (themeToggle) themeToggle.style.display = 'none'
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
   document.documentElement.classList.remove('has-scrolled')
+
+  if (previousTheme.value === 'light') {
+    document.documentElement.classList.remove('dark')
+  }
+
+  const themeToggle = document.querySelector('.VPSwitchAppearance')
+  if (themeToggle) themeToggle.style.display = ''
 })
 
 // FAQ
