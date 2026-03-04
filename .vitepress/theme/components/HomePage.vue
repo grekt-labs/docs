@@ -11,9 +11,9 @@ const CliDemoScan = defineAsyncComponent(() => import('./cli-demos/CliDemoScan.v
 const CliDemoInit = defineAsyncComponent(() => import('./cli-demos/CliDemoInit.vue'))
 
 const installMethods = [
+  { id: 'npm', label: 'npm', command: 'npm i -g @grekt/cli' },
   { id: 'curl', label: 'curl', command: 'curl -fsSL https://cli.grekt.com/install.sh | sh' },
   { id: 'brew', label: 'brew', command: 'brew tap grekt-labs/grekt && brew install grekt' },
-  { id: 'npm', label: 'npm', command: 'npm install -g @grekt/cli' },
   { id: 'pnpm', label: 'pnpm', command: 'pnpm add -g @grekt/cli' },
   { id: 'yarn', label: 'yarn', command: 'yarn global add @grekt/cli' },
   { id: 'bun', label: 'bun', command: 'bun add -g @grekt/cli' },
@@ -38,7 +38,7 @@ const scrollToDemo = (el) => {
     })
   }
 }
-const activeInstall = ref('curl')
+const activeInstall = ref('npm')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
 )
@@ -56,58 +56,16 @@ const copyCommand = async () => {
   }
 }
 
-const phrases = [
-  'All agents, always in sync.',
-  'Reproducible across teams.',
-  'Versioned like code.',
-  'Drift-proof.',
-]
-
-const currentPhrase = ref('')
-const isDeleting = ref(false)
-const phraseIndex = ref(0)
-const charIndex = ref(0)
-
-let timeout = null
-
-const type = () => {
-  const current = phrases[phraseIndex.value]
-
-  if (!isDeleting.value) {
-    currentPhrase.value = current.substring(0, charIndex.value + 1)
-    charIndex.value++
-
-    if (charIndex.value === current.length) {
-      isDeleting.value = true
-      timeout = setTimeout(type, 2000)
-      return
-    }
-  } else {
-    currentPhrase.value = current.substring(0, charIndex.value - 1)
-    charIndex.value--
-
-    if (charIndex.value === 0) {
-      isDeleting.value = false
-      phraseIndex.value = (phraseIndex.value + 1) % phrases.length
-    }
-  }
-
-  timeout = setTimeout(type, isDeleting.value ? 30 : 80)
-}
-
 const onScroll = () => {
   const scrollThreshold = document.documentElement.scrollHeight * 0.05
   document.documentElement.classList.toggle('has-scrolled', window.scrollY > scrollThreshold)
 }
 
 onMounted(() => {
-  timeout = setTimeout(type, 500)
   window.addEventListener('scroll', onScroll, { passive: true })
-
 })
 
 onUnmounted(() => {
-  if (timeout) clearTimeout(timeout)
   window.removeEventListener('scroll', onScroll)
   document.documentElement.classList.remove('has-scrolled')
 })
@@ -116,23 +74,23 @@ onUnmounted(() => {
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is the open artifact manager for AI tools. It helps you install, sync, share, and check for security or drifts. It works with agents, skills, hooks, and other AI configurations across any tool available like Claude Code, Cursor, OpenCode, and more.'
+    answer: 'grekt is local-first AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across tools like Claude Code, Cursor, and OpenCode. Everything runs on your machine. No cloud dependency, no data exposure.'
   },
   {
     question: 'How does grekt work?',
-    answer: 'Add artifacts with a single command, grekt handles downloading and organizing them in your project. Optionally sync to specific tools or use lazy mode to load artifacts on demand from the .grekt folder, keeping your context lean. A lockfile tracks versions and integrity so installs are deterministic.'
+    answer: 'Install artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic installs. Sync to specific AI tools or use lazy mode to load artifacts on demand, keeping context lean.'
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes! The CLI is source available and free to use. The public registry is free for public artifacts, and self-hosted registries are on your own, so free too.'
+    answer: 'The CLI is source available and free. The public registry is free for open artifacts. Self-hosted registries run on your own infrastructure at no cost.'
   },
   {
     question: 'Which AI tools are supported?',
-    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. You can also define custom targets for any AI tool you use.'
+    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI tool into the grekt workflow.'
   },
   {
     question: 'Can I create my own artifacts?',
-    answer: 'Yes! You can create artifacts for your own use or publish them to share with others. Check the documentation for the artifact format specification.'
+    answer: 'Artifacts follow a versioned schema with support for agents, skills, hooks, and commands. Create them locally or publish to a registry for team-wide use.'
   }
 ]
 
@@ -194,36 +152,33 @@ const toggleFaq = (index) => {
       </div>
 
       <div class="hero-content">
-        <h1>
-          <span class="static-text">The open artifact manager for AI tools.</span><br>
-          <span class="typing-text">{{ currentPhrase }}<span class="cursor">|</span></span>
+        <span class="hero-overline">Open source AI tooling infrastructure</span>
+        <span class="brand-claim">Know your <span class="brand-highlight">AI stack</span>.</span>
+        <h1 class="hero-h1">
+          The local-first infrastructure that audits, manages, and secures every tool in your AI stack.
         </h1>
-        <p class="tagline">
-          Install, sync, and share AI configurations with version control, drift detection, and more.
-        </p>
         <div class="hero-buttons">
-          <div class="install-wrapper">
-            <select class="install-select" v-model="activeInstall">
-              <option v-for="method in installMethods" :key="method.id" :value="method.id">
-                {{ method.label }}
-              </option>
-            </select>
-            <div class="install-box">
-              <span class="install-prompt">$</span>
-              <code class="install-command">{{ installCommand }}</code>
-              <button class="copy-btn" @click="copyCommand" :class="{ copied }">
-                <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
-                  <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-                </svg>
-                <svg v-else viewBox="0 0 24 24" width="18" height="18">
-                  <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
-                </svg>
-              </button>
+          <div class="hero-actions-row">
+            <div class="install-wrapper">
+              <select class="install-select" v-model="activeInstall">
+                <option v-for="method in installMethods" :key="method.id" :value="method.id">
+                  {{ method.label }}
+                </option>
+              </select>
+              <div class="install-box">
+                <span class="install-prompt">$</span>
+                <code class="install-command">{{ installCommand }}</code>
+                <button class="copy-btn" @click="copyCommand" :class="{ copied }">
+                  <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                  </svg>
+                  <svg v-else viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="hero-cta-row">
             <a href="/en-US/docs/guide/getting-started" class="primary">Get started</a>
-            <a href="https://explore.grekt.com" class="secondary discover-btn">Explore artifacts</a>
           </div>
         </div>
       </div>
@@ -254,38 +209,38 @@ const toggleFaq = (index) => {
 
     <!-- USE CASES -->
     <section class="use-cases">
-      <h2 class="section-title">What could you do?</h2>
+      <h2 class="section-title">What grekt does.</h2>
       <div class="use-case-grid">
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8A5.9 5.9 0 0 1 6 12c0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
           </div>
-          <h3>Sync to any AI</h3>
-          <p>Push your agents, skills, etc... to Claude, OpenCode, Cursor and more with one command.</p>
+          <h3>One sync. Every tool.</h3>
+          <p>Push agents, skills, hooks to Claude, Cursor, OpenCode. One command. All targets.</p>
           <a href="/en-US/docs/guide/targets" class="card-link">See targets →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4 7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59 5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7z"/></svg>
           </div>
-          <h3>Share within projects</h3>
-          <p>Publish artifacts to share AI configurations across teams or your own projects.</p>
+          <h3>Same config. Every machine.</h3>
+          <p>Publish artifacts. Your team installs the exact same verified setup.</p>
           <a href="/en-US/api/publish" class="card-link">Learn to publish →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41-.39.39-1.03.39-1.42.01A9.969 9.969 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13z"/></svg>
           </div>
-          <h3>Version control</h3>
-          <p>Track changes with lockfiles. Update, rollback, and manage dependencies easily.</p>
+          <h3>Lockfiles, not hope.</h3>
+          <p>Every artifact versioned and locked. Update, rollback, diff. Deterministic installs.</p>
           <a href="/en-US/docs/guide/getting-started" class="card-link">Get started →</a>
         </div>
         <div class="use-case-card">
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
           </div>
-          <h3>Install from anywhere</h3>
-          <p>GitHub, GitLab, or public registry. <strong>Self hosted</strong> instances supported.</p>
+          <h3>Any source. Your terms.</h3>
+          <p>GitHub, GitLab, public registry, or self-hosted. No vendor lock-in.</p>
           <a href="/en-US/docs/guide/sources/overview" class="card-link">See sources →</a>
         </div>
         <div class="use-case-card use-case-card--coming-soon">
@@ -293,8 +248,8 @@ const toggleFaq = (index) => {
           <div class="use-case-icon">
             <svg viewBox="0 0 24 24" width="32" height="32"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
           </div>
-          <h3>Discover & Share</h3>
-          <p>Explore community created artifacts or publish your own for others to use.</p>
+          <h3>Browse. Install. Publish.</h3>
+          <p>Community artifacts in the public registry. Use them or publish your own.</p>
         </div>
       </div>
     </section>
@@ -623,7 +578,7 @@ const toggleFaq = (index) => {
             <div class="footer-logo">
               <span class="logo-text">grekt</span>
             </div>
-            <p class="footer-tagline">The open artifact manager for AI tools.</p>
+            <p class="footer-tagline">Know your AI stack.</p>
           </div>
 
           <!-- Resources -->
@@ -989,17 +944,43 @@ const toggleFaq = (index) => {
   z-index: 2;
 }
 
-.hero h1 {
-  font-family: 'Cal Sans', system-ui, sans-serif;
-  font-size: 3.5rem;
+.hero-overline {
+  font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-  min-height: 8.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grekt-primary-500);
+  display: block;
+  margin-bottom: 1rem;
 }
 
-.static-text {
+.brand-claim {
+  font-family: 'Cal Sans', system-ui, sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.1;
   color: var(--hero-text-color);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.brand-highlight {
+  background: linear-gradient(135deg, var(--grekt-primary-700) 0%, var(--grekt-primary-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-h1 {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--hero-tagline-color);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .typing-text {
@@ -1007,7 +988,10 @@ const toggleFaq = (index) => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: inline;
+  display: block;
+  font-size: 1em;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
 }
 
 .cursor {
@@ -1042,8 +1026,9 @@ const toggleFaq = (index) => {
   gap: 12px;
 }
 
-.hero-cta-row {
+.hero-actions-row {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 12px;
 }
@@ -1101,7 +1086,7 @@ const toggleFaq = (index) => {
 .install-select {
   appearance: none;
   -webkit-appearance: none;
-  background: #f0f0f3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background: #f0f0f3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' stroke='%231a1a2e' stroke-width='1' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-right: none;
   border-radius: 8px 0 0 8px;
@@ -1130,7 +1115,7 @@ const toggleFaq = (index) => {
 }
 
 .dark .install-select {
-  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
+  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' stroke='%23ffffff' stroke-width='1' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
   border-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
@@ -2080,14 +2065,13 @@ html:not(.dark) .feature-run-play {
     padding: 80px 20px 80px;
   }
 
-  .hero h1 {
+  .brand-claim {
     font-size: 2.5rem;
-    min-height: 185px;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  .hero .tagline {
+  .hero-h1 {
     font-size: 1.1rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -2098,13 +2082,13 @@ html:not(.dark) .feature-run-play {
     align-items: center;
   }
 
-  .hero-cta-row {
+  .hero-actions-row {
     flex-direction: column;
     align-items: center;
     width: 100%;
   }
 
-  .hero-cta-row a {
+  .hero-actions-row a {
     width: calc(100% - 32px);
     max-width: 400px;
     justify-content: center;

@@ -1,29 +1,29 @@
 const SITE_URL = 'https://grekt.com'
 const SITE_NAME = 'grekt'
-const SITE_TITLE = 'grekt - The open artifact manager for AI tools'
-const SITE_DESCRIPTION = 'Manage and sync AI tool configurations. The open CLI for prompt templates, system instructions, MCP configs, and more.'
+const SITE_TITLE = 'grekt - Local-first AI tooling infrastructure'
+const SITE_DESCRIPTION = 'Audit, manage, and secure your AI tools from the CLI. Local-first infrastructure for MCPs, agents, skills, hooks across Claude, Cursor, OpenCode.'
 const OG_IMAGE = `${SITE_URL}/og.png`
 
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is the open artifact manager for AI tools. It helps you install, sync, share, and check for security or drifts. It works with agents, skills, hooks, and other AI configurations across any tool available like Claude Code, Cursor, OpenCode, and more.'
+    answer: 'grekt is local-first AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across tools like Claude Code, Cursor, and OpenCode. Everything runs on your machine. No cloud dependency, no data exposure.'
   },
   {
     question: 'How does grekt work?',
-    answer: 'Add artifacts with a single command, grekt handles downloading and organizing them in your project. Optionally sync to specific tools or use lazy mode to load artifacts on demand from the .grekt folder, keeping your context lean. A lockfile tracks versions and integrity so installs are deterministic.'
+    answer: 'Install artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic installs. Sync to specific AI tools or use lazy mode to load artifacts on demand, keeping context lean.'
   },
   {
     question: 'Is grekt free?',
-    answer: 'Yes! The CLI is source available and free to use. The public registry is free for public artifacts, and self-hosted registries are on your own, so free too.'
+    answer: 'The CLI is source available and free. The public registry is free for open artifacts. Self-hosted registries run on your own infrastructure at no cost.'
   },
   {
     question: 'Which AI tools are supported?',
-    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. You can also define custom targets for any AI tool you use.'
+    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI tool into the grekt workflow.'
   },
   {
     question: 'Can I create my own artifacts?',
-    answer: 'Yes! You can create artifacts for your own use or publish them to share with others. Check the documentation for the artifact format specification.'
+    answer: 'Artifacts follow a versioned schema with support for agents, skills, hooks, and commands. Create them locally or publish to a registry for team-wide use.'
   }
 ]
 
