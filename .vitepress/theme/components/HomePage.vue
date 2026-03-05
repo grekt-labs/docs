@@ -216,9 +216,9 @@ const toggleFaq = (index) => {
         <a href="https://hiades.es" target="_blank" rel="noopener" class="trusted-by-logo" title="Hiades">
           <img src="/logos/logo-hiades-apple.png" alt="Hiades" />
         </a>
-        <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
+        <!-- <a href="https://thehotelsnetwork.com" target="_blank" rel="noopener" class="trusted-by-logo" title="The Hotels Network">
           <img src="/logos/thn.svg" alt="The Hotels Network" />
-        </a>
+        </a> -->
       </div>
     </section>
 
