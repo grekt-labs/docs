@@ -41,6 +41,12 @@ export const enUSSidebar = {
       ]
     },
     {
+      text: 'Testing',
+      items: [
+        { text: 'Overview', link: '/en-US/docs/guide/eval' }
+      ]
+    },
+    {
       text: 'Configuration',
       items: [
         { text: 'Environment', link: '/en-US/docs/guide/environment' }
@@ -124,6 +130,12 @@ export const enUSSidebar = {
       items: [
         { text: 'grekt pack', link: '/en-US/api/pack' },
         { text: 'grekt version', link: '/en-US/api/version' }
+      ]
+    },
+    {
+      text: 'Testing',
+      items: [
+        { text: 'grekt eval', link: '/en-US/api/eval' }
       ]
     },
     {
