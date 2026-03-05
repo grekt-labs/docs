@@ -170,7 +170,7 @@ const toggleFaq = (index) => {
         <span class="hero-overline">Open source AI tooling infrastructure</span>
         <span class="brand-claim">Know your <span class="brand-highlight">AI stack</span>.</span>
         <h1 class="hero-h1">
-          The local-first infrastructure that audits, manages, and secures every tool in your AI stack.
+          The local-first infrastructure for your AI stack that audits, manages, and secures every tool (MCPs, skills, agents, and more).
         </h1>
         <div class="hero-buttons">
           <div class="hero-actions-row">
@@ -319,6 +319,7 @@ const toggleFaq = (index) => {
           <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
         </div>
         <div class="pillar-card pillar-card--featured">
+          <span class="dots-border"></span>
           <span class="pillar-number">Private <span class="pillar-badge">For teams</span></span>
           <h3 class="pillar-title">Self-hosted registry</h3>
           <p class="pillar-desc">Same CLI, same workflow. Your artifacts stay on your infrastructure. Zero external dependencies.</p>
@@ -336,6 +337,7 @@ const toggleFaq = (index) => {
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
       <h2 class="init-demo-title">Unmanaged context drifts. Versioned context <span class="init-demo-highlight">stays aligned</span>.</h2>
+      <p class="init-demo-subtitle">Install and verify once. <strong class="init-demo-emphasis">The whole team</strong> gets the exact same locked artifacts.</p>
       <div class="init-demo-wrapper">
         <CliDemoInit ref="initRef" />
       </div>
@@ -2477,6 +2479,19 @@ html:not(.dark) .init-demo--synced {
   color: var(--grekt-primary-500);
 }
 
+.init-demo-emphasis {
+  color: var(--vp-c-text-1);
+}
+
+.init-demo-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  max-width: 600px;
+  margin: -16px auto 32px;
+}
+
 @media (max-width: 768px) {
   .init-demo-title {
     font-size: 1.3rem;
@@ -2704,12 +2719,44 @@ html:not(.dark) .init-demo--synced {
 }
 
 .pillar-card--featured {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(
     135deg,
     rgba(16, 171, 141, 0.08) 0%,
     rgba(16, 171, 141, 0.02) 100%
   );
-  border-color: rgba(16, 171, 141, 0.25);
+  border-color: transparent;
+}
+
+.pillar-card--featured > .dots-border {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: rgba(119, 202, 189, 0.15);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pillar-card--featured > .dots-border::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(119, 202, 189, 0.8) 80%, rgba(119, 202, 189, 0.3) 90%, transparent 100%);
+  animation: rotate-border 3s linear infinite;
+}
+
+html:not(.dark) .pillar-card--featured > .dots-border {
+  background: rgba(50, 130, 115, 0.2);
+}
+
+html:not(.dark) .pillar-card--featured > .dots-border::before {
+  background: conic-gradient(from 0deg, transparent 0%, transparent 75%, rgba(50, 130, 115, 0.8) 80%, rgba(50, 130, 115, 0.3) 90%, transparent 100%);
 }
 
 .pillar-badge {
