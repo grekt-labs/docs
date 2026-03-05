@@ -510,8 +510,16 @@ const toggleFaq = (index) => {
           <div class="comparison-group-title">Security & Trust</div>
           <div class="comparison-row">
             <div class="comparison-label">
+              <span class="label-title">Deterministic installs</span>
+              <span class="label-desc">Same versions, same hashes, same result on every machine</span>
+            </div>
+            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
+            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Partial</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-label">
               <span class="label-title">SHA-verified lockfiles</span>
-              <span class="label-desc">Deterministic, tamper-proof installs</span>
+              <span class="label-desc">Tamper-proof, integrity-checked artifacts</span>
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
@@ -579,14 +587,6 @@ const toggleFaq = (index) => {
             </div>
             <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
             <div class="comparison-value comparison-value--other"><span class="check-no"></span></div>
-          </div>
-          <div class="comparison-row">
-            <div class="comparison-label">
-              <span class="label-title">Open source</span>
-              <span class="label-desc">Source available, audit the code yourself</span>
-            </div>
-            <div class="comparison-value comparison-value--grekt"><span class="check-yes"></span></div>
-            <div class="comparison-value comparison-value--other"><span class="check-partial"></span> Some</div>
           </div>
         </div>
       </div>
