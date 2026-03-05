@@ -270,40 +270,68 @@ const toggleFaq = (index) => {
       </div>
     </section>
 
-    <!-- SELF-HOSTED / TEAMS -->
-    <section class="self-hosted">
-      <h2 class="section-title">Your artifacts. Your infrastructure. <span class="self-hosted-free">Free.</span></h2>
-      <p class="self-hosted-subtitle">Public registry for open artifacts. Self-hosted for private configurations. Offline for zero-dependency setups.</p>
-      <div class="self-hosted-grid">
-        <div class="self-hosted-card">
-          <div class="self-hosted-card-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          </div>
-          <h3>Public registry</h3>
-          <p>Discover and install open artifacts. Free forever.</p>
-          <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
+    <!-- EVAL GRADES -->
+    <section class="eval-section">
+      <div class="eval-content">
+        <div class="eval-text">
+          <span class="eval-label">grekt eval</span>
+          <h2 class="eval-headline">Not all tools deserve an <span class="eval-grade-highlight">A</span>.</h2>
+          <p class="eval-sub">Evaluate your AI artifacts before they reach production. Skills, agents, and commands get a grade based on structure, safety, and behavior.</p>
+          <a href="/en-US/docs/guide/eval" class="eval-link">Learn about evals →</a>
         </div>
-        <div class="self-hosted-card self-hosted-card--highlight">
-          <div class="self-hosted-card-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <div class="eval-cards-area">
+          <div class="eval-card eval-card--1">
+            <span class="eval-card-name">auth-agent</span>
+            <span class="eval-card-grade eval-card-grade--a">A</span>
           </div>
-          <h3>Self-hosted registry</h3>
-          <p>Same CLI, same workflow. Your artifacts stay on your infrastructure. Zero external dependencies.</p>
-          <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
-        </div>
-        <div class="self-hosted-card self-hosted-card--offline">
-          <div class="self-hosted-card-icon self-hosted-card-icon--offline">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>
+          <div class="eval-card eval-card--2">
+            <span class="eval-card-name">code-review</span>
+            <span class="eval-card-grade eval-card-grade--b">B+</span>
           </div>
-          <h3>Offline mode</h3>
-          <p>No registry needed. Add artifacts from local paths or Git repos. No versioning, no lockfile determinism.</p>
-          <a href="/en-US/docs/guide/offline-mode" class="self-hosted-link">Learn more →</a>
+          <div class="eval-card eval-card--3">
+            <span class="eval-card-name">mcp-github</span>
+            <span class="eval-card-grade eval-card-grade--d">D</span>
+          </div>
+          <div class="eval-card eval-card--4">
+            <span class="eval-card-name">deploy-cmd</span>
+            <span class="eval-card-grade eval-card-grade--f">F</span>
+          </div>
+          <div class="eval-card eval-card--5">
+            <span class="eval-card-name">refactor-skill</span>
+            <span class="eval-card-grade eval-card-grade--a">A-</span>
+          </div>
+          <div class="eval-card eval-card--6">
+            <span class="eval-card-name">db-migrate</span>
+            <span class="eval-card-grade eval-card-grade--c">C</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
+    <!-- SELF-HOSTED / TEAMS -->
+    <section class="self-hosted">
+      <h2 class="pillars-heading">Your artifacts. Your infrastructure. <span class="brand-highlight">Free</span>.</h2>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-number">Public</span>
+          <h3 class="pillar-title">Public registry</h3>
+          <p class="pillar-desc">Discover and install open artifacts. Free forever.</p>
+          <a href="https://explore.grekt.com" class="self-hosted-link">Explore artifacts →</a>
+        </div>
+        <div class="pillar-card pillar-card--featured">
+          <span class="pillar-number">Private <span class="pillar-badge">For teams</span></span>
+          <h3 class="pillar-title">Self-hosted registry</h3>
+          <p class="pillar-desc">Same CLI, same workflow. Your artifacts stay on your infrastructure. Zero external dependencies.</p>
+          <a href="/en-US/docs/guide/sources/overview" class="self-hosted-link">Learn more →</a>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-number">Offline</span>
+          <h3 class="pillar-title">Offline mode</h3>
+          <p class="pillar-desc">No registry needed. Add artifacts from local paths or Git repos. No versioning, no lockfile determinism.</p>
+          <a href="/en-US/docs/guide/offline-mode" class="self-hosted-link">Learn more →</a>
+        </div>
+      </div>
+    </section>
 
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
@@ -2376,14 +2404,28 @@ html:not(.dark) .feature-run-play {
   padding-top: 60px;
   padding-bottom: 60px;
   transition: background-color 0.5s ease;
+  background: linear-gradient(
+    to bottom,
+    var(--vp-c-bg) 0%,
+    var(--section-bg) 25%
+  );
+  -webkit-backface-visibility: hidden;
 }
 
 .init-demo--warn {
-  background-color: rgba(232, 168, 56, 0.04);
+  background: linear-gradient(
+    to bottom,
+    var(--vp-c-bg) 0%,
+    rgba(232, 168, 56, 0.04) 25%
+  );
 }
 
 .init-demo--synced {
-  background-color: rgba(119, 202, 189, 0.04);
+  background: linear-gradient(
+    to bottom,
+    var(--vp-c-bg) 0%,
+    rgba(119, 202, 189, 0.04) 25%
+  );
 }
 
 html:not(.dark) .init-demo--warn {
@@ -2447,141 +2489,254 @@ html:not(.dark) .init-demo--synced {
   margin: 0 auto;
 }
 
-/* SELF-HOSTED / TEAMS */
-.self-hosted {
-  background: var(--section-bg-alt);
-  padding: 80px 20px;
+/* EVAL GRADES */
+.eval-section {
+  padding: 96px 20px;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
+  overflow: hidden;
 }
 
-.self-hosted > * {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.self-hosted-free {
-  color: var(--grekt-primary-500);
-}
-
-.self-hosted-subtitle {
-  text-align: center;
-  font-size: 1rem;
-  color: var(--card-text);
-  line-height: 1.6;
-  margin: -1.5rem auto 3rem;
-  max-width: 560px;
-}
-
-.self-hosted-grid {
+.eval-content {
+  max-width: 1100px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
 }
 
-.self-hosted-card {
-  padding: 32px;
-  border-radius: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.self-hosted-card:hover {
-  border-color: var(--card-border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow);
-}
-
-.self-hosted-card--highlight {
-  border-color: var(--grekt-primary-500);
-  position: relative;
-}
-
-.self-hosted-card--highlight::before {
-  content: 'For teams';
-  position: absolute;
-  top: -10px;
-  right: 20px;
-  background: var(--grekt-primary-500);
-  color: #0d1117;
+.eval-label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 3px 10px;
-  border-radius: 20px;
+  letter-spacing: 2px;
+  color: var(--grekt-text-accent);
+  margin-bottom: 16px;
 }
 
-.self-hosted-card-icon {
-  width: 48px;
-  height: 48px;
+.eval-headline {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--card-title);
+  line-height: 1.3;
+  margin-bottom: 16px;
+  border: 0;
+}
+
+.eval-grade-highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--grekt-primary-500), #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.2rem;
+}
+
+.eval-sub {
+  font-size: 1rem;
+  color: var(--card-text);
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.eval-link {
+  color: var(--grekt-text-accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.eval-link:hover {
+  opacity: 0.8;
+}
+
+.eval-cards-area {
+  position: relative;
+  height: 380px;
+  width: 100%;
+}
+
+.eval-card {
+  position: absolute;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--grekt-primary-500) 0%, var(--grekt-primary-300) 100%);
+  padding: 20px 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 16px;
+  width: 220px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.self-hosted-card-icon svg {
-  color: #0d1117;
+.eval-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
-.self-hosted-card h3 {
-  font-family: 'Cal Sans', system-ui, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-  color: var(--card-title);
-}
-
-.self-hosted-card p {
-  font-size: 0.9rem;
+.eval-card-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
   color: var(--card-text);
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.eval-card-grade {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.eval-card-grade--a {
+  color: #10ab8d;
+}
+
+.eval-card-grade--b {
+  color: #34d399;
+}
+
+.eval-card-grade--c {
+  color: #e8a838;
+}
+
+.eval-card-grade--d {
+  color: #f97316;
+}
+
+.eval-card-grade--f {
+  color: #ef4444;
+}
+
+.eval-card--1 {
+  top: 10px;
+  left: 20px;
+  transform: rotate(-3deg);
+  z-index: 3;
+}
+
+.eval-card--2 {
+  top: 80px;
+  right: 10px;
+  transform: rotate(2.5deg);
+  z-index: 4;
+}
+
+.eval-card--3 {
+  top: 160px;
+  left: 60px;
+  transform: rotate(-5deg);
+  z-index: 2;
+}
+
+.eval-card--4 {
+  top: 240px;
+  right: 40px;
+  transform: rotate(4deg);
+  z-index: 5;
+}
+
+.eval-card--5 {
+  top: 40px;
+  left: 200px;
+  transform: rotate(1.5deg);
+  z-index: 1;
+}
+
+.eval-card--6 {
+  top: 290px;
+  left: 10px;
+  transform: rotate(-2deg);
+  z-index: 6;
+}
+
+@media (max-width: 768px) {
+  .eval-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .eval-headline {
+    font-size: 1.5rem;
+  }
+
+  .eval-cards-area {
+    height: 320px;
+  }
+
+  .eval-card {
+    width: 180px;
+    padding: 14px 18px;
+  }
+
+  .eval-card-grade {
+    font-size: 1.4rem;
+  }
+
+  .eval-card--1 { top: 0; left: 10px; }
+  .eval-card--2 { top: 60px; right: 0; left: auto; }
+  .eval-card--3 { top: 130px; left: 30px; }
+  .eval-card--4 { top: 200px; right: 10px; left: auto; }
+  .eval-card--5 { top: 20px; left: 140px; }
+  .eval-card--6 { top: 250px; left: 0; }
+}
+
+/* SELF-HOSTED / TEAMS */
+.self-hosted {
+  padding: 96px 20px;
+  width: 100vw;
+  padding-bottom: 12rem;
+  margin-left: calc(-50vw + 50%);
+}
+
+.self-hosted .pillars-heading {
+  max-width: 1100px;
+}
+
+.self-hosted .pillars-grid {
+  max-width: 1100px;
+}
+
+.pillar-card--featured {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 171, 141, 0.08) 0%,
+    rgba(16, 171, 141, 0.02) 100%
+  );
+  border-color: rgba(16, 171, 141, 0.25);
+}
+
+.pillar-badge {
+  display: inline-block;
+  background: var(--grekt-primary-500);
+  color: #0d1117;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
 .self-hosted-link {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 16px;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--grekt-text-accent);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .self-hosted-link:hover {
-  color: var(--grekt-primary-300);
-}
-
-.self-hosted-card-icon--offline {
-  background: linear-gradient(135deg, var(--grekt-tertiary-500) 0%, var(--grekt-tertiary-300) 100%);
-}
-
-@media (max-width: 900px) {
-  .self-hosted-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .self-hosted-card--offline {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 768px) {
-  .self-hosted-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .self-hosted-card--offline {
-    grid-column: auto;
-  }
+  opacity: 0.8;
 }
 </style>
