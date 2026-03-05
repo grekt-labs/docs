@@ -1,13 +1,13 @@
 const SITE_URL = 'https://grekt.com'
 const SITE_NAME = 'grekt'
-const SITE_TITLE = 'grekt - Local-first AI tooling infrastructure'
-const SITE_DESCRIPTION = 'Audit, manage, and secure your AI tools from the CLI. Local-first infrastructure for MCPs, agents, skills, hooks across Claude, Cursor, OpenCode.'
+const SITE_TITLE = 'grekt - Local AI tooling infrastructure'
+const SITE_DESCRIPTION = 'Audit, manage, and secure every AI tool in your stack. MCPs, agents, skills, hooks, commands - verified, version-locked, local. No cloud dependency.'
 const OG_IMAGE = `${SITE_URL}/og.png`
 
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is local-first AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across tools like Claude Code, Cursor, and OpenCode. Everything runs on your machine. No cloud dependency, no data exposure.'
+    answer: 'grekt is local AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across your projects. Everything runs on your machine. No cloud dependency, no data exposure.'
   },
   {
     question: 'How does grekt work?',
