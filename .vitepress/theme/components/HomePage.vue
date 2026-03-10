@@ -691,6 +691,7 @@ const toggleFaq = (index) => {
               <li><a href="https://github.com/grekt-labs" target="_blank">GitHub</a></li>
               <li><a href="https://github.com/grekt-labs/grekt/discussions" target="_blank">Discussions</a></li>
               <li><a href="https://github.com/grekt-labs/grekt/issues" target="_blank">Issues</a></li>
+              <li><a href="https://blog.grekt.com/" target="_blank">Blog</a></li>
             </ul>
           </div>
 
