@@ -89,11 +89,11 @@ onUnmounted(() => {
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is local-first AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across tools like Claude Code, Cursor, and OpenCode. Everything runs on your machine. No cloud dependency, no data exposure.'
+    answer: 'grekt is an open source MCP and AI tool manager. It audits, versions, and secures MCPs, agents, skills, hooks, and commands across Claude Code, Cursor, OpenCode, and more. Everything runs locally on your machine with no cloud dependency.'
   },
   {
     question: 'How does grekt work?',
-    answer: 'Install artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic installs. Sync to specific AI tools or use lazy mode to load artifacts on demand, keeping context lean.'
+    answer: 'Install AI artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic, reproducible installs. Sync versioned artifacts to specific AI tools or use lazy mode to load them on demand.'
   },
   {
     question: 'Is grekt free?',
@@ -101,11 +101,23 @@ const faqItems = [
   },
   {
     question: 'Which AI tools are supported?',
-    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI tool into the grekt workflow.'
+    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI coding assistant into the grekt workflow.'
   },
   {
     question: 'Can I create my own artifacts?',
     answer: 'Artifacts follow a versioned schema with support for agents, skills, hooks, and commands. Create them locally or publish to a registry for team-wide use.'
+  },
+  {
+    question: 'How do I manage MCP servers across projects?',
+    answer: 'grekt tracks every MCP server in your projects with version pinning and SHA integrity checks. Run grekt check to detect drift, grekt scan to audit for prompt injection, and grekt sync to distribute configurations across your AI tools.'
+  },
+  {
+    question: 'How do I version AI prompts and rules?',
+    answer: 'grekt uses lockfile-based version management for all AI artifacts including prompts, rules, skills, and agent configurations. Pin specific versions, update with rollback support, and share exact configurations across your team.'
+  },
+  {
+    question: 'Can I scan MCPs for security issues?',
+    answer: 'Run grekt scan to check any artifact for prompt injection, data exfiltration, and other security risks. Artifacts published to the grekt registry are scanned automatically before listing.'
   }
 ]
 
@@ -167,10 +179,10 @@ const toggleFaq = (index) => {
       </div>
 
       <div class="hero-content">
-        <span class="hero-overline">Open source AI tooling infrastructure</span>
+        <span class="hero-overline">Open source MCP & AI artifact manager</span>
         <span class="brand-claim">Know your <span class="brand-highlight">AI stack</span>.</span>
         <h1 class="hero-h1">
-          The local-first infrastructure for your AI stack that audits, manages, and secures every tool (MCPs, skills, agents, and more).
+          Audit, manage, and version your MCPs, agents, skills, and AI tools across Claude Code, Cursor, and more.
         </h1>
         <div class="hero-buttons">
           <div class="hero-actions-row">
@@ -337,7 +349,7 @@ const toggleFaq = (index) => {
     <!-- INTERACTIVE INIT DEMO -->
     <section class="feature-section feature-section--init-demo" :class="initRef?.activeTab === 'with' ? 'init-demo--synced' : 'init-demo--warn'">
       <h2 class="init-demo-title">Unmanaged context drifts. Versioned context <span class="init-demo-highlight">stays aligned</span>.</h2>
-      <p class="init-demo-subtitle">Install and verify once. <strong class="init-demo-emphasis">The whole team</strong> gets the exact same locked artifacts.</p>
+      <p class="init-demo-subtitle">Install and verify once. <strong class="init-demo-emphasis">The whole team</strong> gets the exact same version-locked artifacts.</p>
       <div class="init-demo-wrapper">
         <CliDemoInit ref="initRef" />
       </div>
@@ -350,7 +362,7 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Install what matters. Skip the rest.</h2>
+          <h2 class="feature-title">Pick the agents, skills, and hooks you need. Skip the rest.</h2>
           <p class="feature-description">Artifacts ship with skills, agents, hooks, commands. <strong>You decide what stays.</strong></p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': chooseRef?.finished }">
             <label class="feature-run-label">Try it</label>
@@ -380,7 +392,7 @@ const toggleFaq = (index) => {
     <section class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
-          <h2 class="feature-title">Lock it into context</h2>
+          <h2 class="feature-title">Sync AI configurations to Claude Code, Cursor, and OpenCode</h2>
           <p class="feature-description">grekt keeps your context clean by default. When you need it, artifacts go straight into each AI tool's context folder, <strong>committed to your repo and shared with your entire team</strong>.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': syncRef?.finished }">
             <label class="feature-run-label">Try it</label>
@@ -410,8 +422,8 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Update. Rollback. No drift.</h2>
-          <p class="feature-description">One command. Previous selections preserved. Structure changes get flagged.</p>
+          <h2 class="feature-title">Version-locked updates with rollback</h2>
+          <p class="feature-description">One command. Previous selections preserved. Structure changes get flagged. No drift.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': updateRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button
@@ -440,7 +452,7 @@ const toggleFaq = (index) => {
     <section class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
-          <h2 class="feature-title">Drift detection. Built in.</h2>
+          <h2 class="feature-title">Configuration drift detection. Built in.</h2>
           <p class="feature-description">Someone edited a managed file? grekt knows. Run <strong>grekt check</strong> to detect local modifications and decide whether to restore or keep them.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': checkRef?.finished }">
             <label class="feature-run-label">Try it</label>
@@ -470,8 +482,8 @@ const toggleFaq = (index) => {
     <section class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
-          <h2 class="feature-title">Security scan. Built in.</h2>
-          <p class="feature-description">Run <strong>grekt scan</strong> to check artifacts for prompt injection and data exfiltration. <a href="https://explore.grekt.com" target="_blank" rel="noopener">Registry</a> artifacts are scanned automatically.</p>
+          <h2 class="feature-title">Security scanning for prompt injection and data exfiltration</h2>
+          <p class="feature-description">Run <strong>grekt scan</strong> to audit artifacts for prompt injection and data exfiltration. <a href="https://explore.grekt.com" target="_blank" rel="noopener">Registry</a> artifacts are scanned automatically.</p>
           <div class="feature-run-wrapper" :class="{ 'feature-run-wrapper--hidden': scanRef?.finished }">
             <label class="feature-run-label">Try it</label>
             <button

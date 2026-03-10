@@ -1,17 +1,17 @@
 const SITE_URL = 'https://grekt.com'
 const SITE_NAME = 'grekt'
-const SITE_TITLE = 'grekt - Local AI tooling infrastructure'
-const SITE_DESCRIPTION = 'Audit, manage, and secure every AI tool in your stack. MCPs, agents, skills, hooks, commands - verified, version-locked, local. No cloud dependency.'
+const SITE_TITLE = 'grekt - Open source MCP & AI tool manager'
+const SITE_DESCRIPTION = 'Audit, manage, and version MCPs, AI agents, skills, and prompts across Claude Code, Cursor, and more. Lockfile-based installs, security scanning, drift detection, and self-hosted registry. Free and open source.'
 const OG_IMAGE = `${SITE_URL}/og.png`
 
 const faqItems = [
   {
     question: 'What is grekt?',
-    answer: 'grekt is local AI tooling infrastructure. It audits, manages, and secures MCPs, agents, skills, hooks, and commands across your projects. Everything runs on your machine. No cloud dependency, no data exposure.'
+    answer: 'grekt is an open source MCP and AI tool manager. It audits, versions, and secures MCPs, agents, skills, hooks, and commands across Claude Code, Cursor, OpenCode, and more. Everything runs locally on your machine with no cloud dependency.'
   },
   {
     question: 'How does grekt work?',
-    answer: 'Install artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic installs. Sync to specific AI tools or use lazy mode to load artifacts on demand, keeping context lean.'
+    answer: 'Install AI artifacts with a single CLI command. grekt downloads, organizes, and locks them with SHA-verified lockfiles for deterministic, reproducible installs. Sync versioned artifacts to specific AI tools or use lazy mode to load them on demand.'
   },
   {
     question: 'Is grekt free?',
@@ -19,11 +19,23 @@ const faqItems = [
   },
   {
     question: 'Which AI tools are supported?',
-    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI tool into the grekt workflow.'
+    answer: 'Claude Code, Cursor, OpenCode, and any tool that reads markdown files. Custom targets let you integrate any AI coding assistant into the grekt workflow.'
   },
   {
     question: 'Can I create my own artifacts?',
     answer: 'Artifacts follow a versioned schema with support for agents, skills, hooks, and commands. Create them locally or publish to a registry for team-wide use.'
+  },
+  {
+    question: 'How do I manage MCP servers across projects?',
+    answer: 'grekt tracks every MCP server in your projects with version pinning and SHA integrity checks. Run grekt check to detect drift, grekt scan to audit for prompt injection, and grekt sync to distribute configurations across your AI tools.'
+  },
+  {
+    question: 'How do I version AI prompts and rules?',
+    answer: 'grekt uses lockfile-based version management for all AI artifacts including prompts, rules, skills, and agent configurations. Pin specific versions, update with rollback support, and share exact configurations across your team.'
+  },
+  {
+    question: 'Can I scan MCPs for security issues?',
+    answer: 'Run grekt scan to check any artifact for prompt injection, data exfiltration, and other security risks. Artifacts published to the grekt registry are scanned automatically before listing.'
   }
 ]
 
@@ -63,8 +75,10 @@ function buildSoftwareApplicationSchema() {
     '@type': 'SoftwareApplication',
     name: SITE_NAME,
     applicationCategory: 'DeveloperApplication',
+    applicationSubCategory: 'AI Development Tools',
     operatingSystem: 'macOS, Linux, Windows',
     description: SITE_DESCRIPTION,
+    keywords: 'MCP manager, AI tool manager, MCP security scanner, prompt injection detection, AI artifact registry, version management AI tools, Claude Code extensions, Cursor rules manager',
     url: SITE_URL,
     offers: {
       '@type': 'Offer',
