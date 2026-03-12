@@ -47,6 +47,14 @@ export const enUSSidebar = {
       ]
     },
     {
+      text: 'Dashboard',
+      items: [
+        { text: 'Overview', link: '/en-US/docs/guide/dashboard/overview' },
+        { text: 'Setup', link: '/en-US/docs/guide/dashboard/setup' },
+        { text: 'Syncing', link: '/en-US/docs/guide/dashboard/syncing' }
+      ]
+    },
+    {
       text: 'Configuration',
       items: [
         { text: 'Environment', link: '/en-US/docs/guide/environment' }
@@ -136,6 +144,12 @@ export const enUSSidebar = {
       text: 'Testing',
       items: [
         { text: 'grekt eval', link: '/en-US/api/eval' }
+      ]
+    },
+    {
+      text: 'Dashboard',
+      items: [
+        { text: 'grekt dashboard sync', link: '/en-US/api/dashboard-sync' }
       ]
     },
     {
