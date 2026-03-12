@@ -8,6 +8,8 @@ The grekt dashboard gives you visibility into your artifact ecosystem: what's in
 
 ![grekt dashboard overview](/images/dashboard.gif)
 
+The dashboard is self-hosted. Get it from [GitHub](https://github.com/grekt-labs/dashboard).
+
 ## How it works
 
 Run `grekt dashboard sync` in any project containing artifacts.
