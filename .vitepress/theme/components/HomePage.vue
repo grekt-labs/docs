@@ -38,6 +38,7 @@ const scrollToDemo = (el) => {
     })
   }
 }
+const dashboardExpanded = ref(false)
 const activeInstall = ref('npm')
 const installCommand = computed(() =>
   installMethods.find(m => m.id === activeInstall.value)?.command || ''
@@ -187,12 +188,16 @@ const toggleFaq = (index) => {
         <div class="hero-buttons">
           <div class="hero-actions-row">
             <div class="install-wrapper">
-              <select class="install-select" v-model="activeInstall">
-                <option v-for="method in installMethods" :key="method.id" :value="method.id">
-                  {{ method.label }}
-                </option>
-              </select>
-              <div class="install-box">
+              <div class="install-tabs">
+                <button
+                  v-for="method in installMethods"
+                  :key="method.id"
+                  class="install-tab"
+                  :class="{ 'install-tab--active': activeInstall === method.id }"
+                  @click="activeInstall = method.id"
+                >{{ method.label }}</button>
+              </div>
+              <div class="install-box install-box--full">
                 <span class="install-prompt">$</span>
                 <code class="install-command">{{ installCommand }}</code>
                 <button class="copy-btn" @click="copyCommand" :class="{ copied }">
@@ -205,8 +210,8 @@ const toggleFaq = (index) => {
                 </button>
               </div>
             </div>
-            <a href="/en-US/docs/guide/getting-started" class="primary">Get started</a>
           </div>
+          <a href="/en-US/docs/guide/getting-started" class="install-cta">Get started</a>
         </div>
       </div>
 
@@ -344,6 +349,33 @@ const toggleFaq = (index) => {
           <a href="/en-US/docs/guide/offline-mode" class="self-hosted-link">Learn more →</a>
         </div>
       </div>
+    </section>
+
+    <!-- DASHBOARD PREVIEW -->
+    <section class="dashboard-preview">
+      <h2 class="dashboard-preview-heading">See everything in one place.</h2>
+      <p class="dashboard-preview-sub">Track artifacts, scan results, and eval reports across all your projects.</p>
+      <div class="dashboard-window" :class="{ 'dashboard-window--expanded': dashboardExpanded }">
+        <div class="dashboard-titlebar">
+          <div class="dashboard-dots">
+            <span class="dashboard-dot dashboard-dot--red"></span>
+            <span class="dashboard-dot dashboard-dot--yellow"></span>
+            <span class="dashboard-dot dashboard-dot--green"></span>
+          </div>
+          <div class="dashboard-titlebar-spacer"></div>
+        </div>
+        <div class="dashboard-body" @click="dashboardExpanded = !dashboardExpanded">
+          <video
+            muted
+            playsinline
+            controls
+          >
+            <source src="/videos/dashboard.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+      <div v-if="dashboardExpanded" class="dashboard-overlay" @click="dashboardExpanded = false"></div>
+      <a href="/en-US/docs/guide/dashboard/overview" class="self-hosted-link">Learn more →</a>
     </section>
 
     <!-- INTERACTIVE INIT DEMO -->
@@ -602,7 +634,6 @@ const toggleFaq = (index) => {
           </div>
         </div>
       </div>
-      <p class="comparison-note">grekt is not a registry and not a cloud platform. It is infrastructure that runs on your machine.</p>
     </section>
 
     <!-- CTA -->
@@ -610,26 +641,33 @@ const toggleFaq = (index) => {
       <div class="cta-footer-content">
         <h2 class="cta-headline">Know your <span class="brand-highlight">stack</span>.</h2>
         <p class="cta-sub">The answer to "what is running?" should never be "I don't know."</p>
-        <div class="cta-actions">
-          <div class="install-wrapper">
-            <select class="install-select" v-model="activeInstall">
-              <option v-for="method in installMethods" :key="method.id" :value="method.id">
-                {{ method.label }}
-              </option>
-            </select>
-            <div class="install-box">
-              <span class="install-prompt">$</span>
-              <code class="install-command">{{ installCommand }}</code>
-              <button class="copy-btn" @click="copyCommand" :class="{ copied }">
-                <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
-                  <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
-                </svg>
-                <svg v-else viewBox="0 0 24 24" width="18" height="18">
-                  <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
-                </svg>
-              </button>
+        <div class="cta-actions hero-buttons">
+          <div class="hero-actions-row">
+            <div class="install-wrapper">
+              <div class="install-tabs">
+                <button
+                  v-for="method in installMethods"
+                  :key="method.id"
+                  class="install-tab"
+                  :class="{ 'install-tab--active': activeInstall === method.id }"
+                  @click="activeInstall = method.id"
+                >{{ method.label }}</button>
+              </div>
+              <div class="install-box install-box--full">
+                <span class="install-prompt">$</span>
+                <code class="install-command">{{ installCommand }}</code>
+                <button class="copy-btn" @click="copyCommand" :class="{ copied }">
+                  <svg v-if="!copied" viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor" d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"/>
+                  </svg>
+                  <svg v-else viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor" d="M21 7L9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59 21 7z"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
+          <a href="/en-US/docs/guide/getting-started" class="install-cta">Get started</a>
         </div>
         <div class="cta-links">
           <a href="/en-US/docs/guide/getting-started">Documentation →</a>
@@ -1095,7 +1133,7 @@ const toggleFaq = (index) => {
 
 .hero-actions-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 12px;
 }
@@ -1144,65 +1182,98 @@ const toggleFaq = (index) => {
 /* Install wrapper */
 .install-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
   gap: 0;
+  width: 370px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-/* Install select dropdown */
-.install-select {
-  appearance: none;
-  -webkit-appearance: none;
-  background: #f0f0f3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231a1a2e' stroke='%231a1a2e' stroke-width='1' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-right: none;
-  border-radius: 8px 0 0 8px;
-  padding: 10px 38px 10px 14px;
-  color: #1a1a2e;
-  font-size: 0.8rem;
+.dark .install-wrapper {
+  background: #0d1117;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Install tabs */
+.install-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .install-tabs {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.install-tab {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(26, 26, 46, 0.45);
+  font-size: 0.72rem;
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
+  position: relative;
 }
 
-.install-select:hover {
-  background-color: #e8e8ec;
+.install-tab:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: rgba(26, 26, 46, 0.7);
 }
 
-.install-select:focus {
-  outline: none;
-  border-color: var(--grekt-text-accent);
-}
-
-.install-select option {
-  background: #f0f0f3;
+.install-tab--active {
   color: #1a1a2e;
-  padding: 8px;
+  font-weight: 600;
 }
 
-.dark .install-select {
-  background: #161b22 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' stroke='%23ffffff' stroke-width='1' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 12px center;
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+.install-tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  background: var(--grekt-primary-500);
+  border-radius: 2px 2px 0 0;
 }
 
-.dark .install-select:hover {
-  background-color: #1c2128;
+.install-tab--active:hover {
+  background: transparent;
+  color: #1a1a2e;
 }
 
-.dark .install-select option {
-  background: #161b22;
-  color: #e6edf3;
+.dark .install-tab {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.dark .install-tab:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .install-tab--active {
+  color: #fff;
+}
+
+.dark .install-tab--active:hover {
+  background: transparent;
+  color: #fff;
 }
 
 /* Install box */
 .install-box {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 0 8px 8px 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
   padding: 10px 14px;
   gap: 10px;
   font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
@@ -1210,12 +1281,32 @@ const toggleFaq = (index) => {
 }
 
 .dark .install-box {
-  background: #0d1117;
-  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
+  border-color: transparent;
 }
 
 .install-box--full {
+  border-radius: 0;
+}
+
+.install-cta {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 211px;
+  padding: 10px 28px;
+  background: var(--grekt-primary-500);
+  color: #0d1117;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-titles), inherit;
+  text-decoration: none;
   border-radius: 8px;
+  transition: opacity 0.15s ease;
+}
+
+.install-cta:hover {
+  opacity: 0.85;
 }
 
 .install-prompt {
@@ -1229,6 +1320,9 @@ const toggleFaq = (index) => {
   font-size: 0.9rem;
   background: none;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .dark .install-command {
@@ -1246,6 +1340,8 @@ const toggleFaq = (index) => {
   padding: 4px;
   border-radius: 4px;
   transition: all 0.2s ease;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .copy-btn:hover {
@@ -2719,7 +2815,7 @@ html:not(.dark) .init-demo--synced {
 .self-hosted {
   padding: 96px 20px;
   width: 100vw;
-  padding-bottom: 12rem;
+  padding-bottom: 2rem;
   margin-left: calc(-50vw + 50%);
 }
 
@@ -2798,5 +2894,102 @@ html:not(.dark) .pillar-card--featured > .dots-border::before {
 
 .self-hosted-link:hover {
   opacity: 0.8;
+}
+
+/* Dashboard preview */
+.dashboard-preview {
+  padding: 80px 24px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dashboard-preview-heading {
+  font-family: var(--font-titles);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: var(--grekt-text-primary);
+  margin-bottom: 12px;
+  border: 0;
+}
+
+.dashboard-preview-sub {
+  font-size: 1rem;
+  color: var(--grekt-text-secondary);
+  margin-bottom: 32px;
+}
+
+.dashboard-window {
+  background: #1a1b26;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(119, 202, 189, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.dashboard-window--expanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 1200px;
+  z-index: 200;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-titlebar {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #15161e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 12px;
+}
+
+.dashboard-dots {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dashboard-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dashboard-dot--red { background: #ff5f57; }
+.dashboard-dot--yellow { background: #febc2e; }
+.dashboard-dot--green { background: #28c840; }
+
+.dashboard-titlebar-text {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.dashboard-titlebar-spacer {
+  flex: 1;
+}
+
+.dashboard-body {
+  cursor: pointer;
+}
+
+.dashboard-body video {
+  width: 100%;
+  display: block;
+}
+
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 199;
+  cursor: pointer;
 }
 </style>

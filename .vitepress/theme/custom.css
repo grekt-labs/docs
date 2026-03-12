@@ -299,3 +299,16 @@ a.VPNavBarMenuLink:first-of-type.vp-external-link-icon::after {
     right: 12px;
   }
 }
+
+/* Medium Zoom */
+.vp-doc img {
+  cursor: zoom-in;
+}
+
+.medium-zoom-overlay {
+  z-index: 30;
+}
+
+.medium-zoom-image--opened {
+  z-index: 31;
+}
