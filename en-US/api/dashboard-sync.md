@@ -7,36 +7,16 @@ description: "Sync project data, scan results, eval reports, and registry config
 Sync local project data to the dashboard. This is the only command that communicates with the dashboard. No other command sends data automatically.
 
 ```bash
-grekt dashboard sync [target]
-```
-
-## Arguments
-
-| Argument | Description |
-|----------|-------------|
-| `target` | Optional. Omit for full sync, or `registries` for registries only. |
-
-## Full sync (no arguments)
-
-```bash
 grekt dashboard sync
 ```
 
-Performs all sync operations in order:
+## What it does
 
 1. **Project + artifacts**. Upserts project record and all installed artifacts with their elements
 2. **Registries**. Syncs registry configurations (if any are configured)
 3. **Scan report**. Reads and uploads `.grekt/reports/scan.json` (if it exists), then deletes the file
 4. **Eval report**. Reads and uploads `.grekt/reports/eval.json` (if it exists), then deletes the file
 5. **Reconciliation**. Removes artifacts from the dashboard that are no longer in the lockfile, including their scan and eval results
-
-## Registries only
-
-```bash
-grekt dashboard sync registries
-```
-
-Syncs only registry configurations from `.grekt/config.yaml` to the dashboard. Does not touch project or artifact data.
 
 ## Configuration
 
@@ -72,12 +52,6 @@ Full sync after scanning and evaluating:
 grekt scan
 grekt eval
 grekt dashboard sync
-```
-
-Sync registries to the dashboard:
-
-```bash
-grekt dashboard sync registries
 ```
 
 Sync after removing an artifact (triggers reconciliation):
