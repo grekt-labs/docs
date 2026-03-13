@@ -88,7 +88,15 @@ The token is shown once. Copy it immediately. It starts with `gdk_` and cannot b
 
 ## Configure your project
 
-Add the dashboard URL and token to `.grekt/config.yaml`:
+Run the interactive setup command:
+
+```bash
+grekt dashboard setup
+```
+
+This prompts for the dashboard URL and API token, then saves them to `.grekt/config.yaml`.
+
+Alternatively, edit `.grekt/config.yaml` manually:
 
 ```yaml
 dashboard:
@@ -97,6 +105,10 @@ dashboard:
 ```
 
 This file lives inside `.grekt/`, which is already gitignored.
+
+::: tip
+`grekt init` also offers dashboard configuration during the onboarding wizard.
+:::
 
 ## First sync
 
