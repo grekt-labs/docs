@@ -76,6 +76,9 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  document.querySelectorAll('.stats-bridge-cta').forEach(link => {
+    link.removeEventListener('click', scrollToFeature)
+  })
   document.documentElement.classList.remove('has-scrolled')
 
   if (previousTheme.value === 'light') {
@@ -248,20 +251,25 @@ const toggleFaq = (index) => {
           <div class="stat-label">of developers use AI tools</div>
           <div class="stat-desc">MCPs, agents, skills, hooks are everywhere in modern development workflows.</div>
           <a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noopener" class="stat-source">Stack Overflow 2025</a>
+          <span class="stat-action"><span class="stat-action-prompt">$</span> grekt install</span>
         </div>
         <div class="stat-card stat-card--warn">
           <div class="stat-number">29%</div>
           <div class="stat-label">trust what they're running</div>
           <div class="stat-desc">Down from 40% last year. The gap between adoption and trust is growing.</div>
           <a href="https://survey.stackoverflow.co/2025/ai/" target="_blank" rel="noopener" class="stat-source">Stack Overflow 2025</a>
+          <span class="stat-action"><span class="stat-action-prompt">$</span> grekt check</span>
+          <span class="stat-action"><span class="stat-action-prompt">$</span> grekt eval</span>
         </div>
         <div class="stat-card stat-card--fail">
           <div class="stat-number">20%</div>
           <div class="stat-label">of skills in registries are malicious</div>
           <div class="stat-desc">800+ malicious skills found in ClawHub in a single month.</div>
           <a href="https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html" target="_blank" rel="noopener" class="stat-source">The Hacker News 2026</a>
+          <span class="stat-action"><span class="stat-action-prompt">$</span> grekt scan</span>
         </div>
       </div>
+
     </section>
 
     <!-- THREE PILLARS -->
@@ -272,12 +280,12 @@ const toggleFaq = (index) => {
         <div class="pillar-card">
           <span class="pillar-number">01</span>
           <h3 class="pillar-title">See your stack</h3>
-          <p class="pillar-desc">Full inventory of every AI tool in your projects. MCPs, agents, skills, hooks, commands -- everything visible from the CLI.</p>
+          <p class="pillar-desc">Full inventory of every AI tool in your projects. MCPs, agents, skills, hooks, commands. Everything visible from the CLI.</p>
         </div>
         <div class="pillar-card">
           <span class="pillar-number">02</span>
           <h3 class="pillar-title">Check your stack</h3>
-          <p class="pillar-desc">Every artifact audited for version locks, integrity, and drift. PASS, FAIL, or WARN -- no ambiguity.</p>
+          <p class="pillar-desc">Every artifact audited for version locks, integrity, and drift. PASS, FAIL, or WARN. No ambiguity.</p>
         </div>
         <div class="pillar-card">
           <span class="pillar-number">03</span>
@@ -391,7 +399,7 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: PICK & SKIP -->
-    <section class="feature-section">
+    <section id="feature-choose" class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
           <h2 class="feature-title">Pick the agents, skills, and hooks you need. Skip the rest.</h2>
@@ -421,7 +429,7 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: CORE MODE -->
-    <section class="feature-section feature-section--alt">
+    <section id="feature-sync" class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
           <h2 class="feature-title">Sync AI configurations to Claude Code, Cursor, and OpenCode</h2>
@@ -481,7 +489,7 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: DETECT DIFFS -->
-    <section class="feature-section feature-section--alt">
+    <section id="feature-check" class="feature-section feature-section--alt">
       <div class="feature-row feature-row--reversed">
         <div class="feature-text">
           <h2 class="feature-title">Configuration drift detection. Built in.</h2>
@@ -511,7 +519,7 @@ const toggleFaq = (index) => {
     <div class="section-divider"></div>
 
     <!-- FEATURE: SECURITY SCAN -->
-    <section class="feature-section">
+    <section id="feature-scan" class="feature-section">
       <div class="feature-row">
         <div class="feature-text">
           <h2 class="feature-title">Security scanning for prompt injection and data exfiltration</h2>
@@ -1452,6 +1460,7 @@ const toggleFaq = (index) => {
 }
 
 .stat-source {
+  display: block;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.7rem;
   color: var(--grekt-primary-500);
@@ -1462,6 +1471,27 @@ const toggleFaq = (index) => {
 
 .stat-source:hover {
   opacity: 1;
+}
+
+/* STAT ACTION PILLS */
+.stat-action {
+  display: inline-block;
+  margin-top: 16px;
+  margin-right: 6px;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+
+.stat-action-prompt {
+  color: #77CABD;
+  font-weight: 600;
+  margin-right: 6px;
 }
 
 /* THREE PILLARS */
@@ -2416,6 +2446,7 @@ html:not(.dark) .feature-run-play {
   .stat-number {
     font-size: 2.5rem;
   }
+
 
   .pillars-grid {
     grid-template-columns: 1fr;
