@@ -19,7 +19,7 @@ grekt config <subcommand>
 | `get <key>` | Get value |
 | `registry set [scope]` | Configure registry for a scope |
 | `registry unset [scope]` | Remove registry for a scope |
-| `token set` | Add token for a git host |
+| `token set [scope]` | Add token for a git host, or update token for a registry scope (`@scope`) |
 | `token unset [host]` | Remove token for a git host |
 
 ## Keys
@@ -45,6 +45,9 @@ grekt config registry unset @myteam
 # Git source tokens (github:, gitlab:)
 grekt config token set
 grekt config token unset github
+
+# Update token for a registry scope
+grekt config token set @myteam
 ```
 
 ## Registry configuration
@@ -70,7 +73,15 @@ Configure tokens for private git sources:
 grekt config token set
 ```
 
-Tokens are used when adding artifacts from `github:` or `gitlab:` sources. Priority:
+Or update the token for an existing registry scope:
+
+```bash
+grekt config token set @myteam
+```
+
+When called with `@scope`, it updates the token in the existing registry entry (configured with `grekt config registry set`).
+
+When called without arguments, tokens are used for `github:` or `gitlab:` sources. Priority:
 1. Token in `.grekt/config.yaml`
 2. Environment variable (`GITHUB_TOKEN`, `GITLAB_TOKEN`)
 
