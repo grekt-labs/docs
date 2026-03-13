@@ -149,6 +149,7 @@ export const enUSSidebar = {
     {
       text: 'Dashboard',
       items: [
+        { text: 'grekt dashboard setup', link: '/en-US/api/dashboard-setup' },
         { text: 'grekt dashboard sync', link: '/en-US/api/dashboard-sync' }
       ]
     },
