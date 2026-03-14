@@ -6,7 +6,9 @@ description: "Track artifacts, scan results, and eval reports across projects wi
 
 The grekt dashboard gives you visibility into your artifact ecosystem: what's installed on which projects, global and per-artifact scan results, eval reports, and available registries.
 
-![grekt dashboard overview](/images/dashboard.gif)
+<video autoplay loop muted playsinline style="width:100%;border-radius:8px;">
+  <source src="/videos/dashboard.mp4" type="video/mp4" />
+</video>
 
 The dashboard is self-hosted.
 
